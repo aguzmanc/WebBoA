@@ -1,0 +1,2740 @@
+<!DOCTYPE html>
+<!--     BOLIVIANA DE AVIACION     -->
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>Boliviana de Aviaci&oacute;n</title>
+	<link rel="icon" href="content/images/icon.png" type="image/x-icon">
+
+	<!-- JQUERY LIBRARY -->
+	<script type="text/javascript" src="content/lib/jquery-1.11.1.min.js"></script>
+
+	<!-- SCROLLBAR LIBRARY -->
+	<link href="content/lib/custom_scrollbar/jquery.mCustomScrollbar.css" 
+		rel="stylesheet" type="text/css" />
+	<script src="content/lib/custom_scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- ANIMATION LIBRARY -->
+	<script type="text/javascript" src="content/prototypes/Engine.js"></script>
+	<script type="text/javascript" src="content/prototypes/Transformable.js"></script>
+	<script type="text/javascript" src="content/prototypes/Transparent.js"></script>
+	<script type="text/javascript" src="content/prototypes/Cloud.js"></script>
+	<script type="text/javascript" src="content/prototypes/Sky.js"></script>
+	
+	<!-- INFO PAGE CUSTOM SCRIPTS -->
+	<script type="text/javascript" src="content/info_page.js"></script>
+	<script type="text/javascript" src="content/weather.js"></script>
+
+	<!-- COMMON SCRIPTS -->
+	<script type="text/javascript" src="content/custom_handlers.js"></script>
+	<script type="text/javascript" src="content/common.js"></script>
+	<script type="text/javascript" src="content/header.js"></script>
+
+	<!-- STYLE.CSS -->
+	<link href="content/style.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="content/contenidos.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body style="padding:0;margin:0;overflow-y:auto !important;overflow-x:hidden !important">
+	<header style="display:block">
+		<a id="btn_return_home" href="http://www.boa.bo"></a>
+		<div class="logo-header"></div>
+		<ul id="main_menu">
+			<li id="menu_item_planifica" >
+				<span>PLANIFICA TU VIAJE</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>RESERVAR VUELOS
+										</a>
+									</li>
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>ESTADO DEL VUELO
+										</a>
+									</li>
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>HORARIO DE VUELOS
+										</a>
+									</li>
+									<li class="primary disabled"  data-item="web_check_in"><div class="icon"></div>WEB CHECK-IN</li>
+									<li class="primary disabled"  data-item="formas_pago"><div class="icon"></div>FORMAS DE PAGO</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_antes_viajar">
+				<span>ANTES DE VIAJAR</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="politica_equipaje"><div class="icon"></div>POL&Iacute;TICA DE EQUIPAJE</li>
+									<li data-item="equipaje_mano">Equipaje de mano</li>
+									<li data-item="equipaje_facturable">Equipaje facturable</li>
+									<li data-item="exceso_equipaje">Exceso de equipaje</li>
+									<li data-item="equipaje_especial">Equipaje especial</li>
+									<li data-item="equipaje_adicional" class="disabled ">Equipaje adicional</li>
+									<li data-item="mercancias_peligrosas">Mercanc&iacute;as peligrosas</li>
+									<li data-item="equipaje_mascotas">Mascotas</li>
+									<li class="primary disabled" data-item="seguimiento_equipaje"><div class="icon"></div>SEGUIMIENTO DE EQUIPAJE EN L&Iacute;NEA</li>
+									<li class="primary disabled"  data-item="equipajes_demorados"><div class="icon"></div>EQUIPAJES DEMORADOS EXTRAVIADOS O DA&Ntilde;ADOS</li>
+									<li class="primary disabled"  data-item="declaracion_equipaje"><div class="icon"></div>DECLARACI&Oacute;N DEL VALOR DEL EQUIPAJE</li>
+									<li class="primary" data-item="tips_equipaje"><div class="icon"></div>TIPS DE EQUIPAJE</li>
+									<li class="primary disabled" data-item="equipaje_interlineal"><div class="icon"></div>EQUIPAJE INTERLINEAL</li>
+									<li class="primary" data-item="llegar_aeropuerto"><div class="icon"></div>LLEGAR AL AEROPUERTO</li>
+									<li data-item="hora_limite">Hora l&iacute;mite</li>
+									<li data-item="aeropuerto_lp">Aeropuerto de La Paz</li>
+									<li data-item="aeropuerto_cbba">Aeropuerto de Cochabamba</li>
+									<li data-item="aeropuerto_viruviru">Aeropuerto de Viru Viru</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="servicios_especiales"><div class="icon"></div>SERVICIOS ESPECIALES</li>
+									<li data-item="menores_no_acompanados">Menores no acompa&ntilde;ados</li>
+									<li data-item="pasajeros_necesidades_diferentes">Pasajeros con necesidades diferentes</li>
+									<li data-item="condiciones_medicas_especiales">Condiciones m&eacute;dicas especiales</li>
+									<li data-item="oxigeno">Transporte de ox&iacute;geno</li>
+									<li data-item="dialisis_portatil">Transporte de equipo de di&aacute;lisis port&aacute;til (PDMs)</li>
+									<li data-item="bebes">Viajando con beb&eacute;s</li>
+									<li data-item="mascota">Viajando con tu mascota en cabina</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="pasajeros_especiales"><div class="icon"></div>PASAJEROS ESPECIALES</li>
+									<li data-item="embarazadas">Mujeres embarazadas</li>
+									<li data-item="tercera_edad">Pasajeros de la tercera edad</li>
+									<li data-item="pasajeros_sobrepeso">Pasajeros que requieren asiento extra</li>
+									<li data-item="dificultad_vision" class="disabled">Pasajeros con dificultad de visi&oacute;n</li>
+									<li data-item="acompanantes" class="disabled">Acompa&ntilde;antes</li>
+									<li class="primary" data-item="menu_especial"><div class="icon"></div>MEN&Uacute; ESPECIAL</li>
+									<li class="primary" data-item="documentacion_viaje"><div class="icon"></div>DOCUMENTACI&Oacute;N DE VIAJE, VISA y API</li>
+									<li class="primary" data-item="vacunas"><div class="icon"></div>VACUNAS</li>
+									<li class="primary" data-item="derechos_pasajeros" data-action="none"><div class="icon"></div>DERECHOS DE LOS PASAJEROS</li>
+									<li data-is_link="true">
+										<a href="content/docs/contrato_transporte.pdf">Contrato de transporte</a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_promos_destinos" style="display:none">
+				<span>PROMOS Y DESTINOS</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_experiencia_boa">
+				<span>EXPERIENCIA BoA</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="nuestra_flota"><div class="icon"></div>NUESTRA FLOTA</li>
+									<li class="primary" data-item="experiencia_bordo"><div class="icon"></div>EXPERIENCIA A BORDO</li>
+									<li data-item="gastronomia">Gastronom&iacute;a, Snack y Bebidas</li>
+									<li data-item="" class="disabled">Entretenimiento a Bordo</li>
+									<li data-item="" class="disabled">Duty Free a Bordo</li>
+									<li data-item="" class="disabled">Asiento + Confort</li>
+									<li data-item="" class="disabled">Revista Destinos</li>
+									<li data-item="" class="disabled">Wi-Fi y GSM</li>
+									<li class="primary" data-item="seguro_internacional"><div class="icon"></div>SEGURO INTERNACIONAL</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="night">
+									<li class="primary" data-item="en_el_aeropuerto"><div class="icon"></div>EN EL AEROPUERTO</li>
+									<li data-item="">Servicio de Check-In</li>
+									<li data-item="" class="disabled">Kioskos de Check-In</li>
+									<li data-item="" class="disabled">Mobile Phone Check-In</li>
+									<li data-item="" class="disabled">Salas VIP</li>
+									<li data-item="" class="disabled">Alquiler de Veh&iacute;culos</li>
+									<li data-item="" class="disabled">Parqueos</li>
+									<li data-item="" class="disabled">Servicio de Chofer</li>
+									<li data-item="" class="disabled">Transporte Origen-Destino Aeropuerto</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="night">
+									<li class="primary" data-item="cabinas"><div class="icon"></div>CARACTERISTICAS DE LAS CABINAS</li>
+									<li data-item="" class="disabled">Clase Business</li>
+									<li data-item="" class="disabled">Clase Econ&oacute;mica</li>
+									<li class="primary disabled" data-item=""><div class="icon"></div>VIAJE DE FAMILIA</li>
+									<li class="primary disabled" data-item=""><div class="icon"></div>VIAJE DE GRUPOS</li>
+									
+									<li class="primary disabled" data-item=""><div class="icon"></div>NUESTRAS ALIANZAS</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_boa_millas" style="display:none">
+				<span>BoA MILES</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+									<li data-item="">Secundario A</li>
+									<li data-item="">Secundario B</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_somos_boa" style="display:none">
+				<span>SOMOS BoA</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+									<li data-item="">Secundario A</li>
+									<li data-item="">Secundario B</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+		</ul>
+		<ul id="sec_menu">
+			<li id="menu_item_agencias">Agencias</li>
+			<li id="menu_item_corporativo" style="display:none">Corporativo</li>
+			<li id="menu_item_login" style="display:none">Login</li>
+		</ul>
+		<div id="menu_locations" class="header-menu">
+			<div class="flag bolivia"></div>
+			<h2><strong>BOLIVIA</strong></h2>
+			<div class="arrow-down-icon"></div>
+			<ul>
+				<li class="bolivia selected" data-location="bolivia">
+					<div class="flag"></div>
+					<h2><strong>BOLIVIA</strong></h2>
+				</li>
+				<li class="bsas"  data-location="bsas">
+					<div class="flag"></div>
+					<h2><strong>BS. AS.</strong></h2>
+				</li>
+				<li class="madrid" data-location="madrid">
+					<div class="flag"></div>
+					<h2><strong>MADRID</strong></h2>
+				</li>
+				<li class="saopaulo"  data-location="saopaulo">
+					<div class="flag"></div>
+					<h2><strong>SAO PAULO</strong></h2>
+				</li>
+				<li class="salta" data-location="salta">
+					<div class="flag"></div>
+					<h2><strong>SALTA</strong></h2>
+				</li>
+				<li class="miami" data-location="miami">
+					<div class="flag"></div>
+					<h2><strong>MIAMI</strong></h2>
+				</li>
+			</ul>
+		</div>
+		<div id="menu_languages" class="header-menu">
+			<h2><strong>ESPA&Ntilde;OL</strong></h2>
+			<div class="arrow-down-icon"></div>
+			<ul>
+				<li class="selected" data-language="ES">
+					<h2><strong>ESPA&Ntilde;OL</strong></h2>
+				</li>
+				<!-- <li data-language="EN">
+					<h2><strong>ENGLISH</strong></h2>
+				</li>
+				<li data-language="PT">
+					<h2><strong>PORTUGU&Ecirc;S</strong></h2>
+				</li> -->
+			</ul>
+		</div>
+	</header>
+
+	<div id="clouds">
+		<canvas id="clouds_canvas" width="2500" height="1000"></canvas>
+	</div>
+	
+	<!-- UI POLITICA DE EQUIPAJE -->
+	<div id="ui_politica_equipaje" class="ui-section">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>POL&Iacute;TICA DE</h3>
+			<h2>EQUIPAJE</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>POL&Iacute;TICA DE EQUIPAJE</h3>
+		</div>
+		<ul class="first-menu">
+			<li id="submenu_item_equipaje_mano" class="selected" data-info="equipaje_mano">
+				<label>Equipaje de Mano</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_equipaje_facturable" data-info="equipaje_facturable">
+				<label>Equipaje Facturable</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_exceso_equipaje" data-info="exceso_equipaje">
+				<label>Exceso de Equipaje</label>
+				<div class="icon small"></div>
+			</li>
+
+			<li id="submenu_item_equipaje_especial" data-info="equipaje_especial">
+				<label>Equipaje Especial</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_mercancias_peligrosas" data-info="mercancias_peligrosas">
+				<label>Mercanc&iacute;as Peligrosas</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_equipaje_mascotas" data-info="equipaje_mascotas">
+				<label>Mascotas</label>
+				<div class="icon small"></div>
+			</li>
+		</ul>
+
+		<!-- equipaje mano -->
+		<div id="info_equipaje_mano" class="info selected">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>EQUIPAJE DE MANO</h3>
+				<div id="img_equipaje_mano" class="img-contenido inlined"></div>
+		        Es un malet&iacute;n que puede viajar contigo en la cabina del avi&oacute;n, puedes transportar objetos de uso personal, valiosos o delicados, adem&aacute;s puedes llevar contigo un accesorio personal.
+		        <br><br>
+		        En caso de que tu equipaje de mano exceda los l&iacute;mites de peso y dimensiones, este malet&iacute;n puede ser retirado por funcionarios de la empresa, para ingresarlo en el buz&oacute;n de la aeronave, realizando posiblemente, un cobro adicional.
+		        <br><br>
+		        Las dimensiones m&aacute;ximas de tu Maleta de Mano deben ser:
+		        <i>55 cm x 40 cm x 20 cm</i>
+		        En los m&oacute;dulos ubicados en los aeropuertos, podr&aacute;s verificar si las dimensiones de tu equipaje de mano son correctas.<br><br>
+		        Tu equipaje de mano no debe sobrepasar  los 10 kilos para viajes en las naves 767 300 (Madrid y Miami).<br><br>
+		        Tu equipaje de mano no debe sobrepasar los 7 kilos para viajes en naves 737 300 (Vuelos nacionales, Argentina y Brasil).<br><br>
+			    <div id="subtitle_franquicia" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>FRANQUICIA DE EQUIPAJE DE MANO</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table>
+			    			<tr>
+			    				<td class="hidden"></td>
+			    				<th colspan="2">Rutas Nacionales</th>
+			    				<th colspan="2">Argentina</th>
+			    				<th colspan="2">Brasil</th>
+			    				<th colspan="2">Espa&ntilde;a</th>
+			    				<th colspan="2">Estados Unidos</th>
+			    			</tr>
+			    			<tr>
+			    				<th>Equipaje de mano</th>
+			    				<td><div class="maleta"></div></td>
+			    				<td>7 Kilos &oacute; 15 Libras</td>
+			    				<td><div class="maleta"></div></td>
+			    				<td>7 Kilos &oacute; 15 Libras</td>
+			    				<td><div class="maleta"></div></td>
+			    				<td>7 Kilos &oacute; 15 Libras</td>
+			    				<td><div class="maleta"></div></td>
+			    				<td>10 Kilos &oacute; 22 Libras</td>
+			    				<td><div class="maleta"></div><div class="maleta"></div></td>
+			    				<td>10 Kilos &oacute; 22 Libras</td>
+			    			</tr>
+			    		</table>
+			    		<br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_ubicacion_equipaje" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>UBICACI&Oacute;N DEL EQUIPAJE DE MANO</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_ubicacion_equipaje" class="img-contenido"></div>
+			    		De acuerdo a las regulaciones aeron&aacute;uticas, tu equipaje de mano debe caber en el compartimiento superior o debajo
+				        del asiento delantero. Si tu malet&iacute;n excede las dimensiones establecidas o su forma irregular no permite que sea
+				        introducido en los lugares adecuados, no ser&aacute; aceptado en cabina y se lo registrar&aacute; para su transporte en buzones
+				        de carga.<br><br><br><br><br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_accesorio_personal" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>ACCESORIO PERSONAL</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_accesorio_personal" class="img-contenido"></div>
+				        Al momento de embarcar se te permitir&aacute; portar en la cabina de pasajeros y sin costo adicional
+				        un accesorio personal, siempre y cuando su tama&ntilde;o, volumen y peso no incomode a
+				        los dem&aacute;s pasajeros, ni obstruya las salidas de emergencia, pasillos o puertas.
+				        <br><br>
+				        Entre los art&iacute;culos que puedes transportar est&aacute;n
+				        <ul style="margin-left: 20px;">
+				            <li>Bolsa o cartera de mujer.</li>
+				            <li>Bolsa con alimento y pa&ntilde;ales para bebe.</li>
+				            <li>Cobertor o frazada.</li>
+				            <li>C&aacute;mara fotogr&aacute;fica o binoculares.</li>
+				            <li>Equipo fotogr&aacute;fico, de video y computadores port&aacute;tiles.</li>
+				            <li>Una capa, abrigo, mantilla o impermeable.</li>
+				            <li>Una sombrilla o bast&oacute;n.</li>
+				            <li>Revistas o libros (en cantidad reducida)</li>
+				        </ul>
+				        En caso de que poseas una silla de ruedas plegable, muletas o artefactos ortop&eacute;dicos para facilitar tu desplazamiento, estos ser&aacute;n embarcados en el compartimiento de carga sin costo adicional. Lo mismo ocurre con las cunas y coches plegables para el transporte de bebes.<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_articulos_restringidos" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>ART&Iacute;CULOS RESTRINGIDOS</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_articulos_restringidos" class="img-contenido"></div>
+				        Se trata de art&iacute;culos que por ning&uacute;n motivo deben ser transportados en la cabina de la nave, por tanto si requieres viajar y llevar alguno de estos objetos debes informarte respecto a la normativa.<br><br>
+				        <strong>Herramientas</strong><br><br>
+				        El transporte o env&iacute;o de herramientas de trabajo como martillos, taladros, sierras, radiales, etc., s&oacute;lo est&aacute; permitido como equipaje registrado o carga.<br><br>
+				        <strong>Armas de fuego y armas en general</strong><br><br>
+				        Pistolas, rifles, escopetas, pistolas de aire comprimido/de se&ntilde;ales/de juguete, etc.
+				        Si debes transportar alg&uacute;n tipo de arma, por favor notifica en mostradores para realizar el procedimiento correspondiente, es importante que presentes tu permiso para portar armas.<br><br>
+				        <strong>Objetos contundentes</strong><br><br>
+				        Cualquier tipo de objetos contundentes, bates, palos de golf, patines, equipo de artes marciales, etc.<br><br>
+				        <strong>Armas u objetos punzantes o con aristas</strong><br><br>
+				        Cuchillos, navajas, corta cajas, cuchillas plegables o retractables, pica hielos, tijeras con punta y cualquier otro objeto punzo cortante.<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_liquidos_geles" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>L&Iacute;QUIDOS Y GELES</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_liquidos_geles" class="img-contenido inlined"></div>
+			    		Si necesitas transportar l&iacute;quidos, es muy importante que tomes en cuenta que se clasifica como l&iacute;quido:<br><br>
+				        <ul>
+				            <li>Agua, sopas, jarabes y otras bebidas.</li>
+				            <li>Cremas, lociones y aceites.</li>
+				            <li>Perfumes.</li>
+				            <li>Aerosoles.</li>
+				            <li>Geles (de ducha o champ&uacute;).</li>
+				            <li>Espuma de afeitar, peinar  o desodorantes</li>
+				            <li>Pastas o cremas, incluye dent&iacute;fricos.</li>
+				            <li>Mezclas de l&iacute;quidos y s&oacute;lidos</li>
+				            <li>M&aacute;scara para pesta&ntilde;as</li>
+				            <li>Cualquier otro art&iacute;culo de consistencia similar</li>
+				        </ul>
+				        Existen l&iacute;quidos que s&iacute; puedes transportar en la cabina de la aeronave y cuyo envase puede superar los 100 mililitros.<br><br>
+				        
+				        <ul>
+				            <li>Leche para beb&eacute;, leche materna o jugos (alimento para infantes).</li>
+				            <li>Medicamentos con receta: Se debe portar la receta o el envase del medicamento a nombre del titular del boleto a&eacute;reo.</li>
+				            <li>Medicamentos sin receta: Insulina y otros medicamentos.</li>
+				        </ul>
+				        <strong>Presentaci&oacute;n:</strong>
+				        <br><br>
+				        Para el transporte de l&iacute;quidos, los debes envasar en botellas con una capacidad m&aacute;xima para 100 mililitros cada uno.<br>
+				        Deber&aacute;s acomodar todas las botellas dentro una bolsa transparente de pl&aacute;stico con auto cierre, de no m&aacute;s de 20 x 20 cent&iacute;metros (equivalente a 1 litro).<br>
+				        Esta bolsa completamente cerrada,  deber&aacute;s presentarla separada de resto de tu equipaje de mano para la revisi&oacute;n y los controles de seguridad correspondientes.
+				        <br><br>
+				        Todos los l&iacute;quidos, geles, aerosoles, etc. que superen los 100 mililitros, deber&aacute;n ser incluidos en el equipaje facturado, caso contrario ser&aacute;n confiscados en el control de seguridad.<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_duty_free" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>DUTTY FREE</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_duty_free" class="img-contenido inlined"></div>
+			    		Cualquier producto que hayas adquirido en Dutty Free est&aacute; sujeto a la misma normativa, en ning&uacute;n caso podr&aacute;n sobrepasar los 100 ml, y el pasajero deber&aacute; portar el recibo y la bolsa sellada hasta destino final.<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_equipos_electronicos" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>EQUIPOS ELECTR&Oacute;NICOS</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			        <div class="content">
+			        	<div id="img_equipos_electronicos" class="img-contenido inlined"></div>
+			        	Puedes llevar conectados durante el vuelo: tu ordenador personal, tableta, agenda electr&oacute;nica, reproductor de m&uacute;sica, c&aacute;maras fotogr&aacute;fica y el tel&eacute;fono m&oacute;vil (en modo avi&oacute;n). Siempre respeta las instrucciones de la tripulaci&oacute;n.<br><br>
+			        </div>
+			    </div>
+			</div>
+		</div>
+		<!-- equipaje facturable -->
+		<div id="info_equipaje_facturable" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>EQUIPAJE FACTURABLE</h3>
+			    Tu equipaje facturable debe tener ciertas caracter&iacute;sticas para poder ser transportado, se trata de la maleta que es chequeada en aeropuerto al momento de presentarte en mostradores y que viaja en la bodega del avi&oacute;n.
+			    <br><br>
+			    Es importante que verifiques la informaci&oacute;n de acuerdo a la ruta de tu viaje y cumplas con los requisitos para evitar inconvenientes.
+			    <br><br>
+			    Para garantizar el binestar de nuestros funcionarios, la empresa recibe en mostradores maletas con un
+			    peso un peso m&aacute;ximo de 32 Kilos como equipaje registrado, respetando las restricciones de cada ruta, ya que presentar en aeropuerto una maleta con un peso superior al permitido en la ruta, puede provocar retraso en tu registro en el vuelo.
+			    <br><br>
+				<div id="subtitle_franquicia_equipaje_facturable" class="desplegable">
+				    <div class="title">
+			        	<div class="img"></div>
+			    		<h4>FRANQUICIA EQUIPAJE FACTURABLE</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table>
+			    			<tr>
+			    				<td colspan="3" class="table-title">
+			    					<div>Clase Econ&oacute;mica</div>
+			    				</td>
+			    			</tr>
+			    			<tr>
+			    				<th>Tipo de pasajero</th>
+			    				<th>Nro de piezas permitidas</th>
+			    				<th>Peso permitido c/u</th>
+			    			</tr>
+			    			<tr>
+			    				<td>Adulto</td>
+			    				<td><div class="maleta"></div></td>
+			    				<td>20 kg</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Ni&ntilde;o</td>
+			    				<td><div class="maleta"></div></td>
+			    				<td>20 kg</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+				</div>
+				<div id="subtitle_vuelos_madrid" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4>VUELOS A/DESDE MADRID</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table>
+			    			<tr>
+				    			<td class="hidden"></td>
+				    			<th colspan="2">Clase Ejecutiva</th>
+				    			<th colspan="2">Clase Econ&oacute;mica</th>
+			    			</tr>
+			    			<tr>
+			    				<th>Tipo de pasajero</th>
+			    				<th>Nro de piezas permitidas</th>
+			    				<th>Peso permitido c/u</th>
+			    				<th>Nro de piezas permitidas</th>
+			    				<th>Peso permitido c/u</th>
+			    			</tr>
+			    			<tr>
+			    				<td>Adulto</td>
+			    				<td><div class="maleta"></div><div class="maleta"></div><div class="maleta"></div></td>
+			    				<td>23 kg</td>
+			    				<td><div class="maleta"></div><div class="maleta"></div></td>
+			    				<td>23 kg</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Ni&ntilde;o</td>
+			    				<td></td>
+			    				<td></td>
+			    				<td><div class="maleta"></div><div class="maleta"></div></td>
+			    				<td>23 kg</td>
+			    			</tr>
+			    		</table>
+
+			    		<div id="img_franquicia_facturable_madrid" class="img-contenido"></div>
+			    	</div>
+				</div>
+				<div id="subtitle_vuelos_sp_bsas_salta" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">VUELOS A/DESDE SAO PAULO, BUENOS AIRES, SALTA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_franquicia_facturable_sao_arg" class="img-contenido"></div>
+			    	</div>
+				</div>
+				<div id="subtitle_vuelos_miami" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4>VUELOS A/DESDE MIAMI</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="img_franquicia_facturable_miami" class="img-contenido"></div>
+			    	</div>
+				</div>
+			</div>
+		</div>
+		<!-- exceso equipaje -->
+		<div id="info_exceso_equipaje" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>EXCESO DE EQUIPAJE</h3>
+				Cualquier art&iacute;culo que supere tu franquicia gratuita de equipaje facturado se considera exceso de equipaje, la tarifa por este peso adicional depender&aacute; b&aacute;sicamente de la ruta en la que realices tu viaje.
+				<br><br>
+				Puedes hacer el pago por exceso de equipaje en oficinas, con el peso exacto, que ser&aacute; confirmado en aeropuerto o directamente al momento de realizar tu check in, con la anticipaci&oacute;n requerida de acuerdo a tu destino.
+				<br><br>
+				<div id="subtitle_exceso_nacionales" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4>RUTAS NACIONALES</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table class="medium">
+			    			<tr>
+			    				<td class="hidden"></td>
+			    				<th>Costo del Sobrepeso</th>
+			    				<th>Excepciones</th>
+			    			</tr>
+			    			<tr>
+			    				<th>Clase Econ&oacute;mica</th>
+			    				<td>1 por ciento de la tarifa plean en la ruta en la que viaja por Kilo adicional</td>
+			    				<td>De Cochabamba, La Paz y Santa Cruz a Cobija 16 Bs. por cada Kilo adicional.</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+				</div>
+				<div id="subtitle_exceso_bol_desde_br_arg" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">ORIGEN/DESTINO BOLIVIA DESDE BRASIL/ARGENTINA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table class="small">
+			    			<tr>
+			    				<td class="hidden"></td>
+			    				<th>Costo del Sobrepeso</th>
+			    			</tr>
+			    			<tr>
+			    				<th>Clase Econ&oacute;mica</th>
+			    				<td>1 por ciento de la tarifa plen de la ruta en la que viaja por Kilo adicional.</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+				</div>
+				<div id="subtitle_exceso_esp_desde_bo_br_arg" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">ORIGEN/DESTINO ESPA&Ntilde;A DESDE BOLIVIA/BRASIL/ARGENTINA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table>
+			    			<tr>
+			    				<td class="hidden"></td>
+			    				<th>Costo del Sobrepeso</th>
+			    				<th>Aplica a</th>
+			    			</tr>
+			    			<tr>
+			    				<th>3ra maleta de 23 Kg.</th>
+			    				<td>A Espa&ntilde;a: 70 Usd.<br>Desde Espa&ntilde;a: 70 &euro;</td>
+			    				<td>Clase econ&oacute;mica.</td>
+			    			</tr>
+			    			<tr>
+			    				<th>4ta y 5ta maleta de 23 Kg.</th>
+			    				<td>A Espa&ntilde;: 100 Usd.<br>Desde Espa&ntilde;a: 100 &euro; cada una.</td>
+			    				<td>Clase econ&oacute;mica y Clase ejecutiva.</td>
+			    			</tr>
+			    			<tr>
+			    				<th>6ta y siguientes maletas de 23 Kg.</th>
+			    				<td>A Espa&ntilde;a: 150 Usd.<br>Desde Espa&ntilde;a: 150 &euro; cada una.</td>
+			    				<td>Clase econ&oacute;mica y Clase ejecutiva.</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+				</div>
+				<div id="subtitle_exceso_usa_desde_bo_br_arg" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">ORIGEN/DESTINO USA DESDE BOLIVIA/BRASIL/ARGENTINA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table class="medium">
+			    			<tr>
+			    				<td class="hidden"></td>
+			    				<th>Condiciones de exceso de euqipaje</th>
+			    				<th>Costo por exceso de equipaje</th>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Dimensi&oacute;n superior a 158 cent&iacute;metros e inferior a 230 cent&iacute;metros.</td>
+			    				<td>130 Usd. por pieza</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso mayor a 23 Kilos y menor a 23 Kilos.</td>
+			    				<td>100 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso mayor a 32 Kilos y menor a 45 Kilos.</td>
+			    				<td>150 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso menor o igual a 23 Kilos, con dimensiones que no superen los 158 cent&iacute;metros en total.</td>
+			    				<td>100 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso mayora a 23 Kilos y menor o igual a 32 Kilos, con dimensiones que no superen los 158 cen&iacute;metros en total.</td>
+			    				<td>150 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso menor o igual a 23 Kilos, con dimensiones que no superen los 158 cent&iacute;metros en total.</td>
+			    				<td>100 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso mayor a 23 Kilos y menor o igual a 32 Kilos, con dimensiones que no superen los 138 cent&iacute;metros en total.</td>
+			    				<td>150 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso menor o igual a 23 Kilos con dimensiones que no superen los 158 cent&iacute;metros en total.</td>
+			    				<td>100 Usd. por pieza.</td>
+			    			</tr>
+			    			<tr>
+			    				<td><div class="maleta"></div></td>
+			    				<td>Peso mayor a 23 Kilos y menor o igual a 32 Kilos con dimensiones que no superen los 158 cent&iacute;metros en total.</td>
+			    				<td>150 Usd. por pieza.</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+				</div>
+			</div>
+		</div>
+		<!-- equipaje especial -->
+		<div id="info_equipaje_especial" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>Equipaje Especial</h3>
+			    Se consideran equipaje especial, todos los objetos o instrumentos que desees transportar y que por sus caracter&iacute;sticas, naturaleza, tama&ntilde;o,cantidad y/o fragilidad, merecen un tratamiento especial y condiciones diferentes para su manipulaci&oacute;n y traslado.
+			    <br><br>
+			    <div id="subtitle_equipamiento_deportivo" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>EQUIPAMIENTO DEPORTIVO</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="image_equipaje_deportivo" class="img-contenido inlined"></div>
+			    		Implementos de pesca - Tabla de surf - Bicicletas - Ski - Snow board - Arco y flecha - Patines y patinetas - Bolsa de golf - Skate - Boliche.
+				        <br><br>
+				        Todos estos implementos ser&aacute;n incluidos en tu franquicia, en caso de existir un exceso, se te realizar&aacute; el cobro correspondiente.
+				        <br><br>
+				        <h4>Excepciones</h4>
+				        Si participas en alg&uacute;n evento deportivo en representaci&oacute;n oficial podr&aacute;s presentar la
+				        documentaci&oacute;n correspondiente para quedar exento del cobro de exceso de equipaje.
+				        <br><br>
+				        <h4>No aceptados</h4>
+				        Si cuentas con un equipo deportivo que funcione a motor y/o bater&iacute;as, debes tomar en cuenta que este no ser&aacute; recibido para su transporte.
+				        <br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_instrumentos_musicales" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>INSTRUMENTOS MUSICALES VOLUMINOSOS</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="image_equipaje_musical" class="img-contenido inlined"></div>
+			    		Guitarras - Bater&iacute;as - Tambores - Trompetas.
+			    		<br><br>
+			            Debido a la fragilidad y valor de estos art&iacute;culos, se te permitir&aacute; en caso de solicitarlo, el transporte de alguno de estos instrumentos en cabina de pasajeros, si ingresa en las condiciones de equipaje de mano el transporte se realizar&aacute; sin cobro adicional; caso contrario deber&aacute; ser acomodado en un asiento, para esto deber&aacute;s pagar una tarifa regular, el peso m&aacute;ximo para que el instrumento sea aceptado es de 75 Kilos.
+			            <br><br>
+			            Tu instrumento tambi&eacute;n puede ser transportado en el buz&oacute;n de la aeronave bajo las condiciones de franquicia, exceso de equipaje.
+			            <br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_equipaje_voluminoso" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>EQUIPAJE VOLUMINOSO Y FR&Aacute;GIL</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div id="image_equipaje_fragil" class="img-contenido inlined"></div>
+			    		Si tienes planificado transportar un televisor (Plasma o LED) de 42 pulgadas o m&aacute;s, debes tomar en cuenta que es considerado un equipaje especial y exige condiciones adecuadas para su recepci&oacute;n, no se considerar&aacute; como parte de la franquicia, por tanto, adem&aacute;s de realizar el pago como exceso de equipaje, deber&aacute;s firmar un deslinde de responsabilidad para su transporte, es importante que lo presentes en su empaque original.
+			    		<br><br>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+		<!-- mercancias peligrosas -->
+		<div id="info_mercancias_peligrosas" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+			    <h3>MERCANC&Iacute;AS PELIGROSAS</h3>
+		        Se trata de sustancias que por ningún motivo puedes transportar en la aeronave como equipaje, sea de mano o facturado, ya que pondrían en riesgo la seguridad del vuelo y de todos los pasajeros y tripulación. <br>
+		        Es importante que prestes atención a los datos que te proporcionamos y te informes respecto a las sustancias que corresponden a esta clasificación para evitar tener inconvenientes al momento de realizar tu viaje.
+		      	<br><br>
+		       	Existen elementos considerados mercanc&iacute;as peligrosas, que la aerol&iacute;nea puede transportar como carga a solicitud tuya, bajo normas de seguridad estrictas.
+		       	<br><br>
+				Para mayor informaci&oacute;n puedes consultar el siguiente documento:<br>
+				<a href="http://www.iata.org/whatwedo/cargo/dgr/Documents/passenger-provisions-table-2.3.A-dgr-56-sp.pdf">http://www.iata.org/whatwedo/cargo/dgr/Documents/passenger-provisions-table-2.3.A-dgr-56-sp.pdf</a>
+			    <br><br><br>
+			    <div id="subtitle_lista_mercancias_peligrosas" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>LISTA DE MERCANC&Iacute;AS PELIGROSAS</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<strong>1) Maletines Provistos de Dispositivos de Alarma</strong>
+			    		<br><br>
+			    		<strong>2) Artefactos Explosivos</strong>
+				       	Explosivos, municiones, material para expediciones, bengalas, fuegos artificiales, material para expediciones, maletines de seguridad con art&iacute;culos pirot&eacute;cnicos y material pirot&eacute;cnico en general.
+				       	<br><br>
+				       	<strong>3) Gases Comprimidos</strong>
+						Gases comprimidos inflamables, no inflamables y venenosos, extintores, licuados, botellas de oxigeno para bucear, licuados refrigerados o disueltos, ya sean inflamables, t&oacute;xicos, o no inflamables y no t&oacute;xicos, tales como: aerosoles, aparatos para respirar, botellas con gases refrigerantes y en cilindros en general.
+						<br><br>
+						<strong>4) L&iacute;quidos Inflamables</strong>
+				       	Bombonas de gas para recarga de encendedores, pinturas, disolventes, combustible, l&iacute;quidos y s&oacute;lidos inflamables, disolventes, adhesivos, barnices, cerillas y sustancias inflamables en general.
+				       	<br><br>
+				        <strong>5) S&oacute;lidos Inflamables</strong>
+				       	F&oacute;sforo, art&iacute;culos de f&aacute;cil ignici&oacute;n, combusti&oacute;n espont&aacute;nea o que al contacto con el agua emitan gases inflamables.
+				       	<br><br>
+				       	<strong>6) Venenos y Sustancias Infecciosas</strong>
+				      	Muestras para diagn&oacute;stico, vacunas, insecticidas, sustancias t&oacute;xicas o infecciosas, y herbicidas.
+				      	<br><br>
+				      	<strong>7) Materiales Radioactivos</strong>
+						Material con is&oacute;topos radioactivos.
+						<br><br>
+						<strong>8) Materiales Corrosivos y Oxidantes</strong>
+				       	&aacute;cidos, alcalinos, mercurio (contenido en term&oacute;metros), pilas h&uacute;medas, acumuladores el&eacute;ctricos y materiales oxidantes como polvos para blanquear y per&oacute;xido.
+				       	<br><br>
+				       	<strong>9) Pilas y Bater&iacute;as</strong>
+				      	Adem&aacute;s de otros art&iacute;culos considerados peligrosos como material ferro-magn&eacute;tico, hielo seco y bater&iacute;as de coche.
+				      	<br><br>
+				      	<div id="img_objetos_prohibidos" class="img-contenido"></div>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+		<!-- equipaje mascotas -->
+		<div id="info_equipaje_mascotas" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>MASCOTAS</h3>
+				Una de las maneras en que puedes llevar contigo a tu animal de compa&ntilde;&iacute;a cuando viajes es en el buz&oacute;n de la nave, para poder transportar a tu mascota en vuelos nacionales e internacionales, debes cumplir varios requisitos:
+				<div id="image_mascotas" class="img-contenido"></div>
+				<br><br>
+			    <div id="subtitle_mascotas_buzon" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Para el Transporte en Buz&oacute;n</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		1. Es imprescindible que reserves el espacio para tu mascota al momento de realizar la reserva o compra de tu boleto, informa sobre la raza y peso del animal y las medidas del canil transportador; el agente de call center o ventas realizar&aacute; la solicitud al &aacute;rea de reservas e inmediatamente aceptar&aacute;n o negar&aacute;n el transporte de tu perro o gato.<br>
+			            Uno de los motivos frecuentes para negar el servicio en buz&oacute;n es que la raza de tu animal de compa&ntilde;&iacute;a est&eacute; incluida en la lista de perros y gatos de raza braquic&eacute;falo (animales de hocico chato).
+			            <div id="image_mascotas_braquicefalos" class="img-contenido"></div>
+			            <br><br>
+				      	2. Al momento de adquirir el canil de transporte debes buscar uno que sea resistente, seguro, c&oacute;modo y con buena ventilaci&oacute;n; para viajes internacionales el material debe ser m&aacute;s fuerte y los seguros deber&aacute;n garantizar que no se abrir&aacute; en ning&uacute;n momento.
+				      	<br><br>
+				     	3. Los horarios de presentaci&oacute;n en aeropuerto deber&aacute;n ser cumplidos rigurosamente para evitar el rechazo de tu animal de compa&ntilde;&iacute;a en mostradores. Es imprescindible que presentes la <a href="javascript:" style="display:inline" id="btn_ir_a_documentacion_requerida">documentaci&oacute;n requerida</a>, acorde a la ruta en que realices el viaje con tu animal de compa&ntilde;&iacute;a; as&iacute; mismo la ruta determinar&aacute; la tarifa a pagar, ya que equivale al 1% de la tarifa plena por cada kilo del animal y su canil.
+				     	<br><br>
+						4. Si te preocupa la seguridad de tu animal de compa&ntilde;&iacute;a durante el viaje, te informamos que contamos con procedimientos rigurosos para el transporte de animales vivos, de esta forma garantizamos que reciba un buen trato y est&eacute; seguro. Toma en cuenta que existe un cupo limitado de espacios por vuelo para animales en buz&oacute;n.
+						<br><br>
+						5. Para una mejor identificaci&oacute;n del canil transportador de tu animal de compa&ntilde;&iacute;a, puedes etiquetar los siguientes datos en un lugar visible:
+						<div id="image_mascotas_identificacion" class="img-contenido"></div>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mascotas_documentacion" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Documentaci&oacute;n requerida de acuerdo a la normativa de cada pa&iacute;s</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table>
+			    			<tr>
+			    				<th>Pa&iacute;s</th>
+			    				<th class="small-title">Certificado Zoosanitario Internacional</th>
+			    				<th class="small-title">Informe Sanitario</th>
+			    				<th class="small-title">Cartilla de Vacunaci&oacute;n</th>
+			    				<th class="small-title">Microchip / Tatuaje</th>
+			    				<th class="small-title">Certificado de Serolog&iacute;a</th>
+			    				<th class="small-title">Certificado de Vacunaci&oacute;n contra bacterias y par&aacute;sitos</th>
+			    			</tr>
+			    			<tr>
+			    				<td>Nacional</td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    				<td></td>
+			    				<td></td>
+			    			</tr>
+			    			<tr>
+			    				<td>Bolivia</td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    				<td></td>
+			    				<td><div class="cross"></div></td>
+			    			</tr>
+			    			<tr>
+			    				<td>Brasil</td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    				<td></td>
+			    			</tr>
+			    			<tr>
+			    				<td>Argentina</td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    				<td></td>
+			    				<td></td>
+			    			</tr>
+			    			<tr>
+			    				<td>Espa&ntilde;a</td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    			</tr>
+			    			<tr>
+			    				<td>Estados Unidos</td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td><div class="cross"></div></td>
+			    				<td></td>
+			    				<td></td>
+			    				<td></td>
+			    			</tr>
+			    		</table>
+				        <br><br>
+				        <strong>1) Certificado Zoosanitario Internacional (CZI):</strong>
+				        documento emitido por el Servicio Sanitario oficial del pa&iacute;s de origen o de procedencia del animal, los plazos de validez de este documento depender&aacute;n de la normativa de cada pa&iacute;s.
+				        <br><br>
+				        <strong>2) Informe sanitario </strong> emitido por un veterinario. El informe tendr&aacute; una validez de 10 d&iacute;as a partir de su fecha de emisi&oacute;n.
+				        <br><br>
+				        <strong>3) Cartilla de Vacunaci&oacute;n:</strong> certificado de vacunaci&oacute;n contra la rabia, la vacuna debe ser aplicada entre 30 d&iacute;as a 01 a&ntilde;o antes del embarque.
+				        <br><br>
+				        <strong>4) Microchip/tatuaje:</strong> el microchip implantado en el cuerpo del animal o el tatuaje detr&aacute;s de la oreja, conteniendo un c&oacute;digo alfanum&eacute;rico de identificaci&oacute;n. Se debe presentar la etiqueta correspondiente al momento del check in.
+				        <br><br>
+				        <strong>5) Certificado de Serolog&iacute;a:</strong> proporcionado tras el env&iacute;o de una muestra de sangre del animal a uno de los dos laboratorios acreditados por la Uni&oacute;n Europea (UE) o a otro laboratorio igualmente acreditado por la Comunidad Europea en el exterior. IMPORTANTE: deber&aacute;n pasar necesariamente 90 d&iacute;as desde la fecha de toma de muestra de sangre hasta el embarque del animal.
+			    	</div>
+			    </div>
+			</div>
+		</div>
+	</div> <!-- <<< UI POLITICA DE EQUIPAJE >>> -->
+
+	<!-- UI SEGUIMIENTO EQUIPAJE EN LINEA -->
+	<div id="ui_seguimiento_equipaje" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>SEGUIMIENTO DE EQUIPAJE</h3>
+			<h2>EN L&Iacute;NEA</h2>
+		</div>
+		<div class="icon"></div>
+		<div class="info">
+			<div class="descripcion">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+		</div>
+	</div> <!-- <<< UI SEGUIMIENTO EQUIPAJE EN LINEA >>> -->
+
+	<!-- UI EQUIPAJES DEMORADOS EXTRAVIADOS O DAÑADOS -->
+	<div id="ui_equipajes_demorados" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>EQUIPAJES DEMORADOS, EXTRAVIADOS</h3>
+			<h2>O DA&Ntilde;ADOS</h2>
+		</div>
+		<div class="icon"></div>
+		<div class="info">
+			<div class="descripcion">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>
+			</div>
+		</div>
+	</div> <!-- <<< UI EQUIPAJES DEMORADOS EXTRAVIADOS O DAÑADOS >>> -->
+
+	<!-- UI DECLARACION DEL VALOR DEL EQUIPAJE -->
+	<div id="ui_declaracion_equipaje" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>DECLARACI&Oacute;N DEL VALOR</h3>
+			<h2>DEL EQUIPAJE</h2>
+		</div>
+		<div class="icon"></div>
+		<div class="info">
+			<div class="descripcion">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+		</div>
+	</div> <!-- <<< UI DECLARACION DEL VALOR DEL EQUIPAJE >>> -->
+
+	<!-- UI TIPS DE EQUIPAJE -->
+	<div id="ui_tips_equipaje" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>TIPS DE</h3>
+			<h2>EQUIPAJE</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>TIPS DE EQUIPAJE</h3>
+		</div>
+		<ul class="first-menu"></ul>
+		<div class="info">
+			<div class="descripcion">
+				Porque nos interesa que tengas un viaje sin imprevistos, toma en cuenta estas sugerencias:
+				<ul>
+					<li>No olvides identificar adecuadamente tu equipaje de mano y tu equipaje registrado con datos actualizados.</li>
+					<li>Si planeas transportar objetos de valor, documentos importantes o valorados y artículos electrónicos de uso personal, no olvides que todos deben ser incluidos en tu equipaje de mano</li>
+					<li>Siempre presta atención a todas las notificaciones que Boliviana de Aviación ha desplegado en oficinas y aeropuertos indicando los elementos que puedes o no transportar en tu equipaje de mano y en tu equipaje registrado.</li>
+					<li>Recuerda informarte respecto a las restricciones  existentes sobre el transporte de objetos punzocortantes, explosivos, armas de fuego, materiales magn&eacute;ticos y l&iacute;quidos</li>
+					<li>Cuando requieras transportar animales vivos, inf&oacute;rmate sobre las condiciones vigentes para la ruta en la que necesitas viajar.</li>
+				</ul>
+			</div>
+		</div>
+	</div> <!-- <<< UI TIPS DE EQUIPAJE >>> -->
+
+	<!-- UI EQUIPAJE INTERLINEAL -->
+	<div id="ui_equipaje_interlineal" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>EQUIPAJE</h3>
+			<h2>INTERLINEAL</h2>
+		</div>
+		<div class="icon"></div>
+		<div class="info">
+			<div class="descripcion">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+		</div>
+	</div> <!-- <<< UI EQUIPAJE INTERLINEAL >>> -->
+
+	<!-- UI LLEGAR AL AEROPUERTO -->
+	<div id="ui_llegar_aeropuerto" class="ui-section">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>LLEGAR AL</h3>
+			<h2>AEROPUERTO</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>LLEGAR AL AEROPUERTO</h3>
+		</div>
+		<ul class="first-menu">
+			<li id="submenu_item_hora_limite" class="selected" data-info="hora_limite">
+				<label>Hora L&iacute;mite</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_aeropuerto_lp" data-info="aeropuerto_lp">
+				<label>Aeropuerto de La Paz</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_aeropuerto_cbba" data-info="aeropuerto_cbba">
+				<label>Aeropuerto de Cochabamba</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_aeropuerto_viruviru" data-info="aeropuerto_viruviru">
+				<label>Aeropuerto de Viru Viru</label>
+				<div class="icon small"></div>
+			</li>
+		</ul>
+
+		<!-- hora limite -->
+		<div id="info_hora_limite" class="info selected">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>HORA L&Iacute;MITE</h3>
+				Para evitar inconvenientes en aeropuerto toma en cuenta la hora límite:
+				<table class="medium">
+					<tr>
+						<td class="table-title" colspan="3"><div>Vuelos Nacionales</div></td>
+					</tr>
+					<tr>
+						<th>Hora sugerida para check in</th>
+						<th>Hora l&iacute;mite para check in</th>
+						<th>Cierre de vuelo</th>
+					</tr>
+					<tr>
+						<td>60 minutos antes del vuelo.</td>
+						<td>30 minutos antes del vuelo</td>
+						<td>25 minutos antes del vuelo</td>
+					</tr>
+				</table>
+				<table class="medium">
+					<tr>
+						<td class="table-title" colspan="3"><div>Vuelos Internacionales</div></td>
+					</tr>
+					<tr>
+						<th>Hora sugerida para check in</th>
+						<th>Hora l&iacute;mite para check in</th>
+						<th>Cierre de vuelo</th>
+					</tr>
+					<tr>
+						<td>3 horas antes de tu vuelo.</td>
+						<td>75 minutos antes del vuelo</td>
+						<td>60 minutos antes del vuelo</td>
+					</tr>
+				</table>
+				<br><br><br>
+			    <div id="subtitle_porque_en_hora_nacionales" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">&iquest;Por qu&eacute; presentarte una hora antes en vuelos nacionales?</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Nuestros agentes de ventas siempre te solicitar&aacute;n presentarte una hora antes de la salida de tu vuelo en mostradores de aeropuerto, para que tengas el tiempo suficiente para facturar, entregar tu equipaje, pasar  los controles de <i>SABSA</i> y de narc&oacute;ticos sin el riesgo de perder tu vuelo. En caso de llegar fuera de horario la l&iacute;nea a&eacute;rea no se responsabiliza.
+			    		<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_porque_en_hora_internacionales" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">&iquest;Por qu&eacute; presentarte tres horas antes en vuelos internacionales?</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Nuestros agentes de ventas siempre te solicitar&aacute;n presentarte tres horas antes del horario de salida de tu vuelo internacional en mostradores de Boliviana de Aviaci&oacute;n,  para realizar la facturaci&oacute;n, entregar tu equipaje, presentar tus documentos de identidad y viaje (pasaporte, c&eacute;dula de identidad, documento de residencia, autorizaciones de viaje, etc); pasar los controles migratorios, aduanas y narc&oacute;ticos. En caso de llegar fuera de horario la l&iacute;nea a&eacute;rea no se responsabiliza. 
+			    		<br><br>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- aeropuerto La Paz -->
+		<div id="info_aeropuerto_lp" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>AEROPUERTO DE LA PAZ</h3>
+				<strong>Nombre:</strong> Aeropuerto Internacional de El Alto
+				<br><br>
+				<strong>Ciudad:</strong> La Paz
+				<br><br>
+				<strong>Ubicaci&oacute;n:</strong> Av. H&eacute;roes del Kilometro 7 S/N Zona Villa Bolivar
+				<br><br>
+				<strong>Contacto:</strong> Telf. (591-2) 215-7300
+				<br><br>
+				<strong>Temperatura Promedio:</strong> 18 Grados Cent&iacute;grados.
+				<br><br>
+				Para mayor informaci&oacute;n visita:<br>
+				<a href="http://www.sabsa.aero/aeropuerto-el-alto/info-vuelos.aspx">http://www.sabsa.aero/aeropuerto-el-alto/info-vuelos.aspx</a>
+				<br><br>
+				<div id="subtitle_mapa_lp" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">MAPA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div class="img-contenido"></div>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+		<!-- aeropuerto Cochabamba -->
+		<div id="info_aeropuerto_cbba" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>AEROPUERTO DE COCHABAMBA</h3>
+				<strong>Nombre:</strong>Aeropuerto Internacional Jorge Wilstermann
+				<br><br>
+				<strong>Ciudad:</strong> Cochabamba
+				<br><br>
+				<strong>Ubicaci&oacute;n:</strong> Av. Guillermo Killman/ Zona Aeropuerto.
+				<br><br>
+				<strong>Contacto:</strong> Telf. (591-4) 412-0400
+				<br><br>
+				<strong>Temperatura promedio:</strong> 20 Grados Cent&iacute;grados.
+				<br><br>
+				Para mayor informaci&oacute;n visita:<br>
+				<a href="http://www.sabsa.aero/aeropuerto-jorge-wilsterman/info_vuelos.aspx">http://www.sabsa.aero/aeropuerto-jorge-wilsterman/info_vuelos.aspx</a><br><br>
+			    <div id="subtitle_mapa_cbba" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>MAPA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div class="img-contenido"></div>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- aeropuerto Viru Viru -->
+		<div id="info_aeropuerto_viruviru" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>AEROPUERTO DE VIRU VIRU</h3>
+				<strong>Nombre:</strong> Aeropuerto Internacional de Viru Viru.
+				<br><br>
+				<strong>Ciudad:</strong> Santa Cruz de la Sierra
+				<br><br>
+				<strong>Ubicaci&oacute;n:</strong> Km. 11 Carretera al Norte.
+				<br><br>
+				<strong>Contacto:</strong> Telf. (591-3) 338-5000
+				<br><br>
+				<strong>Temperatura Promedio:</strong> 25 Grados Cent&iacute;grados.
+				<br><br>
+				Para mayor informaci&oacute;n visita:<br>
+				<a href="http://www.sabsa.aero/aeropuerto-viru-viru/default.aspx">http://www.sabsa.aero/aeropuerto-viru-viru/default.aspx</a><br><br>
+			    <div id="subtitle_mapa_viruviru" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>MAPA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<div class="img-contenido"></div>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+	</div> <!-- <<< UI LLEGAR AL AEROPUERTO >>> -->
+
+	<!-- UI SERVICIOS ESPECIALES -->
+	<div id="ui_servicios_especiales" class="ui-section">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>SERVICIOS</h3>
+			<h2>ESPECIALES</h2>
+		</div>
+		<div class="header-fixed">
+			<h3 class="for-fixed">SERVICIOS ESPECIALES</h3>
+		</div>
+		<ul class="first-menu">
+			<li id="submenu_item_menores_no_acompanados" class="selected" data-info="menores_no_acompanados">
+				<label>Menores no acompa&ntilde;ados</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_pasajeros_necesidades_diferentes"
+				data-info="pasajeros_necesidades_diferentes">
+				<label>Pasajeros con necesidades diferentes</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_condiciones_medicas_especiales" data-info="condiciones_medicas_especiales">
+				<label>Condiciones m&eacute;dicas especiales</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_oxigeno" data-info="oxigeno">
+				<label>Transporte de Ox&iacute;geno</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_dialisis_portatil" data-info="dialisis_portatil">
+				<label>Transporte equipo Di&aacute;lisis Port&aacute;til</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_bebes" data-info="bebes">
+				<label>Viajando con Beb&eacute;s</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_mascota" data-info="mascota">
+				<label>Viajando con tu Mascota en Cabina</label>
+				<div class="icon small"></div>
+			</li>
+		</ul>
+
+		<!-- menores no acompañados -->
+		<div id="info_menores_no_acompanados" class="info selected">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>MENORES NO ACOMPA&Ntilde;ADOS</h3>
+				Este servicio posibilita que menores entre 5 y 11 a&ntilde;os puedan viajar sin acompa&ntilde;ante bajo circunstancias reguladas en vuelos nacionales e internacionales de Boliviana de Aviaci&oacute;n. Debido a que requieren una atenci&oacute;n especial y existen requisitos por cumplir, es muy importante que revises a profundidad esta informaci&oacute;n.
+				<br><br><br>
+			    <div id="subtitle_menores_no_acompanados_nal" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>Requisitos viajes nacionales</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+					        <li>
+					            Al momento de la reserva y compra del boleto es necesario que informes al agente de Boliviana de Aviaci&oacute;n, que el menor viajar&aacute; sin la compa&ntilde;&iacute;a de un adulto.
+					        </li>
+					        <li>
+					            Deber&aacute;s completar con los datos correctos el formulario dise&ntilde;ado especialmente para el servicio de menor no acompa&ntilde;ado.
+					        </li>
+					        <li>
+					            El menor debe portar un documento de identidad original, el formulario completo y debe necesariamente estar acompa&ntilde;ado por un adulto para realizar el check in y todos los procedimientos aeroportuarios.
+					        </li>
+					    </ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_requisitos_viajes_internacionales" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Requisitos viajes internacionales</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Si requieres que un menor de entre 5 y 11 a&ntilde;os de edad realice un viaje internacional sin la compa&ntilde;&iacute;a de un adulto, debes tomar todas las previsiones, dependiendo del origen y destino del viaje.
+			    		<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_bo_arg_bra" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Viajes con origen o destino entre Bolivia, Argentina y Brasil</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+				        <ul>
+				            <li>
+				                Es importante que realices la solicitud del servicio de menor no acompa&ntilde;ado al momento de la reserva o compra de boleto, presentando la documentaci&oacute;n original y vigente del menor.
+				            </li>
+				            <li>
+				                Deber&aacute;s tramitar la autorizaci&oacute;n legal de viaje, correspondiente al pa&iacute;s de origen.
+				            </li>
+				            <li>
+				                Deber&aacute;s presentarte en mostradores de aeropuerto, junto al menor, 3 horas antes del vuelo con toda la documentaci&oacute;n original.
+				            </li>
+				            <li>
+				                Toma en cuenta que el servicio no tiene costo adicional, pero s&iacute; cupos limitados.
+				            </li>
+				        </ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_sud_am_a_esp_usa" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Viajes con origen o destino de Sud Am&eacute;rica a Espa&ntilde;a y Estados Unidos</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+				        <ul>
+				            <li>
+				                Si el pasajero es un menor entre 5 y 11 a&ntilde;os, debe contar obligatoriamente con el servicio de asistencia para menores no acompa&ntilde;ados, por tanto como padre o tutor legal, deber&aacute;s realizar la solicitud al momento de la reserva o compra del boleto, presentando la documentaci&oacute;n original y vigente del menor.
+				            </li>
+				            <li>
+				                Tambi&eacute;n deber&aacute;s realizar el tr&aacute;mite de la autorizaci&oacute;n legal de viaje, correspondiente al pa&iacute;s de origen.
+				            </li>
+				            <li>
+				                Para tu tranquilidad, este servicio incluye asistencia por parte de la aerol&iacute;nea durante el embarque y desembarque, adem&aacute;s, la compa&ntilde;&iacute;a de nuestros agentes de aeropuerto durante los tr&aacute;mites de migraci&oacute;n y aduanas, hasta la entrega a los padres o apoderados.
+				            </li>
+				            <li>
+				                Deber&aacute;s presentarte en mostradores de aeropuerto, junto al menor, 3 horas antes del vuelo con toda la documentaci&oacute;n original.
+				            </li>
+				            <li>
+				                El costo por el servicio de asistencia es de 100 Usd. incluyendo impuestos, dependiendo la legislaci&oacute;n del pa&iacute;s de origen. Debes tomar en cuenta que el servicio tiene cupos limitados.
+				            </li>
+				        </ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_jovenes_sud_am_a_esp_usa" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">J&oacute;venes viajeros desde Sud Am&eacute;rica a Espa&ntilde;a y Estados Unidos</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+				            <li>
+				                Si requieres que un menor entre los 12 y 17 a&ntilde;os viaje a Madrid o Estados Unidos sin compa&ntilde;&iacute;a de un adulto, te ofrecemos el servicio de asistencia para j&oacute;venes viajeros, puedes solicitarlo al momento de realizar la reserva o compra del boleto del menor, presentando sus documentos de identidad y viaje originales y vigentes.
+				            </li>
+				            <li>
+				                Al tratarse de menores de edad, las condiciones de transporte son similares a la de menores no acompa&ntilde;ados, por tanto deber&aacute;s realizar el tr&aacute;mite para la autorizaci&oacute;n legal de viaje correspondiente al pa&iacute;s de origen.
+				            </li>
+				            <li>
+				                El servicio tiene un costo de 100 USD adicionales a la tarifa de adulto.
+				            </li>
+				        </ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_auxiliar" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Menores no acompa&ntilde;ados con auxiliar a bordo</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Podemos ofrecerte este servicio de acuerdo a la ruta en la que se realice el viaje, la edad de los menores y nuestra disponibilidad de tripulaci&oacute;n, toma en cuenta que los espacios son limitados.
+			    		<br><br>
+			    		<strong>Rutas Nacionales</strong><br>
+			            La empresa te ofrece este servicio si requieres que se transporte a tu ni&ntilde;o de entre 2 y 5 a&ntilde;os sin compa&ntilde;&iacute;a de un familiar adulto. A&uacute;n as&iacute; ser&aacute; considerado Menor no Acompa&ntilde;ado.
+			            <br><br>
+			            Deber&aacute;s realizar la solicitud del servicio de Auxiliar a Bordo por lo menos 72 horas de antes del vuelo.
+			            <br><br>
+			            Toma en cuenta que para solicitar se destine un tripulante de cabina para el cuidado exclusivo de tu ni&ntilde;o de 2 a 5 a&ntilde;os, deber&aacute;s pagar los pasajes ida y vuelta de nuestro funcionario, hotel y vi&aacute;ticos.
+			            <br><br>
+			            <strong>Viajes con origen o destino entre Bolivia, Argentina y Brasil.</strong><br>
+            			La empresa te ofrece este servicio si requieres que se transporte a tu ni&ntilde;o de entre 2 y 5 a&ntilde;os sin compa&ntilde;&iacute;a de un familiar adulto. A&uacute;n as&iacute; ser&aacute; considerado Menor no Acompa&ntilde;ado.
+            			<br><br>
+			            Deber&aacute;s realizar la solicitud del servicio de Auxiliar a Bordo por lo menos 4 d&iacute;as antes de la fecha de viaje.
+			            <br><br>
+			            Toma en cuenta que para solicitar se destine un tripulante de cabina para el cuidado exclusivo de tu ni&ntilde;o entre 2 a 5 a&ntilde;os, deber&aacute;s pagar los pasajes de ida y vuelta, hotel y proporcionar vi&aacute;ticos a nuestro funcionario.
+			            <br><br>
+			            <strong>Viajes con origen o destino de Sud Am&eacute;rica a Espa&ntilde;a o Estados Unidos. </strong><br>
+				        La empresa te ofrece este servicio si requieres que se transporte a tu ni&ntilde;o de entre 5 y 11 a&ntilde;os sin compa&ntilde;&iacute;a de un familiar adulto. A&uacute;n as&iacute; ser&aacute; considerado Menor no Acompa&ntilde;ado.
+				        <br><br>
+				        Deber&aacute;s realizar la solicitud del servicio de Auxiliar a Bordo por lo menos una semana antes de la fecha de viaje.
+				        <br><br>
+				        Toma en cuenta que para solicitar se destine un tripulante de cabina para el cuidado exclusivo de tu ni&ntilde;o de 5 a 11a&ntilde;os, deber&aacute;s pagar los pasajes de ida y vuelta, hotel y proporcionar vi&aacute;ticos a
+				        nuestro funcionario.
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_restricciones" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Restricciones</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			        	En ning&uacute;n caso el servicio de Menor no Acompa&ntilde;ado se aplicar&aacute; a:
+			        	<br><br>
+				        <ul>
+				            <li>Menores con vuelos de conexi&oacute;n con otras aerol&iacute;neas.</li>
+				            <li>Menores que requieran asistencia especial durante el viaje.</li>
+				            <li>Menores que requieran silla de ruedas para su desplazamiento.</li>
+				            <li>Menores que requieran certificaci&oacute;n m&eacute;dica por enfermedad o discapacidad grave.</li>
+				        </ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_mna_excepciones" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Excepciones</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			        	Menores extranjeros o residentes en el exterior, con documentaci&oacute;n vigente y sello de ingreso que ratifique su permanencia menor a 90 d&iacute;as en el territorio del pa&iacute;s de destino temporal, no deber&aacute;n presentar autorizaci&oacute;n de viaje adicional a la que utilizaron para salir de su pa&iacute;s de origen y/o residencia.
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- pasajeros con necesidades diferentes -->
+		<div id="info_pasajeros_necesidades_diferentes" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>PASAJEROS CON NECESIDADES DIFERENTES</h3>
+			    Como empresa de transportes, tenemos la obligaci&oacute;n de proporcionar un servicio a&eacute;reo accesible para nuestros clientes con capacidades y necesidades especiales, pero existen limitaciones vinculadas a la seguridad operativa. Por eso, con el objetivo de facilitar y hacer seguros tus viajes se han establecido procedimientos que deben ser aplicados en nuestras oficinas y aeropuertos.
+			    <div id="subtitle_pnd_limitaciones" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Limitaciones</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Las limitaciones en el transporte de pasajeros con capacidades diferentes est&aacute;n, en muchos casos, relacionadas con protocolos y normas de seguridad operativas y en otros por caracter&iacute;sticas de las aeronaves y terminales aeroportuarias.
+			    		<br><br>
+			            Es importante tener en cuenta que existen ciertas condiciones que requieren, por parte de la aerol&iacute;nea, atenci&oacute;n especial o un certificado m&eacute;dico legal que permita podamos prestar el servicio.
+			            <br><br>
+			            Tambi&eacute;n existen condiciones excepcionales que permiten a nuestros agentes de aeropuerto denegar el embarque de un pasajero, este procedimiento se realiza en resguardo de la seguridad de los usuarios, la tripulaci&oacute;n y el propio pasajero.
+			    	</div>
+			    </div>
+			    <div id="subtitle_px_mov_reducida" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>Personas con movilidad reducida. (PRM)</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		De acuerdo a Normativa Internacional, se refiere a toda persona que por cualquier alteraci&oacute;n temporal o permanente de sus capacidades f&iacute;sicas y/o sensoriales, deterioro de facultades intelectuales, edad u otra causa, requiere atenci&oacute;n especial y la adaptaci&oacute;n de los servicios a sus necesidades.
+			    		<br><br>
+			    		<strong>Transporte de personas con movilidad reducida</strong><br>
+				        <ol>
+				            <li>
+				                S&iacute; por cualquier motivo t&uacute; ingresas en la definici&oacute;n de Persona con Movilidad Reducida, debes tomar en
+				                cuenta que no requieres presentar un certificado m&eacute;dico legal, salvo que hayas desarrollado una
+				                condici&oacute;n m&eacute;dica especial.
+				            </li>
+				            <li>
+				                En caso de requerir el uso de silla de ruedas para una parte o el trayecto completo (durante el
+				                embarque y desembarque), deber&aacute;s realizar la solicitud correspondiente al agente de reservas o venta de
+				                pasajes al momento de la compra de tu boleto.
+				            </li>
+				            <li>
+				                Como aerol&iacute;nea no prestamos un servicio de asistencia m&eacute;dica, por tanto, en caso de no ser
+				                autosuficiente, siempre deber&aacute;s viajar con un acompa&ntilde;ante que garantice tu seguridad, higiene y
+				                asistencia sanitaria.
+				            </li>
+				            <li>
+				                En un caso extremo, si los agentes de aeropuerto te deniegan el transporte, se te debe realizar una
+				                explicaci&oacute;n clara y espec&iacute;fica respecto a las causas.
+				            </li>
+				            <li>
+				                En caso de requerir transportar un perro lazarillo es de suma importancia que comuniques a la
+				                aerol&iacute;nea con anticipaci&oacute;n. Recuerda que para su transporte el perro entrenado debe utilizar bozal y
+				                permanecer junto a tus pies durante todo el trayecto.
+				            </li>
+				            <li>
+				                El transporte de un perro lazarillo es gratuito, no aplican restricciones de peso ni ruta, pero
+				                deber&aacute;s presentar la certificaci&oacute;n o el distintivo oficial y la documentaci&oacute;n sanitaria que requiera
+				                para ingresar al pa&iacute;s de destino o tr&aacute;nsito.
+				            </li>
+				            <li>
+				                Si cuentas con objetos que faciliten tu movilidad (silla de ruedas, muletas, etc), estos ser&aacute;n
+				                transportados sin costo adicional en el buz&oacute;n de carga y te ser&aacute;n entregados una vez se realice el
+				                desembarque en destino.
+				            </li>
+				        </ol>
+			    	</div>
+			    </div>
+				<br><br>
+			</div>
+		</div>
+
+		<!-- condiciones medicas especiales -->
+		<div id="info_condiciones_medicas_especiales" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>CONDICIONES M&Eacute;DICAS ESPECIALES</h3>
+				<br><br>
+				<div id="subtitle_condiciones_med_requieren_atencion" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4>CONDICIONES QUE REQUIEREN CONSULTA M&Eacute;DICA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Como empresa de transportes y por normativa de seguridad, estamos en condiciones de solicitarte que consultes a tu m&eacute;dico antes de realizar un viaje, fundamentalmente si tienes alguna de las siguientes condiciones que requiera atenci&oacute;n.
+			    		<ol>
+				            <li>Problemas cardiovasculares.</li>
+				            <li>Problemas respiratorios cr&oacute;nicos.</li>
+				            <li>Anemia severa.</li>
+				            <li>Diabetes inestable.</li>
+				            <li>C&aacute;ncer</li>
+				            <li>Consumo de medicaci&oacute;n inmunosupresiva.</li>
+				            <li>Que su estado general est&eacute; en duda por cualquier causa.</li>
+				        </ol>
+			    	</div>
+			    </div>
+			    <div id="subtitle_condiciones_med_requieren_certificado" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4>CONDICIONES QUE REQUIEREN CERTIFICADO M&Eacute;DICO</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+        				En algunos casos m&eacute;dicos y siempre que proporciones la informaci&oacute;n correcta sobre tu estado de salud a los agentes de reservas y ventas de la empresa, se te solicitar&aacute; como requisito indispensable, para poder ser embarcado, un certificado m&eacute;dico. Si olvidaste notificar al personal de ventas sobre alguna afecci&oacute;n, nuestros agentes en aeropuerto pueden impedir tu embarque a simple sospecha de riesgo para tu seguridad o la del resto de los pasajeros.
+        				<br><br>
+				        <ol>
+				            <li>Requerimiento de suministro de ox&iacute;geno.</li>
+				            <li>Bebes nacidos prematuramente.</li>
+				            <li>Dificultad para permanecer sentado durante el tiempo de duraci&oacute;n del vuelo.</li>
+				            <li>Padecimiento de una enfermedad mental.</li>
+				            <li>Padecimiento de enfermedades agudas, cr&oacute;nicas</li>
+				            <li>Reciente intervenci&oacute;n quir&uacute;rgica.</li>
+				        </ol>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- transporte de oxigeno -->
+		<div id="info_oxigeno" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>TRANSPORTE DE OX&Iacute;GENO</h3>
+				<br><br>
+		        Por normativa interna, Boliviana de Aviaci&oacute;n te permitir&aacute; portar un Concentrador de Ox&iacute;geno Port&aacute;til (POC) en cabina para ser usado durante el viaje, o si lo requieres en buz&oacute;n de equipajes, estos aparatos forman parte de la clasificaci&oacute;n de mercanc&iacute;as peligrosas, por eso, es muy importante que tomes en cuenta los siguientes aspectos para su transporte:
+		        <br><br>
+			    <ol>
+			        <li>Debes asegurarte que el tubo est&eacute; certificado para uso en aviones comerciales y que cuente con la autorizaci&oacute;n por parte de la Administraci&oacute;n Federal de Aviaci&oacute;n.</li>
+			        <li>T&uacute; o tus familiares deber&aacute;n enviar, con por lo menos 48 horas de anticipaci&oacute;n al vuelo, los siguientes datos sobre el equipo: fabricante, marca y serie, para que la empresa realice la verificaci&oacute;n y as&iacute; evitarte inconvenientes al momento del embarque.</li>
+			        <li>Para viajar portando este equipo deber&aacute;s presentarte en aeropuerto una hora y media antes, para que el personal de Boliviana de Aviaci&oacute;n efect&uacute;e la revisi&oacute;n correspondiente.</li>
+			        <li>Imprescindiblemente debes presentar en mostradores de aeropuerto el Formulario de Servicios Especiales firmado por tu m&eacute;dico.</li>
+			    </ol>
+			    <div id="subtitle_concentradores_oxigeno_portatil" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">CONCENTRADORES DE OX&Iacute;GENO PORT&Aacute;TIL (POC) PERMITIDOS</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		&Uacute;nicamente se autoriza el uso de los siguientes equipos <i>POC</i> a bordo de nuestros vuelos:
+				        <ol>
+				            <li>Airsep "Lifestyle” made by the Airsep Corporation</li>
+				            <li>Inogen One made by the Inogen Corporation</li>
+				            <li>Airsep "Freestyle" made by the Airsep Corporation</li>
+				            <li>SeQual Eclipse made by SeQual Technologies Inc.</li>
+				            <li>Respironics Evergo made by Respironics Inc.</li>
+				            <li>Delphi RS 00400 made by delphi Medical System</li>
+				            <li>Invacare’s XPO2 made by the Invacare Corporation</li>
+				        </ol>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- dialisis portatil -->
+		<div id="info_dialisis_portatil" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>TRANSPORTE DE EQUIPO DE DI&Aacute;LISIS PORT&Aacute;TIL (PDMs)</h3>
+				<br><br>
+		        Por normativa interna, Boliviana de Aviaci&oacute;n te permitir&aacute; portar un Concentrador de Ox&iacute;geno Port&aacute;til (POC) en cabina para ser usado durante el viaje, o si lo requieres en buz&oacute;n de equipajes, estos aparatos forman parte de la clasificaci&oacute;n de mercanc&iacute;as peligrosas, por eso, es muy importante que tomes en cuenta los siguientes aspectos para su transporte:
+		        <br><br>
+			    <div id="subtitle_condiciones_seguridad_pdms" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">CONDICIONES DE SEGURIDAD</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Recuerda solicitar este servicio especial al momento de realizar la reserva o compra de tu boleto, m&iacute;nimo con 24 horas de anticipaci&oacute; al vuelo.
+			    		<br><br>
+						Al momento de presentarte en mostradores la M&aacute;quina de Di&aacute;lisis Port&aacute;til ya deber&aacute; estar <i>TOTALMENTE APAGADA</i> y permanecer as&iacute; hasta el final de tu viaje, ya que en funcionamiento puede interferir con los sistemas de comunicaci&oacute;n de la aeronave.
+						<br><br>
+						Se te permitir&aacute; llevar una cantidad de l&iacute;quidos y suministros (medicinas, jeringas y fluidos de di&aacute;lisis), suficientes para 1 ó 2 d&iacute;as. Los l&iacute;quidos deben estar envasados herm&eacute;ticamente. 
+						<br><br>
+						Al momento del embarque deber&aacute;s presentar y entregar el formulario MEDIF para servicios especiales,  firmado por un m&eacute;dico especialista, esto te posibilita que el transporte sea totalmente gratuito en cabina de pasajeros o buz&oacute;n de equipaje.
+						<br><br>
+						Para que puedas transportarla en cabina de pasajeros, el equipo port&aacute;til no deber&aacute; exceder el l&iacute;mite permitido para equipaje de mano.
+						<br><br>
+						Para transportar una m&aacute;quina en el buz&oacute;n de equipaje facturado el peso m&aacute;ximo permitido es de 45 kilos. Como procedimiento de seguridad deber&aacute;s retirar las bater&iacute;as de litio y mantenerlas separadas en su equipaje.
+						<br><br>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- viajando con bebes -->
+		<div id="info_bebes" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>VIAJANDO CON BEB&Eacute;S</h3>
+				Los beb&eacute;s menores a 2 a&ntilde;os no ocupan asiento y pagan exactamente el 10% de la tarifa del adulto con quien viajan. Si requieres que tu beb&eacute; ocupe un sitio en la aeronave, deber&aacute;s pagar, para &eacute;l, la tarifa de ni&ntilde;o (2 a 11 a&ntilde;os) y portar un asiento especial CDR, con el siguiente sello:
+				<br><br>
+				<div style="padding: 10px;border: 3px solid #000;">
+				    <strong>
+				        &laquo;This child restraint system conforms to all applicable Federal Motor Vehicle Safety Standars (FMVSS 213), THIS RESTRAINT IS CERTIFIED FOR USE IN MOTOR VEHICLES AND AIRCRAFT.&raquo;
+				    </strong>
+			    </div>
+		        <br><br>
+		        <div id="subtitle_transporte_bebes" class="desplegable">
+		        	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">TRANSPORTE DE RECI&Eacute;N NACIDOS</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+				            <li>Por regulaciones de seguridad, Boliviana de Aviaci&oacute;n s&oacute;lo transportar&aacute; beb&eacute;s a partir del octavo d&iacute;a de nacidos.
+				            </li>
+				            <li>Obligatoriamente debe viajar acompa&ntilde;ado de uno de sus padres o familia cercana.</li>
+				            <li>Para vuelos nacionales, podr&aacute;s presentar durante el 1er mes de vida del beb&eacute; el certificado de nacido vivo, a partir de entonces deber&aacute;s presentar el certificado de nacimiento o carnet de identidad.</li>
+				            <li>Para vuelos internacionales resulta obligatoria la presentaci&oacute;n del carnet de identidad o pasaporte.</li>
+				            <li>Los beb&eacute;s prematuros son considerados caso m&eacute;dico y requieren de certificado m&eacute;dico para realizar el viaje.</li>
+				        </ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_adultos_dos_infantes" class="desplegable">
+		        	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">ADULTOS ACOMPA&Ntilde;ADOS POR DOS INFANTES</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		De acuerdo a las normativas de seguridad y regulaciones sobre transporte de menores, si requieres transportar dos beb&eacute;s menores a dos a&ntilde;os, deber&aacute;s asegurar al m&aacute;s peque&ntilde;o junto a ti y el otro infante deber&aacute; ser asegurado a un asiento especial CDR, que debe obligatoriamente llevar este sello:
+			    		<br>
+						<div style="padding: 10px;border: 3px solid #000;">
+				    		<strong>
+								&laquo;This childrestraint system conforms to all applicable Federal Motor Vehicle Safety Standars (FMVSS 213), “THIS RESTRAINT IS CERTIFIED FOR USE IN MOTOR VEHICLES AND AIRCRAFT.&raquo;
+							</strong>
+						</div>
+						<br>
+			        	El beb&eacute; que ocupa un asiento adicional debe tener un boleto comprado con tarifa de ni&ntilde;o.
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<!-- viajando con tu mascota en cabina -->
+		<div id="info_mascota" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>VIAJANDO CON TU MASCOTA EN CABINA</h3>
+				Si requieres viajar con tu animal de compa&ntilde;&iacute;a en cabina, te ofrecemos el servicio que est&aacute; destinado &uacute;nicamente a perros, gatos y aves peque&ntilde;as de hasta 5 kilos de peso.
+				<br><br>
+				<div id="subtitle_transporte_mascota_cabina" class="desplegable">
+		        	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">CONDICIONES PARA VIAJAR CON TU MASCOTA EN CABINA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+				            <li>Debes reservar el espacio para tu animal de compa&ntilde;&iacute;a al comento de realizar la reserva o compra de tu boleto o m&iacute;nimo con 24 horas de anticipaci&oacute;n al vuelo.</li>
+				            <li> El peso m&aacute;ximo, para la aceptaci&oacute;n de tu animal de compa&ntilde;&iacute;a en cabina, ser&aacute; de 5 Kilos, incluyendo la bolsa de transporte.</li>
+				            <li>Al momento de adquirir la bolsa de transporte, debes buscar una resistente, ventilada, con base impermeable y bastante segura. Las dimensiones m&aacute;ximas ser&aacute;s de 45 x 35 x 25 cent&iacute;metros, sumando un total de 105 cent&iacute;metros.</li>
+				            <li> En aeropuerto tienes que presentar originales y fotocopias de los certificados de vacunaci&oacute;n y zoosanitario, adem&aacute;s de llenar y firmar el formulario para transporte de animales en cabina.</li>
+				            <li>El servicio tiene un costo equiparable al exceso de equipaje correspondiente a una maleta de 20 Kilos.(tomando en cuenta el 1% de la tarifa plena por cada kilo)</li>
+				        </ul>
+			    	</div>
+			    </div>
+		        <br><br>
+			</div>
+		</div>
+	</div> <!-- <<< UI SERVICIOS ESPECIALES >>> -->
+
+	<!-- UI PASAJEROS ESPECIALES -->
+	<div id="ui_pasajeros_especiales" class="ui-section">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>PASAJEROS</h3>
+			<h2>ESPECIALES</h2>
+		</div>
+		<div class="header-fixed"><h3>PASAJEROS ESPECIALES</h3></div>
+		<ul class="first-menu">
+			<li id="submenu_item_embarazadas" class="selected" data-info="embarazadas">
+				<label>Mujeres Embarazadas</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_tercera_edad" data-info="tercera_edad">
+				<label>Pasajeros de la Tercera Edad</label>
+				<div class="icon small"></div>
+			</li>
+			<li id="submenu_item_pasajeros_sobrepeso" data-info="pasajeros_sobrepeso">
+				<label>Pasajeros que Requiren Asiento Extra</label>
+				<div class="icon small"></div>
+			</li>
+		</ul>
+
+		<!-- mujeres embarazadas -->
+		<div id="info_embarazadas" class="info selected">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>MUJERES EMBARAZADAS</h3>
+				De acuerdo a la legislaci&oacute;n boliviana las mujeres en gestaci&oacute;n s&oacute;lo pueden viajar por avi&oacute;n hasta la semana treinta y cuatro, por tanto es importante que no olvides informarte adecuadamente para que podamos transportarte sin contratiempos.
+				<br><br><br>
+				<div id="subtitle_gestacion_sin_complicaciones" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Gestaci&oacute;n sin complicaciones m&eacute;dicas</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table class="medium">
+			    			<tr>
+			    				<th colspan="2">Gestaci&oacute;n sin complicaciones m&eacute;dicas</th>
+			    			</tr>
+			    			<tr>
+			    				<td>Hasta la semana 28 de embarazo.</td>
+			    				<td>S&oacute;lo necesitas presentar el Formulario de Pasajera en Gestaci&oacute;n. Puedes solicitarlo en cualquiera de nuestras oficinas en aeropuertos.</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Entre la semana 28 a la semana 34.</td>
+			    				<td>Necesitas presentar un certificado m&eacute;dico legal para poder embarcar, este no debe tener una antig&uuml;edad mayor a los siete d&iacute;as antes del vuelo.<br>Adem&aacute; deber&aacute;s presentar el formulario de Pasajera en Gestaci&oacute;n</td>
+			    			</tr>
+			    			<tr>
+			    				<td>A partir de la semana 35 de gestaci&oacute;n</td>
+			    				<td>Tu m&eacute;dico puede definir si est&aacute;s en condiciones de viajar o no, en todo caso de acuerdo a la normativa boliviana, se acepta el embarque con la presentaci&oacute;n de un Certificado M&eacute;dico Legal y s&oacute;lo en casos de extrema necesidad.</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Post Parto.</td>
+			    				<td>Si tu parto fue hace menos de siete d&iacute;as, Boliviana de Aviaci&oacute;n no podr&aacute; transportarte.</td>
+			    			</tr>
+			    		</table>
+				        <br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_gestacion_con_riesgo" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Gestaci&oacute;n con riesgo</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table>
+			    			<tr>
+			    				<td class="table-title" colspan="2"><div>Gestaci&oacute;n con riesgo</div></td>
+			    			</tr>
+			    			<tr>
+			    				<td>Sin importar en tiempo de gestaci&oacute;n</td>
+			    				<td>Al ser considerado un caso m&eacute;dico, deber&aacute;s presentar obligatoriamente un Certificado M&eacute;dico Legal y el formulario de Certificaci&oacute;n M&eacute;dica de la empresa, firmado por tu m&eacute;dico.</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+		<!-- tercera edad -->
+		<div id="info_tercera_edad" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>PASAJEROS DE LA TERCERA EDAD</h3>
+				Los ciudadanos bolivianos mayores de 60 a&ntilde;os, tienen muchas ventajas en lo que se refiere a la compra de boletos nacionales, atenci&oacute;n y asignaci&oacute;n de asientos, gracias al Art&iacute;culo 6 de la ley 1886, el Art&iacute;culo 5 del Decreto Supremo 0264 y el Art&iacute;culo 56 de la Resoluci&oacute;n Administrativa RA SC –STR-DS-RA-0300/2007.
+				<br><br>
+				<strong>Beneficios:</strong><br>
+			    <ul>
+			        <li>Cuentan con el 40 por ciento de descuento en rutas nacionales a sola presentaci&oacute;n del carnet de  identidad boliviano vigente, pasaporte,  R.U.N o libreta de servicio militar y una fotocopia.</li>
+			        <li>Cuentan con atenci&oacute;n preferente en oficinas y aeropuertos.</li>
+			    </ul>
+			    <br><br>
+		        En caso de requerir un servicio especial, como por ejemplo: silla de ruedas, pueden acceder al &eacute;l a simple solicitud.
+				<br><br><br>
+			</div>
+		</div>
+		<!-- pasajeros sobrepeso -->
+		<div id="info_pasajeros_sobrepeso" class="info">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>PASAJEROS QUE REQUIEREN ASIENTO EXTRA</h3>
+				<br><br><br>
+			    <ul>
+			        <li>En caso de estar obligado a requerir un  asiento extra en la aeronave para tu viaje, puedes solicitar este servicio para  tu mayor comodidad al momento de realizar la compra de tu boleto, informando  que necesitas adquirir tambi&eacute;n el asiento contiguo.</li>
+			        <li>Para mayor seguridad Boliviana de  Aviaci&oacute;n puede proporcionarte una extensi&oacute;n de seguridad a simple solicitud a  bordo de la aeronave.</li>
+			        <li>Toma en cuenta que para el boleto adquirido (asiento  extra), se aplican las mismas condiciones del boleto inicial, en cuanto a  penalidades y transporte de equipaje.</li>
+			    </ul>
+			</div>
+		</div>
+	</div> <!-- <<< UI PASAJEROS ESPECIALES >>> -->
+
+	<!-- UI COMIDA ESPECIAL -->
+	<div id="ui_menu_especial" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>MEN&Uacute;</h3>
+			<h2>ESPECIAL</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>MEN&Uacute; ESPECIAL</h3>
+		</div>
+		<ul class="first-menu"></ul>
+		<div class="info">
+			<div class="descripcion">
+				Existen varias condiciones de salud que te obligan a solicitar un men&uacute; especial a la hora de viajar en tramos largos, entre ellos: la diabetes, hipertensi&oacute;n, h&aacute;bitos alimenticios o la intolerancia a ciertos alimentos o componentes. Boliviana de Aviaci&oacute;n te ofrece un men&uacute; especial, elaborado para satisfacer estas necesidades.
+				<br><br>
+				<strong>¿C&oacute;mo puedo solicitar mi comida especial?</strong>
+				<br><br>
+				Para acceder a un men&uacute; especial en tu viaje internacional, debes realizar la solicitud al momento de la emisi&oacute;n del boleto o por lo menos 48 horas antes del vuelo, puedes hacerlo a trav&eacute;s de los agentes de ventas, call center e incluso mediante tu agencia de viajes.
+				<br><br>
+				<div id="subtitle_menu_especial" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">VER MEN&Uacute;</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<table class="small">
+			    			<tr>
+			    				<th colspan="2">Men&uacute; Especial</th>
+			    			</tr>
+			    			<tr>
+			    				<td>Men&uacute; para diab&eacute;ticos</td>
+			    				<td>Alimentos controlados en az&uacute;cares y carbohidratos de absorci&oacute;n r&aacute;pida.</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Plato de frutas.</td>
+			    				<td>En base a frutas de temporada.</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Men&uacute; libre de gl&uacute;ten.</td>
+			    				<td>No incluye cereales: trigo, centeno, cebada, avena.</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Men&uacute; sin sal.</td>
+			    				<td>Alimentos cuya preparaci&oacute;n no incluye sal.</td>
+			    			</tr>
+			    			<tr>
+			    				<td>Men&uacute; vegetariano<br>(sin l&aacute;cteos)</td>
+			    				<td>Plato sin carne, de estilo occidental, sin productos l&aacute;cteos ni huevos.</td>
+			    			</tr>
+			    		</table>
+			    	</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- <<< UI COMIDA ESPECIAL >>> -->
+
+	<!-- UI DOCUMENTACION DE VIAJE -->
+	<div id="ui_documentacion_viaje" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>DOCUMENTACI&Oacute;N DE</h3>
+			<h2>VIAJE, VISA Y API</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>DOCUMENTACION DE VIAJE</h3>
+		</div>
+		<ul class="first-menu"></ul>
+		<div class="info">
+			<div class="descripcion">
+				Antes de realizar un viaje, es importante que est&eacute;s seguro de portar toda tu documentaci&oacute;n vigente y en buen estado (Pasaporte, c&eacute;dula de identidad, documento de residencia), para de esta manera cumplir las regulaciones migratorias del pa&iacute;s de salida, destino y/o tr&aacute;nsito.
+				<br><br>
+				T&uacute;, como pasajero, eres responsable de mantenerte informado y tener toda la documentaci&oacute;n en regla en el momento que la normativa de cada pa&iacute;s te lo requiera, ya sea para la reserva y compra de tu boleto o al momento del embarque.
+				<br><br>
+    			Inf&oacute;rmate sobre todos los requisitos. 
+    			<a href="http://www.iatatravelcentre.com">http://www.iatatravelcentre.com</a> (s&oacute;lo disponible en ingl&eacute;s)
+    			<br><br>
+    			<strong>Informaci&oacute;n Anticipada sobre Pasajeros (API)</strong>
+    			<br><br>
+        		Por regulaciones migratorias de diversos pa&iacute;ses, las aerol&iacute;neas nos vemos obligadas a recopilar respecto al pasajero antes de comenzar el viaje e incluso antes de la emisi&oacute;n de los boletos.
+				<br><br>
+				<div id="subtitle_documentacion_usa" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Estados Unidos</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+				            <li>Tipo de documento <strong>P</strong>: Pasaporte <strong>C</strong>: Doc. Identidad.</li>
+				            <li>Pa&iacute;s de emisi&oacute;n del documento.</li>
+				            <li>Numeraci&oacute;n del documento.</li>
+				            <li>Nacionalidad del pasajero.</li>
+				            <li>Fecha de Nacimiento del pasajero</li>
+				            <li>Sexo del pasajero.</li>
+				            <li>Fecha de expiraci&oacute;n del documento.</li>
+				            <li>Apellido (s) y Nombre (s).</li>
+				            <li>Tipo de documento (visa o green card).</li>
+				            <li>Numeraci&oacute;n del documento.</li>
+				            <li>Fecha de emisi&oacute;n del documento</li>
+				        </ul>
+						<br><br>
+						Para mayor informaci&oacute;n:<br>
+						<a href="http://www.tsa.gov">http://www.tsa.gov</a><br>
+						<a href="https://help.cbp.gov/app/answers/detail/a_id/725">https://help.cbp.gov/app/answers/detail/a_id/725</a><br>
+				        <a href="http://www.tsa.gov/stakeholders/secure-flight-program">http://www.tsa.gov/stakeholders/secure-flight-program</a>
+				        <br><br>
+				        <strong>Programa de exenci&oacute;n de visas. ESTA (VWP)</strong>
+				        <br><br>
+				     	Estados Unidos tiene en vigencia un Programa de Exenci&oacute;n de Visas, que permite a los ciudadanos de los pa&iacute;ses incluidos, ingresar con fines tur&iacute;sticos o comerciales por un periodo de 90 d&iacute;as o menos, sin necesidad de presentar una visa.
+				     	<br><br>
+				        <div class="small-info">
+				            <ul>
+				                <li>Alemania, Andorra, Australia, Austria, B&eacute;lgica, Brunei, Chile, Corea del Sur (***),Dinamarca, Eslovaquia (***), Eslovenia(*), Espa&ntilde;a, Estonia, Finlandia, Francia, Grecia(****), Hungr&iacute;a(***), Irlanda, Islandia, Italia, Jap&oacute;n, Letonia (***), Liechtenstein, Lituania (***), Luxemburgo, Malta (***), M&oacute;naco, Noruega, Nueva Zelanda, Pa&iacute;ses Bajos,Portugal, Reino Unido (**), Rep&uacute;blica Checa (***), San Marino, Singapur, Suecia, Suiza.
+				                </li>
+				                <li>Los ciudadanos y nacionales de Eslovenia s&oacute;lo pueden usar el pasaporte esloveno con portada roja para ingresar a Estados Unidos para el programa de Exenci&oacute;n de Visa.
+				                </li>
+				                <li>** Las personas que presenten pasaportes brit&aacute;nicos, deben poseer derecho irrestricto para residir en Inglaterra, Escocia, Gales, Irlanda del Norte, las Islas del Canal y la Isla de Man para calificar al VWP.
+				                </li>
+				                <li>*** Los ciudadanos de estos pa&iacute;ses deben presentar un pasaporte electr&oacute;nico identificado con el logotipo del chip de la ICAO en la portada.
+				                </li>
+				                <li>S&oacute;lo los pasaportes electr&oacute;nicos griegos, emitidos por la polic&iacute;a de ese pa&iacute;s a partir del 26 de agosto de 2006, son v&aacute;lidos para viajar bajo el VWP.</li>
+				            </ul>
+				        </div>
+				        <br><br>
+				        <strong>Pa&iacute;ses exentos de la regla de seis meses de vigencia del pasaporte.</strong>
+				        <br><br>
+				       	Por norma todos los pa&iacute;ses exigen una vigencia de los documentos superior a los 6 meses de la fecha del vuelo de retorno, Estados Unidos tiene una lista de pa&iacute;ses cuyos ciudadanos est&aacute;n exentos de esta regla.
+				       	<br><br>
+				        <div class="small-info">
+						Alemania, Andorra, Angola, Antigua y Barbuda, Antillas, Argelia, Argentina, Armenia, Aruba, Australia,Austria, Bahamas Las, Barbados, B&eacute;lgica, Belice, Bermudas,Birmania, Bolivia, Bosnia – Herzegovina, Brasil,Bulgaria, Canad&aacute;, Chile, Chipre, Colombia, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Dinamarca, Dominica, Egipto, El Salvador, Emiratos &aacute;rabes Unidos, Eslovaquia, Eslovenia, Espa&ntilde;a, Estonia, Etiop&iacute;a, Filipinas, Finlandia, Fiyi, Francia, Gab&oacute;n, Georgia, Granada, Grecia, Guatemala, Guinea, Guyana, Hait&iacute;, Hong Kong, Hungr&iacute;a, India, Indonesia, Irlanda, Islandia, Israel, Italia, Jamaica, Jap&oacute;n, Kuwait, Letonia, L&iacute;bano, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Maldivas, Malta, Mauricio, Mauritania, M&eacute;xico, M&oacute;naco, Mongolia, Montenegro, Mozambique, Nepal, Nicaragua, Nigeria, Noruega,Nueva Zelanda, Pa&iacute;ses Bajos, Palaos, Panam&aacute;, Pap&uacute;a Nueva Guinea, Paquist&aacute;n, Paraguay, Per&uacute;, Polonia, Portugal, Qatar, Reino Unido, Rep&uacute;blica Checa, Rep&uacute;blica Dominicana, Ruman&iacute;a, Rusia, San Cristobal y Nieves, San Marino, San Vicente y las Granadinas, Santa Luc&iacute;a, Serbia, Seychelles, Singapur, Sri Lanka, Sud&aacute;frica, Suecia, Suiza, Surinam, Tailandia, Taiw&aacute;n, Trinidad y Tobago, T&uacute;nez, Turqu&iacute;a, Tuvalu, Ucrania, Uruguay,Uzbekist&aacute;n, Vaticano, Venezuela, Vietnam y Zimbabwe.</p>
+				        </div>
+			    	</div>
+				</div>
+				<div id="subtitle_documentacion_espana" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Espa&ntilde;a</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+				            <li>Dependiendo de la nacionalidad del pasajero se debe tomar en cuenta que la informaci&oacute;n requerida para su ingreso a Espa&ntilde;a es indispensable.
+				            </li>
+				            <li>Tipo de documento <strong>P</strong>: Pasaporte <strong>C</strong>: Doc. Identidad.</li>
+				            <li>Pa&iacute;s de emisi&oacute;n del documento.</li>
+				            <li>Numeraci&oacute;n del documento.</li>
+				            <li>Nacionalidad del pasajero.</li>
+				            <li>Fecha de Nacimiento del pasajero</li>
+				            <li>Sexo del pasajero.</li>
+				            <li>Fecha de expiraci&oacute;n del documento.</li>
+				            <li>Apellido (s) y Nombre (s).</li>
+				            <li>Tipo de documento (visa o registro de extranjero).</li>
+				            <li>Numeraci&oacute;n del documento.</li>
+				            <li>Fecha de emisi&oacute;n del documento</li>
+				            <li>Pa&iacute;s al que aplica la visa.</li>
+				        </ul>
+				        <br><br>
+				        Para mayor informaci&oacute;n consulta:<br>
+				        <a href="http://www.aena.es/csee/Satellite/HomeAena">http://www.aena.es/csee/Satellite/HomeAena</a><br>
+				        <a href="http://www.seguridadaerea.gob.es/lang_castellano/home.aspx">http://www.seguridadaerea.gob.es/lang_castellano/home.aspx</a>
+			    	</div>
+			    </div>
+			    <div id="subtitle_documentacion_bolivia" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Bolivia</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Si te interesa visitar Bolivia, ingresa a:<br>
+            			<a href="http://www.rree.gob.bo/webmre/principal.aspx?idpagina=32">http://www.rree.gob.bo/webmre/principal.aspx?idpagina=32</a>
+            			<br><br>
+        				De esa formar podr&aacute;s verificar los requisitos y  procedimientos correctos a la hora de tramitar tu documentaci&oacute;n.
+        				<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_documentacion_argentina" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Argentina</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Si eres ciudadano de los Estados Unidos, Canad&aacute; o Australia y necesitas, por turismo o negocios a Argentina, debes tomar en cuenta el pago de la Tasa de Reciprocidad por Solicitud de Ingreso al Pa&iacute;s, que se realiza v&iacute;a internet. Deber&aacute;s realizar el pago de esta tasa y tener el comprobante de pago impreso antes de embarcar rumbo a territorio Argentino ya que te ser&aacute; solicitado durante el control migratorio.
+			    		<br><br>
+        				Para realizar la transacci&oacute;n u obtener mayor informaci&oacute;n visita:<br>
+            			<a href="http://www.migraciones.gov.ar">www.migraciones.gov.ar</a><br>
+            			<a href="http://www.provinciapagos.gov.ar">www.provinciapagos.gov.ar</a>
+        				<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_documentacion_brasil" class="desplegable">
+					<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Brasil</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		Para conocer m&aacute;s sobre las pol&iacute;ticas migratorias de Brasil ingresa a:<br>
+            			<a href="http://www.portalconsular.mre.gov.br/antes-de-viajar-1/antes-de-viajar">http://www.portalconsular.mre.gov.br/antes-de-viajar-1/antes-de-viajar</a>
+        				<br><br>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+	</div> <!-- <<< UI DOCUMENTACION DE VIAJE >>> -->
+
+	<!-- UI VACUNAS -->
+	<div id="ui_vacunas" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>&nbsp;</h3>
+			<h2>VACUNAS</h2>
+		</div>
+		<div class="header-fixed">
+			<h3 class="for-fixed">VACUNAS</h3>
+		</div>
+		<ul class="first-menu"></ul>
+		<div class="info">
+			<div class="descripcion">
+				Cada pa&iacute;s cuenta una normativa diferente respecto a las vacunas solicitadas de forma obligatoria y las recomendadas en general o en situaciones especiales.
+				<br><br>
+				Para la consulta respecto a las vacunas recurre a un centro de salud o banco de vacunas o:<br>
+				<a href="http://travelcentre.iata.org">http://travelcentre.iata.org</a> (s&oacute;lo en inglés)
+				<br><br>
+				<div id="subtitle_vacunas_argentina" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Argentina</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<strong>Vacunas generalmente recomendadas:</strong><br>
+						Hepatitis A/ T&eacute;tanos – Difteria/ T&eacute;tanos – Difteria – Tosferina y Triple V&iacute;rica.
+						<br><br>
+						<strong>Vacunas recomendadas en situaciones especiales:</strong><br>
+						Hepatitis B/ Fiebre Amarilla / Rabia/ Gripe/ Neumoc&oacute;cica, Fiebre Tifoidea.
+						<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_vacunas_bolivia" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Bolivia</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<strong>Vacunas obligatorias:</strong><br>
+						Fiebre Amarilla (si procede de un país endémico)
+						<br><br>
+						<strong>Vacunas generalmente recomendadas: </strong><br>
+						Hepatitis A/ T&eacute;tanos – Difteria y Triple V&iacute;rica.
+						<br><br>
+						<strong>Vacunas recomendadas en situaciones especiales:</strong><br>
+						Fiebre Amarilla/ Fiebre Tifoidea/ Hepatitis B/ Rabia/ Gripe y Neumoc&oacute;cica.
+						<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_vacunas_brasil" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Brasil</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<strong>Vacunas obligatorias:</strong><br>
+						Fiebre Amarilla (si procede de un país endémico)
+						<br><br>
+						<strong>Vacunas generalmente recomendadas:</strong><br>
+						Hepatitis A/ Tétanos – Difteria y Triple Vírica.
+						<br><br>
+						<strong>Vacunas recomendadas en situaciones especiales:</strong>
+						Fiebre Amarilla/ Fiebre Tifoidea/ Hepatitis B/ Rabia/ Gripe y Neumoc&oacute;cica.
+						<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_vacunas_espana" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Espa&ntilde;a</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<strong>Vacunas generalmente recomendadas:</strong><br>
+						T&eacute;tanos – Difteria/ T&eacute;tanos – Difteria – Tosferina y Triple V&iacute;rica.
+						<br><br>
+						<strong>Vacunas recomendadas en situaciones especiales:</strong><br>
+						Hepatitis B/ Gripe y Neumocócica
+						<br><br>
+			    	</div>
+			    </div>
+			    <div id="subtitle_vacunas_eeuu" class="desplegable">
+			    	<div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">Estados Unidos</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<strong>Vacunas generalmente recomendadas:</strong><br>
+						T&eacute;tanos – Difteria/ y Triple V&iacute;rica.
+						<br><br>
+						<strong>Vacunas recomendadas en situaciones especiales:</strong><br>
+						Hepatitis B/ Gripe y Neumoc&oacute;cica
+						<br><br>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+	</div> <!-- <<< UI VACUNAS >>> -->
+
+	<!-- UI DERECHOS DE LOS PASAJEROS -->
+	<div id="ui_derechos_pasajeros" class="ui-section">
+		<div class="gradient"></div>
+		<ul class="first-menu">
+			<li id="submenu_item_contrato_transporte" class="selected" data-info="contrato_transporte">
+				<label>Contrato de Transporte</label>
+				<div class="header">
+					<h3>CONTRATO DE</h3>
+					<h2>TRANSPORTE</h2>
+				</div>
+				<div class="icon"></div>
+				<div class="icon small"></div>
+				<div id="info_contrato_transporte" class="info selected">
+					<div class="descripcion">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div> <!-- <<< UI DERECHOS DE LOS PASAJEROS >>> -->
+
+	<!-- UI NUESTRA FLOTA -->
+	<div id="ui_nuestra_flota" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>NUESTRA</h3>
+			<h2>FLOTA</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>NUESTRA FLOTA</h3>
+		</div>
+		<ul class="first-menu"></ul>
+		<div class="info">
+			<div class="descripcion">
+			    Boliviana de Aviaci&oacute;n cuenta con la siguiente flota:
+			    <br><br>
+			    <strong>Boeing  737 – 300</strong>
+			    <div id="image_737_300_foto" class="img-contenido"></div>
+			    <ul>
+			    	<li>N&uacute;mero de asientos: 138 ; 136</li>
+			    	<li>N&uacute;mero de aeronaves operadas por BoA :  8</li>
+			    </ul>
+			    <br>
+			    Plano de la aeronave: 
+			   	<div id="image_737_300_plano" class="img-contenido"></div>
+			    <strong>Boeing 737 - 500</strong>
+			    <div id="image_737_500_foto" class="img-contenido"></div>
+			    <ul>
+			        <li>N&uacute;mero de asientos: 122</li>
+			        <li>N&uacute;mero de aeronaves operadas por BoA :  1</li>
+			    </ul>
+			    <br>
+			    Plano de la aeronave:
+			    <div id="image_737_500_plano" class="img-contenido"></div>
+			    <strong>B 767 - 300</strong>
+			    <div id="image_767_300_foto" class="img-contenido"></div>
+			    <ul>
+			        <li>N&uacute;mero de asientos Clase Econ&uacute;mica: 215 </li>
+			        <li>N&uacute;mero de asientos Clase Ejecutiva: 10</li>
+			        <li>Unidades operadas por BoA: 2 </li>
+			    </ul>
+			</div>
+		</div>
+	</div> <!-- <<< UI NUESTRA FLOTA >>> -->
+
+	<!-- UI EXPERIENCIA A BORDO -->
+	<div id="ui_experiencia_bordo" class="ui-section">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>EXPERIENCIA A</h3>
+			<h2>BORDO</h2>
+		</div>
+		<div class="header-fixed">
+			<h3>EXPERIENCIA A BORDO</h3>
+		</div>
+		<ul class="first-menu">
+			<li id="submenu_item_gastronomia" class="selected" data-info="gastronomia">
+				<label>Gastronomia, Snack y Bebidas</label>
+				<div class="icon small"></div>
+			</li>
+		</ul>
+
+		<!-- gastronomia, snack y bebidas -->
+		<div id="info_gastronomia" class="info selected">
+			<div class="icon"></div>
+			<div class="descripcion">
+				<h3>GASTRONOMIA, SNACK Y BEBIDAS</h3>
+				Tanto en nuestros tramos internacionales (cortos y largos), como en nuestras rutas nacionales tenemos planificado el men&uacute; para que sea de tu total agrado.
+				<br><br>
+			    <strong>Men&uacute; para destinos Nacionales:</strong>
+			   	Presentaci&oacute;n: Caja con imagen corporativa de Boliviana de Aviaci&oacute;n que contiene:<br>
+			    <ul>
+			        <li>Masita dulce o salada.</li>
+			        <li>Caramelo.</li>
+			        <li>Servilleta.</li>
+			    </ul>
+			    <div id="image_menu_destinos_nacionales" class="img-contenido"></div>
+			    <strong>Men&uacute; para destinos internacionales en Sud Am&eacute;rica:</strong>
+			    <br><br>
+			   	Si viajas a Brasil o Argentina te ofrecemos este men&uacute; preparado especialmente para estas rutas:
+			   	<br><br>
+			  	Presentaci&oacute;n: Bandeja con individual de papel, todo higi&eacute;nicamente manipulado:
+			  	<br>
+			    <ul>
+			        <li>S&aacute;ndwich</li>
+			        <li>Postre</li>
+			        <li>Ensalada de frutas</li>
+			        <li>Yogurt</li>
+			        <li>Set de Cubiertos</li>
+			    </ul>
+			    <div id="image_menu_destinos_internacionales_samerica" class="img-contenido"></div>
+			    <strong>Men&uacute; para destinos internacionales en Europa y Estados Unidos.</strong>
+			    <br><br>
+			  	El servicio de alimentaci&oacute;n en nuestras naves 767 – 300, que realizan el servicio en tramos largos, es diferenciado entre la cabina de clase econ&oacute;mica y la cabina de clase ejecutiva:
+			  	<br><br>
+			    <strong>Clase econ&oacute;mica en vuelos a Miami te ofrecemos el siguiente men&uacute;:</strong>
+			    <br><br>
+			  	Al tratarse de viajes de larga duraci&oacute;n en clase econ&oacute;mica podemos ofrecerte, de acuerdo al horario del vuelo, desayunos, comida caliente a la hora del almuerzo y cena.
+			  	<br><br>
+			    Para la clase Economica en vuelos a Miami te ofrecemos el siguiente men&uacute;:
+			    <div id="image_menu_destinos_internacionales_economica_miami" class="img-contenido"></div>
+			    <strong>Clase Ejecutiva en vuelos a Miami te ofrecemos el siguiente men&uacute;:</strong>
+			    <br><br>
+			   	En clase ejecutiva, cuya cabina est&aacute; conformada por diez asientos, para brindar total comodidad a nuestros pasajeros, se te ofrece un servicio personalizado, muy especial en cuanto al men&uacute; y su presentaci&oacute;n, adem&aacute;s contamos con una gran variedad de bebidas en nuestro servicio de bar.
+			   	<br>
+			   	<strong>Para la clase  Ejecutiva en vuelos a Miami te ofrecemos el siguiente men&uacute;:</strong>
+			   	<div id="image_menu_destinos_internacionales_ejecutiva_miami" class="img-contenido"></div>
+			</div>
+		</div>
+	</div> <!-- <<< UI EXPERIENCIA A BORDO >>> -->
+
+	<!-- DIALOGOS -->
+	<div class="dialog-overlay" style="display:none">
+		<div class="dialog" id="dialog_direcciones" style="display:none">
+			<div class="btn-cerrar">CERRAR X</div>
+			<ul>
+				<li>Cobija
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle Ernesto Nishikawa # 50 entre Bahia y Antofagasta</strong><br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (3) 8424820</strong><br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes de 08:00 a 12:00<br>&nbsp;&nbsp;&nbsp;y de 15:00 a 18:30<br>
+						S&aacute;bado de 09:00 a 12:30</strong>
+					</div>
+				</li>
+				<li>La Paz
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Av. Camacho N°1413 Esq. Loayza</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (2) 2117993</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 12:00</strong>
+						<br><br><br>
+						Direcci&oacute;n:<br>
+						<strong>Av. Claudio Aliaga 1367 esq. Gabriel Ren&eacute; Moreno</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (2) 2124310 – 591 (2) 2124326</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 12:00</strong>
+					</div>
+				</li>
+				<li>Cochabamba
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle Jord&aacute;n N° 202 esq. Nataniel Aguirre</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 4140873</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 19:00</strong><br>
+						<strong>S&aacute;bado 9:00 a 12:30</strong>
+						<br><br><br>
+						Direcci&oacute;n:<br>
+						<strong>Av. Sim&oacute;n L&oacute;n Nro 1582</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 4114614 – 591 (4) 4142858</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 9:00 a 13:00<br>&nbsp;&nbsp;&nbsp;y de 15:00 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 13:00</strong>
+					</div>
+				</li>
+				<li class="selected">Santa Cruz
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Las Torres Aventura local 25 (segundo anillo Av. Cristóbal de Mendoza entre calle Orton y Av. Trinidad)</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 13:00</strong>
+						<br><br><br>
+						Direcci&oacute;n:<br>
+						<strong>Av. Trompillo esq. Monseñor Santiesteban Edif. Seven Center Oficina 6</strong>
+						<br><br>
+						Tel&eacute;fonos:<br>
+						<strong>591 (3) 3121343 – 591 (3) 3116247</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 13:00</strong>
+					</div>
+				</li>
+				<li>Tarija
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle General Trigo N°327 entre Virginio Lema y Alejandro del Carpio</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 6111389</strong>
+						<br><br>
+						FAX:<br>
+						<strong>6654004 - 6112787</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado de 9:00 a 12:00</strong>
+					</div>
+				</li>
+				<li>Sucre
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle Audiencia # 21</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 6912360</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado de 8:30 a 12:30</strong>
+					</div>
+				</li>
+				<li>Trinidad
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle sucre esq. Av. C. Arce. Zona Central Distrito 1</strong><br><br>
+					</div>
+				</li>
+				
+			</ul>
+		</div>
+		<div id="dialog_info" class="dialog">
+			<div class="btn-cerrar">CERRAR X</div>
+			<div class="info" id="impuestos_salida">
+				<h3>Impuesto de Salidas al</h3>
+				<h2>Exterior ISAE</h2>
+				<div class="descripcion">
+					Es el impuesto de salidas al exterior, el pago de 40.37 USD es obligatorio para
+					todos los bolivianos y ciudadanos extranjeros con m&aacute;s de 3 meses de permanencia
+					en el pa&iacute;s, excepto para los diplom&aacute;ticos acreditados en la canciller&iacute;a de la rep&uacute;blica.
+					<br><br>
+					Ya viene inclu&iacute;do en el boleto.
+				</div>
+			</div>
+			<div class="info" id="migracion">
+				<h3>Migraci&oacute;n</h3>
+				<div class="descripcion">
+					Porta siempre tus documentos de Identificaci&oacute;n personal actualizados y vigentes como  DNI (cedula de identidad) y/o la presentaci&oacute;n del Pasaporte cuando viajas a otros pa&iacute;ses.   
+					<br><br>
+					En ciertos pa&iacute;ses se exige la presentaci&oacute;n de otros documentos para ingresar a su territorio tales como Visado y Certificados de Sanidad.
+				</div>
+			</div>
+			<div class="info" id="documentacion_menores">
+				<h3>Documentaci&oacute;n para</h3>
+				<h2>menores</h2>
+				<div class="descripcion">
+					Seg&uacute;n las normas bolivianas, los menores que realicen un viaje deber&aacute;n
+					contar con la debida autorizaci&oacute;n de sus padres o apoderados adem&aacute;s de tener a mano un permiso especial de viaje. 
+					<br><br>
+					Todo menor de 12 a&ntilde;os que no estuviese acompa&ntilde;ado y salga de la ciudad
+					donde vive a cualquier destino  de Bolivia. 
+					<br><br>
+					Todo menor de 18 a&ntilde;os que salga del pa&iacute;s y no estuviese acompa&ntilde;ado por sus padres o al menos  uno de ellos.
+				</div>
+			</div>
+			<div class="info" id="check_in">
+				<h3>Acerca del</h3>
+				<h2>Check-in</h2>
+				<div class="descripcion">
+					Para hacer check-in debes presentarte en los mostradores del aeropuerto una(1) hora
+					antes en vuelos nacionales y 2 horas antes para vuelos internacionales, y presentar
+					los documentos necesarios dependiendo el vuelo.
+					<br>
+					Puedes acelerar el proceso haciendo web check-in y elegir tu asiento pero recuerda estar en los horarios establecidos para el embarque.
+					<br><br><br>
+					<div id="btn_go_to_check_in" class="button">WEB CHECK-IN</div>
+				</div>
+			</div>
+			<div class="info" id="contrato_transporte">
+				<h3>Contrato de</h3>
+				<h2>transporte</h2>
+				<div class="descripcion">
+					&iquest;Tienes alguna duda legal?
+					<br>
+					Te dejamos el contrato de transporte en un formato c&oacute;modo para que puedas
+					llevarlo c&oacute;modamente.<br><br>
+					<div id="btn_contrato_transporte" class="button">BAJAR CONTRATO</div>
+					<br><br>
+				</div>
+			</div>
+			<div class="info" id="tercera_edad">
+				<h3>Tercera</h3>
+				<h2>edad</h2>
+				<div class="descripcion">
+					Las personas mayores de 60 a&ntilde;os deben portar los documentos de identidad: Cedula de identidad, pasaporte y que:
+					<br><br>
+					-Se encuentren en condiciones de viajar solos. <br>
+					-Cuenten con un acompa&ntilde;ante en caso de viajar solos.  
+					<br><br>
+					Para vuelos nacionales los pasajeros de la tercera edad tienen un descuento del 40%.
+				</div>
+			</div>
+			<div class="info" id="capacidades_disminuidas">
+				<h3>Personas con capacidades</h3>
+				<h2>disminuidas</h2>
+				<div class="descripcion">
+					<strong>Autosufientes:</strong> Cuando son capaces de comunicarse y comprender las instrucciones de Tripulaci&oacute;n y/o una vez a bordo pueden atender sus necesidades en forma independiente.
+					<br><br>
+					<strong>No autosufientes:</strong> Los que no son capaces de comunicarse y comprender las instrucciones de tripulación y/o  requieren asistencia para atender sus necesidades de alimentación, higiene y/o fisiológicas; y aquellos que requieren de un acompañante que lo asista durante el vuelo personalmente.
+				</div>
+			</div>
+			<div class="info" id="mujeres_embarazadas">
+				<h3>Mujeres</h3>
+				<h2>embarazadas</h2>
+				<div class="descripcion">
+					Por normativa se aceptan pasajeras embarazadas.
+					<br><br>
+					<ul>
+						<li>
+							Hasta la <strong>28va</strong> semana de gestaci&oacute;n<br>
+							&nbsp;&nbsp;&nbsp;-Formulario  Pasajera en Gestaci&oacute;n
+							<br><br>
+						</li>
+						<li>
+							Hasta la <strong>34va</strong> semana de gestaci&oacute;n<br>
+							&nbsp;&nbsp;&nbsp;-Certificado M&eacute;dico de Ginec&oacute;logo Obstetra.<br>
+							&nbsp;&nbsp;&nbsp;-Formulario Pasajera en Gestaci&oacute;n.
+							<br><br>
+						</li>
+						<li>
+							Hasta 1 semana <strong>ANTES</strong> del parto<br>	
+							&nbsp;&nbsp;&nbsp;-Acompa&ntilde;ada de un m&eacute;dico responsable<br>
+							&nbsp;&nbsp;&nbsp;-Formulario  Pasajera en Gestaci&oacute;n
+							<br><br>
+						</li>
+						<li>
+							En la <strong>&Uacute;LTIMA</strong> semana de gestaci&oacute;n.<br>
+							&nbsp;&nbsp;&nbsp;- <strong>NO PODRÁN viajar</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="info" id="pasajeros_adolescentes">
+				<h3>Pasajeros</h3>
+				<h2>adolescentes</h2>
+				<div class="descripcion">
+					Son pasajeros no acompa&ntilde;ados entre los 15 y 18 a&ntilde;os que la familia solicita un tipo de asistencia especial.  
+					<br><br>
+					El servicio se constituir&aacute; en que un funcionario de la compa&ntilde;&iacute;a lo asista durante el embarque, conexi&oacute;n y arribo del vuelo por un costo extra adicional.
+				</div>
+			</div>
+			<div class="info" id="menores_no_acompanados">
+				<h3>Menores</h3>
+				<h2>NO acompa&ntilde;ados</h2>
+				<div class="descripcion">
+					Posibilita que los ni&ntilde;os solos en circunstancias reguladas puedan ser trasportados.
+					<br><br>
+					Cobraremos un pequeño cargo por el suministro de servicio
+					<br><br>
+					<strong>VER CONDICIONES</strong>
+					<br><br>
+					<strong>5-8 años:</strong> Los ni&ntilde;os de 5 a&ntilde;os en adelante pueden ser trasportados &uacute;nicamente en vuelos directos sin escalas o en los que el viaje se realice en el mismo avi&oacute;n.
+					<br><br>
+					<strong>8-14 años:</strong> Los menores deben tener entre 8 y 14 a&ntilde;os de edad para viajar en itinerarios que requieran una conexi&oacute;n en BoA. La aerol&iacute;nea no embarcar&aacute; ni&ntilde;os no acompañados (UMNR) cuando sus itinerarios incluyen una conexi&oacute;n hacia / desde otra aerol&iacute;nea, incluyendo los socios de codeshare (c&oacute;digo compartido).
+					<br><br>
+					<strong>15-17 años:</strong> Los menores entre 15 y 17 a&ntilde;os se consideran adultos j&oacute;venes y no necesitan utilizar el servicio para menores que viajan solos. Sin embargo, el servicio para “menores no acompa&ntilde;ados” est&aacute; a su disposici&oacute;n a solicitud del cliente, aplicando las disposiciones vigentes de la l&iacute;nea a&eacute;rea.
+				</div>
+			</div>
+			<div class="info" id="menores_acompanados">
+				<h3>Menores</h3>
+				<h2>Acompa&ntilde;ados</h2>
+				<div class="descripcion">
+					Los pasajeros que tengan de 8 d&iacute;as a 12 a&ntilde;os de edad ser&aacute;n trasportados siempre que viajen acompa&ntilde;ados por un pasajero mayor de edad presentando certificado de nacimiento.  
+					<br><br>
+					Reci&eacute;n nacidos hasta los 7 días no podr&aacute;n ser transportados.
+				</div>
+			</div>
+			<div class="info" id="equipaje_mano">
+				<h3>Equipaje de</h3>
+				<h2>mano</h2>
+				<div class="descripcion">
+					El peso no debe exceder de 7 kilos y la suma de sus dimensiones (largo + ancho + altura) no debe exceder los 115 cm., incluidas las ruedas, correas, etc.
+					<br>
+					Cada pasajero podr&aacute; llevar como m&aacute;ximo un equipaje de mano y un art&iacute;culo personal.
+				</div>
+			</div>
+			<div class="info" id="equipaje_gratuito">
+				<h3>Equipaje</h3>
+				<h2>gratuito</h2>
+				<div class="descripcion">
+					Se puede llevar hasta 20 kilos de equipaje para adulto y 20 kilos de equipaje para menor para rutas nacionales y para rutas internacionales hasta 30 kilos de equipaje para adulto y 30 Kilos para menor.  
+					<br><br>
+					El exceso de equipaje se debe cancelar seg&uacute;n los convenios vigentes con los pa&iacute;ses de destino.
+				</div>
+			</div>
+			<div class="info" id="restricciones_equipaje">
+				<h3>Restricciones de</h3>
+				<h2>equipaje</h2>
+				<div class="descripcion">
+					Por su naturaleza, algunos objetos no pueden ser transportados en el equipaje. Te presentamos un listado general de los objetos y si tienes alguna pregunta, no dudes en consultarnos
+				</div>
+			</div>
+			<div class="info" id="calidad_producto">
+				<h3>Calidad del</h3>
+				<h2>producto</h2>
+				<div class="descripcion">
+					En BoA nos preocupamos por brindarte el mejor servicio a bordo por lo que todos nuestros productos son frescos y elaborados con el mayor de los cuidados.
+				</div>
+			</div>
+			<div class="info" id="menu_internacional">
+				<h3>Men&uacute;</h3>
+				<h2>internacional</h2>
+				<div class="descripcion">
+					Los vuelos internacionales son largos y por eso te proponemos un men&uacute; de alimentos que est&eacute; acorde a los horarios, visita el link para verlo a detalle.
+					<br><br><br>
+					<div id="btn_download_menu_internacional" class="button">DESCARGAR MEN&Uacute;</div>
+					<br>
+				</div>
+			</div>
+			<div class="info" id="opciones_alimenticias">
+				<h3>Opciones</h3>
+				<h2>alimenticias</h2>
+				<div class="descripcion">
+					Nos preocupa tu bienestar, por lo tanto en nuestro men&uacute; tenemos opciones que se adec&uacute;an a tus necesidades, av&iacute;sanos al momento de realizar la reserva/compra del boleto si tienes alguna alergia, o si tienes alg&uacute;n estilo de alimentaci&oacute;n espec&iacute;fico.
+				</div>
+			</div>
+			<div class="info" id="destinos_nacionales">
+				<h3>Destinos nacionales</h3>
+				<div class="descripcion">
+					Tu destino tiene muchos lugares que visitar y actividades que realizar, aseg&uacute;rate de llevar lo necesario con las condiciones climáticas de la semana.
+					<br>
+					<table>
+						<tr>
+							<th>CBBA</th>
+							<th>SCZ</th>
+							<th>LPZ</th>
+							<th>SUCRE</th>
+							<th>TJA</th>
+							<th>TRI</th>
+							<th>COBIJA</th>
+						</tr>
+						<tr id="row_destinos_nacionales">
+							<!-- INSERT NATIONAL WEATHER INFO HERE -->
+						</tr>
+					</table>
+					<div id="btn_info_turismo_bolivia" class="button">M&Aacute;S INFO</div>
+					<br>
+				</div>
+			</div>
+			<div class="info" id="destinos_internacionales">
+				<h3>Destinos internacionales</h3>
+				<div class="descripcion">
+					Tu destino tiene muchos lugares que visitar y actividades que realizar, 
+					aseg&uacute;rate de llevar lo necesario con las condiciones clim&aacute;ticas de la semana
+					<br>
+					<table style="margin:0 auto">
+						<tr>
+							<th>MADRID</th>
+							<th>SALTA</th>
+							<th>BS. AS.</th>
+							<th>SAO PAULO</th>
+							<th>MIAMI</th>
+						</tr>
+						<tr id="row_destinos_internacionales">
+							<!-- INSERT INTERNATIONAL WEATHER INFO HERE -->
+						</tr>
+						<tr>
+							<td class="weather-info-cell">
+								<div id="btn_info_madrid" class="button">M&Aacute;S INFO</div>
+							</td>
+							<td class="weather-info-cell">
+								<div id="btn_info_salta" class="button">M&Aacute;S INFO</div>
+							</td>
+							<td class="weather-info-cell">
+								<div id="btn_info_bs_as" class="button">M&Aacute;S INFO</div>
+							</td>
+							<td class="weather-info-cell">
+								<div id="btn_info_sao_paulo" class="button">M&Aacute;S INFO</div>
+							</td>
+							<td class="weather-info-cell">
+								<div id="btn_info_miami" class="button">M&Aacute;S INFO</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<br><br>
+			</div>
+			<div class="info" id="quienes_somos">
+				<h3>Quienes</h3>
+				<h2>somos</h2>
+				<div class="descripcion">	
+					El 24 de Octubre de 2007, mediante el <strong>Decreto Supremo Nº 29318</strong> se crea la Empresa P&uacute;blica Nacional Estratégica Boliviana de Aviación – BoA, como una persona jur&iacute;dica de derecho p&uacute;blico; duración indefinida; patrimonio propio; autonom&iacute;a de gesti&oacute;n administrativa, financiera, legal y t&eacute;cnica, bajo tuici&oacute;n del Ministerio de Obras P&uacute;blicas, Servicios y Vivienda.
+					<br><br>
+					As&iacute; nacimos y cada a&ntilde;o crecemos buscando brindar un mayor y mejor servicio para todos, generando trabajo, ampliando nuestras rutas manteniendo precios competitivos en el mercado, elevando el nombre de Bolivia en lo alto  y velando por que tu experiencia con nosotros sea inolvidable, BoA es la empresa de aviaci&oacute;n de los bolivianos por los bolivianos y para los bolivianos, BoA nuestra, la de todos.
+				</div>
+			</div>
+			<div class="info" id="mision_vision">
+				<h3>Misi&oacute;n y</h3>
+				<h2>visi&oacute;n</h2>
+				<div class="descripcion">
+					<strong>Misión</strong><br>
+					<em>
+						&quot;Brindar servicio integral de transporte aerocomercial de alcance nacional e internacional con calidad, seguridad, y gestión empresarial transparente&quot;.
+					</em>
+					<br><br>
+					<strong>Visi&oacute;n</strong><br>
+					<em>
+						&quot;Boliviana de Aviaci&oacute;n contribuir&aacute; significativamente a la consecuci&oacute;n de los objetivos estrat&eacute;gicos del pa&iacute;s y al bienestar de los bolivianos, a trav&eacute;s de servicios aeron&aacute;uticos de calidad reconocida&quot;.
+					</em>
+				</div>
+			</div>
+			<div class="info" id="el_personal">
+				<h3></h3>
+				<h2>El personal</h2>
+				<div class="descripcion">
+					En Boliviana de Aviaci&oacute;n queremos a nuestros clientes y por eso estamos orgullosos de presentarte al equipo que nos hace ser quienes somos:
+					<br><br><br>
+					<div id="btn_autoridades" class="button">Autoridades</div>
+					<div id="btn_personal" class="button">Personal</div>
+				</div>
+			</div>
+		</div> <!-- dialog_info -->
+		<!-- <div class="dialog-close-out"></div> -->
+	</div> <!-- dialog-overlay -->
+
+	<a id="btn_redirect" href="#" target="_blank" style="display:none"></a>
+</body>
+</html>

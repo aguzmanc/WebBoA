@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<!--     BOLIVIANA DE AVIACION     -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Boliviana de Aviaci&oacute;n</title>
+	<link rel="icon" href="images/icon.png" type="image/x-icon">
+	
+	<!--  LIBRERIAS JAVASCRIPT  -->
+	<!-- JQUERY -->
+	<script src="content/lib/jquery-1.11.1.min.js"></script>
+
+	<!-- STYLE.CSS -->
+	<link href="content/style.css" media="screen" rel="stylesheet" type="text/css" />
+	
+	<!-- CUSTOM SCROLLBAR -->
+	<link href="content/lib/custom_scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+	<script src="content/lib/custom_scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- JQUERY UI -->
+	<link rel="stylesheet" type="text/css" href="content/lib/jquery_ui/css/dot-luv/jquery-ui.min.css">
+	<script src="content/lib/jquery_ui/jquery-ui.min_es.js"></script> <!-- CHANGE BY LANGUAGE -->
+	<!-- <script src="content/lib/jquery_ui/jquery-ui.min_en.js"></script>  -->
+	<!-- <script src="content/lib/jquery_ui/jquery-ui.min_pt.js"></script>  -->
+
+	<!-- GENERAL SCRIPTS -->
+	<script type="text/javascript" src="content/common.js"></script>
+	<script type="text/javascript" src="content/language_data_es.js"></script><!-- CHANGE BY LANGUAGE -->
+	<script type="text/javascript" src="content/custom_handlers.js"></script>
+	<script type="text/javascript" src="content/home.js"></script>
+	<script type="text/javascript" src="content/header.js"></script>
+	<script type="text/javascript" src="content/footer.js"></script>
+
+	<!-- SERVICES LOCATION -->
+	<script type="text/javascript">
+		var SLIDES_SERVICE_URL = "content/fake_services/slides.json";
+	</script>
+</head>
+<body>
+	<header style="display:block">
+		<a id="btn_return_home" href="http://www.boa.bo"></a>
+		<div class="logo-header"></div>
+		<ul id="main_menu">
+			<li id="menu_item_planifica" >
+				<span>PLANIFICA TU VIAJE</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>RESERVAR VUELOS
+										</a>
+									</li>
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>ESTADO DEL VUELO
+										</a>
+									</li>
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>HORARIO DE VUELOS
+										</a>
+									</li>
+									<li class="primary disabled"  data-item="web_check_in"><div class="icon"></div>WEB CHECK-IN</li>
+									<li class="primary disabled"  data-item="formas_pago"><div class="icon"></div>FORMAS DE PAGO</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_antes_viajar">
+				<span>ANTES DE VIAJAR</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="politica_equipaje"><div class="icon"></div>POL&Iacute;TICA DE EQUIPAJE</li>
+									<li data-item="equipaje_mano">Equipaje de mano</li>
+									<li data-item="equipaje_facturable">Equipaje facturable</li>
+									<li data-item="exceso_equipaje">Exceso de equipaje</li>
+									<li data-item="equipaje_especial">Equipaje especial</li>
+									<li data-item="equipaje_adicional" class="disabled ">Equipaje adicional</li>
+									<li data-item="mercancias_peligrosas">Mercanc&iacute;as peligrosas</li>
+									<li data-item="equipaje_mascotas">Mascotas</li>
+									<li class="primary disabled" data-item="seguimiento_equipaje"><div class="icon"></div>SEGUIMIENTO DE EQUIPAJE EN L&Iacute;NEA</li>
+									<li class="primary disabled"  data-item="equipajes_demorados"><div class="icon"></div>EQUIPAJES DEMORADOS EXTRAVIADOS O DA&Ntilde;ADOS</li>
+									<li class="primary disabled"  data-item="declaracion_equipaje"><div class="icon"></div>DECLARACI&Oacute;N DEL VALOR DEL EQUIPAJE</li>
+									<li class="primary" data-item="tips_equipaje"><div class="icon"></div>TIPS DE EQUIPAJE</li>
+									<li class="primary disabled" data-item="equipaje_interlineal"><div class="icon"></div>EQUIPAJE INTERLINEAL</li>
+									<li class="primary" data-item="llegar_aeropuerto"><div class="icon"></div>LLEGAR AL AEROPUERTO</li>
+									<li data-item="hora_limite">Hora l&iacute;mite</li>
+									<li data-item="aeropuerto_lp">Aeropuerto de La Paz</li>
+									<li data-item="aeropuerto_cbba">Aeropuerto de Cochabamba</li>
+									<li data-item="aeropuerto_viruviru">Aeropuerto de Viru Viru</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="servicios_especiales"><div class="icon"></div>SERVICIOS ESPECIALES</li>
+									<li data-item="menores_no_acompanados">Menores no acompa&ntilde;ados</li>
+									<li data-item="pasajeros_necesidades_diferentes">Pasajeros con necesidades diferentes</li>
+									<li data-item="condiciones_medicas_especiales">Condiciones m&eacute;dicas especiales</li>
+									<li data-item="oxigeno">Transporte de ox&iacute;geno</li>
+									<li data-item="dialisis_portatil">Transporte de equipo de di&aacute;lisis port&aacute;til (PDMs)</li>
+									<li data-item="bebes">Viajando con beb&eacute;s</li>
+									<li data-item="mascota">Viajando con tu mascota en cabina</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="pasajeros_especiales"><div class="icon"></div>PASAJEROS ESPECIALES</li>
+									<li data-item="embarazadas">Mujeres embarazadas</li>
+									<li data-item="tercera_edad">Pasajeros de la tercera edad</li>
+									<li data-item="pasajeros_sobrepeso">Pasajeros que requieren asiento extra</li>
+									<li data-item="dificultad_vision" class="disabled">Pasajeros con dificultad de visi&oacute;n</li>
+									<li data-item="acompanantes" class="disabled">Acompa&ntilde;antes</li>
+									<li class="primary" data-item="menu_especial"><div class="icon"></div>MEN&Uacute; ESPECIAL</li>
+									<li class="primary" data-item="documentacion_viaje"><div class="icon"></div>DOCUMENTACI&Oacute;N DE VIAJE, VISA y API</li>
+									<li class="primary" data-item="vacunas"><div class="icon"></div>VACUNAS</li>
+									<li class="primary" data-item="derechos_pasajeros" data-action="none"><div class="icon"></div>DERECHOS DE LOS PASAJEROS</li>
+									<li data-is_link="true">
+										<a href="content/docs/contrato_transporte.pdf">Contrato de transporte</a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_promos_destinos" style="display:none">
+				<span>PROMOS Y DESTINOS</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_experiencia_boa">
+				<span>EXPERIENCIA BoA</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="nuestra_flota"><div class="icon"></div>NUESTRA FLOTA</li>
+									<li class="primary" data-item="experiencia_bordo"><div class="icon"></div>EXPERIENCIA A BORDO</li>
+									<li data-item="gastronomia">Gastronom&iacute;a, Snack y Bebidas</li>
+									<li data-item="" class="disabled">Entretenimiento a Bordo</li>
+									<li data-item="" class="disabled">Duty Free a Bordo</li>
+									<li data-item="" class="disabled">Asiento + Confort</li>
+									<li data-item="" class="disabled">Revista Destinos</li>
+									<li data-item="" class="disabled">Wi-Fi y GSM</li>
+									<li class="primary" data-item="seguro_internacional"><div class="icon"></div>SEGURO INTERNACIONAL</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="night">
+									<li class="primary" data-item="en_el_aeropuerto"><div class="icon"></div>EN EL AEROPUERTO</li>
+									<li data-item="check_in">Servicio de Check-In</li>
+									<li data-item="" class="disabled">Kioskos de Check-In</li>
+									<li data-item="" class="disabled">Mobile Phone Check-In</li>
+									<li data-item="" class="disabled">Salas VIP</li>
+									<li data-item="" class="disabled">Alquiler de Veh&iacute;culos</li>
+									<li data-item="" class="disabled">Parqueos</li>
+									<li data-item="" class="disabled">Servicio de Chofer</li>
+									<li data-item="" class="disabled">Transporte Origen-Destino Aeropuerto</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="night">
+									<li class="primary" data-item="cabinas"><div class="icon"></div>CARACTERISTICAS DE LAS CABINAS</li>
+									<li data-item="" class="disabled">Clase Business</li>
+									<li data-item="" class="disabled">Clase Econ&oacute;mica</li>
+									<li class="primary disabled" data-item=""><div class="icon"></div>VIAJE DE FAMILIA</li>
+									<li class="primary disabled" data-item=""><div class="icon"></div>VIAJE DE GRUPOS</li>
+									
+									<li class="primary disabled" data-item=""><div class="icon"></div>NUESTRAS ALIANZAS</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_boa_millas" style="display:none">
+				<span>BoA MILES</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+									<li data-item="">Secundario A</li>
+									<li data-item="">Secundario B</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_somos_boa" style="display:none">
+				<span>SOMOS BoA</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+									<li data-item="">Secundario A</li>
+									<li data-item="">Secundario B</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+		</ul>
+		<ul id="sec_menu">
+			<li id="menu_item_agencias">Agencias</li>
+			<li id="menu_item_corporativo" style="display:none">Corporativo</li>
+			<li id="menu_item_login" style="display:none">Login</li>
+		</ul>
+		<div id="menu_locations" class="header-menu">
+			<div class="flag bolivia"></div>
+			<h2><strong>BOLIVIA</strong></h2>
+			<div class="arrow-down-icon"></div>
+			<ul>
+				<li class="bolivia selected" data-location="bolivia">
+					<div class="flag"></div>
+					<h2><strong>BOLIVIA</strong></h2>
+				</li>
+				<li class="bsas"  data-location="bsas">
+					<div class="flag"></div>
+					<h2><strong>BS. AS.</strong></h2>
+				</li>
+				<li class="madrid" data-location="madrid">
+					<div class="flag"></div>
+					<h2><strong>MADRID</strong></h2>
+				</li>
+				<li class="saopaulo"  data-location="saopaulo">
+					<div class="flag"></div>
+					<h2><strong>SAO PAULO</strong></h2>
+				</li>
+				<li class="salta" data-location="salta">
+					<div class="flag"></div>
+					<h2><strong>SALTA</strong></h2>
+				</li>
+				<li class="miami" data-location="miami">
+					<div class="flag"></div>
+					<h2><strong>MIAMI</strong></h2>
+				</li>
+			</ul>
+		</div>
+		<div id="menu_languages" class="header-menu">
+			<h2><strong>ESPA&Ntilde;OL</strong></h2>
+			<div class="arrow-down-icon"></div>
+			<ul>
+				<li class="selected" data-language="ES">
+					<h2><strong>ESPA&Ntilde;OL</strong></h2>
+				</li>
+				<!-- <li data-language="EN">
+					<h2><strong>ENGLISH</strong></h2>
+				</li>
+				<li data-language="PT">
+					<h2><strong>PORTUGU&Ecirc;S</strong></h2>
+				</li> -->
+			</ul>
+		</div>
+	</header>
+	<!-- HOME -->
+	<div id="home">
+		<div id="slider">
+			<!-- PUT IMAGES HERE -->
+		</div>
+		<div class="paginator-container">
+			<ul id="slider_paginator">
+				<!-- PUT AN INNOCENT POINT FOR EVERY IMAGE -->
+				<li data-slide="0" class="selected"></li>
+			</ul>
+		</div>
+		<div class="main-label" style="margin-top:0px;">
+			<h2 id="lbl_secondary_a"></h2>
+			<h1 id="lbl_primary"></h1>
+			<h3 id="lbl_secondary_b"></h3>
+		</div>
+	</div>
+	<!-- UI HOME -->
+	<div id="ui_home">
+		<div id="div_submit"></div>
+		<div id="buscador_vuelos" class="expanded">
+			<!-- TABS -->
+			<ul>
+				<li class="menu selected" data-content="reserva_vuelos">
+					<h2>RESERVA DE</h2>
+					<h1>VUELOS</h1>
+				</li>
+				<li id="tab_web_check_in" class="menu" data-content="web_check_in" title="Disponible Pr&oacute;ximamente">
+					<h2>WEB</h2>
+					<h1>CHECK IN</h1>
+				</li>
+				<li class="menu" data-content="estado_vuelo" title="Disponible Pr&oacute;ximamente">
+					<div class="label-prox">(pr&oacute;ximamente)</div>
+					<h2>ESTADO DE MI</h2>
+					<h1>VUELO</h1>
+				</li>
+			</ul>
+			<!-- CONTENT -->
+				<div id="reserva_vuelos" class="content selected">
+					<table>
+						<tr>
+							<td><label>Desde:</label></td>
+							<td><label>A:</label></td>
+						</tr>
+						<tr>
+							<td class='input-container'>
+								<div class="validable">
+									<select id="select_desde" class="origen-destino">
+										<option value="">Origen</option>
+										<option value="CIJ">COBIJA</option>
+						                <option value="CBB">COCHABAMBA</option>
+						                <option value="LPB">LA PAZ</option>
+						                <option value="MAD">MADRID</option>
+						                <option value="VVI">SANTA CRUZ</option>
+						                <option value="SRE">SUCRE</option>
+						                <option value="TJA">TARIJA</option>
+						                <option value="TRI">TRINIDAD</option>
+						                <option value="EZE">BUENOS AIRES</option>
+						                <option value="GRU">SAO PAULO</option>
+									</select>	
+								</div>
+							</td>
+							<td class='input-container'>
+								<div class="validable">
+									<select id="select_hasta" class="origen-destino">
+										<option value="">Destino</option>
+										<option value="CIJ">COBIJA</option>
+						                <option value="CBB">COCHABAMBA</option>
+						                <option value="LPB">LA PAZ</option>
+						                <option value="MAD">MADRID</option>
+						                <option value="VVI">SANTA CRUZ</option>
+						                <option value="SRE">SUCRE</option>
+						                <option value="TJA">TARIJA</option>
+						                <option value="TRI">TRINIDAD</option>
+						                <option value="EZE">BUENOS AIRES</option>
+						                <option value="GRU">SAO PAULO</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td>
+								<div id="rbtn_ida_vuelta" class="radio-button" data-group="ida_vuelta">
+									<div class="btn">
+										<div></div>
+									</div>
+									<label>Ida y vuelta</label>
+								</div>
+							</td>
+							<td>
+								<div id="rbtn_ida" class="radio-button checked" data-group="ida_vuelta">
+									<div class="btn">
+										<div></div>
+									</div>
+									<label>Solo ida</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>Salida:</label></td>
+							<td><label id="lbl_regreso" style="display:none">Regreso:</label></td>
+						</tr>
+						<tr>
+							<td class='input-container'>
+								<div class="validable">
+									<input type="text" id="picker_salida" class="calendar" text="(Ingrese fecha)" onkeypress="return false;">
+								</div>
+							</td>
+							<td class='input-container'>
+								<div class="validable">
+									<input type="text" id="picker_regreso" class="calendar" style="display:none"
+										onkeypress="return false;">
+								</div>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td><label>Adultos</label></td>
+							<td><label>Ni&ntilde;os<br>(2-11)a&ntilde;os</label></td>
+							<td><label>Beb&eacute;s<br>(0-1)a&ntilde;os</label></td>
+							<td style="display:none"><label>Flexible en Fechas</label></td>
+						</tr>
+						<tr>
+							<td class="input-container">
+								<select id="select_nro_adultos" class="number">
+									<option value="1" selected>1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								</select>
+							</td>
+							<td class="input-container">
+								<select id="select_nro_ninhos" class="number">
+									<option value="0" selected>0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								</select>
+							</td>
+							<td class="input-container">
+								<select id="select_nro_bebes" class="number">
+									<option value="0" selected>0</option>
+									<option value="1">1</option>
+									<option value="1">2</option>
+								</select>
+							</td>
+							<td valign="top" style="display:none">
+								<div id="cbx_flexible_en_fechas" class="checkbox"></div>
+							</td>
+						</tr>
+						<tr style="display:none">
+							<td><label>Moneda:</label></td>
+						</tr>
+						<tr style="display:none">
+							<td colspan="5">
+								<select id="select_moneda" class="moneda">
+									<option value="BOB" selected>BOLIVIANOS (BOB)</option>
+									<option value="USD">D&Oacute;LARES (USD)</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<div id="btn_buscar_vuelos" class="button">BUSCAR</div>
+				</div>
+				<div id="web_check_in" class="content">
+					<table>
+						<tr>
+							<td rowspan="2" valign="top">
+								<div id="cbx_acepto_terminos" class="checkbox"></div>
+								<br>
+								<br>
+								<label>Acepto los <a target="_blank" href="http://www.boa.bo/es/bolivia/terminos-condiciones">t&eacute;rminos y condiciones</a></label>
+							</td>
+							<td>
+								<table class="tbl_indicaciones">
+									<tr>
+										<td>
+											<div class="clock-img"></div>
+										</td>
+										<td>Real&iacute;zalo entre 24 y 2 horas antes del vuelo.</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="book-img"></div>
+										</td>
+										<td>Ten a mano tus documentos de viaje.</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="paper-img"></div>
+										</td>
+										<td>Ten lista tu impresora</td>
+									</tr>
+									<tr>
+										<td>
+											
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="btn_buscar_check_in" class="button" style="display:none">CHECK-IN</div>
+							</td>
+						</tr>
+					</table>
+					<table class="tbl_tipo_identificacion" style="display:none;">
+						<tr>
+							<td>
+								<input id="rbtn_cod_reserva" name="tipo_identificacion" type="radio">
+							</td>
+							<td>
+								<label for="rbtn_cod_reserva">COD. RESERVA</label>
+							</td>
+							<td>
+								<input id="rbtn_doc_identificacion" checked name="tipo_identificacion" type="radio">
+							</td>
+							<td>
+								<label for="rbtn_doc_identificacion">DOCUMENTO NAL. DE IDENTIFICACI&Oacute;N</label>
+							</td>
+							<td>
+								<input id="rbtn_frequent_flyer" name="tipo_identificacion" type="radio">
+							</td>
+							<td>
+								<label for="rbtn_frequent_flyer">FREQUENT FLYER</label>
+							</td>
+						</tr>
+					</table>
+					<table class="tbl_datos" style="display:none;">
+						<tr>
+							<td><label>Apellido</label></td>
+						</tr>
+						<tr>
+							<td><input id="tbx_apellido" type="text"></td>
+						</tr>
+						<tr>
+							<td><label id="lbl_tipo_documento">Documento nal. de Identificaci&oacute;n</label></td>
+						</tr>
+						<tr>
+							<td><input id="tbx_documento" type="text"></td>
+						</tr>
+						<tr>
+							<td><label>Origen</label></td>
+						</tr>
+						<tr>
+							<td>
+								<select id="select_check_in_origen">
+									<option value="VVI">Santa Cruz, BO(WI)</option>
+									<option value="EZE" selected>Buenos Aires, AR(EZE)</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="estado_vuelo" class="content">
+					<table>
+						<tr>
+							<td><label>ORIGEN:</label></td>
+							<td><label>DESTINO:</label></td>
+						<tr>
+							<td>
+								<select id="select_origen">
+									<option value="VVI" selected>Santa Cruz, BO(WI)</option>
+									<option value="EZE">Buenos Aires, AR(EZE)</option>
+								</select>
+							</td>
+							<td>
+								<select id="select_destino">
+									<option value="VVI">Santa Cruz, BO(WI)</option>
+									<option value="EZE" selected>Buenos Aires, AR(EZE)</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><label>FECHA:</label></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="picker_estado_vuelo" class="calendar">
+							</td>
+						</tr>
+					</table>
+					<div id="btn_buscar_estado_vuelo" class="button">BUSCAR</div>
+				</div>
+		</div>
+		
+	</div>
+	<a id="btn_redirect" href="#" target="_blank" style="display:none"></a>
+	<!-- DIALOGOS -->
+	<div class="dialog-overlay" style="display:none">
+		<div class="dialog" id="dialog_direcciones" style="display:none">
+			<div class="btn-cerrar">CERRAR X</div>
+			<ul>
+				<li>Cobija
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle Ernesto Nishikawa # 50 entre Bahia y Antofagasta</strong><br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (3) 8424820</strong><br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes de 08:00 a 12:00<br>&nbsp;&nbsp;&nbsp;y de 15:00 a 18:30<br>
+						S&aacute;bado de 09:00 a 12:30</strong>
+					</div>
+				</li>
+				<li>La Paz
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Av. Camacho N°1413 Esq. Loayza</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (2) 2117993</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 12:00</strong>
+						<br><br><br>
+						Direcci&oacute;n:<br>
+						<strong>Av. Claudio Aliaga 1367 esq. Gabriel Ren&eacute; Moreno</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (2) 2124310 – 591 (2) 2124326</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 12:00</strong>
+					</div>
+				</li>
+				<li>Cochabamba
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle Jord&aacute;n N° 202 esq. Nataniel Aguirre</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 4140873</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 19:00</strong><br>
+						<strong>S&aacute;bado 9:00 a 12:30</strong>
+						<br><br><br>
+						Direcci&oacute;n:<br>
+						<strong>Av. Sim&oacute;n L&oacute;n Nro 1582</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 4114614 – 591 (4) 4142858</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 9:00 a 13:00<br>&nbsp;&nbsp;&nbsp;y de 15:00 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 13:00</strong>
+					</div>
+				</li>
+				<li class="selected">Santa Cruz
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Las Torres Aventura local 25 (segundo anillo Av. Cristóbal de Mendoza entre calle Orton y Av. Trinidad)</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 13:00</strong>
+						<br><br><br>
+						Direcci&oacute;n:<br>
+						<strong>Av. Trompillo esq. Monseñor Santiesteban Edif. Seven Center Oficina 6</strong>
+						<br><br>
+						Tel&eacute;fonos:<br>
+						<strong>591 (3) 3121343 – 591 (3) 3116247</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado 9:00 a 13:00</strong>
+					</div>
+				</li>
+				<li>Tarija
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle General Trigo N°327 entre Virginio Lema y Alejandro del Carpio</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 6111389</strong>
+						<br><br>
+						FAX:<br>
+						<strong>6654004 - 6112787</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado de 9:00 a 12:00</strong>
+					</div>
+				</li>
+				<li>Sucre
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle Audiencia # 21</strong>
+						<br><br>
+						Tel&eacute;fono:<br>
+						<strong>591 (4) 6912360</strong>
+						<br><br>
+						Horarios de Atenci&oacute;n<br>
+						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
+						<strong>S&aacute;bado de 8:30 a 12:30</strong>
+					</div>
+				</li>
+				<li>Trinidad
+					<div class="info">
+						Direcci&oacute;n:<br>
+						<strong>Calle sucre esq. Av. C. Arce. Zona Central Distrito 1</strong><br><br>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="dialog_info" class="dialog">
+			<div class="btn-cerrar">CERRAR X</div>
+		</div>
+	</div>
+	<footer>
+		<div id="footer_buscador_vuelos">
+			<div id="icons_seguridad"></div>
+			<div id="contacto_asistencia" class="tooltip">
+				<span>Contacto y asistencia</span>
+				<div class="arrow"></div>
+			</div>
+			<div id="horarios" class="tooltip">
+				<span>Horarios de salida</span>
+				<div class="arrow"></div>
+			</div>
+			<div id="reservas" class="tooltip">
+				<span>Mis reservas</span>
+				<div class="arrow"></div>
+			</div>
+
+			<div id="notificacion" class="tooltip" style="display:none"></div>
+		</div>
+	</footer>
+</body>
+</html>

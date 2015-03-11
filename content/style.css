@@ -1,0 +1,2038 @@
+
+ /*
+ * Theme Name: Boliviana de Aviación
+ * Theme URI: http://www.wasp.bo/
+ * Description: Skin para la página web de Boa
+ * Author: Arnold Marcelo Guzmán C.; Brian Terceros Salinas
+ * Author URI: http://
+ * Version: 1.0
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags: boa, boliviana, aviacion, bolivia, viajes
+ * Text Domain: boa
+ */
+
+@charset "UTF-8";
+@import "lib/reset.css";
+
+@font-face {
+    font-family: "HelveticaNeuePro";
+    src: url('fonts/HelveticaNeueLTPro-Th.woff');
+}
+@font-face {
+    font-family: "HelveticaNeueProMd";
+    src: url('fonts/HelveticaNeueLTPro-Md.woff');
+}
+@font-face {
+    font-family: "FuturaBold";
+    src: url('fonts/FuturaStd-Bold.woff');
+}
+@font-face {
+    font-family: "FuturaHeavy";
+    src: url('fonts/FuturaStd-Heavy.woff');
+}
+@font-face {
+    font-family: "FuturaMedium";
+    src: url('fonts/FuturaStd-Medium.woff');
+}
+@font-face {
+    font-family: "FuturaBook";
+    src: url('fonts/FuturaStd-Book.woff');
+}
+@font-face {
+    font-family: "FuturaLight";
+    src: url('fonts/FuturaStd-Light.woff');
+}
+
+
+
+/* **** ANIMACIONES **** */
+#slider > img,
+.ui-section .first-menu > li > label,
+.ui-section .second-menu > li,
+.ui-section .second-menu,
+.ui-section .second-menu label,
+header #language_selector .content,
+/*#buscador_vuelos li,*/
+/*#buscador_vuelos li h1,*/
+#buscador_vuelos .content,
+.ui-section .header h2,
+.ui-section .header,
+.ui-section .header-fixed,
+.ui-section .info,
+.ui-section .info .icon,
+.ui-section .descripcion .desplegable .title,
+.ui-section .descripcion .desplegable .title > h4,
+.ui-section .descripcion .desplegable .img,
+.ui-section .descripcion .desplegable .content,
+.ui-section .descripcion .desplegable .arrow,
+.ui-section .first-menu .icon:not(.small),
+#home
+{
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+}
+
+/* CHANGES ONLY FOR OPACITY (because other changes are handled manually by javascript) */
+#buscador_vuelos{
+	transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+}
+
+.content .validable
+{
+	transition: all 1.5s;
+	-moz-transition: all 1.5s;
+	-webkit-transition: all 1.5s;
+	-o-transition: all 1.5s;
+	-ms-transition: all 1.5s;
+}
+/* --------------------------------------------------------------------------- */
+@-moz-document url-prefix(){
+      .ui-select{
+          border: 1px solid #CCC; 
+          border-radius: 4px; 
+          box-sizing: border-box; 
+          position: relative; 
+          overflow: hidden;
+     }
+     .ui-select select{
+          width: 110%; 
+          background-position: right 30px center; 
+          border: none;
+     }
+}
+
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+body{
+	overflow: hidden;
+}
+/* --------------------------------------------------------------------------- */
+header{
+	position: fixed;
+	width: 100%;
+	z-index: 2000;
+}
+
+header .logo-header{
+	position: fixed;
+	width:320px; height:137px;
+	margin: -4px 0;
+	background-image:url('images/textures.png');
+	background-position: -693px -207px;
+	z-index: 20;
+
+	pointer-events: none; /* Non IE compatible */
+}
+
+header #btn_return_home{
+	width: 200px;
+	height: 114px;
+	display: block;
+	position: fixed;
+	z-index: 99;
+}
+
+header #language_selector{overflow: hidden;}
+header #language_selector.collapsed{
+	position: absolute;
+	top: 55px;
+	left: 225px;
+	height: 31px;
+}
+
+header #language_selector.expanded {
+	position: absolute;
+	top: 55px;
+	left: 215px;
+	height: 31px;	
+}
+
+header #language_selector .content {
+	text-align: center;
+	padding: 7px 0 0 0px;
+	background-image: url('images/bg_header_color_dark.png');
+	background-repeat: repeat;
+}
+
+header #language_selector table{min-width:90px;}
+
+header #language_selector.collapsed .content{width:130px;}
+header #language_selector.expanded .content{width:310px;}
+
+header #language_selector .content .sel-button {
+	position: relative;
+	width: 130px;
+	color: #1F3656;
+	font-size: 10px;
+	font-family: "HelveticaNeuePro";
+	font-weight: bold;
+	cursor: pointer;
+	text-align: right;
+	padding: 0 25px 0 0;
+}
+
+header #language_selector.expanded .content .sel-button{
+	display: none;
+}
+
+header #language_selector .content .sel-button:hover{text-decoration:underline;}
+
+header #language_selector.collapsed .content .locations{display: none;width:10px;}
+header #language_selector.collapsed .content .locations ul{margin:0 auto;width:0px;}
+header #language_selector.expanded .content .locations ul{margin:0 0 0 70px;width:225px;}
+header #language_selector .content .locations li{
+	float:right;
+	margin: 0 10px;
+	color: #1F3656;
+	font-size: 10px;
+	font-family: "HelveticaNeuePro";
+	font-weight: bold;
+	cursor: pointer;
+}
+header #language_selector .content li:hover{text-decoration:underline;}
+header #language_selector .content .locations li.selected{
+	text-decoration: none;
+	cursor: none;
+	font-size: 12px;
+	color: #000;
+}
+
+header #language_selector .angle-right{
+	background-image: url('images/textures.png');
+	width: 20px;
+	height: 20px;
+	background-position: -166px -379px;
+}
+
+header .att-div{
+	position: absolute;
+	top: 270px;
+	height: 52px;
+	width: 565px;
+	left: -248px;
+	color: #FFF;
+	font-size: 8px;
+	font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', 'sans-serif';
+	font-weight: 100;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-ms-writing-mode: lr-tb;
+}
+/* --------------------------------------------------------------------------- */
+#main_menu {
+	position: absolute;
+	width: 5500px;
+	height:55px;
+	top: 0;
+	left: 220px;
+	margin: 0 0 0 20px;
+	background-image:url('images/bg_header_color.png');
+	background-repeat:repeat;
+	z-index: 19;
+}
+
+#main_menu > li{
+	position: relative;
+	float: left;
+	min-width: 70px;
+	max-width: 90px;
+	color: #1F3656;
+	padding: 13px 15px 0 15px;
+	font-family: "FuturaMedium";
+	font-size: 13px;
+	font-weight: 100;
+	text-align: center;
+	cursor: pointer;
+	height: 42px;
+}
+
+#main_menu > li > .shadow-margin-left {
+	position: absolute;
+	width: 10px;
+	height: 100%;
+	top: 0px;
+	left: -10px;
+	background-image: url("images/gradient_left.png");
+	background-size: 12px auto;
+	background-position: 4px 0px;
+	background-repeat: repeat-y;
+	opacity: 0.4;
+	display: none;
+}
+
+#main_menu > li:hover > .shadow-margin-left{display: block;}
+
+#main_menu > li > .shadow-margin-right {
+	position: absolute;
+	width: 10px;
+	height: 100%;
+	top: 0px;
+	left: 100%;
+	background-image: url("images/gradient_right.png");
+	background-size: 12px auto;
+	background-repeat: repeat-y;
+	background-position: -6px 0px;
+	opacity: 0.4;
+	display: none;
+}
+
+#main_menu > li:hover > .shadow-margin-right{display: block;}
+
+#main_menu > li > .fix-bottom{
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	width: 100%;
+	height: 16px;
+	background-image: url("images/bg_header_color.png");
+	z-index: 9;
+	display: none;
+}
+
+#main_menu > li:hover > .fix-bottom{display: block;}
+
+#main_menu > li:first-child {
+	width: 91px;
+	max-width: 288px;
+	padding: 13px 15px 0px 60px;
+}
+
+#main_menu > li:hover{
+	
+}
+
+#main_menu > li:hover > span{font-weight:bold;}
+
+#main_menu > li .secondary-menu-container {
+	position: absolute;
+	top: 55px;
+	left: -100px;
+	background-image: url("images/bg_header_color.png");
+	background-repeat: repeat;
+	padding: 18px;
+	text-align: left !important;
+	display: none;
+	/*display: inline-block;*/
+
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5), 0px 8px 12px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5), 0px 8px 12px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5), 0px 8px 12px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5), 0px 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+#main_menu li:hover .secondary-menu-container {
+	display: inline-block;
+}
+
+#main_menu #menu_item_planifica .secondary-menu-container{left:50px;}
+#main_menu #menu_item_antes_viajar .secondary-menu-container{left:-40px;}
+#main_menu #menu_item_experiencia_boa .secondary-menu-container{left:-200px;}
+
+#main_menu .secondary-menu {
+	width: 200px;
+	background-image: url("images/bg_header_color.png");
+	background-repeat: repeat;
+	margin: 0 10px 0 0;
+}
+
+#main_menu .secondary-menu li {
+	position: relative;
+	font-size: 12px;
+	font-weight: 100;
+	cursor: pointer;
+}
+
+#main_menu .secondary-menu li > a {
+	position: relative;
+	width: 175px;
+	height: 100%;
+	color: #1F3656;
+	padding: 6px 0px 0px 25px;
+
+	display: block;
+}
+
+
+#main_menu .secondary-menu li.disabled{
+	color: #CCC;
+	cursor: not-allowed;	
+	display: none;
+}
+
+
+#main_menu .secondary-menu li.primary{
+	font-size: 15px;
+	font-weight: 100;
+	line-height: 24px;
+	font-family: "FuturaMedium";
+}
+
+#main_menu .secondary-menu li:not(.primary)
+{
+	letter-spacing: 1px;
+	font-size: 16px;
+	font-family: "FuturaLight";
+
+	background-image: url("images/icon_arrow_white.png");
+	background-repeat: no-repeat;
+	background-size: 4px auto;
+	background-position: 16px 10px;
+}
+
+#main_menu .secondary-menu li:hover{
+	background-color: #EFAA35;
+	color: #FFF;
+}
+
+#main_menu .secondary-menu .icon {
+	position: absolute;
+	top: 5px;
+	left: 0px;
+	width: 20px;
+	height: 20px;
+	background-size: 20px auto;
+	background-repeat: no-repeat;
+	background-color: #1F3656;
+	border-radius: 25px;
+}
+/* --------------------------------------------------------------------------- */
+#menu_item_antes_viajar .secondary-menu .primary .icon {
+	background-image: url("images/contenidos/icons_antes_de_viajar.png");
+}
+
+.secondary-menu li[data-item='politica_equipaje'] 		.icon{ background-position: 0px 0px; }
+.secondary-menu li[data-item='equipajes_demorados'] 	.icon{ background-position: 0px -20px; }
+.secondary-menu li[data-item='declaracion_equipaje'] 	.icon{ background-position: 0px -40px; }
+.secondary-menu li[data-item='tips_equipaje'] 			.icon{ background-position: 0px -60px; }
+.secondary-menu li[data-item='llegar_aeropuerto'] 		.icon{ background-position: 0px -80px; }
+.secondary-menu li[data-item='servicios_especiales'] 	.icon{ background-position: 0px -100px; }
+.secondary-menu li[data-item='pasajeros_especiales'] 	.icon{ background-position: 0px -120px; }
+.secondary-menu li[data-item='menu_especial'] 			.icon{ background-position: 0px -140px; }
+.secondary-menu li[data-item='documentacion_viaje'] 	.icon{ background-position: 0px -160px; }
+.secondary-menu li[data-item='vacunas'] 				.icon{ background-position: 0px -180px; }
+.secondary-menu li[data-item='derechos_pasajeros'] 		.icon{ background-position: 0px -200px; }
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+#menu_item_experiencia_boa .secondary-menu .primary .icon {
+	background-image: url("images/contenidos/icons_experiencia_boa.png");
+}
+
+.secondary-menu li[data-item='nuestra_flota'] 		 .icon{ background-position: 0px 0px; }
+.secondary-menu li[data-item='experiencia_bordo'] 	 .icon{ background-position: 0px -20px; }
+.secondary-menu li[data-item='seguro_internacional'] .icon{ background-position: 0px -40px; }
+.secondary-menu li[data-item='en_el_aeropuerto'] 	 .icon{ background-position: 0px -60px; }
+.secondary-menu li[data-item='cabinas'] 		 	 .icon{ background-position: 0px -80px; }
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+#menu_item_planifica .secondary-menu .primary .icon {
+	background-image: url("images/contenidos/icons_planifica_tu_viaje.png");
+}
+
+.secondary-menu li:nth-child(1)		.icon{ background-position: 0px 0px; }
+.secondary-menu li:nth-child(2) 	.icon{ background-position: 0px -20px; }
+.secondary-menu li:nth-child(3) 	.icon{ background-position: 0px -40px; }
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+#sec_menu {
+	position: absolute;
+	top: 55px;
+	width: 100%;
+	height: 30px;
+	background-color: #D8D8D8;
+	padding: 0 0 0 300px;
+}
+
+#sec_menu > li{
+	float: left;
+	color: #1F3656;
+	font-size: 12px;
+	line-height: 30px;
+	font-weight: 100;
+	padding: 0 20px;
+	cursor: pointer;
+}
+
+#sec_menu > li:hover{background-color: #EFAA35;}
+/* --------------------------------------------------------------------------- */
+.header-menu {
+	position: fixed;
+	top: 60px;
+	width: 80px;
+	height: 15px;
+	text-align: left;
+	font-family: "HelveticaNeuePro";
+	color: #1F3656;
+	padding: 7px 0px 0px 20px;
+	margin: 0 15px 0 0;
+}
+
+.header-menu.floating{right: 0;}
+
+#menu_locations.fixed{left: 924px !important;}
+#menu_languages.fixed{left: 790px !important;}
+
+.header-menu h2{
+	width: 100%;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 0 0 5px 0;
+	cursor: default;
+}
+
+.header-menu h3{
+	font-size: 20px;
+	cursor: default;
+}
+
+.header-menu .flag {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 11px;
+	height: 22px;
+	background-image: url("images/call_center_flags.png");
+	background-size: 55px 22px;
+}
+
+.header-menu:hover ul {
+	display: block;	
+}
+
+.header-menu ul {
+	display: none;
+	position: absolute;
+	top: 22px;
+	left: 0;
+	width: 160px;
+}
+
+.header-menu ul li{
+	position: relative;
+	width: 80px;
+	height: 21px;
+	float: none;
+	color: #1F3656;
+	background-color: #D1D1D1;
+	padding: 0px 0px 0px 20px;
+	cursor: pointer;
+	border-color: #FFF;
+	border-width: 0px 0px 1px;
+	border-style: solid;
+}
+
+.header-menu ul li.selected{display: none;}
+
+.header-menu ul li:hover{
+	background-color: #1F3656 !important;
+	color: #FFF;
+}
+
+.header-menu ul li h2{ cursor: pointer; }
+.header-menu ul li h3{ cursor: pointer;}
+
+.header-menu ul li strong{line-height: 23px;}
+
+
+.header-menu .arrow-down-icon {
+	position: absolute;
+	top: 6px;
+	right: 0px;
+	width: 16px;
+	height: 15px;
+	background-image: url("images/icon_arrow_down.png");
+	background-repeat: no-repeat;
+}
+
+#menu_locations  { right: 0; }
+
+#menu_languages  { width: 90px; right: 130px; }
+
+/*BOLIVIA*/
+#menu_locations ul .bolivia .flag,
+#menu_locations > .flag.bolivia {background-position: 0 0;}
+/*BUENOS AIRES*/
+#menu_locations ul .bsas .flag,
+#menu_locations > .flag.bsas{background-position: -44px 0;}
+/*MADRID*/
+#menu_locations ul .madrid .flag,
+#menu_locations > .flag.madrid{background-position: -11px 0;}
+/*SAO PAULO*/
+#menu_locations ul .saopaulo .flag,
+#menu_locations > .flag.saopaulo{background-position: -22px 0;}
+/*SALTA*/
+#menu_locations ul .salta .flag,
+#menu_locations > .flag.salta{background-position: -44px 0;}
+/*MIAMI*/
+#menu_locations ul .miami .flag,
+#menu_locations > .flag.miami {background-position: -33px 0;}
+/* --------------------------------------------------------------------------- */
+#menu_item_servicios:hover #menu_servicios{display: block}
+#menu_item_informacion:hover #menu_informacion{display: block}
+#menu_item_acerca_de:hover #menu_acerca_de{display: block}
+#menu_item_contacto:hover #menu_contacto{display: block}
+#menu_item_call_center:hover #menu_locations ul{display: block}
+/* --------------------------------------------------------------------------- */
+#menu_servicios{ left: 70px; }
+#menu_informacion{ left: 10px;}
+#menu_acerca_de{ left: 10px;}
+#menu_contacto{ left: 150px;}
+/* --------------------------------------------------------------------------- */
+#menu_item_boa_plus			{background-position: -280 -2px}
+#menu_item_boa_plus:hover	{background-position: -280 -103px;}
+
+#menu_item_nosotros							{background-position: -348px -2px}
+#menu_item_nosotros:hover					{background-position: -348px -103px;}
+
+#menu_item_responsabilidad_social			{background-position: -416px -2px}
+#menu_item_responsabilidad_social:hover		{background-position: -416px -103px;}
+
+#menu_item_oficinas							{background-position: -484px -2px}
+#menu_item_oficinas:hover					{background-position: -484px -103px;}
+
+#menu_item_comunicados_prensa				{background-position: -552px -2px}
+#menu_item_comunicados_prensa:hover			{background-position: -552px -103px;}
+
+#menu_item_memoria_anual					{background-position: -620px -2px}
+#menu_item_memoria_anual:hover				{background-position: -620px -103px;}
+
+#menu_item_marco_normativo					{background-position: -688px -2px}
+#menu_item_marco_normativo:hover			{background-position: -688px -103px;}
+
+#menu_item_informacion_gestion				{background-position: -756px -2px}
+#menu_item_informacion_gestion:hover		{background-position: -756px -103px;}
+
+#menu_item_convocatorias					{background-position: -824px -2px}
+#menu_item_convocatorias:hover				{background-position: -824px -103px;}
+
+#menu_item_correo_corporativo				{background-position: -892px -2px}
+#menu_item_correo_corporativo:hover			{background-position: -892px -103px;}
+
+#menu_item_intranet							{background-position: -960px -2px}
+#menu_item_intranet:hover					{background-position: -960px -103px;}
+
+#menu_item_charter 	  	{background-position: -1096px -2px}
+#menu_item_charter:hover{background-position: -1096px -103px;}
+
+#menu_item_cargo 	  {background-position: -1164px -2px;}
+#menu_item_cargo:hover{background-position: -1164px -103px;}
+
+#menu_item_aeropuerto				{background-position: -1300px -2px}
+#menu_item_aeropuerto:hover			{background-position: -1300px -103px;}
+
+#menu_item_pasajeros 				{background-position: -1368px -2px}
+#menu_item_pasajeros:hover			{background-position: -1368px -103px;}
+
+#menu_item_equipaje					{background-position: -1436px -2px}
+#menu_item_equipaje:hover			{background-position: -1436px -103px;}
+
+#menu_item_preguntas_frecuentes			{background-position: -1504px -2px}
+#menu_item_preguntas_frecuentes:hover	{background-position: -1504px -103px;}
+
+#menu_item_menu_a_bordo				{background-position: -1572px -2px}
+#menu_item_menu_a_bordo:hover		{background-position: -1572px -103px;}
+
+#menu_item_mascotas					{background-position: -1640px -2px}
+#menu_item_mascotas:hover			{background-position: -1640px -103px;}
+
+#menu_item_informacion_turistica		{background-position: -1708px -2px}
+#menu_item_informacion_turistica:hover	{background-position: -1708px -103px;}
+
+#menu_item_revista_destinos				{background-position: -1776px -2px}
+#menu_item_revista_destinos:hover		{background-position: -1776px -103px;}
+
+#menu_item_clientes_frecuentes 	  	{background-position: -1844px -2px}
+#menu_item_clientes_frecuentes:hover{background-position: -1844px -103px;}
+
+#menu_item_agencias_viajes 	  	{background-position: -1912px -2px}
+#menu_item_agencias_viajes:hover{background-position: -1912px -103px;}
+
+
+
+#menu_item_facebook 			{background-position: -280px -207px}
+#menu_item_facebook:hover		{background-position: -280px -308px;}
+
+#menu_item_twitter				{background-position: -348px -207px}
+#menu_item_twitter:hover		{background-position: -348px -308px;}
+
+#menu_item_instagram 			{background-position: -416px -207px}
+#menu_item_instagram:hover		{background-position: -416px -308px;}
+
+#menu_item_direcciones_oficinas 		{background-position: -484px -207px}
+#menu_item_direcciones_oficinas:hover 	{background-position: -484px -308px;}
+
+#menu_item_youtube 				{background-position: -552px -207px}
+#menu_item_youtube:hover		{background-position: -552px -308px;}
+
+#menu_item_chat 				{background-position: -620px -207px}
+#menu_item_chat:hover			{background-position: -620px -308px;}
+/* --------------------------------------------------------------------------- */
+#slider{
+	position: absolute;
+	width: 100%;
+	top: 80px;
+	overflow: hidden;
+	height: 4500px;
+	background-color: #FFF;
+}
+
+#slider img{
+	width: 100%;
+	position: absolute;
+	opacity: 0;
+	min-width: 1024px;
+}
+
+#slider img.selected{
+	opacity: 1;	
+}
+
+.paginator-container {
+	position: fixed;
+	bottom: 30px;
+	height: 30px;
+	width: 100%;
+	opacity: 0.5;
+}
+
+.paginator-container:hover{opacity:1;}
+
+#slider_paginator {
+	margin: -8px 60px;
+}
+
+#slider_paginator li{
+	width: 10px;
+	height: 10px;
+	background-color: rgb(255, 255, 255);
+	margin: 0px 10px;
+	float: left;
+	border-radius: 100px;
+	/*opacity: 0.5;*/
+	cursor: pointer;
+
+	box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.7);
+	-ms-box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.7);
+}
+
+#slider_paginator li.selected{
+	background-color: #EFAA35;
+	cursor: initial;
+}
+
+/*#slider_paginator:hover li{opacity: 1;}*/
+/* --------------------------------------------------------------------------- */
+.content label{
+	font-family: "HelveticaNeuePro";
+	font-size: 13px;
+	color: #FFF;
+}
+
+.content label a{
+	color: #1F3656;
+	font-size: 15px;
+}
+
+.content label a:hover{text-decoration: underline;}
+
+.content .input-container{
+	padding: 0 20px 5px 0;
+}
+
+.content select {
+	height: 34px;
+	border-radius: 0px;
+	border-width: 0 0 2px 0;
+	border-style: solid;
+	border-color: #959595;
+	font-family: "HelveticaNeuePro";
+	font-size: 15px;
+	color: #1F3656;
+	padding: 2px 44px 0 10px;
+	background-image: url('images/icon_arrow_down.png');
+	background-repeat: no-repeat;
+	background-position: 165px 10px;
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+
+	text-indent: 0.01px;
+	text-overflow: '';
+}
+
+.content select::-ms-expand{
+  display:none;
+}
+
+@-moz-document url-prefix(){
+  .content select { width: 100%; }
+}
+
+.content select.number{
+	background-image: url('images/icon_arrow_down.png');
+	background-repeat: no-repeat;
+	background-position: 40px 10px;
+}
+
+.content input[type="text"] {
+	height: 34px;
+	border-radius: 0px;
+	border-width: 0 0 2px 0;
+	border-style: solid;
+	border-color: #959595;
+	font-family: "HelveticaNeuePro";
+	font-size: 15px;
+	color: #1F3656;
+	padding: 2px 40px 0 10px;
+}
+
+.content input.calendar {
+	background-image: url('images/icon_calendar.png');
+	background-repeat: no-repeat;
+	background-position: 150px 10px;
+	cursor: pointer;
+}
+
+.content input.calendar:hover {
+	background-image: url('images/icon_calendar_hover.png');
+}
+
+
+.content .checkbox{
+	width: 35px;
+	height: 33px;
+	background-color: #FFF;
+	margin: 0 5px;
+	border-radius: 0px;
+	border-width: 0 0 2px 0;
+	border-style: solid;
+	border-color: #959595;
+	font-family: "HelveticaNeuePro";
+	font-size: 15px;
+	color: #1F3656;
+	cursor: pointer;
+	display: inline-table;
+}
+
+.content .checkbox div{
+	width:11px;
+	height:12px; 
+}
+
+.content .checkbox.checked{
+	background-image: url('images/checkbox_mark.png');
+	background-repeat: no-repeat;
+	background-size: 15px;
+	background-position: 10px 8px;
+}
+
+.content .checkbox:hover{
+	background-color: #9E9E9E;
+}
+
+.content .radio-button, .content .radio-button label {
+	cursor: pointer;	
+}
+
+.content .radio-button .btn {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border-radius: 100px;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+.content .radio-button .btn div{
+	background-color: rgb(0, 0, 0);
+	width: 10px;
+	height: 10px;
+	margin: 5px auto;
+	vertical-align: middle;
+	border-radius: 100px;
+	display: none;
+}
+
+.content .radio-button.checked .btn div{
+	display: block;
+}
+
+.content .radio-button label{
+	line-height: 20px;
+	display: inline-block;
+}
+
+.content .validable {
+	border-color: rgba(255, 0, 0, 0);
+	border-width: 3px;
+	border-style: solid;
+}
+
+.content .validable.active{ border-color: #F00;}
+
+.button{
+	position: absolute;
+	font-family: "HelveticaNeuePro";
+	background-color: #085794;
+	border-color: #096CB9;
+	border-width: 0 0 4px 0;
+	border-style: solid;
+	color: #FFF;
+	padding: 10px 10px 6px 10px;
+	width: 200px;
+	text-align: center;
+	font-size: 17px;
+	cursor: pointer;
+}
+
+.button:hover{
+	color: #1F3656;
+	background-color: #E6BB38;
+	border-color: #BF9B2E;
+}
+
+/*exception rule*/
+#submenu_item_marco_normativo .button{position:relative;}
+
+.content select.origen-destino,
+.content select.moneda {width: 195px;}
+/* --------------------------------------------------------------------------- */
+.main-label{
+	position: fixed;
+	
+	left: 670px;
+	width: 345px;
+	color: #FFF;
+}
+
+.main-label.top{top:235px;}
+.main-label.middle{top:330px;}
+.main-label.bottom{top:500px;}
+
+.main-label h2{
+	font-family: "HelveticaNeuePro";
+	font-size: 30px;
+	padding: 5px 0 0 0;
+	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.29);
+}
+
+.main-label h1{
+	font-family: "HelveticaNeueProMd";
+	font-size: 50px;
+	padding: 10px 0 0 0;
+	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.29);
+}
+
+.main-label h3{
+	font-family: "HelveticaNeueProMd";
+	font-size: 20px;
+	padding: 10px 0 0 0;
+	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.29);
+}
+
+#icons_seguridad{
+	position: relative;
+	width: 425px;
+	height: 50px;
+	top: 10px;
+	margin: -15px 0 0 0;
+	background-image: url('images/textures.png');
+	background-position: -1057px -345px;
+	z-index: 201;
+}
+/* --------------------------------------------------------------------------- */
+#buscador_vuelos{
+	position: absolute;
+	top: 200px;
+	left: 75px;
+	margin-top: -80px;
+	z-index: 200;
+}
+
+#buscador_vuelos .menu{
+	float: left;
+	font-family: "HelveticaNeuePro";
+	cursor: pointer;
+}
+
+#buscador_vuelos .menu.selected{
+	padding: 20px 0 2px 20px;
+	width: 200px;
+}
+
+#buscador_vuelos.collapsed {opacity: 0.5;}
+#buscador_vuelos.expanded {opacity: 1.0;}
+
+/*ENABLED TABS*/
+#buscador_vuelos .menu:nth-child(1):hover{background-color:rgba(66, 98, 142, 0.9);}
+/*#buscador_vuelos .menu:nth-child(2):hover{background-color:rgba(159, 124, 28, 0.9);}
+#buscador_vuelos .menu:nth-child(3):hover{background-color:rgba(134, 134, 134, 0.9);}*/
+
+#buscador_vuelos .menu:nth-child(1),
+#buscador_vuelos .menu.selected:nth-child(1):hover{
+	background-color: rgba(31, 54, 86, 0.9);
+	color: #FFF;
+}
+
+#buscador_vuelos .menu:nth-child(2),
+#buscador_vuelos .menu.selected:nth-child(2):hover{
+	background-color: rgba(239, 170, 53, 0.9);	
+	color: #1F3656;
+}
+
+#buscador_vuelos .menu:nth-child(3)
+/*#buscador_vuelos .menu.selected:nth-child(3):hover*/{
+	background-color: rgba(175, 175, 175, 0.9);
+	color: #797979;
+	cursor: not-allowed;
+	/* ENABLED COLORS
+	background-color: #DDE0E1;	
+	color: #1F3656;*/
+}
+
+#buscador_vuelos .menu{
+	position:relative;
+	width: 150px;
+	padding: 44px 15px 2px 15px;
+}
+
+#buscador_vuelos .menu .label-prox{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #7F7F7F;
+}
+
+#buscador_vuelos .menu h1{font-size: 18px}
+#buscador_vuelos .menu h2{font-size: 18px}
+
+#buscador_vuelos .menu.selected h1{font-size: 40px}
+#buscador_vuelos .menu.selected h2{font-size: 20px}
+
+#buscador_vuelos .content{
+	height: 275px;
+	padding: 20px 0 30px 30px;
+	display: none;
+	margin: 82px 0 0 0;
+	overflow: hidden;
+}
+
+#buscador_vuelos .content.selected{display: block;}
+
+/* ESTADOS DE CAJA DE RESERVAS */
+#buscador_vuelos.expanded #reserva_vuelos{ 
+	height: 270px;
+	padding: 20px 0px 30px 30px;
+}
+
+#buscador_vuelos.collapsed #reserva_vuelos,
+#buscador_vuelos.collapsed #web_check_in,
+#buscador_vuelos.collapsed #estado_vuelo
+{ 
+	height: 0px; 
+	padding: 0px;
+}
+
+#btn_flexible_fechas {
+	top: 350px;
+	right: 180px;
+}
+
+#btn_buscar_vuelos {
+	position: relative;
+	width: 122px;
+	margin: -44px 30px 0 0;
+	float: right;
+}
+
+#reserva_vuelos{
+	background-color: rgba(31, 54, 86, 0.9);
+}
+
+#web_check_in{
+	background-color: rgba(239, 170, 53, 0.9);
+}
+
+#estado_vuelo{
+	background-color: rgba(221, 224, 225, 0.9);
+}
+
+/* --------------------------------------------------------------------------- */
+
+#web_check_in .tbl_tipo_identificacion{
+	width: 500px;
+}
+
+#web_check_in .tbl_tipo_identificacion td{
+	width: 270px;
+}
+
+#web_check_in .tbl_tipo_identificacion label{
+	color: #1F3656;
+	font-size: 15px
+}
+
+#web_check_in .tbl_tipo_identificacion input[type="radio"]{
+	float: right;
+}
+
+#web_check_in .tbl_datos{
+	float: left;
+}
+
+#web_check_in .tbl_datos label{
+	color: #FFF;
+	font-size: 15px
+}
+
+#web_check_in .tbl_indicaciones {
+	width: 200px;
+	color: #1F3656;
+	font-family: "HelveticaNeuePro";
+	margin: 0 50px 0 0;
+}
+
+#web_check_in .clock-img {
+	width:50px;
+	height: 50px;
+	background-image: url('images/textures.png');
+	background-position: -184px -317px;
+}
+
+#web_check_in .book-img {
+	width:50px;
+	height: 50px;
+	background-image: url('images/textures.png');
+	background-position: -132px -317px;
+}
+
+#web_check_in .paper-img {
+	width:50px;
+	height: 50px;
+	background-image: url('images/textures.png');
+	background-position: -693px -346px;
+}
+
+#web_check_in #btn_buscar_check_in {position: relative;}
+/* --------------------------------------------------------------------------- */
+#estado_vuelo label{
+	color: #000;
+}
+
+#estado_vuelo #btn_buscar_estado_vuelo{
+	top: 310px;
+	right: 60px;
+}
+/* --------------------------------------------------------------------------- */
+#footer_buscador_vuelos {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	font-size: 15px;
+	background-color: rgba(31, 54, 86, 0.9);
+	padding: 10px 0px 0px 10px;
+	z-index: 200;
+}
+/* --------------------------------------------------------------------------- */
+#footer_buscador_vuelos .tooltip {
+	position: absolute;
+	top: 10px;
+	height: 25px;
+	width: 25px;
+	background-color: #FFF;
+	background-repeat: no-repeat;
+	border-radius: 50px;
+	cursor: pointer;
+
+	transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+}
+
+#footer_buscador_vuelos .tooltip.animating {
+	top: -10px;
+}
+
+#footer_buscador_vuelos .tooltip:hover {
+	background-color: #EFAA35;
+	top: 2px;
+	width: 40px;
+	height: 40px;
+}
+
+#footer_buscador_vuelos #contacto_asistencia {
+	right: 30px;
+	background-image: url("images/icon_contacto_asistencia.png");
+	background-position: 3px 1px;
+	background-size: 20px;
+}
+
+#footer_buscador_vuelos #contacto_asistencia:hover {
+	right: 25px;
+	background-position: 4px 2px;
+	background-repeat: no-repeat;
+	background-size: 32px;
+}
+#footer_buscador_vuelos #contacto_asistencia .arrow { right: 28px; }
+
+#footer_buscador_vuelos #horarios {
+	right: 70px;
+	background-image:url('images/icon_horarios.png');	
+	background-position: 2px 1px;
+	background-size: 22px auto;
+}
+#footer_buscador_vuelos #horarios .arrow { right: 67px; }
+
+#footer_buscador_vuelos #horarios:hover {
+	right: 65px;
+	background-position: 4px 3px;
+	background-repeat: no-repeat;
+	background-size: 33px auto;
+}
+
+#footer_buscador_vuelos #reservas {
+	right: 110px;
+	background-image:url('images/icon_reservas.png');	
+	background-position: 2px 1px;
+	background-size: 20px;
+}
+
+#footer_buscador_vuelos #reservas .arrow { right: 108px; }
+
+#footer_buscador_vuelos #reservas:hover {
+	right: 105px;
+	background-position: 4px 3px;
+	background-repeat: no-repeat;
+	background-size: 33px auto;
+}
+
+#footer_buscador_vuelos .tooltip span {
+	position: fixed;
+	bottom: 59px;
+	right: 20px;
+	width: 230px;
+	height: 40px;
+	color: #FFF;
+	text-align: center;
+	font-size: 20px;
+	font-family: "HelveticaNeuePro";
+	line-height: 40px;
+
+	background-image: url('images/bg_footer_popup.png');
+
+	display: none;
+}
+
+#footer_buscador_vuelos .tooltip:hover span {
+	display: block;
+}
+
+#footer_buscador_vuelos .tooltip .arrow {
+	position: fixed;
+	bottom: 49px;
+	right: 28px;
+	width: 16px;
+	height: 15px;
+	background-image: url("images/arrow_footer_popup.png");
+	display: none;
+}
+
+#footer_buscador_vuelos .tooltip:hover .arrow{
+	display: block;
+}
+
+#footer_buscador_vuelos .sensor {
+	position: fixed;
+	background-color: red;
+	width: 117px;
+	height: 33px;
+	bottom: 5px;
+	right: 15px;
+	z-index: 100;
+}
+/* --------------------------------------------------------------------------- */
+#clouds{
+	position: fixed;
+	pointer-events: none;
+}
+/* --------------------------------------------------------------------------- */
+.ui-section{
+	position: relative;
+	top: 125px;
+	width: 850px;
+	margin: 0 auto;
+	
+	/*height: 300px;*/
+	z-index: 1;
+	opacity: 0;
+	display: none;
+}
+
+.ui-section.selected { 
+	opacity: 1;
+	z-index: 1000;
+	display: block;
+}
+
+.ui-section h1{
+	font-family: "HelveticaNeuePro";
+	color: #FFF;
+	padding: 0 0 40px 100px;
+	background-position: 0 -10px;
+	background-repeat: no-repeat;
+	background-size: 80px;
+	font-size: 40px;
+	margin: 0 0 0 200px;
+}
+/* --------------------------------------------------------------------------- */
+.ui-section .first-menu{
+	position: absolute;
+	min-height: 900px;
+	width: 50px;
+	background-color: rgba(31, 54, 86, 0.9);
+	padding: 25px 0 0 0;
+	margin: 130px 0 0 0;
+
+	overflow: hidden;
+
+	z-index: 100;
+
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.57);
+	-webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.57);
+	-moz-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.57);
+	-ms-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.57);
+
+	transition: width .5s, background-color .5s;
+	-moz-transition: width .5s, background-color .5s;
+	-webkit-transition: width .5s, background-color .5s;
+	-o-transition: width .5s, background-color .5s;
+	-ms-transition: width .5s, background-color .5s;
+}
+
+.ui-section .first-menu.fixed{
+	position: fixed !important;
+	top: 85px;
+	margin: 0;
+}
+
+.ui-section .first-menu:hover{
+	width: 300px;
+	background-color: #FFF;
+	z-index: 300;
+}
+
+.ui-section .first-menu > li{
+	height: 35px;
+	font-size: 20px;
+	padding: 0px 0 0 55px;
+}
+
+.ui-section .first-menu > li.selected {
+	background-color: #98BDEF;
+}
+
+.ui-section .first-menu > li > label{
+	min-width: 245px;
+	height: 100%;
+	font-family: "HelveticaNeuePro";
+	font-size: 15px;
+	line-height:39px;
+	color: #1F3656;
+	display: block;
+}
+
+.ui-section .first-menu > li.selected > label{
+	color: #FFF;
+	cursor: default;
+}
+
+.ui-section.dark .first-menu > li:not(.selected) > label { color: #A5C7F0; }
+.ui-section.dark .first-menu > li:hover:not(.selected) > label { color: #FFF;  }
+/* --------------------------------------------------------------------------- */
+.ui-section .info {
+	position: absolute;
+	top: 130px;
+	left: 1500px;
+	width: 800px;
+	min-height: 700px;
+	background-color: rgba(255, 255, 255, 0.8);
+	font-family: "HelveticaNeuePro";
+	font-size: 16px;
+	letter-spacing: 2px;
+	/*opacity: 0;*/
+	padding: 40px 0 0 0;
+}
+
+.ui-section .info.selected{ left: 50px; /*opacity: 1;*/}
+.ui-section.unique .info {
+	left:50px; 
+	width:800px;
+	opacity: 1; 
+}
+
+.ui-section .info.fixed .icon {
+	position: fixed;
+	top: 92px;
+	width: 50px;
+	height: 50px;
+	background-size: 50px auto;
+	margin: 0 0 0 300px;
+
+	z-index: 200;
+
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+}
+
+.ui-section .header{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 800px;
+	height: 100px;
+	background-color: rgba(31, 54, 86, 0.9);
+	padding: 20px 0 0 50px;
+	border-color: #1F3656;
+	border-style: solid;
+	border-width: 10px 0 0 0;
+}
+
+
+.ui-section .header-fixed {
+	position: fixed;
+	top: 0px;
+	left: 25px;
+	width: 100%;
+	height: 69px;
+	z-index: 140;
+}
+
+.ui-section .header-fixed.active { top:85px; }
+
+.ui-section .header-fixed h3 {
+	width: 800px;
+	height: 70px;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 70px;
+	color: #FFF;
+	font-size: 30px;
+	font-family: "HelveticaNeuePro";
+
+	background-color: rgba(31, 54, 86, 0.9);
+}
+
+.ui-section li.selected .header,
+.ui-section.unique .header{ 
+	opacity: 1;
+}
+
+.ui-section .header h2{
+	position: relative;
+	top: 0px;
+	color:#FFF;
+	font-size: 45px;
+	font-family: "HelveticaNeueProMd";
+	margin: 10px 0 0 0;
+}
+
+.ui-section .header.fixed h2{
+	top: -70px;
+}
+
+.ui-section .header h3{
+	color:#FFF;
+	font-size: 25px;
+	font-family: "HelveticaNeuePro";
+}
+
+.ui-section .gradient{
+	position: absolute;
+	width: 800px;
+	height: 10px;
+	background-image: url("images/gradient_bottom.png");
+	background-repeat: repeat-x;
+	background-position: 0px 0px;
+	background-size: 9px 9px;
+	opacity: 0.5;
+	top: 130px;
+	z-index: 10;
+	left: 50px;
+}
+
+.ui-section .gradient.fixed {
+	position: fixed;
+	top: 153px;
+	left: 50%;
+	margin: 0 0 0 -375px;
+
+	transition: top 0.5s cubic-bezier(0.05, -5.37, 0.25, 1) 0s;
+	-moz-transition: top 0.5s cubic-bezier(0.05, -5.37, 0.25, 1) 0s;
+	-webkit-transition: top 0.5s cubic-bezier(0.05, -5.37, 0.25, 1) 0s;
+	-o-transition: top 0.5s cubic-bezier(0.05, -5.37, 0.25, 1) 0s;
+	-ms-transition: top 0.5s cubic-bezier(0.05, -5.37, 0.25, 1) 0s;
+}
+
+/* --------------------------------------------------------------------------- */
+.ui-section .descripcion{
+	color: #212121;
+	padding: 0px 30px 30px 50px;
+	font-size: 18px;
+	font-family: "FuturaLight";
+	letter-spacing: 0px;
+	text-align: justify;
+}
+	
+.ui-section .descripcion h3{
+	width: 550px;
+	margin: 0 0 30px;
+	font-size: 50px;
+	font-family: "HelveticaNeuePro";
+	text-align: left;
+}
+
+.ui-section .descripcion strong {font-size: 25px;}
+
+.ui-section .descripcion table {margin: 0 auto 20px auto;}
+
+.ui-section .descripcion table th {
+	color: #FFF;
+	font-family: "FuturaLight";
+	font-size: 16px;
+	font-weight: 100;
+	padding: 10px;
+	text-align: center;
+	background-color: #1F3656;
+	border-style: solid;
+	border-color: #FFF;
+	border-width: 0 1px;
+}
+.ui-section .descripcion table th.small-title {font-size:11px;}
+
+.ui-section .descripcion table td.hidden{visibility: hidden;}
+.ui-section .descripcion table td {
+	color: #1F3656;
+	text-align: center;
+	background-color: #CADAE5;
+	font-size: 12px;
+	padding: 10px;
+}
+
+.ui-section .descripcion table td.table-title {
+	text-align: center;
+	background-color: transparent;
+}
+
+.ui-section .descripcion table td.table-title div{
+	width: 300px;
+	font-family: "HelveticaNeueProMd";
+	font-size: 13px;
+	font-weight: 100;
+	padding: 10px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #1F3656;
+	color: #FFF;
+}
+
+.ui-section .descripcion table.small{width:300px;}
+.ui-section .descripcion table.medium{width:500px;}
+
+
+.ui-section .descripcion .maleta {
+	width: 30px;
+	height: 30px;
+	background-image: url('images/maleta.png');
+	background-repeat: no-repeat;
+	background-size: 30px auto;
+	background-position: center;
+	margin: 0 1px;
+	display: inline-block;
+}
+
+.ui-section .descripcion .cross {
+	width: 30px;
+	height: 30px;
+	background-image: url('images/cross.png');
+	background-repeat: no-repeat;
+	background-size: 30px auto;
+	background-position: center;
+	margin: 0 1px;
+	display: inline-block;
+}
+
+.ui-section .descripcion ul {
+	margin: 10px 0;
+}
+
+.ui-section .descripcion ul li {
+	list-style-type: square;
+	line-height: 25px;
+	margin: 0 0 0 20px;
+}
+
+.ui-section .descripcion ol li {
+	list-style-type: number;
+	margin: 0 0 20px 0;
+}
+
+.ui-section .descripcion a{
+	text-decoration: underline;
+	font-size: 20px;
+	display: block;
+	margin: 10px 0px;
+	color: #1F3656;
+	font-family: "HelveticaNeueProMd";
+}
+
+.ui-section .descripcion .small-info {
+	width: 700px;
+	font-size: 11px;
+	letter-spacing: 1px;
+	background-color: rgb(218, 218, 218);
+	padding: 20px;
+	text-align: justify;
+}
+
+.ui-section .descripcion .title {
+	position: relative;
+	width: 800px;
+	height: 170px;
+	left: -50px;
+	background-color: #EFAA35;
+	margin: 0 0 20px 0;
+	cursor: pointer;
+}
+.ui-section .descripcion .title:hover{ background-color:#DD9111; }
+
+.ui-section .descripcion .desplegable.collapsed .title:hover{  background-color: #EFAA35;  }
+
+.ui-section .descripcion .desplegable.collapsed .title {
+	height: 60px;
+	margin: 0;
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.ui-section .descripcion .title .img {
+	position: absolute;
+	top: 20px;
+	left: 60px;
+	width: 125px;
+	height: 125px;
+	background-repeat: no-repeat;
+	border-radius: 200px;
+	background-size: 125px auto;
+	background-color: #DA992B;
+
+	background-image: url('images/contenidos/default_icon.png');
+
+	box-shadow: inset 1px 1px 1px #966717;
+	-webkit-box-shadow: inset 1px 1px 1px #966717;
+	-moz-box-shadow: inset 1px 1px 1px #966717;
+	-ms-box-shadow: inset 1px 1px 1px #966717;
+}
+
+
+.ui-section .descripcion .desplegable.collapsed .title .img {
+	width: 40px;
+	height: 40px;
+	background-size: 40px auto;
+	top: 10px;
+	left: 50px;
+
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-ms-box-shadow: none;
+}
+
+.ui-section .descripcion .title > h4 {
+	position: relative;
+	top: 55px;
+	left: 240px;
+	width: 540px;
+	color: #FFF;
+	font-size: 30px;
+	line-height: 30px;
+	text-align: left;
+	font-family: "HelveticaNeuePro";
+}
+
+.ui-section .descripcion .desplegable.collapsed .title > h4 {
+	top: 18px;
+	left: 120px;
+	width: 620px;
+	font-size: 20px;
+	color: #1F3656;
+}
+
+.ui-section .descripcion .desplegable.collapsed .title > h4.small { font-size: 15px; }
+
+.ui-section .descripcion .desplegable.collapsed .title:hover > h4{ color: #FFF;}
+
+.ui-section .descripcion .desplegable {
+	width: 735px;
+}
+
+.ui-section .descripcion .desplegable > h4 {
+	width: 100%;
+	background-color: #0056AF;
+	color: #FFF;
+	padding: 10px;
+	font-size: 20px;
+	margin: 20px 0;
+	height: 25px;
+	line-height: 25px;
+}
+
+.ui-section .descripcion .desplegable .content {
+	max-height: 4000px;
+	overflow: hidden;
+}
+
+.ui-section .descripcion .desplegable.collapsed .content {
+	max-height: 0px;
+}
+
+.ui-section .descripcion .desplegable .arrow {
+	position: absolute;
+	top: 15px;
+	right: 30px;
+	width: 14px;
+	height: 30px;
+	background-image: url("images/icon_arrow_white.png");
+	background-repeat: no-repeat;
+	background-size: 14px auto;
+	opacity: 0;
+
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+}
+
+.ui-section .descripcion .desplegable.collapsed .arrow {
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+
+	opacity: 1;
+}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+.ui-section .icon,
+.ui-section.unique .icon {
+	position: absolute;
+	top: -45px;
+	left: 50%;
+	width: 80px;
+	height: 80px;
+	background-color: #547BB0;
+	background-size: 80px auto;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	border-radius: 200px;
+	margin: 0 0 0 200px;
+
+	opacity: 0;
+
+	z-index: 100;
+
+	box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.29);
+	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.29);
+	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.29);
+	-ms-box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.29);
+
+	transform: rotate(-360deg);
+	-webkit-transform: rotate(-360deg);
+	-moz-transform: rotate(-360deg);
+	-ms-transform: rotate(-360deg);
+}
+
+.ui-section .info.selected .icon{opacity: 1;}
+
+.ui-section .first-menu .icon.small{
+	top: -31px;
+    left: -42px;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    opacity: 1;
+
+    background-size: 25px;
+	background-repeat: no-repeat;
+	margin: 0;
+
+	box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.29);
+	-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.29);
+	-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.29);
+	-ms-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.29);
+}
+
+.ui-section .first-menu > li.selected .icon.small{
+	box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.29);
+	-webkit-box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.29);
+	-moz-box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.29);
+	-ms-box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.29);
+}
+
+.ui-section .first-menu > li.selected .icon,
+.ui-section.unique .icon{
+	opacity: 1;
+	-webkit-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+/* --------------------------------------------------------------------------- */
+.ui-section .second-menu{
+	position: absolute;
+	left: 1500px;
+	top: -30px;
+	overflow: hidden;
+	width: 0%;
+
+	display: none; 
+	/*DEBUG*/
+}
+
+.ui-section .second-menu li{ margin: 20px 0;}
+
+.ui-section.dark .second-menu li label{color:#FFF;}
+.ui-section .second-menu li label{font-size: 25px;}
+
+.ui-section .second-menu > li{overflow: hidden;}
+
+.ui-section .second-menu > li.selected{
+	max-height: 600px;
+}
+
+.ui-section .second-menu > li:not(.selected) {
+	padding: 0;
+	max-height: 30px;
+}
+
+.ui-section .first-menu > li.selected .second-menu{ 
+	width: 100%;
+	left: 300px;
+}
+
+.ui-section .second-menu > li.selected label{display: none;}
+.ui-section .second-menu > li:not(.selected) h2{display: none;}
+.ui-section .second-menu > li:not(.selected) h3{display: none;}
+
+
+.ui-section .second-menu h2,
+.ui-section .second-menu h3{
+	color: #1F3656;
+	font-family: "HelveticaNeuePro";
+}
+
+.ui-section.dark .second-menu h2,
+.ui-section.dark .second-menu h3{
+	color: #FFF;
+}
+
+.ui-section .second-menu h2{font-size: 50px;}
+.ui-section .second-menu h3{font-size: 40px;}
+
+.ui-section .second-menu label{
+	color: #1F3656;
+	font-size: 20px;
+	font-family: "HelveticaNeuePro";
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.ui-section .second-menu label:hover{
+	color: #FFF;
+	margin: 0 0 0 15px;
+}
+
+.ui-section .second-menu .descripcion{
+	position: relative;
+	background-color: rgba(255, 255, 255, 0.53);
+	padding: 20px;
+	width: 550px;
+	font-family: "HelveticaNeuePro";
+	font-size: 20px;
+	color: #1F3656;
+	margin: 20px 0;
+	border-color: #FFF;
+	border-style: solid;
+}
+
+.ui-section .second-menu #div_preguntas_frecuentes.descripcion{
+	height: 130px;
+}
+
+.ui-section .second-menu .descripcion h4{
+	font-size: 24px;
+	font-family: "HelveticaNeueProMd";
+}
+/* --------------------------------------------------------------------------- */
+.weather-cell{width: 100px}
+.weather-info-cell .button{width: 50px;}
+/* --------------------------------------------------------------------------- */
+#btn_charter_contacto {
+	bottom: 15px;
+	right: 100px;
+}
+
+#btn_transporte_animales_cabina{
+	bottom: 20px;
+	left: 30px;
+}
+
+#btn_tranporte_animales_equipaje{
+	bottom: 20px;
+	right: 30px;
+}
+
+#btn_personal{
+	bottom: -10px;
+	right: 100px;
+}
+
+#btn_autoridades{
+	bottom: -10px;
+	left: 100px;	
+}
+/* --------------------------------------------------------------------------- */
+.dialog-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.39);
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+
+.dialog {
+	position: relative;
+	width: 700px;
+	min-height: 100px;
+	background-color: #F0F0F0;
+	color: #1F3656;
+	margin: 150px auto;
+	border-style: solid;
+	border-width: 0 0 20px 0;
+	border-color: #1F3656;
+}
+
+.btn-cerrar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 5px 5px 0 0;
+	color: #E21717;
+	cursor: pointer;
+	z-index: 100;
+}
+
+.btn-cerrar:hover {
+	text-decoration: underline;
+}
+
+.dialog-close-out{
+	position: relative;
+	width:100%;
+	height: 100%;
+	background-color: red;
+	z-index: 999;
+}
+/* --------------------------------------------------------------------------- */
+#dialog_direcciones{
+	height: 400px
+}
+
+#dialog_direcciones ul {
+	width: 300px;
+	background-color: #F0F0F0;
+	padding: 40px 0
+}
+
+#dialog_direcciones ul > li{
+	font-family: "HelveticaNeuePro";
+	font-size: 15px;
+	padding: 5px 0 5px 40px;
+	cursor: pointer;
+}
+
+#dialog_direcciones ul > li:hover{
+	background-color: #DEDEDE;
+	font-family: "HelveticaNeueProMd";
+	font-size: 16px;
+}
+
+#dialog_direcciones ul > li .info {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 400px;
+	height: 100%;
+	background-color: #DEDEDE;
+	font-family: "HelveticaNeuePro";
+	display: none;
+	z-index: 10;
+}
+
+#dialog_direcciones ul > li:hover .info{display: block;}
+
+#dialog_direcciones ul > li:hover .info {
+	padding: 50px 0 0 70px;
+	height: 350px;
+}
+/* --------------------------------------------------------------------------- */
+#dialog_info{padding: 40px;}
+
+#dialog_info h2,
+#dialog_info h3{
+	color: #1F3656;
+	font-family: "HelveticaNeuePro";
+	margin: 10px 0;
+}
+
+#dialog_info h2{font-size: 50px;}
+#dialog_info h3{font-size: 40px;}
+
+#dialog_info .descripcion{
+	position: relative;
+	font-family: "HelveticaNeuePro";
+	font-size: 20px;
+	color: #1F3656;
+	border-color: #FFF;
+	border-style: solid;
+}
+
+#dialog_info .info{
+	height: 300px;
+}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */

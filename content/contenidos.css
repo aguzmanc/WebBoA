@@ -1,0 +1,415 @@
+/* --------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------- */
+.info .img-contenido{
+	width: 200px;
+	height: 200px;
+	background-repeat: no-repeat;
+	margin: 20px auto;
+}
+
+.info .img-contenido.inlined{ 
+	float: right; 
+	margin: 10px 10px 300px 20px; 
+}
+
+/* ----------------------------------------------------- */
+/* ------------= POLITICA DE EQUIPAJE =----------------- */
+/* ----------------------------------------------------- */
+#ui_politica_equipaje .info .icon,
+#ui_politica_equipaje .first-menu li .icon { background-image: url("images/contenidos/icons_politica_equipaje.png"); }
+
+#submenu_item_equipaje_mano 		.icon{background-position: 0px 0px;}
+#submenu_item_equipaje_facturable 	.icon{background-position: 0px -25px;}
+#submenu_item_exceso_equipaje 		.icon{background-position: 0px -50px;}
+#submenu_item_equipaje_especial 	.icon{background-position: 0px -75px;}
+#submenu_item_mercancias_peligrosas .icon{background-position: 0px -100px;}
+#submenu_item_equipaje_mascotas 	.icon{background-position: 0px -125px;}
+
+#info_equipaje_mano 				.icon{background-position: 	0px 0px; }
+#info_equipaje_facturable 			.icon{background-position: 	0px -80px; }
+#info_exceso_equipaje 				.icon{background-position: 	0px -160px; }
+#info_equipaje_especial 			.icon{background-position: 	0px -240px; }
+#info_mercancias_peligrosas 		.icon{background-position: 	0px -320px; }
+#info_equipaje_mascotas 			.icon{background-position: 	0px -400px; }
+
+#info_equipaje_mano.fixed 			.icon{background-position:	0px 0px; }
+#info_equipaje_facturable.fixed 	.icon{background-position: 	0px -50px; }
+#info_exceso_equipaje.fixed 		.icon{background-position: 	0px -100px; }
+#info_equipaje_especial.fixed 		.icon{background-position: 	0px -150px; }
+#info_mercancias_peligrosas.fixed 	.icon{background-position: 	0px -200px; }
+#info_equipaje_mascotas.fixed 		.icon{background-position: 	0px -250px; }
+
+/* ---- EQUIPAJE DE MANO ---- */
+#info_equipaje_mano .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_mano.png'); }
+#info_equipaje_mano .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_mano.png'); }
+
+#subtitle_franquicia 						.title .img { background-position: 0 0;}
+#subtitle_ubicacion_equipaje 				.title .img{background-position: 0 -125px;}
+#subtitle_accesorio_personal 				.title .img{background-position: 0 -250px;}
+#subtitle_articulos_restringidos 			.title .img{background-position: 0 -375px;}
+#subtitle_liquidos_geles 					.title .img{background-position: 0 -500px;}
+#subtitle_duty_free							.title .img{background-position: 0 -625px;}
+#subtitle_equipos_electronicos				.title .img{background-position: 0 -750px;}
+
+#subtitle_franquicia.collapsed				.title .img{background-position: 0 0;}
+#subtitle_ubicacion_equipaje.collapsed 		.title .img{background-position: 0 -40px;}
+#subtitle_accesorio_personal.collapsed 		.title .img{background-position: 0 -80px;}
+#subtitle_articulos_restringidos.collapsed 	.title .img{background-position: 0 -120px;}
+#subtitle_liquidos_geles.collapsed 			.title .img{background-position: 0 -160px;}
+#subtitle_duty_free.collapsed 				.title .img{background-position: 0 -200px;}
+#subtitle_equipos_electronicos.collapsed 	.title .img{background-position: 0 -240px;}
+
+#img_equipaje_mano{ background-position: 0 0;}
+#img_franquicia_equipaje_a {width:600px;background-position:0 -200px;}
+#img_franquicia_equipaje_b {width: 650px;background-position: 0px -460px;}
+#img_ubicacion_equipaje {width: 600px;height: 302px;background-position: 0 -295px;}
+#img_accesorio_personal {width: 400px;background-position: 0px -600px;}
+#img_articulos_restringidos {width: 600px;background-position: 0px -800px;}
+#img_liquidos_geles {background-position: 0px -1000px;}
+#img_duty_free {background-position: 0px -1200px;}
+#img_equipos_electronicos {width:400px;background-position: 0px -1400px;}
+
+/* ---- EQUIPAJE FACTURABLE ---- */
+#info_equipaje_facturable .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_facturable.png'); }
+#info_equipaje_facturable .img-contenido { width:400px; background-image: url('images/contenidos/images_politica_equipaje_facturable.png'); }
+
+#subtitle_franquicia_equipaje_facturable	.title .img { background-position: 0 0; }
+#subtitle_vuelos_madrid 					.title .img { background-position: 0 -125px; }
+#subtitle_vuelos_sp_bsas_salta 				.title .img { background-position: 0 -250px; }
+#subtitle_vuelos_miami 						.title .img { background-position: 0 -375px; }
+
+#subtitle_franquicia_equipaje_facturable.collapsed 	.title .img{background-position: 0 0;}
+#subtitle_vuelos_madrid.collapsed 					.title .img{background-position: 0 -40px;}
+#subtitle_vuelos_sp_bsas_salta.collapsed 			.title .img{background-position: 0 -80px;}
+#subtitle_vuelos_miami.collapsed 					.title .img{background-position: 0 -120px;}
+
+/*#img_franquicia_equipaje_facturable_a {height: 150px;background-position: 0 -50px;}
+#img_franquicia_equipaje_facturable_b {background-position: 0 -200px;}*/
+/*#img_franquicia_facturable_madrid	  {background-position: 0 -400px;}*/
+#img_franquicia_facturable_sao_arg 	  {background-position: 0 -600px;}
+#img_franquicia_facturable_miami 	  {background-position: 0 -800px;}
+
+/* ---- EXCESO DE EQUIPAJE ---- */
+#info_exceso_equipaje .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_exceso.png'); }
+
+#subtitle_exceso_nacionales				.title .img { background-position: 0 0; }
+#subtitle_exceso_bol_desde_br_arg		.title .img { background-position: 0 0; }
+#subtitle_exceso_esp_desde_bo_br_arg 	.title .img { background-position: 0 -125px; }
+#subtitle_exceso_usa_desde_bo_br_arg 	.title .img { background-position: 0 -375px; }
+
+#subtitle_exceso_nacionales.collapsed			.title .img { background-position: 0 0; }
+#subtitle_exceso_bol_desde_br_arg.collapsed		.title .img { background-position: 0 0; }
+#subtitle_exceso_esp_desde_bo_br_arg.collapsed 	.title .img { background-position: 0 -40px; }
+#subtitle_exceso_usa_desde_bo_br_arg.collapsed 	.title .img { background-position: 0 -120px; }
+
+/* ---- EQUIPAJE ESPECIAL ---- */
+#info_equipaje_especial .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_especial.png'); }
+#info_equipaje_especial .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_especial.png'); }
+
+#subtitle_equipamiento_deportivo 				.title .img { background-position: 0 0;}
+#subtitle_instrumentos_musicales 				.title .img {background-position: 0 -125px;}
+#subtitle_equipaje_voluminoso 					.title .img {background-position: 0 -250px;}
+
+#subtitle_equipamiento_deportivo.collapsed		.title .img { background-position: 0 0;}
+#subtitle_instrumentos_musicales.collapsed 		.title .img {background-position: 0 -40px;}
+#subtitle_equipaje_voluminoso.collapsed 		.title .img {background-position: 0 -80px;}
+
+#image_equipaje_deportivo 	{background-position: 0 0;}
+#image_equipaje_musical 	{width: 280px;height: 400px;background-position: 0px -200px;}
+#image_equipaje_fragil  	{width: 280px;background-position: 0px -600px;}
+
+/* ---- MERCANCIAS PELIGROSAS ---- */
+#info_mercancias_peligrosas .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_mercancias_peligrosas.png'); }
+#info_mercancias_peligrosas .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_mercancias_peligrosas.png'); }
+
+#subtitle_lista_mercancias_peligrosas 				.title .img { background-position: 0 0;}
+#subtitle_lista_mercancias_peligrosas.collapsed		.title .img { background-position: 0 0;}
+
+#img_objetos_prohibidos {width: 600px;height:420px;margin: 0 auto; float: none;}
+
+/* ---- MASCOTAS ---- */
+#info_equipaje_mascotas .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_mascotas.png'); }
+#info_equipaje_mascotas .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_mascotas.png'); }
+
+#subtitle_mascotas_buzon 			.title .img { background-position: 0 0;}
+#subtitle_mascotas_documentacion	.title .img { background-position: 0 -125px;}
+
+#subtitle_mascotas_buzon.collapsed 			.title .img { background-position: 0 0;}
+#subtitle_mascotas_documentacion.collapsed	.title .img { background-position: 0 -40px;}
+
+#image_mascotas {background-position: 0 0;}
+#image_mascotas_braquicefalos {background-position: 0 -200px;width: 600px;height: 400px;}
+#image_mascotas_identificacion {background-position: 0 -600px;width:400px;}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+
+/* ---------------------------------------------- */
+/* ----------= LLEGAR AL AEROPUERTO =------------ */
+/* ---------------------------------------------- */
+#ui_llegar_aeropuerto .info .icon,
+#ui_llegar_aeropuerto .first-menu li .icon { background-image: url("images/contenidos/icons_llegar_aeropuerto.png"); }
+
+#submenu_item_hora_limite 			.icon{background-position: 0px 0px;}
+#submenu_item_aeropuerto_lp 		.icon{background-position: 0px -50px;}
+#submenu_item_aeropuerto_cbba 		.icon{background-position: 0px -75px;}
+#submenu_item_aeropuerto_viruviru 	.icon{background-position: 0px -25px;}
+
+#info_hora_limite 					.icon{background-position: 	0px 0px; }
+#info_aeropuerto_lp 				.icon{background-position: 	0px -160px; }
+#info_aeropuerto_cbba 				.icon{background-position: 	0px -240px; }
+#info_aeropuerto_viruviru 			.icon{background-position: 	0px -80px; }
+
+#info_hora_limite.fixed 			.icon{background-position:	0px 0px; }
+#info_aeropuerto_lp.fixed 			.icon{background-position: 	0px -100px; }
+#info_aeropuerto_cbba.fixed 		.icon{background-position: 	0px -150px; }
+#info_aeropuerto_viruviru.fixed 	.icon{background-position: 	0px -50px; }
+
+/* aeropuertos */
+#info_aeropuerto_lp 		.desplegable,
+#info_aeropuerto_cbba 		.desplegable,
+#info_aeropuerto_viruviru 	.desplegable {
+	position: relative;
+}
+
+#info_aeropuerto_lp .img-contenido,
+#info_aeropuerto_cbba .img-contenido,
+#info_aeropuerto_viruviru .img-contenido {
+	position: absolute;
+	top: 150px;
+	left: -50px;
+	background-size: 800px 800px;
+	background-position: 0 0;
+	width: 800px; height:800px;
+
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+}
+
+#ui_llegar_aeropuerto .desplegable.collapsed .img-contenido{height: 0;top: 60px;}
+
+
+
+#subtitle_mapa_lp .img-contenido {  background-image: url('images/contenidos/image_aeropuerto_lp.png'); }
+#subtitle_mapa_cbba .img-contenido { background-image: url('images/contenidos/image_aeropuerto_cbba.png'); }
+#subtitle_mapa_viruviru .img-contenido { background-image: url('images/contenidos/image_aeropuerto_viruviru.png'); }
+
+/* ----------------------------------------------------- */
+/* ------------= SERVICIOS ESPECIALES =----------------- */
+/* ----------------------------------------------------- */
+#ui_servicios_especiales .info .icon,
+#ui_servicios_especiales .first-menu li .icon { background-image: url("images/contenidos/icons_servicios_especiales.png"); }
+
+#submenu_item_menores_no_acompanados 			.icon{background-position: 0px 0px;}
+#submenu_item_pasajeros_necesidades_diferentes 	.icon{background-position: 0px -25px;}
+#submenu_item_condiciones_medicas_especiales 	.icon{background-position: 0px -50px;}
+#submenu_item_oxigeno 							.icon{background-position: 0px -75px;}
+#submenu_item_dialisis_portatil 				.icon{background-position: 0px -100px;}
+#submenu_item_bebes 							.icon{background-position: 0px -125px;}
+#submenu_item_mascota 							.icon{background-position: 0px -150px;}
+
+#info_menores_no_acompanados 			.icon{background-position: 	0px 0px; }
+#info_pasajeros_necesidades_diferentes	.icon{background-position: 	0px -80px; }
+#info_condiciones_medicas_especiales 	.icon{background-position: 	0px -160px; }
+#info_oxigeno 							.icon{background-position: 	0px -240px; }
+#info_dialisis_portatil 				.icon{background-position: 	0px -320px; }
+#info_bebes 							.icon{background-position: 	0px -400px; }
+#info_mascota 							.icon{background-position: 	0px -480px; }
+
+#info_menores_no_acompanados.fixed 				.icon{background-position:	0px 0px; }
+#info_pasajeros_necesidades_diferentes.fixed 	.icon{background-position: 	0px -50px; }
+#info_condiciones_medicas_especiales.fixed 		.icon{background-position: 	0px -100px; }
+#info_oxigeno.fixed 							.icon{background-position: 	0px -150px; }
+#info_dialisis_portatil.fixed 					.icon{background-position: 	0px -200px; }
+#info_bebes.fixed 								.icon{background-position: 	0px -250px; }
+#info_mascota.fixed 							.icon{background-position: 	0px -300px; }
+
+/* menores no acompañados */
+#info_menores_no_acompanados .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_menores_no_acompanados.png'); }
+
+#subtitle_menores_no_acompanados_nal 				.title .img {background-position: 0 0;}
+#subtitle_mna_requisitos_viajes_internacionales 	.title .img {background-position: 0 -125px;}
+#subtitle_mna_bo_arg_bra 							.title .img {background-position: 0 -250px;}
+#subtitle_mna_sud_am_a_esp_usa 						.title .img {background-position: 0 -375px;}
+#subtitle_mna_jovenes_sud_am_a_esp_usa 				.title .img {background-position: 0 -500px;}
+#subtitle_mna_auxiliar 								.title .img {background-position: 0 -625px;}
+#subtitle_mna_restricciones 						.title .img {background-position: 0 -750px;}
+#subtitle_mna_excepciones 							.title .img {background-position: 0 -875px;}
+
+#subtitle_menores_no_acompanados_nal.collapsed 				.title .img {background-position: 0 0;}
+#subtitle_mna_requisitos_viajes_internacionales.collapsed 	.title .img {background-position: 0 -40px;}
+#subtitle_mna_bo_arg_bra.collapsed 							.title .img {background-position: 0 -80px;}
+#subtitle_mna_sud_am_a_esp_usa.collapsed 					.title .img {background-position: 0 -120px;}
+#subtitle_mna_jovenes_sud_am_a_esp_usa.collapsed 			.title .img {background-position: 0 -160px;}
+#subtitle_mna_auxiliar.collapsed 							.title .img {background-position: 0 -200px;}
+#subtitle_mna_restricciones.collapsed 						.title .img {background-position: 0 -240px;}
+#subtitle_mna_excepciones.collapsed 						.title .img {background-position: 0 -280px;}
+
+/* pasajeros necesidades diferentes */
+#info_pasajeros_necesidades_diferentes .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_discapacidad.png'); }
+
+#subtitle_pnd_limitaciones 				.title .img { background-position: 0 0;}
+#subtitle_px_mov_reducida				.title .img { background-position: 0 -125px;}
+
+#subtitle_pnd_limitaciones.collapsed 	.title .img { background-position: 0 0;}
+#subtitle_px_mov_reducida.collapsed		.title .img { background-position: 0 -40px;}
+
+/* oxigeno */
+#info_oxigeno .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_oxigeno.png'); }
+
+#subtitle_concentradores_oxigeno_portatil	.title .img { background-position: 0 0;}
+#subtitle_pnd_limitaciones.collapsed 		.title .img { background-position: 0 0;}
+
+/* dialisis */
+#info_dialisis_portatil .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_dialisis.png'); }
+
+#subtitle_condiciones_seguridad_pdms .title .img { background-position: 0 0;}
+#subtitle_condiciones_seguridad_pdms.collapsed .title .img { background-position: 0 0;}
+
+/* bebes */
+#info_bebes .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_bebes.png'); }
+
+#subtitle_transporte_bebes			.title .img { background-position: 0 0;}
+#subtitle_adultos_dos_infantes		.title .img { background-position: 0 -125px;}
+
+#subtitle_transporte_bebes.collapsed 		.title .img { background-position: 0 0;}
+#subtitle_adultos_dos_infantes.collapsed	.title .img { background-position: 0 -40px;}
+
+/* mascota en cabina */
+#info_mascota .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_mascota.png'); }
+
+#subtitle_transporte_mascota_cabina			.title .img { background-position: 0 0;}
+#subtitle_transporte_mascota_cabina.collapsed 		.title .img { background-position: 0 0;}
+
+/* ----------------------------------------------------- */
+/* ------------= PASAJEROS ESPECIALES =----------------- */
+/* ----------------------------------------------------- */
+#ui_pasajeros_especiales .info .icon,
+#ui_pasajeros_especiales .first-menu li .icon { background-image: url("images/contenidos/icons_pasajeros_especiales.png"); }
+
+#submenu_item_embarazadas 			.icon{background-position: 0px 0px;}
+#submenu_item_tercera_edad 			.icon{background-position: 0px -25px;}
+#submenu_item_pasajeros_sobrepeso 	.icon{background-position: 0px -50px;}
+
+#info_embarazadas 				.icon{background-position: 	0px 0px; }
+#info_tercera_edad 				.icon{background-position: 	0px -80px; }
+#info_pasajeros_sobrepeso 		.icon{background-position: 	0px -160px; }
+
+#info_embarazadas.fixed 			.icon{background-position:	0px 0px; }
+#info_tercera_edad.fixed 			.icon{background-position: 	0px -50px; }
+#info_pasajeros_sobrepeso.fixed 	.icon{background-position: 	0px -100px; }
+
+/* mujeres embarazadas */
+#info_embarazadas .desplegable .title .img { background-image: url('images/contenidos/icons_pasajeros_especiales_embarazadas.png'); }
+#info_embarazadas .img-contenido { background-image: url('images/contenidos/images_pasajeros_especiales_embarazadas.png'); }
+
+#subtitle_gestacion_sin_complicaciones	.title .img { background-position: 0 0;}
+#subtitle_gestacion_con_riesgo			.title .img { background-position: 0 -125px;}
+
+#subtitle_gestacion_sin_complicaciones.collapsed 	.title .img { background-position: 0 0;}
+#subtitle_gestacion_con_riesgo.collapsed			.title .img { background-position: 0 -40px;}
+
+#image_gestacion_sin_complicaciones { width: 400px;height: 300px;background-position: 0px 0px; }
+#image_gestacion_con_riesgo 		{ width: 400px;background-position: 0 -400px; }
+/* -------------------------------------------- */
+/* ------------= MENU ESPECIAL =--------------- */
+/* -------------------------------------------- */
+#ui_menu_especial .info .desplegable .title .img { background-image: url('images/contenidos/icons_antes_de_viajar.png'); }
+#ui_menu_especial .info .img-contenido { background-image: url('images/contenidos/images_menu_especial.png'); }
+
+#subtitle_menu_especial 			.title .img { background-position: 0 -875px; }
+#subtitle_menu_especial.collapsed 	.title .img { background-position: 0 -280px; }
+
+#image_menu_especial {width: 400px;height: 400px;background-position: 0 0;}
+
+/* ----------------------------------------------------- */
+/* ------------= DOCUMENTACION DE VIAJE =--------------- */
+/* ----------------------------------------------------- */
+#ui_documentacion_viaje .info .desplegable .title .img { background-image: url('images/contenidos/icons_documentacion_viaje.png'); }
+
+#subtitle_documentacion_usa 		.title .img { background-position: 0 0;}
+#subtitle_documentacion_espana		.title .img { background-position: 0 -125px;}
+#subtitle_documentacion_bolivia 	.title .img { background-position: 0 -250px;}
+#subtitle_documentacion_argentina	.title .img { background-position: 0 -375px;}
+#subtitle_documentacion_brasil		.title .img { background-position: 0 -500px;}
+
+#subtitle_documentacion_usa.collapsed 		.title .img { background-position: 0 0;}
+#subtitle_documentacion_espana.collapsed	.title .img { background-position: 0 -40px;}
+#subtitle_documentacion_bolivia.collapsed	.title .img { background-position: 0 -80px;}
+#subtitle_documentacion_argentina.collapsed	.title .img { background-position: 0 -120px;}
+#subtitle_documentacion_brasil.collapsed	.title .img { background-position: 0 -160px;}
+
+/* -------------------------------------- */
+/* ------------= VACUNAS =--------------- */
+/* -------------------------------------- */
+#ui_vacunas .info .desplegable .title .img { background-image: url('images/contenidos/icons_vacunas.png'); }
+
+#subtitle_vacunas_bolivia	.title .img { background-position: 0 0; }
+#subtitle_vacunas_eeuu 		.title .img { background-position: 0 -125px; }
+#subtitle_vacunas_espana 	.title .img { background-position: 0 -250px; }
+#subtitle_vacunas_argentina .title .img { background-position: 0 -375px; }
+#subtitle_vacunas_brasil 	.title .img { background-position: 0 -500px; }
+
+#subtitle_vacunas_bolivia.collapsed		.title .img { background-position: 0 0; }
+#subtitle_vacunas_eeuu.collapsed 		.title .img { background-position: 0 -40px; }
+#subtitle_vacunas_espana.collapsed 		.title .img { background-position: 0 -80px; }
+#subtitle_vacunas_argentina.collapsed 	.title .img { background-position: 0 -120px; }
+#subtitle_vacunas_brasil.collapsed 		.title .img { background-position: 0 -160px; }
+
+/* -------------------------------------------- */
+/* ------------= NUESTRA FLOTA =--------------- */
+/* -------------------------------------------- */
+/*#ui_nuestra_flota .info .desplegable .title .img { background-image: url('images/contenidos/icons_nuestra_flota.png'); }*/
+#ui_nuestra_flota .info .img-contenido {width:400px;background-image: url('images/contenidos/images_nuestra_flota.png'); }
+
+#image_737_300_foto{background-position: 0 0;}
+#image_737_300_plano{width:280px !important;height:400px;background-position: 0 -200px;}
+#image_737_500_foto{height: 180px;background-position: 0px -620px;}
+#image_737_500_plano{width:140px !important;height:400px;background-position: 0 -800px;}
+#image_767_300_foto{background-position: 0 -1200px;}
+
+/* -------------------------------------------------- */
+/* ------------= EXPERIENCIA A BORDO =--------------- */
+/* -------------------------------------------------- */
+#ui_experiencia_bordo .info .icon,
+#ui_experiencia_bordo .first-menu li .icon { background-image: url("images/contenidos/icons_experiencia_a_bordo.png"); }
+
+#submenu_item_gastronomia 			.icon{background-position: 0px -25px;}
+
+#info_gastronomia 					.icon{background-position: 	0px -80px; }
+#info_gastronomia.fixed 			.icon{background-position:	0px -50px; }
+
+#info_gastronomia .img-contenido { background-image: url('images/contenidos/images_experiencia_bordo_gastronomia.png'); }
+
+#image_menu_destinos_nacionales					{ background-position: 0 0;}
+#image_menu_destinos_internacionales_samerica 	{ width:300px; background-position: 0 -200px;}
+#image_menu_destinos_internacionales_economica_miami 	{ width:300px; background-position: 0 -400px;}
+#image_menu_destinos_internacionales_ejecutiva_miami 	{ width:300px; background-position: 0 -600px;}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */

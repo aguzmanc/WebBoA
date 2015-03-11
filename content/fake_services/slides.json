@@ -1,0 +1,81 @@
+{
+	"success":"true",
+	"slides":[
+	{
+		"secondary_text_a":"SOS EL MOTOR",
+		"main_text":"QUE NOS IMPULSA",
+		"secondary_text_b":"BoA, LA NUESTRA, LA DE TODOS",
+		"url":"content\/fake_services\/slides\/motor.jpg",
+		"text_valign" : "bottom"
+	},
+	{
+		"secondary_text_a":"CELEBRAMOS NUESTROS",
+		"main_text":"6 A&Ntilde;OS",
+		"secondary_text_b":"DE OPERACIONES",
+		"url":"content\/fake_services\/slides\/aniversario.jpg",
+		"text_valign" : "top"
+	},
+	{
+		"secondary_text_a":"VIVE BUENOS AIRES",
+		"main_text":"DESDE<br>USD 411",
+		"secondary_text_b":"CON LOS VUELOS AZULES",
+		"url":"content\/fake_services\/slides\/baires.jpg",
+		"text_valign" : "bottom"
+	},
+	{
+		"secondary_text_a":"DISFRUTA DE<br>SAO PAULO",
+		"main_text":"DESDE<br>USD 420",
+		"secondary_text_b":"CON LOS VUELOS AZULES",
+		"url":"content\/fake_services\/slides\/brasil.jpg",
+		"text_valign" : "top"
+	},
+	{
+		"secondary_text_a":"MADRID M&Aacute;GICO",
+		"main_text":"DESDE<br>USD 916",
+		"secondary_text_b":"CON LOS VUELOS AZULES",
+		"url":"content\/fake_services\/slides\/madrid.jpg",
+		"text_valign" : "bottom"
+	},
+	{
+		"secondary_text_a":"TRABAJAMOS PARA AYUDARTE",
+		"main_text":"A CUMPLIR TUS SUE&Ntilde;OS",
+		"secondary_text_b":"BoA, LA NUESTRA, LA DE TODOS",
+		"url":"content\/fake_services\/slides\/ninho.jpg",
+		"text_valign" : "bottom"
+	},
+	{
+		"secondary_text_a":"DESCUENTO EN NUESTRAS TARIFAS",
+		"main_text":"DE HASTA 50%",
+		"secondary_text_b":"SUJETOS A DISPONIBILIDAD",
+		"url":"content\/fake_services\/slides\/outlet.jpg",
+		"text_valign" : "bottom"
+	},
+	{
+		"secondary_text_a":"TU FAMILIA",
+		"main_text":"TE ESPERA EN BOLIVIA",
+		"secondary_text_b":"VIS&Iacute;TALOS",
+		"url":"content\/fake_services\/slides\/familia.jpg",
+		"text_valign" : "bottom"
+	},
+	{
+		"secondary_text_a":"VIAJA A BOLIVIA CON",
+		"main_text":"2 EQUIPAJES DE 23 KG",
+		"secondary_text_b":"CADA UNO",
+		"url":"content\/fake_services\/slides\/maletas.jpg",
+		"text_valign" : "middle"
+	},
+	{
+		"secondary_text_a":"VEN A CONOCER LA CIUDAD MARAVILLA",
+		"main_text":"DESDE<br>USD 550",
+		"secondary_text_b":"IDA Y VUELTA DESDE MIAMI",
+		"url":"content\/fake_services\/slides\/lapaz.jpg",
+		"text_valign" : "top"
+	},
+	{
+		"secondary_text_a":"EL ENCANTO DE SANTA CRUZ",
+		"main_text":"DESDE<br>USD 550",
+		"secondary_text_b":"IDA Y VUELTA DESDE MIAMI",
+		"url":"content\/fake_services\/slides\/santacruz.jpg",
+		"text_valign" : "bottom"
+	}
+]}

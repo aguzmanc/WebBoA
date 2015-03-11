@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+
+/*
+ * Reset Styles
+ */
+
+
+:focus 
+{ 
+	outline: 0;
+}
+ 
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, ul, li, form
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+body 
+{
+	background: white;
+    color: #474747;
+    font: normal 13px/20px Helvetica;
+	line-height: 1;
+}
+
+ol, ul 
+{ 
+	list-style: none; 
+}
+
+a 
+{ 
+	text-decoration: none;
+}
+
+input, button, img
+{
+	border: none;
+}
+
+textarea
+{
+	resize: none;
+}
+
+.clearfix
+{
+	clear: both;
+	line-height: 0px;
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+.center{
+	text-align:center;
+}
+
+.main-appFB{
+    height:auto;	
+    width: 720px;
+}
+
+.h-20{
+	height:20px;
+}
+
+.h-200{
+	height:200px;
+}
+
+.h-220{
+	height:220px;
+}
+
+.h-270{
+	height:270px;
+}
+
+.h-150{
+	height:150px;
+}
+
+/* --- [END Reset Styles] --- */
