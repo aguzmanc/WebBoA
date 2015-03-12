@@ -1554,6 +1554,17 @@ header .att-div{
 	color: #FFF;
 }
 
+.ui-section .descripcion table td.table-title div.clock {
+	height: 50px;
+	background-image: url("images/icon_clock.png");
+	background-size: 40px;
+	background-repeat: no-repeat;
+	background-position: 10px;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: right;
+}
+
 .ui-section .descripcion table.small{width:300px;}
 .ui-section .descripcion table.medium{width:500px;}
 

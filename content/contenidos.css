@@ -60,15 +60,21 @@
 #subtitle_duty_free.collapsed 				.title .img{background-position: 0 -200px;}
 #subtitle_equipos_electronicos.collapsed 	.title .img{background-position: 0 -240px;}
 
-#img_equipaje_mano{ background-position: 0 0;}
+#img_equipaje_mano{ width: 400px;height: 400px;background-position: 0 0;}
 #img_franquicia_equipaje_a {width:600px;background-position:0 -200px;}
 #img_franquicia_equipaje_b {width: 650px;background-position: 0px -460px;}
-#img_ubicacion_equipaje {width: 600px;height: 302px;background-position: 0 -295px;}
-#img_accesorio_personal {width: 400px;background-position: 0px -600px;}
-#img_articulos_restringidos {width: 600px;background-position: 0px -800px;}
-#img_liquidos_geles {background-position: 0px -1000px;}
-#img_duty_free {background-position: 0px -1200px;}
-#img_equipos_electronicos {width:400px;background-position: 0px -1400px;}
+#img_ubicacion_equipaje {width: 600px;height: 302px;background-position: 0 -400px;}
+#img_accesorio_personal {width: 200px;height: 400px;background-position: 0px -800px;}
+
+#img_articulos_restringidos_herramientas{width: 100px;height: 100px;background-position: 0 -600px;background-size: 400px;}
+#img_articulos_restringidos_armas{width: 100px;height: 100px;background-position: -100px -600px;background-size: 400px;}
+#img_articulos_restringidos_contundentes{width: 100px;height: 100px;background-position: -200px -600px;background-size: 400px;}
+#img_articulos_restringidos_punzantes{width: 100px;height: 100px;background-position: -300px -600px;background-size: 400px;}
+
+
+#img_liquidos_geles {background-position: 0px -1400px;width: 300px;height: 400px;}
+#img_duty_free {width: 400px;height: 398px;background-position: 0px -1800px;}
+#img_equipos_electronicos {width: 600px;background-position: 0px -2200px;}
 
 /* ---- EQUIPAJE FACTURABLE ---- */
 #info_equipaje_facturable .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_facturable.png'); }
@@ -115,22 +121,29 @@
 #subtitle_instrumentos_musicales.collapsed 		.title .img {background-position: 0 -40px;}
 #subtitle_equipaje_voluminoso.collapsed 		.title .img {background-position: 0 -80px;}
 
-#image_equipaje_deportivo 	{background-position: 0 0;}
-#image_equipaje_musical 	{width: 280px;height: 400px;background-position: 0px -200px;}
-#image_equipaje_fragil  	{width: 280px;background-position: 0px -600px;}
+#image_equipaje_deportivo 	{width: 400px;height: 400px;margin: 0;background-position: 0px 0px;}
+#image_equipaje_musical 	{width: 400px;height: 600px;background-position: 0px -400px;margin: 0;}
+#image_equipaje_fragil  	{width: 600px;height: 400px;background-position: 0px -1000px;}
 
 /* ---- MERCANCIAS PELIGROSAS ---- */
 #info_mercancias_peligrosas .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_mercancias_peligrosas.png'); }
-#info_mercancias_peligrosas .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_mercancias_peligrosas.png'); }
+#info_mercancias_peligrosas .img-contenido { width:100px;height:100px; background-image: url('images/contenidos/images_politica_equipaje_mercancias_peligrosas.png'); }
 
 #subtitle_lista_mercancias_peligrosas 				.title .img { background-position: 0 0;}
 #subtitle_lista_mercancias_peligrosas.collapsed		.title .img { background-position: 0 0;}
 
-#img_objetos_prohibidos {width: 600px;height:420px;margin: 0 auto; float: none;}
+#img_obj_prohi_explosivos {			background-position: 0 0;}
+#img_obj_prohi_comprimidos {		background-position: -100px 0;}
+#img_obj_prohi_liq_inflamables {	background-position: -200px 0;}
+#img_obj_prohi_sol_inflamables {	background-position: 0 -100px;}
+#img_obj_prohi_venenos {			background-position: -100px -100px}
+#img_obj_prohi_radioactivos {		background-position: -200px -100px}
+#img_obj_prohi_corrosivos {			background-position: 0 -200px;}
+#img_obj_prohi_baterias {			background-position: -100px -200px;}
 
 /* ---- MASCOTAS ---- */
 #info_equipaje_mascotas .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_mascotas.png'); }
-#info_equipaje_mascotas .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_mascotas.png'); }
+#info_equipaje_mascotas .img-contenido {background-image: url('images/contenidos/images_politica_equipaje_mascotas.png'); }
 
 #subtitle_mascotas_buzon 			.title .img { background-position: 0 0;}
 #subtitle_mascotas_documentacion	.title .img { background-position: 0 -125px;}
@@ -138,8 +151,9 @@
 #subtitle_mascotas_buzon.collapsed 			.title .img { background-position: 0 0;}
 #subtitle_mascotas_documentacion.collapsed	.title .img { background-position: 0 -40px;}
 
-#image_mascotas {background-position: 0 0;}
-#image_mascotas_braquicefalos {background-position: 0 -200px;width: 600px;height: 400px;}
+#image_mascotas { width: 400px; height: 400px; background-position: 0 0;}
+#image_no_dogs{background-position: 0 -400px;}
+#image_no_cats{background-position: -200px -400px;}
 #image_mascotas_identificacion {background-position: 0 -600px;width:400px;}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
@@ -164,6 +178,14 @@
 #info_aeropuerto_lp.fixed 			.icon{background-position: 	0px -100px; }
 #info_aeropuerto_cbba.fixed 		.icon{background-position: 	0px -150px; }
 #info_aeropuerto_viruviru.fixed 	.icon{background-position: 	0px -50px; }
+
+#info_hora_limite .desplegable .title .img { background-image: url('images/contenidos/icons_llegar_aeropuerto_hora_limite.png'); }
+
+#subtitle_porque_en_hora_nacionales 		.title .img { background-position: 0 0;}
+#subtitle_porque_en_hora_internacionales	.title .img { background-position: 0 -125px;}
+
+#subtitle_porque_en_hora_nacionales.collapsed 		.title .img { background-position: 0 0;}
+#subtitle_porque_en_hora_internacionales.collapsed	.title .img { background-position: 0 -40px;}
 
 /* aeropuertos */
 #info_aeropuerto_lp 		.desplegable,
