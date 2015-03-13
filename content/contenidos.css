@@ -213,11 +213,13 @@
 
 #ui_llegar_aeropuerto .desplegable.collapsed .img-contenido{height: 0;top: 60px;}
 
-
-
 #subtitle_mapa_lp .img-contenido {  background-image: url('images/contenidos/image_aeropuerto_lp.png'); }
 #subtitle_mapa_cbba .img-contenido { background-image: url('images/contenidos/image_aeropuerto_cbba.png'); }
 #subtitle_mapa_viruviru .img-contenido { background-image: url('images/contenidos/image_aeropuerto_viruviru.png'); }
+
+#subtitle_mapa_lp .title .img,
+#subtitle_mapa_cbba .title .img,
+#subtitle_mapa_viruviru .title .img {background-image: url('images/contenidos/icon_map.png');}
 
 /* ----------------------------------------------------- */
 /* ------------= SERVICIOS ESPECIALES =----------------- */
@@ -278,6 +280,15 @@
 
 #subtitle_pnd_limitaciones.collapsed 	.title .img { background-position: 0 0;}
 #subtitle_px_mov_reducida.collapsed		.title .img { background-position: 0 -40px;}
+
+/* condiciones medicas especiales */
+#info_condiciones_medicas_especiales .desplegable .title .img {background-image: url('images/contenidos/icons_servicios_especiales_cond_medicas_esp.png');}
+
+#subtitle_condiciones_med_requieren_atencion 				.title .img { background-position: 0 0;}
+#subtitle_condiciones_med_requieren_certificado				.title .img { background-position: 0 -125px;}
+
+#subtitle_condiciones_med_requieren_atencion.collapsed 		.title .img { background-position: 0 0;}
+#subtitle_condiciones_med_requieren_certificado.collapsed	.title .img { background-position: 0 -40px;}
 
 /* oxigeno */
 #info_oxigeno .desplegable .title .img { background-image: url('images/contenidos/icons_servicios_especiales_oxigeno.png'); }
