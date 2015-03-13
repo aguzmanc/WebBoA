@@ -46,8 +46,7 @@ $(document).on('ready',function()
 	// $("header > ul > li").click(set_main_state);
 	postprocess_header_links();
 
-	$(".secondary-menu li").click(click_menu_item);
-	$(".secondary-menu li a").click(function(ev){ev.preventDefault();});
+	$(".secondary-menu li a").click(click_menu_item);
 
 	$(".ui-section .first-menu > li").click(click_first_menu);
 
@@ -196,44 +195,85 @@ function set_main_state()
 	$("#ui_" + section).show()
 }
 // ---------------------= =---------------------
-function click_menu_item()
+function click_menu_item(ev)
 {
-	if($(this).hasClass("disabled")) return;
-	
-	var item = $(this).data("item")
-	var is_link = $(this).data("is_link");
-	var is_action = $(this).data("is_action");
+	ev.preventDefault();
+
+	var href = $(this).attr("href");
+	var btn = $("#btn_redirect");
+	var li = this.parentNode;
+	var isLink = $(li).data("is_link");
+	var action = $(li).data("action");
+
+	// redirects if is direct link
+	if(isLink) {
+		btn.attr("target","_blank");
+		btn.attr("href",href);
+		btn[0].click();
+		return;
+	}
+
+	if(action=="none") return;
+
+	var item = $(li).data("item");
 
 	// hides menu when clicked
 	$(".secondary-menu-container").css("display","none");
 	setTimeout(function(){$(".secondary-menu-container").attr("style","");},200);
 
-	if(typeof is_link !== 'undefined'){
-		var url = $(this).data("url");
-		redirect(url);
-		return;
-	}
-
-	$(".ui-section").removeClass("selected"); 
-
+	// set sky state
 	var sky_state = $(this.parentNode).data("sky");
 	if(typeof sky_state === 'undefined')
 		sky_state = "afternoon";
 	sky.changeState(sky_state);
 
-	if($(this).hasClass("primary")){
-		var ui_section = $("#ui_" + item);
-		ui_section.addClass("selected");
-		if(false == ui_section.hasClass("unique"))
-			$("#ui_" + item + " .first-menu li:first-child").click();
+	var primary = "";
+	var isPrimary = $(li).hasClass("primary");
+
+	// search for primary data item
+	if(isPrimary)
+		primary = item;
+	else{
+		// buscando primario
+		do {
+			var prev = $(li).prev();
+			if(prev.length==0){
+				console.log("ERROR, PRIMARIO DE ITEM NO ENCONTRADO");
+				return;
+			}
+
+			li = prev[0];
+		} while(false == $(li).hasClass("primary"));
+
+		primary =  $(li).data("item");
+	}
+
+	var qs_primary = location.queryString['primary'];
+	if(qs_primary == null)
+		qs_primary = "politica_equipaje";
+
+	href = INFO_PAGE_LINK_ADDRESS;
+	btn.attr("target","_top");
+
+	if(isPrimary){
+		if(primary == qs_primary) 
+			$("#ui_" + primary + " .first-menu li:first-child").click();
 		else{
-			;
-			// $("#ui_" + item + " .descripcion").mCustomScrollbar("destroy");
-			// $("#ui_" + item + " .descripcion").mCustomScrollbar({theme:"dark-thick",autoHideScrollbar:true,scrollButtons:{enable:true}});
+			href = href + "?primary=" + primary;
+			btn.attr("href",href);
+			btn[0].click();
+			return;
+		}
+	}else {
+		if(primary == qs_primary)
+			$("#ui_" + primary + " .first-menu li#submenu_item_" + item).click();
+		else{
+			href = href + "?primary=" + primary + "&item=" + item;
+			btn.attr("href",href);
+			btn[0].click();
+			return;
 		}
 	}
-	else 
-		$("#submenu_item_" + item).click();
 }
 // ---------------------= =---------------------
 var first_menu_data = {

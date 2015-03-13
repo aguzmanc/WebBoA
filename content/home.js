@@ -95,6 +95,7 @@ function click_menu_item_from_home(ev)
 	var action = $(li).data("action");
 
 	if(isLink) {
+		btn.attr("target","_blank");
 		btn.attr("href",href);
 		btn[0].click();
 		return;
