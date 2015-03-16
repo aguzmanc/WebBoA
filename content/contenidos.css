@@ -8,11 +8,6 @@
 	margin: 20px auto;
 }
 
-.info .img-contenido.inlined{ 
-	float: right; 
-	margin: 10px 10px 300px 20px; 
-}
-
 /* ----------------------------------------------------- */
 /* ------------= POLITICA DE EQUIPAJE =----------------- */
 /* ----------------------------------------------------- */
@@ -63,7 +58,7 @@
 #img_equipaje_mano{ width: 400px;height: 400px;background-position: 0 0;}
 #img_franquicia_equipaje_a {width:600px;background-position:0 -200px;}
 #img_franquicia_equipaje_b {width: 650px;background-position: 0px -460px;}
-#img_ubicacion_equipaje {width: 600px;height: 302px;background-position: 0 -400px;}
+#img_ubicacion_equipaje {width: 600px; height: 302px;background-position: 0px -348px;background-size: 700px;}
 #img_accesorio_personal {width: 200px;height: 400px;background-position: 0px -800px;}
 
 #img_articulos_restringidos_herramientas{width: 100px;height: 100px;background-position: 0 -600px;background-size: 400px;}
@@ -78,7 +73,6 @@
 
 /* ---- EQUIPAJE FACTURABLE ---- */
 #info_equipaje_facturable .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_facturable.png'); }
-#info_equipaje_facturable .img-contenido { width:400px; background-image: url('images/contenidos/images_politica_equipaje_facturable.png'); }
 
 #subtitle_franquicia_equipaje_facturable	.title .img { background-position: 0 0; }
 #subtitle_vuelos_madrid 					.title .img { background-position: 0 -125px; }
@@ -89,12 +83,6 @@
 #subtitle_vuelos_madrid.collapsed 					.title .img{background-position: 0 -40px;}
 #subtitle_vuelos_sp_bsas_salta.collapsed 			.title .img{background-position: 0 -80px;}
 #subtitle_vuelos_miami.collapsed 					.title .img{background-position: 0 -120px;}
-
-/*#img_franquicia_equipaje_facturable_a {height: 150px;background-position: 0 -50px;}
-#img_franquicia_equipaje_facturable_b {background-position: 0 -200px;}*/
-/*#img_franquicia_facturable_madrid	  {background-position: 0 -400px;}*/
-#img_franquicia_facturable_sao_arg 	  {background-position: 0 -600px;}
-#img_franquicia_facturable_miami 	  {background-position: 0 -800px;}
 
 /* ---- EXCESO DE EQUIPAJE ---- */
 #info_exceso_equipaje .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_exceso.png'); }
@@ -209,6 +197,12 @@
 	-webkit-transition: all 0.5s;
 	-o-transition: all 0.5s;
 	-ms-transition: all 0.5s;
+}
+
+#info_aeropuerto_lp 		.descripcion,
+#info_aeropuerto_cbba 		.descripcion,
+#info_aeropuerto_viruviru 	.descripcion {
+	height: 1400px;
 }
 
 #ui_llegar_aeropuerto .desplegable.collapsed .img-contenido{height: 0;top: 60px;}

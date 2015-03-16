@@ -311,10 +311,9 @@ function click_first_menu(ev)
 		$(t.parentNode.parentNode).addClass("selected");
 		$(t.parentNode.parentNode).find(".first-menu > li").removeClass("selected");
 		$(t).addClass("selected");		
+		// $(t.parentNode).css("width","50px");
 
-		$(t.parentNode).css("width","50px");
-
-		setTimeout(function(){$(first_menu_data.node.parentNode).css("width","");},550); // trick to avoid width value holding
+		//setTimeout(function(){$(first_menu_data.node.parentNode).css("width","");},550); // trick to avoid width value holding
 	},timeToCollapse);
 }
 // ---------------------= =---------------------
