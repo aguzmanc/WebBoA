@@ -221,7 +221,7 @@
 					</table>
 				</div>
 			</li>
-			<li id="menu_item_somos_boa" style="display:none">
+			<li id="menu_item_somos_boa">
 				<span>SOMOS BoA</span>
 				<div class="shadow-margin-left"></div>
 				<div class="shadow-margin-right"></div>
@@ -230,10 +230,10 @@
 					<table cellpadding="0" cellspacing="0">
 						<tr>
 							<td valign="top">
-								<ul class="secondary-menu">
-									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
-									<li data-item="">Secundario A</li>
-									<li data-item="">Secundario B</li>
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary disabled" data-item="perfil_corporativo"><div class="icon"></div>PERFIL CORPORATIVO</li>
+									<li class="primary disabled" data-item="liderazgo_corporativo"><div class="icon"></div>LIDERAZGO CORPORATIVO</li>
+									<li class="primary" data-item="somos_iosa"><div class="icon"></div>SOMOS IOSA</li>
 								</ul>
 							</td>
 						</tr>
@@ -2355,32 +2355,6 @@
 		</div>
 	</div> <!-- <<< UI VACUNAS >>> -->
 
-	<!-- UI DERECHOS DE LOS PASAJEROS -->
-	<div id="ui_derechos_pasajeros" class="ui-section">
-		<div class="gradient"></div>
-		<ul class="first-menu">
-			<li id="submenu_item_contrato_transporte" class="selected" data-info="contrato_transporte">
-				<label>Contrato de Transporte</label>
-				<div class="header">
-					<h3>CONTRATO DE</h3>
-					<h2>TRANSPORTE</h2>
-				</div>
-				<div class="icon"></div>
-				<div class="icon small"></div>
-				<div id="info_contrato_transporte" class="info selected">
-					<div class="descripcion">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div> <!-- <<< UI DERECHOS DE LOS PASAJEROS >>> -->
-
 	<!-- UI NUESTRA FLOTA -->
 	<div id="ui_nuestra_flota" class="ui-section unique">
 		<div class="gradient"></div>
@@ -2491,419 +2465,110 @@
 		</div>
 	</div> <!-- <<< UI EXPERIENCIA A BORDO >>> -->
 
-	<!-- DIALOGOS -->
-	<div class="dialog-overlay" style="display:none">
-		<div class="dialog" id="dialog_direcciones" style="display:none">
-			<div class="btn-cerrar">CERRAR X</div>
-			<ul>
-				<li>Cobija
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Calle Ernesto Nishikawa # 50 entre Bahia y Antofagasta</strong><br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (3) 8424820</strong><br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes de 08:00 a 12:00<br>&nbsp;&nbsp;&nbsp;y de 15:00 a 18:30<br>
-						S&aacute;bado de 09:00 a 12:30</strong>
-					</div>
-				</li>
-				<li>La Paz
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Av. Camacho N°1413 Esq. Loayza</strong>
-						<br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (2) 2117993</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 18:30</strong><br>
-						<strong>S&aacute;bado 9:00 a 12:00</strong>
-						<br><br><br>
-						Direcci&oacute;n:<br>
-						<strong>Av. Claudio Aliaga 1367 esq. Gabriel Ren&eacute; Moreno</strong>
-						<br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (2) 2124310 – 591 (2) 2124326</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
-						<strong>S&aacute;bado 9:00 a 12:00</strong>
-					</div>
-				</li>
-				<li>Cochabamba
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Calle Jord&aacute;n N° 202 esq. Nataniel Aguirre</strong>
-						<br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (4) 4140873</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 19:00</strong><br>
-						<strong>S&aacute;bado 9:00 a 12:30</strong>
-						<br><br><br>
-						Direcci&oacute;n:<br>
-						<strong>Av. Sim&oacute;n L&oacute;n Nro 1582</strong>
-						<br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (4) 4114614 – 591 (4) 4142858</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 9:00 a 13:00<br>&nbsp;&nbsp;&nbsp;y de 15:00 a 18:30</strong><br>
-						<strong>S&aacute;bado 9:00 a 13:00</strong>
-					</div>
-				</li>
-				<li class="selected">Santa Cruz
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Las Torres Aventura local 25 (segundo anillo Av. Cristóbal de Mendoza entre calle Orton y Av. Trinidad)</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
-						<strong>S&aacute;bado 9:00 a 13:00</strong>
-						<br><br><br>
-						Direcci&oacute;n:<br>
-						<strong>Av. Trompillo esq. Monseñor Santiesteban Edif. Seven Center Oficina 6</strong>
-						<br><br>
-						Tel&eacute;fonos:<br>
-						<strong>591 (3) 3121343 – 591 (3) 3116247</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
-						<strong>S&aacute;bado 9:00 a 13:00</strong>
-					</div>
-				</li>
-				<li>Tarija
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Calle General Trigo N°327 entre Virginio Lema y Alejandro del Carpio</strong>
-						<br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (4) 6111389</strong>
-						<br><br>
-						FAX:<br>
-						<strong>6654004 - 6112787</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
-						<strong>S&aacute;bado de 9:00 a 12:00</strong>
-					</div>
-				</li>
-				<li>Sucre
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Calle Audiencia # 21</strong>
-						<br><br>
-						Tel&eacute;fono:<br>
-						<strong>591 (4) 6912360</strong>
-						<br><br>
-						Horarios de Atenci&oacute;n<br>
-						<strong>Lunes a Viernes 8:30 a 12:30<br>&nbsp;&nbsp;&nbsp;y de 14:30 a 18:30</strong><br>
-						<strong>S&aacute;bado de 8:30 a 12:30</strong>
-					</div>
-				</li>
-				<li>Trinidad
-					<div class="info">
-						Direcci&oacute;n:<br>
-						<strong>Calle sucre esq. Av. C. Arce. Zona Central Distrito 1</strong><br><br>
-					</div>
-				</li>
-				
-			</ul>
+	<!-- UI SOMOS IOSA -->
+	<div id="ui_somos_iosa" class="ui-section unique">
+		<div class="gradient"></div>
+		<div class="header">
+			<h3>SOMOS</h3>
+			<h2>IOSA</h2>
 		</div>
-		<div id="dialog_info" class="dialog">
-			<div class="btn-cerrar">CERRAR X</div>
-			<div class="info" id="impuestos_salida">
-				<h3>Impuesto de Salidas al</h3>
-				<h2>Exterior ISAE</h2>
-				<div class="descripcion">
-					Es el impuesto de salidas al exterior, el pago de 40.37 USD es obligatorio para
-					todos los bolivianos y ciudadanos extranjeros con m&aacute;s de 3 meses de permanencia
-					en el pa&iacute;s, excepto para los diplom&aacute;ticos acreditados en la canciller&iacute;a de la rep&uacute;blica.
-					<br><br>
-					Ya viene inclu&iacute;do en el boleto.
-				</div>
-			</div>
-			<div class="info" id="migracion">
-				<h3>Migraci&oacute;n</h3>
-				<div class="descripcion">
-					Porta siempre tus documentos de Identificaci&oacute;n personal actualizados y vigentes como  DNI (cedula de identidad) y/o la presentaci&oacute;n del Pasaporte cuando viajas a otros pa&iacute;ses.   
-					<br><br>
-					En ciertos pa&iacute;ses se exige la presentaci&oacute;n de otros documentos para ingresar a su territorio tales como Visado y Certificados de Sanidad.
-				</div>
-			</div>
-			<div class="info" id="documentacion_menores">
-				<h3>Documentaci&oacute;n para</h3>
-				<h2>menores</h2>
-				<div class="descripcion">
-					Seg&uacute;n las normas bolivianas, los menores que realicen un viaje deber&aacute;n
-					contar con la debida autorizaci&oacute;n de sus padres o apoderados adem&aacute;s de tener a mano un permiso especial de viaje. 
-					<br><br>
-					Todo menor de 12 a&ntilde;os que no estuviese acompa&ntilde;ado y salga de la ciudad
-					donde vive a cualquier destino  de Bolivia. 
-					<br><br>
-					Todo menor de 18 a&ntilde;os que salga del pa&iacute;s y no estuviese acompa&ntilde;ado por sus padres o al menos  uno de ellos.
-				</div>
-			</div>
-			<div class="info" id="check_in">
-				<h3>Acerca del</h3>
-				<h2>Check-in</h2>
-				<div class="descripcion">
-					Para hacer check-in debes presentarte en los mostradores del aeropuerto una(1) hora
-					antes en vuelos nacionales y 2 horas antes para vuelos internacionales, y presentar
-					los documentos necesarios dependiendo el vuelo.
-					<br>
-					Puedes acelerar el proceso haciendo web check-in y elegir tu asiento pero recuerda estar en los horarios establecidos para el embarque.
-					<br><br><br>
-					<div id="btn_go_to_check_in" class="button">WEB CHECK-IN</div>
-				</div>
-			</div>
-			<div class="info" id="contrato_transporte">
-				<h3>Contrato de</h3>
-				<h2>transporte</h2>
-				<div class="descripcion">
-					&iquest;Tienes alguna duda legal?
-					<br>
-					Te dejamos el contrato de transporte en un formato c&oacute;modo para que puedas
-					llevarlo c&oacute;modamente.<br><br>
-					<div id="btn_contrato_transporte" class="button">BAJAR CONTRATO</div>
-					<br><br>
-				</div>
-			</div>
-			<div class="info" id="tercera_edad">
-				<h3>Tercera</h3>
-				<h2>edad</h2>
-				<div class="descripcion">
-					Las personas mayores de 60 a&ntilde;os deben portar los documentos de identidad: Cedula de identidad, pasaporte y que:
-					<br><br>
-					-Se encuentren en condiciones de viajar solos. <br>
-					-Cuenten con un acompa&ntilde;ante en caso de viajar solos.  
-					<br><br>
-					Para vuelos nacionales los pasajeros de la tercera edad tienen un descuento del 40%.
-				</div>
-			</div>
-			<div class="info" id="capacidades_disminuidas">
-				<h3>Personas con capacidades</h3>
-				<h2>disminuidas</h2>
-				<div class="descripcion">
-					<strong>Autosufientes:</strong> Cuando son capaces de comunicarse y comprender las instrucciones de Tripulaci&oacute;n y/o una vez a bordo pueden atender sus necesidades en forma independiente.
-					<br><br>
-					<strong>No autosufientes:</strong> Los que no son capaces de comunicarse y comprender las instrucciones de tripulación y/o  requieren asistencia para atender sus necesidades de alimentación, higiene y/o fisiológicas; y aquellos que requieren de un acompañante que lo asista durante el vuelo personalmente.
-				</div>
-			</div>
-			<div class="info" id="mujeres_embarazadas">
-				<h3>Mujeres</h3>
-				<h2>embarazadas</h2>
-				<div class="descripcion">
-					Por normativa se aceptan pasajeras embarazadas.
-					<br><br>
-					<ul>
-						<li>
-							Hasta la <strong>28va</strong> semana de gestaci&oacute;n<br>
-							&nbsp;&nbsp;&nbsp;-Formulario  Pasajera en Gestaci&oacute;n
-							<br><br>
-						</li>
-						<li>
-							Hasta la <strong>34va</strong> semana de gestaci&oacute;n<br>
-							&nbsp;&nbsp;&nbsp;-Certificado M&eacute;dico de Ginec&oacute;logo Obstetra.<br>
-							&nbsp;&nbsp;&nbsp;-Formulario Pasajera en Gestaci&oacute;n.
-							<br><br>
-						</li>
-						<li>
-							Hasta 1 semana <strong>ANTES</strong> del parto<br>	
-							&nbsp;&nbsp;&nbsp;-Acompa&ntilde;ada de un m&eacute;dico responsable<br>
-							&nbsp;&nbsp;&nbsp;-Formulario  Pasajera en Gestaci&oacute;n
-							<br><br>
-						</li>
-						<li>
-							En la <strong>&Uacute;LTIMA</strong> semana de gestaci&oacute;n.<br>
-							&nbsp;&nbsp;&nbsp;- <strong>NO PODRÁN viajar</strong>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="info" id="pasajeros_adolescentes">
-				<h3>Pasajeros</h3>
-				<h2>adolescentes</h2>
-				<div class="descripcion">
-					Son pasajeros no acompa&ntilde;ados entre los 15 y 18 a&ntilde;os que la familia solicita un tipo de asistencia especial.  
-					<br><br>
-					El servicio se constituir&aacute; en que un funcionario de la compa&ntilde;&iacute;a lo asista durante el embarque, conexi&oacute;n y arribo del vuelo por un costo extra adicional.
-				</div>
-			</div>
-			<div class="info" id="menores_no_acompanados">
-				<h3>Menores</h3>
-				<h2>NO acompa&ntilde;ados</h2>
-				<div class="descripcion">
-					Posibilita que los ni&ntilde;os solos en circunstancias reguladas puedan ser trasportados.
-					<br><br>
-					Cobraremos un pequeño cargo por el suministro de servicio
-					<br><br>
-					<strong>VER CONDICIONES</strong>
-					<br><br>
-					<strong>5-8 años:</strong> Los ni&ntilde;os de 5 a&ntilde;os en adelante pueden ser trasportados &uacute;nicamente en vuelos directos sin escalas o en los que el viaje se realice en el mismo avi&oacute;n.
-					<br><br>
-					<strong>8-14 años:</strong> Los menores deben tener entre 8 y 14 a&ntilde;os de edad para viajar en itinerarios que requieran una conexi&oacute;n en BoA. La aerol&iacute;nea no embarcar&aacute; ni&ntilde;os no acompañados (UMNR) cuando sus itinerarios incluyen una conexi&oacute;n hacia / desde otra aerol&iacute;nea, incluyendo los socios de codeshare (c&oacute;digo compartido).
-					<br><br>
-					<strong>15-17 años:</strong> Los menores entre 15 y 17 a&ntilde;os se consideran adultos j&oacute;venes y no necesitan utilizar el servicio para menores que viajan solos. Sin embargo, el servicio para “menores no acompa&ntilde;ados” est&aacute; a su disposici&oacute;n a solicitud del cliente, aplicando las disposiciones vigentes de la l&iacute;nea a&eacute;rea.
-				</div>
-			</div>
-			<div class="info" id="menores_acompanados">
-				<h3>Menores</h3>
-				<h2>Acompa&ntilde;ados</h2>
-				<div class="descripcion">
-					Los pasajeros que tengan de 8 d&iacute;as a 12 a&ntilde;os de edad ser&aacute;n trasportados siempre que viajen acompa&ntilde;ados por un pasajero mayor de edad presentando certificado de nacimiento.  
-					<br><br>
-					Reci&eacute;n nacidos hasta los 7 días no podr&aacute;n ser transportados.
-				</div>
-			</div>
-			<div class="info" id="equipaje_mano">
-				<h3>Equipaje de</h3>
-				<h2>mano</h2>
-				<div class="descripcion">
-					El peso no debe exceder de 7 kilos y la suma de sus dimensiones (largo + ancho + altura) no debe exceder los 115 cm., incluidas las ruedas, correas, etc.
-					<br>
-					Cada pasajero podr&aacute; llevar como m&aacute;ximo un equipaje de mano y un art&iacute;culo personal.
-				</div>
-			</div>
-			<div class="info" id="equipaje_gratuito">
-				<h3>Equipaje</h3>
-				<h2>gratuito</h2>
-				<div class="descripcion">
-					Se puede llevar hasta 20 kilos de equipaje para adulto y 20 kilos de equipaje para menor para rutas nacionales y para rutas internacionales hasta 30 kilos de equipaje para adulto y 30 Kilos para menor.  
-					<br><br>
-					El exceso de equipaje se debe cancelar seg&uacute;n los convenios vigentes con los pa&iacute;ses de destino.
-				</div>
-			</div>
-			<div class="info" id="restricciones_equipaje">
-				<h3>Restricciones de</h3>
-				<h2>equipaje</h2>
-				<div class="descripcion">
-					Por su naturaleza, algunos objetos no pueden ser transportados en el equipaje. Te presentamos un listado general de los objetos y si tienes alguna pregunta, no dudes en consultarnos
-				</div>
-			</div>
-			<div class="info" id="calidad_producto">
-				<h3>Calidad del</h3>
-				<h2>producto</h2>
-				<div class="descripcion">
-					En BoA nos preocupamos por brindarte el mejor servicio a bordo por lo que todos nuestros productos son frescos y elaborados con el mayor de los cuidados.
-				</div>
-			</div>
-			<div class="info" id="menu_internacional">
-				<h3>Men&uacute;</h3>
-				<h2>internacional</h2>
-				<div class="descripcion">
-					Los vuelos internacionales son largos y por eso te proponemos un men&uacute; de alimentos que est&eacute; acorde a los horarios, visita el link para verlo a detalle.
-					<br><br><br>
-					<div id="btn_download_menu_internacional" class="button">DESCARGAR MEN&Uacute;</div>
-					<br>
-				</div>
-			</div>
-			<div class="info" id="opciones_alimenticias">
-				<h3>Opciones</h3>
-				<h2>alimenticias</h2>
-				<div class="descripcion">
-					Nos preocupa tu bienestar, por lo tanto en nuestro men&uacute; tenemos opciones que se adec&uacute;an a tus necesidades, av&iacute;sanos al momento de realizar la reserva/compra del boleto si tienes alguna alergia, o si tienes alg&uacute;n estilo de alimentaci&oacute;n espec&iacute;fico.
-				</div>
-			</div>
-			<div class="info" id="destinos_nacionales">
-				<h3>Destinos nacionales</h3>
-				<div class="descripcion">
-					Tu destino tiene muchos lugares que visitar y actividades que realizar, aseg&uacute;rate de llevar lo necesario con las condiciones climáticas de la semana.
-					<br>
-					<table>
-						<tr>
-							<th>CBBA</th>
-							<th>SCZ</th>
-							<th>LPZ</th>
-							<th>SUCRE</th>
-							<th>TJA</th>
-							<th>TRI</th>
-							<th>COBIJA</th>
-						</tr>
-						<tr id="row_destinos_nacionales">
-							<!-- INSERT NATIONAL WEATHER INFO HERE -->
-						</tr>
-					</table>
-					<div id="btn_info_turismo_bolivia" class="button">M&Aacute;S INFO</div>
-					<br>
-				</div>
-			</div>
-			<div class="info" id="destinos_internacionales">
-				<h3>Destinos internacionales</h3>
-				<div class="descripcion">
-					Tu destino tiene muchos lugares que visitar y actividades que realizar, 
-					aseg&uacute;rate de llevar lo necesario con las condiciones clim&aacute;ticas de la semana
-					<br>
-					<table style="margin:0 auto">
-						<tr>
-							<th>MADRID</th>
-							<th>SALTA</th>
-							<th>BS. AS.</th>
-							<th>SAO PAULO</th>
-							<th>MIAMI</th>
-						</tr>
-						<tr id="row_destinos_internacionales">
-							<!-- INSERT INTERNATIONAL WEATHER INFO HERE -->
-						</tr>
-						<tr>
-							<td class="weather-info-cell">
-								<div id="btn_info_madrid" class="button">M&Aacute;S INFO</div>
-							</td>
-							<td class="weather-info-cell">
-								<div id="btn_info_salta" class="button">M&Aacute;S INFO</div>
-							</td>
-							<td class="weather-info-cell">
-								<div id="btn_info_bs_as" class="button">M&Aacute;S INFO</div>
-							</td>
-							<td class="weather-info-cell">
-								<div id="btn_info_sao_paulo" class="button">M&Aacute;S INFO</div>
-							</td>
-							<td class="weather-info-cell">
-								<div id="btn_info_miami" class="button">M&Aacute;S INFO</div>
-							</td>
-						</tr>
-					</table>
-				</div>
+		<div class="header-fixed">
+			<h3 class="for-fixed">SOMOS IOSA</h3>
+		</div>
+		<ul class="first-menu"></ul>
+		<div class="info">
+			<div class="descripcion">
+				<strong>&iquest;Qu&eacute; es IOSA?</strong><br>
+			    El programa IOSA (<i>IATA Operational Safety Audit</i>) es el est&aacute;ndar de Calidad y Seguridad Operacional m&aacute;s estricto de la industria aeron&aacute;utica, ya que est&aacute; fundamentado en normas de la OACI (<i>Organizaci&oacute;n de Aviaci&oacute;n Civil Internacional</i>). Estas normas generan una modalidad de evaluaci&oacute;n que permite garantizar un alto est&aacute;ndar de
+			    seguridad en las operaciones. Las aerol&iacute;neas deben someterse a profundas auditor&iacute;as cada dos a&ntilde;os para renovar sus certificaciones.
+			    <br><br>
+				<strong>Nuestra primera certificaci&oacute;n.</strong>
+				<br>
+			    En junio de 2012 iniciamos el trabajo para que Boliviana de Aviaci&oacute;n obtenga la certificaci&oacute;n IOSA, bajo la gu&iacute;a de la empresa BRIPSA en coordinaci&oacute;n con un equipo conformado para lograr este nuevo objetivo, se adecuaron los procedimientos y procesos existentes, a los par&aacute;metros de seguridad operacional de la industria aeron&aacute;utica internacional.
+			    <br><br>
+			    Tras seis meses de arduo trabajo, el 7 de diciembre de 2012 la empresa francesa Quali Audit realiz&oacute; la auditor&iacute;a y logramos la certificaci&oacute;n, gracias al compromiso de toda la familia BoA, convencida de que la seguridad operacional es el &uacute;nico valor que nos permitir&aacute; estar entre las mejores l&iacute;neas &aacute;reas de la regi&oacute;n y del mundo.
+			    <br><br>
+				<strong>Nuestra Re – certificaci&oacute;n IOSA.</strong>
+				<br>
+				En agosto de 2014, se inici&oacute; un nuevo reto, la re-certificaci&oacute;n, para esto se conform&oacute;un comit&eacute; IOSA,
+			    veinticinco personas trabajando para que el resultado de esta auditor&iacute;a sea un &eacute;xito para nuestra empresa. El reto entonces consist&iacute;a en demostrar que todos los procesos y procedimientos implementados en 2012 ya eran parte de un Sistema de Gesti&oacute;n de Calidad y Seguridad Operacional, mostrando madurez por parte de Boliviana de Aviaci&oacute;n, en la cultura de seguridad integral.
+			    <br><br>
+			    Este proceso no pudo llegar en mejor momento, ya que el 7 de diciembre de 2014 renovamos nuestra certificaci&oacute;n IOSA, incluyendo la operaci&oacute;n de nuestras naves Boeing 767 300 ER, en las nuestras rutas Miami y Madrid.
+			    <br><br>
+				<strong>Cambios profundos.</strong>
+				<br>
+			    Para la certificaci&oacute;n y re-certificaci&oacute;n se realizaron cambios profundos, se ha generado una Gesti&oacute;n Administrativa de Calidad y Seguridad Operacional, ya que implementamos un Sistema de Gesti&oacute;n de Seguridad, que sobrepasa los requerimientos de las regulaciones nacionales, porque a trav&eacute;s de diferentes procedimientos eliminamos o por lo menos mitigamos los peligros y por consiguiente los riesgos que podr&iacute;an amenazar nuestras operaciones.
+			    <br><br>
+				<strong>Los principales retos.</strong>
+				<br>
+			    Si bien obtener la certificaci&oacute;n y re-certificar ha sido un gran reto para la empresa, mostrar una continuidad y mantener este nivel de compromiso con los m&aacute;s altos niveles de seguridad de la industria a trav&eacute;s de IOSA es el mayor reto dentro de nuestra compa&ntilde;&iacute;a, por algo somos la &uacute;nica aerol&iacute;nea boliviana que tiene esta certificaci&oacute;n.
+			    <br><br>
+			    <div style="padding: 10px;border: 3px solid #000;">
+				    <strong>
+				        &laquo;This child restraint system conforms to all applicable Federal Motor Vehicle Safety Standars (FMVSS 213), THIS RESTRAINT IS CERTIFIED FOR USE IN MOTOR VEHICLES AND AIRCRAFT.&raquo;
+				    </strong>
+			    </div>
 				<br><br>
+				<div id="subtitle_politica_gerenciamiento" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">POL&Iacute;TICA DE GERENCIAMIENTO</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+				        El equipo Gerencial de Boliviana de Aviaci&oacute;n est&aacute; enfocado en establecer todos sus sistemas operativos y administrativos, y mejorarlo de forma continua en funci&oacute;n de la seguridad (<i>Safety &amp; Security</i>) como el objetivo y medio dentro de la actividad aerocomercial. Con este fin Boliviana de Aviaci&oacute;n se compromete a:
+				        <br><br>
+					    <ol>
+					        <li>Revisar regularmente el rendimiento del sistema en base a indicadores establecidos por la Alta Gerencia.</li>
+					        <li>An&aacute;lisis Peri&oacute;dico de los resultados operacionales no deseados.</li>
+					        <li>Seguimiento de las acciones correctivas y su efectividad para la mejora del rendimiento operacional.</li>
+					    </ol>
+					    <br>
+				        La prestaci&oacute;n de nuestros servicios en el Marco de la Pol&iacute;tica General de la Empresa, ser&aacute; facilitada por el equipo Gerencial en un marco de relaci&oacute;n colaborativa, proactiva y comprendida de todos los miembros de
+				        Boliviana de Aviaci&oacute;n.
+				        <br><br>
+				        As&iacute; mismo, el personal de toda la organizaci&oacute;n debe cumplir sus responsabilidades ajust&aacute;ndose a las regulaciones y los procedimientos en los Manuales aplicables.
+						<br><br>
+			    	</div>
+			    </div>
+
+			    <div id="subtitle_politica_no_punitiva" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">POL&Iacute;TICA NO PUNITIVA</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+			    		<ul>
+			    			<li>La responsabilidad por la seguridad operacional y la seguridad de la aviaci&oacute;n tiene car&aacute;cter transversal general en Boliviana de Aviaci&oacute;n y por tanto, condiciona cada funci&oacute;n asignada a personal administrativo y operativo de nuestra empresa y de Empresas asociadas.</li>
+			    			<li>En el marco de responsabilidad general, es imperativo que todos los funcionarios de Boliviana de Aviaci&oacute;n y colaboradores de la empresa asociadas notifiquen sin temor, cualquier condici&oacute;n, incidente o suceso que pueda comprometer la seguridad de nuestras operaciones, de las instalaciones o la integridad f&iacute;sica del personal involucrado. Estas notificaciones NO SER&aacute;N objeto de represalia.</li>
+			    			<li>La presente pol&iacute;tica asegura a los funcionarios de Boliviana de Aviaci&oacute;n que la notificaci&oacute;n de errores accidentales o no premeditados no resultar&aacute; en acciones disciplinarias o punitivas contra las personas involucradas, a menos que, por supuesto, dichos errores sean el resultado de actividades ilegales, dolo u otras acciones maliciosas, de acuerdo a lo definido por la empresa. La identidad de cualquier funcionario que informa un error no ser&aacute; revelada, salvo si el mismo o la ley lo autoriza.</li>
+			    			<li>Se insta a todo el personal a utilizar los mecanismos de Manual de Gerenciamiento de Seguridad y Calidad (MQS) para ayudar a que Boliviana de Aviaci&oacute;n mejore continuamente la seguridad, mediante una actitud informativa proactiva y comprometida.</li>
+			    		</ul>
+			    	</div>
+			    </div>
+			    <div id="subtitle_politica_de_personal" class="desplegable">
+			        <div class="title">
+			        	<div class="img"></div>
+			    		<h4 class="small">POL&Iacute;TICA DE PERSONAL</h4>
+			    		<div class="arrow"></div>
+			    	</div>
+			    	<div class="content">
+					  	Dondequiera que sean conducidas las operaciones de Boliviana de Aviaci&oacute;n el personal involucrado, deber&aacute;:
+					  	<br>
+					    <ol>
+					        <li>Desempe&ntilde;arse seg&uacute;n los procedimientos establecidos en los manuales aprobados de Empresa, cumplir con la normativa aplicable y el Est&aacute;ndar IOSA.</li>
+					        <li>Reporta a su Gerencia, Jefatura o al responsable inmediato las necesidades de mejora en el sistema de gesti&oacute;n o el manual operacional del &aacute;rea.</li>
+					        <li>Comprometerse con la cultura de seguridad operacional y la seguridad de la aviaci&oacute;n (<i>Safety &amp;Security</i>)</li>
+					        <li>Asegurar la continuidad de las tareas pertinentes en su &aacute;rea en caso de ausencia temporal mediante la delegaci&oacute;n de funciones no de responsabilidades.</li>
+					        <li>Aceptar la responsabilidad de su propio comportamiento y rendir cuentas del mismo.</li>
+					        <li>Participar Coactivamente en el dise&ntilde;o de normas y procedimientos</li>
+					    </ol>
+			    	</div>
+			    </div>
 			</div>
-			<div class="info" id="quienes_somos">
-				<h3>Quienes</h3>
-				<h2>somos</h2>
-				<div class="descripcion">	
-					El 24 de Octubre de 2007, mediante el <strong>Decreto Supremo Nº 29318</strong> se crea la Empresa P&uacute;blica Nacional Estratégica Boliviana de Aviación – BoA, como una persona jur&iacute;dica de derecho p&uacute;blico; duración indefinida; patrimonio propio; autonom&iacute;a de gesti&oacute;n administrativa, financiera, legal y t&eacute;cnica, bajo tuici&oacute;n del Ministerio de Obras P&uacute;blicas, Servicios y Vivienda.
-					<br><br>
-					As&iacute; nacimos y cada a&ntilde;o crecemos buscando brindar un mayor y mejor servicio para todos, generando trabajo, ampliando nuestras rutas manteniendo precios competitivos en el mercado, elevando el nombre de Bolivia en lo alto  y velando por que tu experiencia con nosotros sea inolvidable, BoA es la empresa de aviaci&oacute;n de los bolivianos por los bolivianos y para los bolivianos, BoA nuestra, la de todos.
-				</div>
-			</div>
-			<div class="info" id="mision_vision">
-				<h3>Misi&oacute;n y</h3>
-				<h2>visi&oacute;n</h2>
-				<div class="descripcion">
-					<strong>Misión</strong><br>
-					<em>
-						&quot;Brindar servicio integral de transporte aerocomercial de alcance nacional e internacional con calidad, seguridad, y gestión empresarial transparente&quot;.
-					</em>
-					<br><br>
-					<strong>Visi&oacute;n</strong><br>
-					<em>
-						&quot;Boliviana de Aviaci&oacute;n contribuir&aacute; significativamente a la consecuci&oacute;n de los objetivos estrat&eacute;gicos del pa&iacute;s y al bienestar de los bolivianos, a trav&eacute;s de servicios aeron&aacute;uticos de calidad reconocida&quot;.
-					</em>
-				</div>
-			</div>
-			<div class="info" id="el_personal">
-				<h3></h3>
-				<h2>El personal</h2>
-				<div class="descripcion">
-					En Boliviana de Aviaci&oacute;n queremos a nuestros clientes y por eso estamos orgullosos de presentarte al equipo que nos hace ser quienes somos:
-					<br><br><br>
-					<div id="btn_autoridades" class="button">Autoridades</div>
-					<div id="btn_personal" class="button">Personal</div>
-				</div>
-			</div>
-		</div> <!-- dialog_info -->
-		<!-- <div class="dialog-close-out"></div> -->
-	</div> <!-- dialog-overlay -->
+		</div>
+	</div> <!-- <<< UI VACUNAS >>> -->
 
 	<a id="btn_redirect" href="#" target="_blank" style="display:none"></a>
 </body>

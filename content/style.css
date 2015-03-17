@@ -1304,7 +1304,7 @@ header .att-div{
 /* --------------------------------------------------------------------------- */
 .ui-section .first-menu{
 	position: absolute;
-	width: 250px;
+	width: 200px;
 	min-height: 900px;
 	padding: 40px 0 0 0;
 	margin: 130px 0 0 0;
@@ -1326,18 +1326,18 @@ header .att-div{
 	-ms-transition: width .5s, background-color .5s;
 }
 
+.ui-section.unique .first-menu {width:50px;}
+
 .ui-section .first-menu.fixed{
 	position: fixed !important;
 	top: 85px;
 	margin: 0;
 }
 
-.ui-section .first-menu:hover{
-	
-}
 
-.ui-section .first-menu > li{
-	height: 35px;
+.ui-section .first-menu > li {
+	min-height: 40px;
+	position: relative;
 	font-size: 20px;
 	padding: 0px 0 0 40px;
 }
@@ -1347,13 +1347,13 @@ header .att-div{
 }
 
 .ui-section .first-menu > li > label{
-	min-width: 245px;
 	height: 100%;
-	font-family: "HelveticaNeuePro";
-	font-size: 13px;
-	line-height:39px;
+	font-family: "FuturaMedium";
+	font-size: 16px;
 	color: #1F3656;
 	display: block;
+	width: 130px;
+	padding: 10px 0px 5px 10px;
 }
 
 .ui-section .first-menu > li.selected > label{
@@ -1367,7 +1367,7 @@ header .att-div{
 	position: absolute;
 	top: 130px;
 	left: 1500px;
-	width: 600px;
+	width: 650px;
 	min-height: 700px;
 	background-color: rgba(255, 255, 255, 0.8);
 	font-family: "HelveticaNeuePro";
@@ -1377,7 +1377,7 @@ header .att-div{
 	padding: 40px 0 0 0;
 }
 
-.ui-section .info.selected{ left: 250px; /*opacity: 1;*/}
+.ui-section .info.selected{ left: 200px;}
 .ui-section.unique .info {
 	left: 50px; 
 	width: 800px;
@@ -1502,7 +1502,8 @@ header .att-div{
 	overflow: hidden;
 }
 
-.info.selected .descripcion{ max-height: 9999px; }
+.info.selected .descripcion,
+.ui-section.unique .descripcion{ max-height: 9999px; }
 	
 .ui-section .descripcion h3{
 	width: 540px;
@@ -1628,13 +1629,16 @@ header .att-div{
 
 .ui-section .descripcion .title {
 	position: relative;
-	width: 600px;
+	width: 650px;
 	height: 170px;
 	left: -50px;
 	background-color: #EFAA35;
 	margin: 0 0 20px 0;
 	cursor: pointer;
 }
+
+.ui-section.unique .descripcion .title{ width:800px;}
+
 .ui-section .descripcion .title:hover{ background-color:#DD9111; }
 
 .ui-section .descripcion .desplegable.collapsed .title:hover{  background-color: #EFAA35;  }
@@ -1702,9 +1706,9 @@ header .att-div{
 
 .ui-section .descripcion .desplegable.collapsed .title:hover > h4{ color: #FFF;}
 
-.ui-section .descripcion .desplegable {
-	width: 535px;
-}
+.ui-section .descripcion .desplegable { width: 585px;}
+
+.ui-section.unique .descripcion .desplegable{width: 700px;}
 
 .ui-section .descripcion .desplegable > h4 {
 	width: 100%;
@@ -1785,9 +1789,9 @@ header .att-div{
 .ui-section .info.selected .icon{opacity: 1;}
 
 .ui-section .first-menu .icon.small{
-	top: -31px;
-    left: -30px;
-    position: relative;
+	top: 10px;
+    left: 10px;
+    position: absolute;
     width: 25px;
     height: 25px;
     opacity: 1;
