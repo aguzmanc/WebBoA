@@ -434,13 +434,18 @@ header .att-div{
 .secondary-menu li[data-item='cabinas'] 		 	 .icon{ background-position: 0px -80px; }
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
+#menu_item_somos_boa .secondary-menu .primary .icon {
+	background-image: url("images/contenidos/icons_somos_boa.png");
+}
+
+.secondary-menu li[data-item='perfil_corporativo']		.icon{ background-position: 0px 0px; }
+.secondary-menu li[data-item='somos_iosa']				.icon{ background-position: 0px -20px; }
+.secondary-menu li[data-item='reconocimientos_premios'] .icon{ background-position: 0px -40px; }
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
 #menu_item_planifica .secondary-menu .primary .icon {
 	background-image: url("images/contenidos/icons_planifica_tu_viaje.png");
 }
-
-.secondary-menu li:nth-child(1)		.icon{ background-position: 0px 0px; }
-.secondary-menu li:nth-child(2) 	.icon{ background-position: 0px -20px; }
-.secondary-menu li:nth-child(3) 	.icon{ background-position: 0px -40px; }
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 #sec_menu {

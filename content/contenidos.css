@@ -339,8 +339,8 @@
 #subtitle_gestacion_sin_complicaciones.collapsed 	.title .img { background-position: 0 0;}
 #subtitle_gestacion_con_riesgo.collapsed			.title .img { background-position: 0 -40px;}
 
-#image_gestacion_sin_complicaciones { width: 400px;height: 300px;background-position: 0px 0px; }
-#image_gestacion_con_riesgo 		{ width: 400px;background-position: 0 -400px; }
+#image_gestacion_sin_complicaciones { width: 600px; height: 670px; background-position: 0px 0px; }
+#image_gestacion_con_riesgo 		{ width: 400px; height: 400px;background-position: 0px -800px; }
 /* -------------------------------------------- */
 /* ------------= MENU ESPECIAL =--------------- */
 /* -------------------------------------------- */
@@ -390,13 +390,15 @@
 /* ------------= NUESTRA FLOTA =--------------- */
 /* -------------------------------------------- */
 /*#ui_nuestra_flota .info .desplegable .title .img { background-image: url('images/contenidos/icons_nuestra_flota.png'); }*/
-#ui_nuestra_flota .info .img-contenido {width:400px;background-image: url('images/contenidos/images_nuestra_flota.png'); }
+#ui_nuestra_flota .info .img-contenido {background-image: url("images/contenidos/images_nuestra_flota.png");}
 
-#image_737_300_foto{background-position: 0 0;}
-#image_737_300_plano{width:280px !important;height:400px;background-position: 0 -200px;}
-#image_737_500_foto{height: 180px;background-position: 0px -620px;}
-#image_737_500_plano{width:140px !important;height:400px;background-position: 0 -800px;}
-#image_767_300_foto{background-position: 0 -1200px;}
+#image_737_300_foto{position: relative;left: -50px;width: 800px;height: 300px;background-position:0 0;}
+#image_737_300_plano{width: 600px;height: 400px;background-position: 0px -400px;}
+#image_737_500_foto{position: relative;left: -50px;width: 800px;height: 400px;background-position: 0 -800px;}
+#image_737_500_plano{width: 550px;height: 200px;background-position: 0px -1200px;}
+#image_737_700ng_plano{position: relative;left: -50px;width: 800px;height: 200px;background-position: 0 -1400px;}
+#image_737_700ng_asiento{width:600px;height:400px;background-position: 0 -1600px;}
+#image_767_300_foto{position: relative;left: -25px;width: 800px;height: 300px;background-position: 0 -2020px;}
 
 /* -------------------------------------------------- */
 /* ------------= EXPERIENCIA A BORDO =--------------- */
@@ -415,7 +417,20 @@
 #image_menu_destinos_internacionales_samerica 	{ width:300px; background-position: 0 -200px;}
 #image_menu_destinos_internacionales_economica_miami 	{ width:300px; background-position: 0 -400px;}
 #image_menu_destinos_internacionales_ejecutiva_miami 	{ width:300px; background-position: 0 -600px;}
-/* --------------------------------------------------------------------------- */
+
+/* -------------------------------------------------- */
+/* ------------= SOMOS IOSA =--------------- */
+/* -------------------------------------------------- */
+
+#ui_somos_iosa .info .desplegable .title .img { background-image: url('images/contenidos/icons_somos_iosa.png'); }
+
+#subtitle_politica_gerenciamiento 			.title .img { background-position: 0 0;}
+#subtitle_politica_no_punitiva 				.title .img{background-position: 0 -125px;}
+#subtitle_politica_de_personal 				.title .img{background-position: 0 -250px;}
+
+#subtitle_politica_gerenciamiento.collapsed		.title .img{background-position: 0 0;}
+#subtitle_politica_no_punitiva.collapsed 		.title .img{background-position: 0 -40px;}
+#subtitle_politica_de_personal.collapsed 		.title .img{background-position: 0 -80px;}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
