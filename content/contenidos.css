@@ -418,9 +418,15 @@
 #image_menu_destinos_internacionales_economica_miami 	{ width:300px; background-position: 0 -400px;}
 #image_menu_destinos_internacionales_ejecutiva_miami 	{ width:300px; background-position: 0 -600px;}
 
-/* -------------------------------------------------- */
+/* ------------------------------------------------- */
+/* ------------= PERFIL CORPORATIVO =--------------- */
+/* ------------------------------------------------- */
+#ui_perfil_corporativo .info .img-contenido {background-image: url("images/contenidos/images_perfil_corporativo.png");}
+
+#image_mision_vision { width:700px; height:665px; background-position: 0 0;}
+/* ----------------------------------------- */
 /* ------------= SOMOS IOSA =--------------- */
-/* -------------------------------------------------- */
+/* ----------------------------------------- */
 
 #ui_somos_iosa .info .desplegable .title .img { background-image: url('images/contenidos/icons_somos_iosa.png'); }
 
