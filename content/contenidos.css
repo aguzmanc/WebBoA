@@ -437,7 +437,22 @@
 #subtitle_politica_gerenciamiento.collapsed		.title .img{background-position: 0 0;}
 #subtitle_politica_no_punitiva.collapsed 		.title .img{background-position: 0 -40px;}
 #subtitle_politica_de_personal.collapsed 		.title .img{background-position: 0 -80px;}
-/* --------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------- */
+/* ------------= RECONOCIMIENTOS Y PREMIOS =---------------- */
+/* ---------------------------------------------------------- */
+#ui_reconocimientos_premios .info .img-contenido {width: 125px;height: 125px;background-image: url("images/contenidos/image_reconocimientos_premios.png");}
+
+
+#image_premio_merito_social{		background-position: 0 0;}
+#image_premio_trabajo_liderazgo{	background-position: 0 -125px;}
+#image_premio_empresa_del_year{		background-position: 0 -250px;}
+#image_premio_apoyo_solidario{		background-position: 0 -375px;}
+#image_premio_apoyo_cultura{		background-position: 0 -500px;}
+#image_premio_merito_social{		background-position: 0 -625px;}
+#image_premio_huesped_ilustre{		background-position: 0 -750px;}
+#image_premio_merco_bolivia{		background-position: 0 -875px;}
+
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

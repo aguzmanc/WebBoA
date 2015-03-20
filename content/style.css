@@ -1337,6 +1337,11 @@ header .att-div{
 	position: fixed !important;
 	top: 85px;
 	margin: 0;
+
+	box-shadow: 4px 70px 4px rgba(0, 0, 0, 0.57);
+	-webkit-box-shadow: 4px 70px 4px rgba(0, 0, 0, 0.57);
+	-moz-box-shadow: 4px 70px 4px rgba(0, 0, 0, 0.57);
+	-ms-box-shadow: 4px 70px 4px rgba(0, 0, 0, 0.57);
 }
 
 
@@ -1551,12 +1556,12 @@ header .att-div{
 }
 
 .ui-section .descripcion table td.table-title div{
-	width: 300px;
-	font-family: "HelveticaNeueProMd";
-	font-size: 13px;
+	width: 80%;
+	font-family: "FuturaLight";
+	font-size: 18px;
 	font-weight: 100;
 	padding: 10px;
-	margin: 0 auto;
+	margin: 0px auto;
 	text-align: center;
 	background-color: #1F3656;
 	color: #FFF;
