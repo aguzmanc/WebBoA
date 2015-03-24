@@ -1,11 +1,21 @@
 /* --------------------------------------------------------------------------- */
-
 /* --------------------------------------------------------------------------- */
 .info .img-contenido{
 	width: 200px;
 	height: 200px;
 	background-repeat: no-repeat;
 	margin: 20px auto;
+}
+
+.info .with-aligned-images{min-height: 200px;}
+
+.info .with-aligned-images .img-contenido{
+	margin: 0 10px 0 0;
+	float: left;
+}
+
+.info .with-aligned-images .paragraph {
+	margin: 0px 0px 0px 210px;
 }
 
 /* ----------------------------------------------------- */
@@ -55,7 +65,7 @@
 #subtitle_duty_free.collapsed 				.title .img{background-position: 0 -200px;}
 #subtitle_equipos_electronicos.collapsed 	.title .img{background-position: 0 -240px;}
 
-#img_equipaje_mano{ width: 400px;height: 400px;background-position: 0 0;}
+#img_equipaje_mano{ width: 200px;height: 250px;background-position: 0 0;}
 #img_franquicia_equipaje_a {width:600px;background-position:0 -200px;}
 #img_franquicia_equipaje_b {width: 650px;background-position: 0px -460px;}
 #img_ubicacion_equipaje {width: 600px; height: 302px;background-position: 0px -348px;background-size: 700px;}
@@ -67,9 +77,9 @@
 #img_articulos_restringidos_punzantes{width: 100px;height: 100px;background-position: -300px -600px;background-size: 400px;}
 
 
-#img_liquidos_geles {background-position: 0px -1400px;width: 300px;height: 400px;}
-#img_duty_free {width: 400px;height: 398px;background-position: 0px -1800px;}
-#img_equipos_electronicos {width: 600px;background-position: 0px -2200px;}
+#img_liquidos_geles {background-position: 0px -1400px;width: 200px;height: 280px;}
+#img_duty_free {background-position: 0px -1800px;}
+#img_equipos_electronicos {background-position: 0px -2000px;height: 300px;}
 
 /* ---- EQUIPAJE FACTURABLE ---- */
 #info_equipaje_facturable .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_facturable.png'); }
@@ -109,9 +119,9 @@
 #subtitle_instrumentos_musicales.collapsed 		.title .img {background-position: 0 -40px;}
 #subtitle_equipaje_voluminoso.collapsed 		.title .img {background-position: 0 -80px;}
 
-#image_equipaje_deportivo 	{width: 400px;height: 400px;margin: 0;background-position: 0px 0px;}
-#image_equipaje_musical 	{width: 400px;height: 600px;background-position: 0px -400px;margin: 0;}
-#image_equipaje_fragil  	{width: 600px;height: 400px;background-position: 0px -1000px;}
+#image_equipaje_deportivo 	{margin: 0;background-position: 0px 0px;}
+#image_equipaje_musical 	{height: 340px;background-position: 0px -200px;}
+#image_equipaje_fragil  	{background-position: 0px -600px;}
 
 /* ---- MERCANCIAS PELIGROSAS ---- */
 #info_mercancias_peligrosas .desplegable .title .img { background-image: url('images/contenidos/icons_politica_equipaje_mercancias_peligrosas.png'); }
@@ -139,9 +149,9 @@
 #subtitle_mascotas_buzon.collapsed 			.title .img { background-position: 0 0;}
 #subtitle_mascotas_documentacion.collapsed	.title .img { background-position: 0 -40px;}
 
-#image_mascotas { width: 400px; height: 400px; background-position: 0 0;}
-#image_no_dogs{background-position: 0 -400px;}
-#image_no_cats{background-position: -200px -400px;}
+#image_mascotas {background-position: 0 0;}
+#image_no_dogs{background-position: 0 -200px;}
+#image_no_cats{background-position: 0 -400px;}
 #image_mascotas_identificacion {background-position: 0 -600px;width:400px;}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
@@ -339,8 +349,67 @@
 #subtitle_gestacion_sin_complicaciones.collapsed 	.title .img { background-position: 0 0;}
 #subtitle_gestacion_con_riesgo.collapsed			.title .img { background-position: 0 -40px;}
 
-#image_gestacion_sin_complicaciones { width: 600px; height: 670px; background-position: 0px 0px; }
 #image_gestacion_con_riesgo 		{ width: 400px; height: 400px;background-position: 0px -800px; }
+
+#image_logo_boa{width: 70px;height: 75px;background-position: -428px 0px;margin: 10px 10px 0px;background-size: 500px auto;}
+#image_gestacion_a{width: 97px;height: 250px;background-position: 0 0;}
+#image_gestacion_b{width: 100px;height: 250px;background-position: -100px 0;}
+#image_gestacion_c{width: 120px;height: 250px;background-position: -200px 0;}
+#image_gestacion_d{width: 130px;height: 250px;background-position: -320px 0px;}
+#image_gestacion_e{width: 143px;height: 145px;background-position: -443px 0px;background-color: #1F3656;border-radius: 300px;}
+
+#table_gestacion_sin_complicaciones_a h1,
+#table_gestacion_sin_complicaciones_c h1 {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	font-size: 29px;
+	font-family: "FuturaLight";
+	font-weight: 100;
+}
+
+#table_gestacion_sin_complicaciones_a td {
+	background-color: #1F3656;
+	color: #EFAA35;
+	text-align: left;
+	padding: 0 0 10px 10px;
+	font-size: 15px;
+}
+
+#table_gestacion_sin_complicaciones_b h1,
+#table_gestacion_sin_complicaciones_c h2 {
+	color: #EFAA35;
+	font-family: "FuturaMedium";
+	font-size: 32px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#table_gestacion_sin_complicaciones_b td,
+#table_gestacion_sin_complicaciones_c td {
+	font-size: 16px;
+	text-align: right;
+}
+
+#table_gestacion_sin_complicaciones_c strong {
+	font-size: 17px;
+}
+
+#table_gestacion_sin_complicaciones_c th{
+	background-color: #1F3656;
+	color: #EFAA35;
+	text-align: left;
+	padding: 0 0 10px 10px;
+}
+
+#table_gestacion_sin_complicaciones_c h1 {
+	padding: 15px;
+	margin: 0px;
+	text-align: center;
+	font-size: 36px;
+	font-family: "FuturaLight";
+	font-weight: 100;
+}
 /* -------------------------------------------- */
 /* ------------= MENU ESPECIAL =--------------- */
 /* -------------------------------------------- */
@@ -421,9 +490,37 @@
 /* ------------------------------------------------- */
 /* ------------= PERFIL CORPORATIVO =--------------- */
 /* ------------------------------------------------- */
-#ui_perfil_corporativo .info .img-contenido {background-image: url("images/contenidos/images_perfil_corporativo.png");}
+#ui_perfil_corporativo .info .img-contenido {
+	background-image: url("images/contenidos/bg_mision_vision.png");
+}
 
-#image_mision_vision { width:700px; height:665px; background-position: 0 0;}
+#image_mision_vision { 
+	width:650px; 
+	height:520px; 
+	background-position: 0 0;
+	color: #FFF;
+	padding: 180px 0 0 50px;
+}
+
+#image_mision_vision h1{
+	color: #EFAA35;
+	font-family: "FuturaBold";
+	font-weight: 100;
+	font-size: 30px;
+	text-align: left;
+	margin: 0 0 30px;
+	padding: 0;
+}
+
+#image_mision_vision label{ color: #EFAA35;}
+
+#image_mision_vision p {
+	width: 500px;
+	margin: 0px auto 25px auto;
+	text-align: center;
+	font-size: 22px;
+	line-height: 23px;
+}
 /* ----------------------------------------- */
 /* ------------= SOMOS IOSA =--------------- */
 /* ----------------------------------------- */
@@ -449,9 +546,11 @@
 #image_premio_empresa_del_year{		background-position: 0 -250px;}
 #image_premio_apoyo_solidario{		background-position: 0 -375px;}
 #image_premio_apoyo_cultura{		background-position: 0 -500px;}
-#image_premio_merito_social{		background-position: 0 -625px;}
+
+#image_premio_merito_social_moxos{	background-position: 0 -625px;}
 #image_premio_huesped_ilustre{		background-position: 0 -750px;}
 #image_premio_merco_bolivia{		background-position: 0 -875px;}
+#image_premio_prevencion_vih{		background-position: 0 -1000px;}
 
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

@@ -1546,7 +1546,7 @@ header .att-div{
 	color: #1F3656;
 	text-align: center;
 	background-color: #CADAE5;
-	font-size: 12px;
+	font-size: 18px;
 	padding: 10px;
 }
 
@@ -1557,9 +1557,9 @@ header .att-div{
 
 .ui-section .descripcion table td.table-title div{
 	width: 80%;
-	font-family: "FuturaLight";
+	font-family: "FuturaBook";
 	font-size: 18px;
-	font-weight: 100;
+	font-weight: bold;
 	padding: 10px;
 	margin: 0px auto;
 	text-align: center;
@@ -1569,13 +1569,26 @@ header .att-div{
 
 .ui-section .descripcion table td.table-title div.clock {
 	height: 50px;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: right;
+}
+
+.ui-section .descripcion table td.table-title div.clock td{
+	background-color: transparent;
+	color: #FFF;
+	font-family: "FuturaBook";
+	font-size: 20px;
+	padding: 0 0 0 10px;
+}
+
+.ui-section .descripcion table td.table-title div.clock .icon-clock{
+	width: 30px;
+	height: 30px;
 	background-image: url("images/icon_clock.png");
 	background-size: 40px;
 	background-repeat: no-repeat;
 	background-position: 10px;
-	font-size: 20px;
-	line-height: 50px;
-	text-align: right;
 }
 
 .ui-section .descripcion table.small{width:300px;}
