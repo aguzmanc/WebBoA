@@ -1553,6 +1553,7 @@ header .att-div{
 .ui-section .descripcion table td.table-title {
 	text-align: center;
 	background-color: transparent;
+	padding: 0px;
 }
 
 .ui-section .descripcion table td.table-title div{
@@ -1568,10 +1569,11 @@ header .att-div{
 }
 
 .ui-section .descripcion table td.table-title div.clock {
-	height: 50px;
+	height: 55px;
 	font-size: 20px;
 	line-height: 50px;
 	text-align: right;
+	padding: 0;
 }
 
 .ui-section .descripcion table td.table-title div.clock td{
@@ -1748,6 +1750,8 @@ header .att-div{
 	max-height: 4000px;
 	overflow: hidden;
 }
+
+.ui-section .descripcion .desplegable:not(.collapsed) .content{margin: 0 0 30px 0;}
 
 .ui-section .descripcion .desplegable.collapsed .content {
 	max-height: 0px;
