@@ -346,22 +346,24 @@
 #info_embarazadas .img-contenido { background-image: url('images/contenidos/images_pasajeros_especiales_embarazadas.png'); }
 
 #subtitle_gestacion_sin_complicaciones	.title .img { background-position: 0 0;}
-#subtitle_gestacion_con_riesgo			.title .img { background-position: 0 -125px;}
+#subtitle_gestacion_madrid				.title .img { background-position: 0 -125px;}
+#subtitle_gestacion_con_riesgo			.title .img { background-position: 0 -250px;}
 
 #subtitle_gestacion_sin_complicaciones.collapsed 	.title .img { background-position: 0 0;}
-#subtitle_gestacion_con_riesgo.collapsed			.title .img { background-position: 0 -40px;}
-
-#image_gestacion_con_riesgo 		{ width: 400px; height: 400px;background-position: 0px -800px; }
+#subtitle_gestacion_madrid.collapsed 				.title .img { background-position: 0 -40px;}
+#subtitle_gestacion_con_riesgo.collapsed			.title .img { background-position: 0 -80px;}
 
 #image_logo_boa{width: 70px;height: 75px;background-position: -428px 0px;margin: 10px 10px 0px;background-size: 500px auto;}
-#image_gestacion_a{width: 97px;height: 250px;background-position: 0 0;}
-#image_gestacion_b{width: 100px;height: 250px;background-position: -100px 0;}
-#image_gestacion_c{width: 120px;height: 250px;background-position: -200px 0;}
-#image_gestacion_d{width: 130px;height: 250px;background-position: -320px 0px;}
-#image_gestacion_e{width: 143px;height: 145px;background-position: -443px 0px;background-color: #1F3656;border-radius: 300px;}
+
+#image_gestacion_doctor{width: 97px;height: 250px;background-position: 0 0;}
+#image_gestacion_a{width: 100px;height: 250px;background-position: -100px 0;}
+#image_gestacion_b{width: 100px;height: 250px;background-position: -200px 0;}
+#image_gestacion_c{width: 120px;height: 250px;background-position: -300px 0px;}
+#image_gestacion_d{width: 130px;height: 250px;background-position: -420px 0px;}
+#image_gestacion_feto{width: 143px;height: 145px;background-position: -543px 0px;background-color: #1F3656;border-radius: 300px;}
 
 #table_gestacion_sin_complicaciones_a h1,
-#table_gestacion_sin_complicaciones_c h1 {
+#table_gestacion_con_riesgo h1 {
 	padding: 0;
 	margin: 0;
 	text-align: left;
@@ -379,7 +381,7 @@
 }
 
 #table_gestacion_sin_complicaciones_b h1,
-#table_gestacion_sin_complicaciones_c h2 {
+#table_gestacion_con_riesgo h2 {
 	color: #EFAA35;
 	font-family: "FuturaMedium";
 	font-size: 32px;
@@ -388,23 +390,23 @@
 }
 
 #table_gestacion_sin_complicaciones_b td,
-#table_gestacion_sin_complicaciones_c td {
+#table_gestacion_con_riesgo td {
 	font-size: 16px;
 	text-align: right;
 }
 
-#table_gestacion_sin_complicaciones_c strong {
+#table_gestacion_con_riesgo strong {
 	font-size: 17px;
 }
 
-#table_gestacion_sin_complicaciones_c th{
+#table_gestacion_con_riesgo th{
 	background-color: #1F3656;
 	color: #EFAA35;
 	text-align: left;
 	padding: 0 0 10px 10px;
 }
 
-#table_gestacion_sin_complicaciones_c h1 {
+#table_gestacion_con_riesgo h1 {
 	padding: 15px;
 	margin: 0px;
 	text-align: center;
@@ -412,6 +414,8 @@
 	font-family: "FuturaLight";
 	font-weight: 100;
 }
+
+#table_gestacion_madrid h1{margin: 0;padding: 0;}
 /* -------------------------------------------- */
 /* ------------= MENU ESPECIAL =--------------- */
 /* -------------------------------------------- */
@@ -460,8 +464,18 @@
 /* -------------------------------------------- */
 /* ------------= NUESTRA FLOTA =--------------- */
 /* -------------------------------------------- */
-/*#ui_nuestra_flota .info .desplegable .title .img { background-image: url('images/contenidos/icons_nuestra_flota.png'); }*/
+#ui_nuestra_flota .info .desplegable .title .img { background-image: url('images/contenidos/icons_nuestra_flota.png'); }
 #ui_nuestra_flota .info .img-contenido {background-image: url("images/contenidos/images_nuestra_flota.png");}
+
+#subtitle_737_300			.title .img { background-position: 0 0;}
+#subtitle_737_500			.title .img { background-position: 0 -125px;}
+#subtitle_737_700_ng		.title .img { background-position: 0 -375px;}
+#subtitle_767_300			.title .img { background-position: 0 -500px;}
+
+#subtitle_737_300.collapsed			.title .img { background-position: 0 0;}
+#subtitle_737_500.collapsed			.title .img { background-position: 0 -40px;}
+#subtitle_737_700_ng.collapsed		.title .img { background-position: 0 -120px;}
+#subtitle_767_300.collapsed			.title .img { background-position: 0 -160px;}
 
 #image_737_300_foto{position: relative;left: -50px;width: 800px;height: 300px;background-position:0 0;}
 #image_737_300_plano{width: 600px;height: 400px;background-position: 0px -400px;}
