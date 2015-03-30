@@ -50,22 +50,22 @@
 #info_equipaje_mano .img-contenido { background-image: url('images/contenidos/images_politica_equipaje_mano.png'); }
 
 #subtitle_franquicia 						.title .img { background-position: 0 0;}
-#subtitle_franquicia_espana					.title .img { background-position: 0 0;}
 #subtitle_ubicacion_equipaje 				.title .img{background-position: 0 -125px;}
 #subtitle_accesorio_personal 				.title .img{background-position: 0 -250px;}
 #subtitle_articulos_restringidos 			.title .img{background-position: 0 -375px;}
 #subtitle_liquidos_geles 					.title .img{background-position: 0 -500px;}
 #subtitle_duty_free							.title .img{background-position: 0 -625px;}
 #subtitle_equipos_electronicos				.title .img{background-position: 0 -750px;}
+#subtitle_franquicia_espana					.title .img{background-position: 0 -875px;}
 
 #subtitle_franquicia.collapsed				.title .img{background-position: 0 0;}
-#subtitle_franquicia_espana					.title .img{background-position: 0 0;}
 #subtitle_ubicacion_equipaje.collapsed 		.title .img{background-position: 0 -40px;}
 #subtitle_accesorio_personal.collapsed 		.title .img{background-position: 0 -80px;}
 #subtitle_articulos_restringidos.collapsed 	.title .img{background-position: 0 -120px;}
 #subtitle_liquidos_geles.collapsed 			.title .img{background-position: 0 -160px;}
 #subtitle_duty_free.collapsed 				.title .img{background-position: 0 -200px;}
 #subtitle_equipos_electronicos.collapsed 	.title .img{background-position: 0 -240px;}
+#subtitle_franquicia_espana.collapsed		.title .img{background-position: 0 -280px;}
 
 #img_equipaje_mano{ width: 200px;height: 250px;background-position: 0 0;}
 #img_franquicia_equipaje_a {width:600px;background-position:0 -200px;}
@@ -116,10 +116,12 @@
 #subtitle_equipamiento_deportivo 				.title .img { background-position: 0 0;}
 #subtitle_instrumentos_musicales 				.title .img {background-position: 0 -125px;}
 #subtitle_equipaje_voluminoso 					.title .img {background-position: 0 -250px;}
+#subtitle_equipaje_voluminoso_espana			.title .img {background-position: 0 -375px;}
 
 #subtitle_equipamiento_deportivo.collapsed		.title .img { background-position: 0 0;}
 #subtitle_instrumentos_musicales.collapsed 		.title .img {background-position: 0 -40px;}
 #subtitle_equipaje_voluminoso.collapsed 		.title .img {background-position: 0 -80px;}
+#subtitle_equipaje_voluminoso_espana.collapsed	.title .img {background-position: 0 -120px;}
 
 #image_equipaje_deportivo 	{margin: 0;background-position: 0px 0px;}
 #image_equipaje_musical 	{height: 340px;background-position: 0px -200px;}
