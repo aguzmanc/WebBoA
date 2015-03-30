@@ -9,6 +9,13 @@
 		"text_valign" : "bottom"
 	},
 	{
+		"secondary_text_a":"BOEING",
+		"main_text":"737-700",
+		"secondary_text_b":"NUEVA GENERACI&Oacute;N",
+		"url":"content\/fake_services\/slides\/boeing_737_700.jpg",
+		"text_valign" : "bottom"
+	},
+	{
 		"secondary_text_a":"CELEBRAMOS NUESTROS",
 		"main_text":"6 A&Ntilde;OS",
 		"secondary_text_b":"DE OPERACIONES",
