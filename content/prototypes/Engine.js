@@ -63,8 +63,8 @@ function getEngine()
 function prototypeEngine_initialize(canvas_id)
 {
 	this.canvas = document.getElementById(canvas_id);
-	// this.canvas.width = this.canvasWidth;
-	// this.canvas.height = this.canvasHeight;
+	this.canvas.width = this.canvasWidth;
+	this.canvas.height = this.canvasHeight;
 
 	this.context = this.canvas.getContext('2d');
 }
@@ -204,8 +204,8 @@ function prototypeEngine_setSize(width,height)
 	this.canvasWidth = width;
 	this.canvasHeight = height;
 
-	// this.canvas.width = width;
-	// this.canvas.height = height;
+	this.canvas.width = width;
+	this.canvas.height = height;
 }
 // ---------------------= =---------------------
 function prototypeEngine_addElement(newElement)

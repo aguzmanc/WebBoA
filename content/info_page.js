@@ -143,15 +143,19 @@ function initializeCloudsBackground()
 
 	loadImagesInterval = setInterval(checkLoaded,200);
 
-	var w = $(document).width();
-	var h = $(document).height();
+	var w = $(window).width();
+	var h = $(window).height();
 
 	graphicsEngine = getEngine();
 	graphicsEngine.initialize('clouds_canvas');
 	graphicsEngine.setSize(w,h);
 
+	console.log(w,h);
+
 	$(window).resize(function(ev) {
-		graphicsEngine.setSize(this.innerWidth, this.innerHeight);		
+		graphicsEngine.setSize(this.innerWidth, this.innerHeight);
+
+		console.log(this.innerWidth, this.innerHeight);
 	});
 
 	sky = new Sky();

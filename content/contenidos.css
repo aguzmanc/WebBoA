@@ -545,13 +545,15 @@
 
 #ui_somos_iosa .info .desplegable .title .img { background-image: url('images/contenidos/icons_somos_iosa.png'); }
 
-#subtitle_politica_gerenciamiento 			.title .img { background-position: 0 0;}
-#subtitle_politica_no_punitiva 				.title .img{background-position: 0 -125px;}
-#subtitle_politica_de_personal 				.title .img{background-position: 0 -250px;}
+#subtitle_somos_iosa			 			.title .img { background-position: 0 0;}
+#subtitle_politica_gerenciamiento 			.title .img{background-position: 0 -125px;}
+#subtitle_politica_no_punitiva 				.title .img{background-position: 0 -250px;}
+#subtitle_politica_de_personal 				.title .img{background-position: 0 -375px;}
 
-#subtitle_politica_gerenciamiento.collapsed		.title .img{background-position: 0 0;}
-#subtitle_politica_no_punitiva.collapsed 		.title .img{background-position: 0 -40px;}
-#subtitle_politica_de_personal.collapsed 		.title .img{background-position: 0 -80px;}
+#subtitle_somos_iosa.collapsed					.title .img{background-position: 0 0;}
+#subtitle_politica_gerenciamiento.collapsed		.title .img{background-position: 0 -40px;}
+#subtitle_politica_no_punitiva.collapsed 		.title .img{background-position: 0 -80px;}
+#subtitle_politica_de_personal.collapsed 		.title .img{background-position: 0 -120px;}
 
 /* ---------------------------------------------------------- */
 /* ------------= RECONOCIMIENTOS Y PREMIOS =---------------- */

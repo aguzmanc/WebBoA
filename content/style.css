@@ -114,6 +114,8 @@ header #language_selector .content,
 body{
 	overflow: hidden;
 }
+
+/* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 header{
 	position: fixed;
@@ -948,17 +950,6 @@ header .att-div{
 	padding: 10px 0 0 0;
 	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.29);
 }
-
-#icons_seguridad{
-	position: relative;
-	width: 425px;
-	height: 50px;
-	top: 10px;
-	margin: -15px 0 0 0;
-	background-image: url('images/textures.png');
-	background-position: -1057px -345px;
-	z-index: 201;
-}
 /* --------------------------------------------------------------------------- */
 #buscador_vuelos{
 	position: absolute;
@@ -1154,13 +1145,50 @@ header .att-div{
 	z-index: 200;
 }
 /* --------------------------------------------------------------------------- */
-#footer_buscador_vuelos .tooltip {
+footer{
+	height: 45px;
+	width: 100%;
+	background-color: rgba(31, 54, 86, 0.9);
+	position: fixed;
+	bottom: 0px;
+}
+
+footer #icons_seguridad{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 180px;
+	height: 30px;
+	background-image: url("images/icons_seguridad.png");
+	background-repeat: no-repeat;
+	background-size: 170px auto;
+	z-index: 201;
+}
+
+footer #icons_util {
+	width: 135px;
+	height: 45px;
+	margin: 0 auto;
+	position: relative;
+}
+
+footer #icons_redes_sociales {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 45px;
+	width: 100px;
+}
+
+footer .tooltip {
 	position: absolute;
 	top: 10px;
 	height: 25px;
 	width: 25px;
 	background-color: #FFF;
+	background-image:url('images/icons_footer.png');	
 	background-repeat: no-repeat;
+	background-size: auto 30px;
 	border-radius: 50px;
 	cursor: pointer;
 
@@ -1171,67 +1199,88 @@ header .att-div{
 	-ms-transition: all 0.3s;
 }
 
-#footer_buscador_vuelos .tooltip.animating {
+footer .tooltip.animating {
 	top: -10px;
 }
 
-#footer_buscador_vuelos .tooltip:hover {
+footer .tooltip:hover {
 	background-color: #EFAA35;
+	background-size: auto 45px;
 	top: 2px;
 	width: 40px;
 	height: 40px;
 }
 
-#footer_buscador_vuelos #contacto_asistencia {
-	right: 30px;
-	background-image: url("images/icon_contacto_asistencia.png");
-	background-position: 3px 1px;
-	background-size: 20px;
+footer #contacto_asistencia {
+	left: 95px;
+	background-position: -2px -2px;
 }
 
-#footer_buscador_vuelos #contacto_asistencia:hover {
-	right: 25px;
-	background-position: 4px 2px;
-	background-repeat: no-repeat;
-	background-size: 32px;
-}
-#footer_buscador_vuelos #contacto_asistencia .arrow { right: 28px; }
-
-#footer_buscador_vuelos #horarios {
-	right: 70px;
-	background-image:url('images/icon_horarios.png');	
-	background-position: 2px 1px;
-	background-size: 22px auto;
-}
-#footer_buscador_vuelos #horarios .arrow { right: 67px; }
-
-#footer_buscador_vuelos #horarios:hover {
-	right: 65px;
-	background-position: 4px 3px;
-	background-repeat: no-repeat;
-	background-size: 33px auto;
+footer #contacto_asistencia:hover {
+	left: 90px;
+	background-position: -2px -1px;
 }
 
-#footer_buscador_vuelos #reservas {
-	right: 110px;
-	background-image:url('images/icon_reservas.png');	
-	background-position: 2px 1px;
-	background-size: 20px;
+footer #contacto_asistencia .arrow { right: 28px; }
+
+footer #horarios {
+	left: 55px;
+	background-position: -33px -3px;
 }
 
-#footer_buscador_vuelos #reservas .arrow { right: 108px; }
+footer #horarios .arrow { right: 67px; }
 
-#footer_buscador_vuelos #reservas:hover {
-	right: 105px;
-	background-position: 4px 3px;
-	background-repeat: no-repeat;
-	background-size: 33px auto;
+footer #horarios:hover {
+	left: 50px;
+	background-position: -47px -2px;
 }
 
-#footer_buscador_vuelos .tooltip span {
-	position: fixed;
-	bottom: 59px;
-	right: 20px;
+footer #reservas {
+	left: 15px;
+	background-position: -62px -3px;
+}
+
+footer #reservas .arrow { right: 108px; }
+
+footer #reservas:hover {
+	left: 10px;
+	background-position: -92px -3px;
+}
+
+footer #icon_facebook {
+	right: 15px;
+	background-position: -92px -2px;
+}
+
+footer #icon_facebook:hover{ 
+	right: 10px;
+	background-position: -137px -3px;
+}
+
+footer #icon_twitter {
+	right: 55px;
+	background-position: -122px -2px;
+}
+
+footer #icon_twitter:hover{ 
+	right: 50px;
+	background-position: -181px -3px;
+}
+
+footer #icon_youtube {
+	right: 95px;
+	background-position: -152px -2px;
+}
+
+footer #icon_youtube:hover{ 
+	right: 90px;
+	background-position: -227px -3px;
+}
+
+footer .tooltip span {
+	position: absolute;
+	bottom: 60px;
+	left: -30px;
 	width: 230px;
 	height: 40px;
 	color: #FFF;
@@ -1245,11 +1294,11 @@ header .att-div{
 	display: none;
 }
 
-#footer_buscador_vuelos .tooltip:hover span {
+footer .tooltip:hover span {
 	display: block;
 }
 
-#footer_buscador_vuelos .tooltip .arrow {
+footer .tooltip .arrow {
 	position: fixed;
 	bottom: 49px;
 	right: 28px;
@@ -1259,11 +1308,11 @@ header .att-div{
 	display: none;
 }
 
-#footer_buscador_vuelos .tooltip:hover .arrow{
+footer .tooltip:hover .arrow{
 	display: block;
 }
 
-#footer_buscador_vuelos .sensor {
+footer .sensor {
 	position: fixed;
 	background-color: red;
 	width: 117px;
@@ -1383,15 +1432,16 @@ header .att-div{
 	font-family: "HelveticaNeuePro";
 	font-size: 16px;
 	letter-spacing: 2px;
-	/*opacity: 0;*/
 	padding: 40px 0 0 0;
+
+	display: none;
 }
 
-.ui-section .info.selected{ left: 200px;}
+.ui-section .info.selected{ left: 200px;display: block;}
 .ui-section.unique .info {
 	left: 50px; 
 	width: 800px;
-	opacity: 1; 
+	display: block;
 }
 
 .ui-section .info.fixed .icon {
