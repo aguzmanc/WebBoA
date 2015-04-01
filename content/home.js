@@ -25,7 +25,21 @@ $(document).on('ready',function()
 	});
 
 	// UI SETUP
-	$("#picker_salida, #picker_regreso, #picker_estado_vuelo").datepicker({ dateFormat: 'dd MM yy',numberOfMonths: 2, minDate:0 });
+	$("#picker_salida").datepicker({ 
+		dateFormat: 'dd MM yy',
+		numberOfMonths: 2, 
+		minDate: 0,
+		onSelect:function(selectedDate){
+			$( "#picker_regreso" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+
+	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
+		dateFormat: 'dd MM yy',
+		numberOfMonths: 2, 
+		minDate:0 
+	});
+
 	// checkboxes
 	$(".checkbox").click(toggle_checkbox);
 	$("#cbx_acepto_terminos").click(function(){
@@ -137,15 +151,6 @@ function click_menu_buscador_vuelos()
 	var buscador_vuelos = $("#buscador_vuelos");
 
 	if(content_id=="estado_vuelo") return;
-
-	// if($(this).hasClass("selected")){
-	// 	if(buscador_vuelos.hasClass("collapsed"))
-	// 		buscador_vuelos.removeClass("collapsed").addClass("expanded");
-	// 	else if(buscador_vuelos.hasClass("expanded"))
-	// 		buscador_vuelos.removeClass("expanded").addClass("collapsed");
-	// }
-
-	// return; // ENABLE MAIN TABS HERE
 
 	$("#buscador_vuelos .menu").removeClass("selected");
 	$(this).addClass("selected");
