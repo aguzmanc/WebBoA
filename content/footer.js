@@ -128,8 +128,10 @@ function validar_busqueda_itinerario()
 	$("footer #horarios").removeClass("active");
 }
 // ---------------------------------------------------------------------------
-function toggleFooterTooltip()
+function toggleFooterTooltip(ev)
 {
+	if(ev.target != this) return;
+
 	var isActive = $(this).hasClass("active");
 	$("footer .tooltip").removeClass("active");
 	
