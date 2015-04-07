@@ -1402,6 +1402,7 @@ footer .form .radio-button label{
 }
 
 footer .form input.calendar {
+	width: 120px;
 	background-image: url("images/icon_calendar.png");
 	background-repeat: no-repeat;
 	background-position: 107px 3px;
