@@ -16,9 +16,14 @@ var urls = {
 	info_turismo_bolivia: "http://www.minculturas.gob.bo",
 	contrato_transporte: "content/docs/contrato_transporte.pdf",
 	convocatorias: "http://sms.obairlines.bo/webboa/menupublicaciones.htm",
-
 	/* RESULTADOS DE HORARIOS DE VUELOS */
-	flight_schedule_results : "http://localhost"
+	flight_schedule_results : "http://localhost",
+	/* MAPAS DE OFICINAS */
+	office_maps : "http://localhost",
+	/* BOA EN REDES SOCIALES */
+	social_networks: "http://localhost",
+	/* CALL CENTER */
+	call_center: "http://localhost"
 };
 // ---------------------------------------------------------------------------
 function handle_reserva_vuelos(parameters)
