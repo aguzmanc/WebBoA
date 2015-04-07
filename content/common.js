@@ -18,6 +18,12 @@ function redirect_with_parms(url_key, parms)
 	btn.attr("href",url);
 	btn[0].click();
 }
+// ---------------------= VALIDATION =---------------------
+/* Used with "validable" class as parent of ui_element  */ 
+function activate_validation(ui_element) 
+{
+	ui_element.parent().addClass("active");
+}
 // ---------------------= QUERY STRING PARAMETERS =---------------------
 location.queryString = {};
 location.search.substr(1).split("&").forEach(function (pair) {

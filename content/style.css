@@ -53,8 +53,6 @@
 .ui-section .second-menu,
 .ui-section .second-menu label,
 header #language_selector .content,
-/*#buscador_vuelos li,*/
-/*#buscador_vuelos li h1,*/
 #buscador_vuelos .content,
 .ui-section .header h2,
 .ui-section .header,
@@ -67,6 +65,8 @@ header #language_selector .content,
 .ui-section .descripcion .desplegable .content,
 .ui-section .descripcion .desplegable .arrow,
 .ui-section .first-menu .icon:not(.small),
+.content .validable,
+footer .validable,
 #home
 {
 	transition: all 0.5s;
@@ -85,14 +85,14 @@ header #language_selector .content,
 	-ms-transition: opacity 0.5s;
 }
 
-.content .validable
+/*
 {
 	transition: all 1.5s;
 	-moz-transition: all 1.5s;
 	-webkit-transition: all 1.5s;
 	-o-transition: all 1.5s;
 	-ms-transition: all 1.5s;
-}
+}*/
 /* --------------------------------------------------------------------------- */
 @-moz-document url-prefix(){
       .ui-select{
@@ -757,7 +757,7 @@ header .att-div{
 	padding: 0 20px 5px 0;
 }
 
-.content select {
+.content select{
 	height: 34px;
 	border-radius: 0px;
 	border-width: 0 0 2px 0;
@@ -780,7 +780,8 @@ header .att-div{
 	text-overflow: '';
 }
 
-.content select::-ms-expand{
+.content select::-ms-expand,
+.form select::-ms-expand{
   display:none;
 }
 
@@ -816,8 +817,6 @@ header .att-div{
 .content input.calendar:hover {
 	background-image: url('images/icon_calendar_hover.png');
 }
-
-
 .content .checkbox{
 	width: 35px;
 	height: 33px;
@@ -1151,6 +1150,7 @@ footer{
 	background-color: rgba(31, 54, 86, 0.9);
 	position: fixed;
 	bottom: 0px;
+	z-index: 200;
 }
 
 footer #icons_seguridad{
@@ -1203,7 +1203,8 @@ footer .tooltip.animating {
 	top: -10px;
 }
 
-footer .tooltip:hover {
+footer .tooltip:hover,
+footer .tooltip.active {
 	background-color: #EFAA35;
 	background-size: auto 45px;
 	top: 2px;
@@ -1211,7 +1212,8 @@ footer .tooltip:hover {
 	height: 40px;
 }
 
-footer #contacto_asistencia {
+footer #contacto_asistencia,
+footer #contacto_asistencia.active {
 	left: 95px;
 	background-position: -2px -2px;
 }
@@ -1221,16 +1223,13 @@ footer #contacto_asistencia:hover {
 	background-position: -2px -1px;
 }
 
-footer #contacto_asistencia .arrow { right: 28px; }
-
 footer #horarios {
 	left: 55px;
 	background-position: -33px -3px;
 }
 
-footer #horarios .arrow { right: 67px; }
-
-footer #horarios:hover {
+footer #horarios:hover,
+footer #horarios.active {
 	left: 50px;
 	background-position: -47px -2px;
 }
@@ -1240,10 +1239,8 @@ footer #reservas {
 	background-position: -62px -3px;
 }
 
-footer #reservas .arrow { right: 108px; }
-
-footer #reservas:hover {
-	left: 10px;
+footer #reservas:hover,
+footer #reservas.active {
 	background-position: -92px -3px;
 }
 
@@ -1279,7 +1276,7 @@ footer #icon_youtube:hover{
 
 footer .tooltip span {
 	position: absolute;
-	bottom: 60px;
+	bottom: 70px;
 	left: -30px;
 	width: 230px;
 	height: 40px;
@@ -1295,31 +1292,136 @@ footer .tooltip span {
 }
 
 footer .tooltip:hover span {
+	bottom: 60px;
 	display: block;
 }
 
 footer .tooltip .arrow {
-	position: fixed;
-	bottom: 49px;
-	right: 28px;
+	position: absolute;
+	left: 14px;
+	bottom: 57px;
 	width: 16px;
 	height: 15px;
 	background-image: url("images/arrow_footer_popup.png");
 	display: none;
 }
 
-footer .tooltip:hover .arrow{
+footer .tooltip:hover .arrow,
+footer .tooltip.active .arrow
+{
+	bottom: 47px;
 	display: block;
 }
 
-footer .sensor {
-	position: fixed;
-	background-color: red;
-	width: 117px;
-	height: 33px;
-	bottom: 5px;
-	right: 15px;
-	z-index: 100;
+footer .validable {
+	max-height: 23px;
+	padding: 3px;
+	margin: 0 3px;
+}
+
+footer .validable.active { 
+	background-color: #F00;
+}
+/* --------------------------------------------------------------------------- */
+footer .tooltip.active span{display: none;}
+
+footer .tooltip .form {
+	position: absolute;
+	width: 740px;
+	height: 40px;
+	left: -300px;
+	bottom: 60px;
+	background-image: url("images/bg_footer_popup.png");
+	padding: 4px 0 12px 10px;
+	display: none
+}
+
+footer .tooltip.active .form {
+	display: block;
+}
+
+footer .form select {
+	width: 120px;
+	height: 23px;
+	border-radius: 0px;
+	border-width: 0 0 2px 0;
+	border-style: solid;
+	border-color: #959595;
+	font-family: "HelveticaNeuePro";
+	font-size: 13px;
+	color: #1F3656;
+	padding: 2px 0 0 10px;
+	/*margin: 2px 5px 2px 0;*/
+	background-image: url('images/icon_arrow_down.png');
+	background-repeat: no-repeat;
+	background-position: 102px 5px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	text-indent: 0.01px;
+}
+
+footer .form label{
+	font-family: "HelveticaNeuePro";
+	font-size: 13px;
+	color: #FFF;
+}
+
+footer .form .radio-button, .content .radio-button label {
+	cursor: pointer;	
+}
+
+footer .form .radio-button .btn {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	background-color: #FFF;
+	border-radius: 100px;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+footer .form .radio-button .btn div{
+	background-color: rgb(0, 0, 0);
+	width: 9px;
+	height: 9px;
+	margin: 2px auto;
+	vertical-align: middle;
+	border-radius: 100px;
+	display: none;
+}
+
+footer .form .radio-button.checked .btn div{
+	display: block;
+}
+
+footer .form .radio-button label{
+	line-height: 20px;
+	display: inline-block;
+}
+
+footer .form input.calendar {
+	background-image: url("images/icon_calendar.png");
+	background-repeat: no-repeat;
+	background-position: 107px 3px;
+	background-size: auto 10px;
+	cursor: pointer;
+}
+
+footer .form .button {
+	width: 60px;
+	font-family: "HelveticaNeuePro";
+	background-color: #085794;
+	border-color: #096CB9;
+	border-width: 0px 0px 4px;
+	border-style: solid;
+	color: #FFF;
+	font-size: 12px;
+	text-align: center;
+	padding: 10px;
+	margin: 5px 0 0 15px;
+	cursor: pointer;
 }
 /* --------------------------------------------------------------------------- */
 #clouds{
@@ -1801,7 +1903,10 @@ footer .sensor {
 	overflow: hidden;
 }
 
-.ui-section .descripcion .desplegable:not(.collapsed) .content{margin: 0 0 30px 0;}
+.ui-section .descripcion .desplegable:not(.collapsed) .content {
+	margin: 0 0 30px 0;
+	overflow: visible;
+}
 
 .ui-section .descripcion .desplegable.collapsed .content {
 	max-height: 0px;
@@ -2012,6 +2117,10 @@ footer .sensor {
 	bottom: -10px;
 	left: 100px;	
 }
+
+/* --------------------------------------------------------------------------- */
+/*JQUERY UI DATEPICKER COMPONENT ENHANCEMENTS (dont touch)*/
+#ui-datepicker-div{z-index: 1000 !important;}
 /* --------------------------------------------------------------------------- */
 .dialog-overlay {
 	position: fixed;

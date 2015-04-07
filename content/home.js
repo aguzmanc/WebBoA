@@ -40,6 +40,22 @@ $(document).on('ready',function()
 		minDate:0 
 	});
 
+	// footer UI
+	$("#picker_salida_footer").datepicker({ 
+		dateFormat: 'dd MM yy',
+		numberOfMonths: 2, 
+		minDate: 0,
+		onSelect:function(selectedDate){
+			$( "#picker_regreso_footer" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+
+	$("#picker_regreso_footer").datepicker({ 
+		dateFormat: 'dd MM yy',
+		numberOfMonths: 2, 
+		minDate: 0
+	});
+
 	// checkboxes
 	$(".checkbox").click(toggle_checkbox);
 	$("#cbx_acepto_terminos").click(function(){
@@ -207,7 +223,7 @@ function async_receive_slides(response)
 // ---------------------= =---------------------
 function load_next_slide_image()
 {
-	for(var i in slides){
+	for(var i in slides) {
 		if(slides[i]["status"]=="loaded") continue;
 
 		if(slides[i]["status"]=="ready") {
@@ -458,10 +474,6 @@ function search_check_in()
 	btn[0].click();
 }
 // ---------------------= =---------------------
-function activate_validation(ui_element) 
-{
-	ui_element.parent().addClass("active");
-}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

@@ -610,11 +610,88 @@
 				<div class="arrow"></div>
 			</div>
 			<div id="horarios" class="tooltip">
-				<span>Horarios de salida</span>
+				<span>Itinerarios</span>
 				<div class="arrow"></div>
+				<div class="form">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td><label>Desde:</label></td>
+							<td><label>Hasta:</label></td>
+							<td>
+								<div id="rbtn_ida_footer" class="radio-button checked" data-group="ida_vuelta_footer">
+									<div class="btn">
+										<div></div>
+									</div>
+									<label>Solo ida</label>
+								</div>
+							</td>
+							<td style="width:10px"></td>
+							<td><label>Salida:</label></td>
+							<td><label id="lbl_regreso_footer" style="visibility:hidden">Regreso:</label></td>
+							<td rowspan="2" valign="top">
+								<div id="btn_buscar_itinerario" class="button">BUSCAR</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="validable">
+									<select id="select_origen_footer" class="origen-destino">
+										<option value="">Origen</option>
+										<option value="CIJ">COBIJA</option>
+						                <option value="CBB">COCHABAMBA</option>
+						                <option value="LPB">LA PAZ</option>
+						                <option value="MAD">MADRID</option>
+						                <option value="VVI">SANTA CRUZ</option>
+						                <option value="SRE">SUCRE</option>
+						                <option value="TJA">TARIJA</option>
+						                <option value="TRI">TRINIDAD</option>
+						                <option value="EZE">BUENOS AIRES</option>
+						                <option value="GRU">SAO PAULO</option>
+									</select>
+								<div class="validable">
+							</td>
+							<td>
+								<div class="validable">
+									<select id="select_destino_footer" class="origen-destino">
+										<option value="">Destino</option>
+										<option value="CIJ">COBIJA</option>
+						                <option value="CBB">COCHABAMBA</option>
+						                <option value="LPB">LA PAZ</option>
+						                <option value="MAD">MADRID</option>
+						                <option value="VVI">SANTA CRUZ</option>
+						                <option value="SRE">SUCRE</option>
+						                <option value="TJA">TARIJA</option>
+						                <option value="TRI">TRINIDAD</option>
+						                <option value="EZE">BUENOS AIRES</option>
+						                <option value="GRU">SAO PAULO</option>
+									</select>
+								</div>
+							</td>
+							<td>
+								<div id="rbtn_ida_vuelta_footer" class="radio-button" data-group="ida_vuelta_footer">
+									<div class="btn">
+										<div></div>
+									</div>
+									<label>Ida y vuelta</label>
+								</div>
+							</td>
+							<td></td>
+							<td class='input-container'>
+								<div class="validable">
+									<input type="text" id="picker_salida_footer" class="calendar" text="(Ingrese fecha)" onkeypress="return false;">
+								</div>
+							</td>
+							<td class='input-container'>
+								<div class="validable">
+									<input type="text" id="picker_regreso_footer" class="calendar" text="(Ingrese fecha)" onkeypress="return false;" style="visibility:hidden">
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div id="contacto_asistencia" class="tooltip">
-				<span>Contacto y asistencia</span>
+				<span>Atenci&oacute;n al Cliente</span>
 				<div class="arrow"></div>
 			</div>
 		</div>
