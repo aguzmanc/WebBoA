@@ -1,0 +1,106 @@
+/* --------------------------------------------------------------------------- */
+body.generic-container
+{
+	background-color: #A4C6EF;
+	padding:0;
+	margin:0;
+	overflow-y:auto !important;
+	overflow-x:hidden !important
+}
+/* --------------------------------------------------------------------------- */
+.ui-section.wide {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.ui-section.wide .header {
+	position: relative;
+	width: 100%;
+	min-width: 850px;
+	height: auto;
+	display: flex;
+	padding: 0;
+}
+
+.ui-section.wide .header img {
+	width: 100%;
+	min-width: 850px;
+}
+
+.ui-section.wide .header h2 {
+	position: absolute;	
+	left: 50px;
+	top: auto;
+	bottom: 20px;
+	font-size: 49px;
+	font-family: "HelveticaNeuePro";
+	margin: 0;
+}
+
+.ui-section.wide .gradient{
+	top: auto;
+	bottom: -10px;
+	left: 0;
+	width: 100%;
+}
+/* --------------------------------------------------------------------------- */
+.ui-section.wide .first-menu {
+	position: relative;
+	top: 0;
+	margin: 0;
+}
+
+.ui-section.wide .first-menu li,
+.ui-section.wide .first-menu li label{
+	cursor: pointer;
+}
+/* --------------------------------------------------------------------------- */
+.ui-section.wide .info{
+	top: 0px;
+	width: auto;
+	min-width: 650px;
+	left: 0px;
+	margin: 0px 0px 0px 200px;
+}
+
+.ui-section.wide .info .descripcion.with-menu{
+	padding-right: 210px;
+}
+
+.ui-section.wide .descripcion.with-menu .subinfo {
+	display: none;
+}
+
+.ui-section.wide .descripcion.with-menu .subinfo.selected {
+	display: block;
+}
+/* --------------------------------------------------------------------------- */
+.ui-section.wide .right-menu {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background-color: #3C5E8C;
+	width: 150px;
+	height: 100%;
+}
+
+.ui-section.wide .right-menu li {
+	font-family: "FuturaMedium";
+	font-size: 13px;
+	text-align: right;
+	color: #FFF;
+	display: block;
+	padding: 10px 10px 5px 10px;
+	cursor: pointer;
+}
+
+.ui-section.wide .right-menu li:hover,
+.ui-section.wide .right-menu li.selected
+{
+	background-color: #98BDEF
+}
+
+.ui-section.wide .right-menu li.selected{cursor: default;}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */

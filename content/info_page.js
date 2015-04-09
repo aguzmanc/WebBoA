@@ -43,7 +43,6 @@ $(document).on('ready',function()
 	initializeCloudsBackground();
 
 	// --------= MENU HANDLERS =--------
-	// $("header > ul > li").click(set_main_state);
 	postprocess_header_links();
 
 	$(".secondary-menu li a").click(click_menu_item);

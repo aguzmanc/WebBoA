@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!--     BOLIVIANA DE AVIACION     -->
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+	<title>Boliviana de Aviaci&oacute;n</title>
+	<link rel="icon" href="content/images/icon.png" type="image/x-icon">
+
+	<!-- JQUERY LIBRARY -->
+	<script type="text/javascript" src="content/lib/jquery-1.11.1.min.js"></script>
+
+	<!-- SCROLLBAR LIBRARY -->
+	<link href="content/lib/custom_scrollbar/jquery.mCustomScrollbar.css" 
+		rel="stylesheet" type="text/css" />
+	<script src="content/lib/custom_scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- ANIMATION LIBRARY -->
+	<script type="text/javascript" src="content/prototypes/Engine.js"></script>
+	<script type="text/javascript" src="content/prototypes/Transformable.js"></script>
+	<script type="text/javascript" src="content/prototypes/Transparent.js"></script>
+	<script type="text/javascript" src="content/prototypes/Cloud.js"></script>
+	<script type="text/javascript" src="content/prototypes/Sky.js"></script>
+
+	<!-- CUSTOM SCRIPTS -->
+	<script type="text/javascript" src="content/generic_container.js"></script>
+	
+	<!-- COMMON SCRIPTS -->
+	<script type="text/javascript" src="content/custom_handlers.js"></script>
+	<script type="text/javascript" src="content/common.js"></script>
+	<script type="text/javascript" src="content/header.js"></script>
+
+	<!-- STYLE.CSS -->
+	<link href="content/style.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="content/generic_container.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body class="generic-container">
+	<header style="display:block">
+		<a id="btn_return_home" href="http://www.boa.bo"></a>
+		<div class="logo-header"></div>
+		<ul id="main_menu">
+			<li id="menu_item_planifica" >
+				<span>PLANIFICA TU VIAJE</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>RESERVAR VUELOS
+										</a>
+									</li>
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>ESTADO DEL VUELO
+										</a>
+									</li>
+									<li class="primary" data-is_link="true">
+										<a href="http://www.boa.bo/bolivia/inicio">
+											<div class="icon"></div>HORARIO DE VUELOS
+										</a>
+									</li>
+									<li class="primary disabled"  data-item="web_check_in"><div class="icon"></div>WEB CHECK-IN</li>
+									<li class="primary disabled"  data-item="formas_pago"><div class="icon"></div>FORMAS DE PAGO</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_antes_viajar">
+				<span>ANTES DE VIAJAR</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="politica_equipaje"><div class="icon"></div>POL&Iacute;TICA DE EQUIPAJE</li>
+									<li data-item="equipaje_mano">Equipaje de mano</li>
+									<li data-item="equipaje_facturable">Equipaje facturable</li>
+									<li data-item="exceso_equipaje">Exceso de equipaje</li>
+									<li data-item="equipaje_especial">Equipaje especial</li>
+									<li data-item="equipaje_adicional" class="disabled ">Equipaje adicional</li>
+									<li data-item="mercancias_peligrosas">Mercanc&iacute;as peligrosas</li>
+									<li data-item="equipaje_mascotas">Mascotas</li>
+									<li class="primary disabled" data-item="seguimiento_equipaje"><div class="icon"></div>SEGUIMIENTO DE EQUIPAJE EN L&Iacute;NEA</li>
+									<li class="primary disabled"  data-item="equipajes_demorados"><div class="icon"></div>EQUIPAJES DEMORADOS EXTRAVIADOS O DA&Ntilde;ADOS</li>
+									<li class="primary disabled"  data-item="declaracion_equipaje"><div class="icon"></div>DECLARACI&Oacute;N DEL VALOR DEL EQUIPAJE</li>
+									<li class="primary" data-item="tips_equipaje"><div class="icon"></div>TIPS DE EQUIPAJE</li>
+									<li class="primary disabled" data-item="equipaje_interlineal"><div class="icon"></div>EQUIPAJE INTERLINEAL</li>
+									<li class="primary" data-item="llegar_aeropuerto"><div class="icon"></div>LLEGAR AL AEROPUERTO</li>
+									<li data-item="hora_limite">Hora l&iacute;mite</li>
+									<li data-item="aeropuerto_lp">Aeropuerto de La Paz</li>
+									<li data-item="aeropuerto_cbba">Aeropuerto de Cochabamba</li>
+									<li data-item="aeropuerto_viruviru">Aeropuerto de Viru Viru</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="servicios_especiales"><div class="icon"></div>SERVICIOS ESPECIALES</li>
+									<li data-item="menores_no_acompanados">Menores no acompa&ntilde;ados</li>
+									<li data-item="pasajeros_necesidades_diferentes">Pasajeros con necesidades diferentes</li>
+									<li data-item="condiciones_medicas_especiales">Condiciones m&eacute;dicas especiales</li>
+									<li data-item="oxigeno">Transporte de ox&iacute;geno</li>
+									<li data-item="dialisis_portatil">Transporte de equipo de di&aacute;lisis port&aacute;til (PDMs)</li>
+									<li data-item="bebes">Viajando con beb&eacute;s</li>
+									<li data-item="mascota">Viajando con tu mascota en cabina</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="pasajeros_especiales"><div class="icon"></div>PASAJEROS ESPECIALES</li>
+									<li data-item="embarazadas">Mujeres embarazadas</li>
+									<li data-item="tercera_edad">Pasajeros de la tercera edad</li>
+									<li data-item="pasajeros_sobrepeso">Pasajeros que requieren asiento extra</li>
+									<li data-item="dificultad_vision" class="disabled">Pasajeros con dificultad de visi&oacute;n</li>
+									<li data-item="acompanantes" class="disabled">Acompa&ntilde;antes</li>
+									<li class="primary" data-item="menu_especial"><div class="icon"></div>MEN&Uacute; ESPECIAL</li>
+									<li class="primary" data-item="documentacion_viaje"><div class="icon"></div>DOCUMENTACI&Oacute;N DE VIAJE, VISA y API</li>
+									<li class="primary" data-item="vacunas"><div class="icon"></div>VACUNAS</li>
+									<li class="primary" data-item="derechos_pasajeros" data-action="none"><div class="icon"></div>DERECHOS DE LOS PASAJEROS</li>
+									<li data-is_link="true">
+										<a href="content/docs/contrato_transporte.pdf">Contrato de transporte</a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_promos_destinos" style="display:none">
+				<span>PROMOS Y DESTINOS</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_experiencia_boa">
+				<span>EXPERIENCIA BoA</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="nuestra_flota"><div class="icon"></div>NUESTRA FLOTA</li>
+									<li class="primary" data-item="experiencia_bordo"><div class="icon"></div>EXPERIENCIA A BORDO</li>
+									<li data-item="gastronomia">Gastronom&iacute;a, Snack y Bebidas</li>
+									<li data-item="" class="disabled">Entretenimiento a Bordo</li>
+									<li data-item="" class="disabled">Duty Free a Bordo</li>
+									<li data-item="" class="disabled">Asiento + Confort</li>
+									<li data-item="" class="disabled">Revista Destinos</li>
+									<li data-item="" class="disabled">Wi-Fi y GSM</li>
+									<li class="primary" data-item="seguro_internacional"><div class="icon"></div>SEGURO INTERNACIONAL</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="night">
+									<li class="primary" data-item="en_el_aeropuerto"><div class="icon"></div>EN EL AEROPUERTO</li>
+									<li data-item="check_in">Servicio de Check-In</li>
+									<li data-item="" class="disabled">Kioskos de Check-In</li>
+									<li data-item="" class="disabled">Mobile Phone Check-In</li>
+									<li data-item="" class="disabled">Salas VIP</li>
+									<li data-item="" class="disabled">Alquiler de Veh&iacute;culos</li>
+									<li data-item="" class="disabled">Parqueos</li>
+									<li data-item="" class="disabled">Servicio de Chofer</li>
+									<li data-item="" class="disabled">Transporte Origen-Destino Aeropuerto</li>
+								</ul>
+							</td>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="night">
+									<li class="primary" data-item="cabinas"><div class="icon"></div>CARACTERISTICAS DE LAS CABINAS</li>
+									<li data-item="" class="disabled">Clase Business</li>
+									<li data-item="" class="disabled">Clase Econ&oacute;mica</li>
+									<li class="primary disabled" data-item=""><div class="icon"></div>VIAJE DE FAMILIA</li>
+									<li class="primary disabled" data-item=""><div class="icon"></div>VIAJE DE GRUPOS</li>
+									
+									<li class="primary disabled" data-item=""><div class="icon"></div>NUESTRAS ALIANZAS</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_boa_millas" style="display:none">
+				<span>BoA MILES</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu">
+									<li class="primary"  data-item=""><div class="icon"></div>PRINCIPAL</li>
+									<li data-item="">Secundario A</li>
+									<li data-item="">Secundario B</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li id="menu_item_somos_boa">
+				<span>SOMOS BoA</span>
+				<div class="shadow-margin-left"></div>
+				<div class="shadow-margin-right"></div>
+				<div class="fix-bottom"></div>
+				<div class="secondary-menu-container">
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<ul class="secondary-menu" data-sky="afternoon">
+									<li class="primary" data-item="perfil_corporativo"><div class="icon"></div>PERFIL CORPORATIVO</li>
+									<li class="primary disabled" data-item="liderazgo_corporativo"><div class="icon"></div>LIDERAZGO CORPORATIVO</li>
+									<li class="primary" data-item="somos_iosa"><div class="icon"></div>SOMOS IOSA</li>
+									<li class="primary" data-item="reconocimientos_premios"><div class="icon"></div>RECONOCIMIENTOS Y PREMIOS</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+		</ul>
+		<ul id="sec_menu">
+			<li id="menu_item_agencias">Agencias</li>
+			<li id="menu_item_corporativo" style="display:none">Corporativo</li>
+			<li id="menu_item_login" style="display:none">Login</li>
+		</ul>
+		<div id="menu_locations" class="header-menu">
+			<div class="flag bolivia"></div>
+			<h2><strong>BOLIVIA</strong></h2>
+			<div class="arrow-down-icon"></div>
+			<ul>
+				<li class="bolivia selected" data-location="bolivia">
+					<div class="flag"></div>
+					<h2><strong>BOLIVIA</strong></h2>
+				</li>
+				<li class="bsas"  data-location="bsas">
+					<div class="flag"></div>
+					<h2><strong>BS. AS.</strong></h2>
+				</li>
+				<li class="madrid" data-location="madrid">
+					<div class="flag"></div>
+					<h2><strong>MADRID</strong></h2>
+				</li>
+				<li class="saopaulo"  data-location="saopaulo">
+					<div class="flag"></div>
+					<h2><strong>SAO PAULO</strong></h2>
+				</li>
+				<li class="salta" data-location="salta">
+					<div class="flag"></div>
+					<h2><strong>SALTA</strong></h2>
+				</li>
+				<li class="miami" data-location="miami">
+					<div class="flag"></div>
+					<h2><strong>MIAMI</strong></h2>
+				</li>
+			</ul>
+		</div>
+		<div id="menu_languages" class="header-menu">
+			<h2><strong>ESPA&Ntilde;OL</strong></h2>
+			<div class="arrow-down-icon"></div>
+			<ul>
+				<li class="selected" data-language="ES">
+					<h2><strong>ESPA&Ntilde;OL</strong></h2>
+				</li>
+				<!-- <li data-language="EN">
+					<h2><strong>ENGLISH</strong></h2>
+				</li>
+				<li data-language="PT">
+					<h2><strong>PORTUGU&Ecirc;S</strong></h2>
+				</li> -->
+			</ul>
+		</div>
+	</header>
+
+	<div id="clouds">
+		<canvas id="clouds_canvas" width="2500" height="1000"></canvas>
+	</div>
+
+	<!-- UI ATENCION AL CLIENTE (sin menu derecho) -->
+	<div id="ui_atencion_cliente" class="ui-section wide">
+		<div class="gradient"></div>
+		<div class="header">
+			<img src="content/images/test_banner.jpg">
+			<h2>ATENCI&Oacute;N AL CLIENTE</h2>
+		</div>
+		<div style="position:relative">
+			<ul class="first-menu">
+				<li id="submenu_item_preguntas_frecuentes" class="selected" data-info="preguntas_frecuentes">
+					<label>Preguntas Frecuentes</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_encuentra_oficina" data-info="encuentra_oficina">
+					<label>Encuentra una Oficina de BoA</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_hable_nosotros" data-info="hable_nosotros">
+					<label>Hable con Nosotros</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_redes_sociales" data-info="redes_sociales">
+					<label>En Redes Sociales</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_itinerario" data-info="itinerario">
+					<label>Itinerario</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_reclamos_sugerencias" data-info="reclamos_sugerencias">
+					<label>Reclamos y Sugerencias</label>
+					<div class="icon small"></div>
+				</li>
+			</ul>	
+			<!-- preguntas frecuentes -->
+			<div id="info_preguntas_frecuentes" class="info selected">
+				<div class="icon"></div>
+				<div class="descripcion">
+					<h3>PREGUNTAS FRECUENTES</h3>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br><br>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br><br>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br><br>
+				</div>
+			</div>		
+		</div>
+	</div> <!-- <<< UI ATENCION AL CLIENTE >>> -->
+	
+	<!-- UI ATENCION AL CLIENTE (con menu derecho) -->
+	<div id="ui_atencion_cliente_menu" class="ui-section wide selected">
+		<div class="gradient"></div>
+		<div class="header">
+			<img src="content/images/test_banner.jpg">
+			<h2>ATENCI&Oacute;N AL CLIENTE</h2>
+		</div>
+		<div style="position:relative">
+			<ul class="first-menu">
+				<li id="submenu_item_preguntas_frecuentes" class="selected" data-info="preguntas_frecuentes">
+					<label>Preguntas Frecuentes</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_encuentra_oficina" data-info="encuentra_oficina">
+					<label>Encuentra una Oficina de BoA</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_hable_nosotros" data-info="hable_nosotros">
+					<label>Hable con Nosotros</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_redes_sociales" data-info="redes_sociales">
+					<label>En Redes Sociales</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_itinerario" data-info="itinerario">
+					<label>Itinerario</label>
+					<div class="icon small"></div>
+				</li>
+				<li id="submenu_item_reclamos_sugerencias" data-info="reclamos_sugerencias">
+					<label>Reclamos y Sugerencias</label>
+					<div class="icon small"></div>
+				</li>
+			</ul>	
+			<!-- preguntas frecuentes -->
+			<div id="info_preguntas_frecuentes" class="info selected">
+				<div class="icon"></div>
+				<div class="descripcion with-menu">
+					<div id="subinfo_opcion_uno" class="subinfo">
+						<h3>OPCI&Oacute;N UNO</h3>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<br><br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<br><br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<br><br>
+					</div>
+					<div id="subinfo_opcion_dos" class="subinfo">
+						<h3>OPCI&Oacute;N DOS</h3>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<br><br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<br><br>
+					</div>
+					<div id="subinfo_opcion_tres" class="subinfo selected">
+						<h3>OPCI&Oacute;N TRES</h3>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<br><br>
+					</div>
+				</div>
+				<ul class="right-menu">
+					<li data-item="opcion_uno">opcion 1</li>
+					<li data-item="opcion_dos">opcion 2</li>
+					<li class="selected" data-item="opcion_tres">opcion 3</li>
+					<li>opci&oacute;n con descripci&oacute;n un poco larga</li>
+					<li>opcion 5</li>
+					<li>opcion 6</li>
+				</ul>
+			</div>		
+		</div>
+	</div> <!-- <<< UI ATENCION AL CLIENTE >>> -->
+
+	<a id="btn_redirect" href="#" target="_blank" style="display:none"></a>
+</body>
+</html>

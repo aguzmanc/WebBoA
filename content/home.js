@@ -37,7 +37,7 @@ $(document).on('ready',function()
 	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
 		dateFormat: 'dd MM yy',
 		numberOfMonths: 2, 
-		minDate:0 
+		minDate:0
 	});
 
 	// footer UI
@@ -56,6 +56,10 @@ $(document).on('ready',function()
 		minDate: 0
 	});
 
+	// support for "font-awesome" icon library
+	$(".validable .calendar").datepicker("option", "prevText", '<i class="fa fa-arrow-left"></i>');
+	$(".validable .calendar").datepicker("option", "nextText", '<i class="fa fa-arrow-right"></i>');
+	
 	// checkboxes
 	$(".checkbox").click(toggle_checkbox);
 	$("#cbx_acepto_terminos").click(function(){
