@@ -1,8 +1,38 @@
 // ---------------------= =---------------------
+var HEADER_SCROLL_THRESHOLD = 170;
+var HEADER_SCROLL_THRESHOLD_FOR_MENU = 170;
+// ---------------------= =---------------------
 $(document).on('ready',function()
 {
-	// --------= MENU HANDLERS =--------
-	postprocess_header_links();
+	initialize_header(false);
+
+	initialize_ui_sections({anchor_section_headers:false});
+
+	// DEFAULT ACTION AT BEGINNING
+	handle_section_parameters_from_querystring();
+
+	$(document).scroll(function() {
+		// console.log($(window).scrollTop());
+	});
+});
+// ---------------------= =---------------------
+function initialize_ui_sections(parms)
+{
+	// ------------= SECTION MENU =----------------
+	$(".ui-section .first-menu > li").click(click_first_menu);
+
+	// ------------= DESPLEGABLES =----------------
+	$(".ui-section .descripcion .desplegable .title").click(function() {
+		var desplegable = this.parentNode;
+
+		if($(desplegable).hasClass("collapsed"))
+			$(desplegable).removeClass("collapsed");
+		else
+			$(desplegable).addClass("collapsed");
+	});
+
+	// by default all subtitles are collapsed
+	$(".ui-section .desplegable").addClass("collapsed");
 
 	// SECONDARY MENU INSIDE WIDE SECTIONS (right menu)
 	$(".ui-section.wide .right-menu li").click(function(ev){
@@ -15,11 +45,32 @@ $(document).on('ready',function()
 		parent_info.find(".descripcion #subinfo_" + item).addClass("selected");
 	});
 
-	// DEFAULT ACTION AT BEGINNING
-	handle_parameters_from_querystring();
-});
+	// --------= ANCHOR ELEMENTS WHEN SCROLL DOWN =--------
+	if(parms.anchor_section_headers == true)
+	{
+		$(document).scroll(function() {
+			var pos = $(document).scrollTop();
+
+			if(pos > HEADER_SCROLL_THRESHOLD) {
+				$(".ui-section .header").removeClass("active");
+				$(".ui-section .header-fixed").addClass("active");
+				$(".ui-section .header, .ui-section .first-menu, .ui-section .info, .ui-section .gradient").addClass("fixed");
+			}
+			else {
+				$(".ui-section .header").addClass("active");
+				$(".ui-section .header-fixed").removeClass("active");
+				$(".ui-section .header, .ui-section .first-menu, .ui-section .info, .ui-section .gradient").removeClass("fixed");
+			}
+
+			if(pos > HEADER_SCROLL_THRESHOLD_FOR_MENU)
+				$(".ui-section .first-menu").addClass("fixed");
+			else
+				$(".ui-section .first-menu").removeClass("fixed");
+		});
+	}
+}
 // ---------------------= =---------------------
-function handle_parameters_from_querystring()
+function handle_section_parameters_from_querystring()
 {
 	var item = location.queryString['item'];
 	var primary = location.queryString['primary'];
@@ -53,6 +104,47 @@ function handle_parameters_from_querystring()
 	}
 }
 // ---------------------= =---------------------
+var first_menu_data = {
+	node:null,
+	nodeInfo:null
+};
+function click_first_menu(ev)
+{
+	var scrollOffset = 0;
+	var scrollOffsetStr = $(this.parentNode).data("scroll_offset");
+	if(scrollOffsetStr != null)
+		scrollOffset = parseInt(scrollOffsetStr);
+
+	$('html, body').animate({scrollTop : scrollOffset},300);
+
+	var target = $(ev.target);
+	var isLabel = target.is("label") && $(ev.target.parentNode.parentNode).hasClass("first-menu");
+	var isSmallIcon = target.hasClass("icon") && target.hasClass("small");
+	var isLi = target.is("li") && $(ev.target.parentNode).hasClass("first-menu");
+
+	if(false==isLabel && false==isSmallIcon && false==isLi)  
+		return;
+
+	var info_name = $(this).data("info");
+
+	first_menu_data.node = this;
+	first_menu_data.nodeInfo = $(".ui-section #info_" + info_name);
+
+	var timeToCollapse=0;
+	if($(this.parentNode).hasClass("fixed"))
+		timeToCollapse = 500;
+
+	setTimeout(function(){
+		$(".ui-section .info").removeClass("selected");
+		first_menu_data.nodeInfo.addClass("selected");
+
+		var t = first_menu_data.node;
+
+		$(t.parentNode.parentNode).addClass("selected");
+		$(t.parentNode.parentNode).find(".first-menu > li").removeClass("selected");
+		$(t).addClass("selected");		
+	},timeToCollapse);
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

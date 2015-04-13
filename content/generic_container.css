@@ -31,8 +31,18 @@ body.generic-container
 	position: absolute;	
 	left: 50px;
 	top: auto;
+	bottom: 40px;
+	font-size: 55px;
+	font-family: "HelveticaNeuePro";
+	margin: 0;
+}
+
+.ui-section.wide .header h3 {
+	position: absolute;	
+	left: 50px;
+	top: auto;
 	bottom: 20px;
-	font-size: 49px;
+	font-size: 25px;
 	font-family: "HelveticaNeuePro";
 	margin: 0;
 }

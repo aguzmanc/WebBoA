@@ -33,7 +33,6 @@
 
 	<!-- STYLE.CSS -->
 	<link href="content/style.css" media="screen" rel="stylesheet" type="text/css" />
-	<link href="content/generic_container.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 <body class="generic-container">
 	<header style="display:block">
@@ -298,81 +297,17 @@
 	<div id="clouds">
 		<canvas id="clouds_canvas" width="2500" height="1000"></canvas>
 	</div>
-
-	<!-- UI ATENCION AL CLIENTE (sin menu derecho) -->
-	<div id="ui_atencion_cliente" class="ui-section wide">
-		<div class="gradient"></div>
-		<div class="header">
-			<img src="content/images/test_banner.jpg">
-			<h2>ATENCI&Oacute;N AL CLIENTE</h2>
-		</div>
-		<div style="position:relative">
-			<ul class="first-menu">
-				<li id="submenu_item_preguntas_frecuentes" class="selected" data-info="preguntas_frecuentes">
-					<label>Preguntas Frecuentes</label>
-					<div class="icon small"></div>
-				</li>
-				<li id="submenu_item_encuentra_oficina" data-info="encuentra_oficina">
-					<label>Encuentra una Oficina de BoA</label>
-					<div class="icon small"></div>
-				</li>
-				<li id="submenu_item_hable_nosotros" data-info="hable_nosotros">
-					<label>Hable con Nosotros</label>
-					<div class="icon small"></div>
-				</li>
-				<li id="submenu_item_redes_sociales" data-info="redes_sociales">
-					<label>En Redes Sociales</label>
-					<div class="icon small"></div>
-				</li>
-				<li id="submenu_item_itinerario" data-info="itinerario">
-					<label>Itinerario</label>
-					<div class="icon small"></div>
-				</li>
-				<li id="submenu_item_reclamos_sugerencias" data-info="reclamos_sugerencias">
-					<label>Reclamos y Sugerencias</label>
-					<div class="icon small"></div>
-				</li>
-			</ul>	
-			<!-- preguntas frecuentes -->
-			<div id="info_preguntas_frecuentes" class="info selected">
-				<div class="icon"></div>
-				<div class="descripcion">
-					<h3>PREGUNTAS FRECUENTES</h3>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					<br><br>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					<br><br>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					<br><br>
-				</div>
-			</div>		
-		</div>
-	</div> <!-- <<< UI ATENCION AL CLIENTE >>> -->
 	
-	<!-- UI ATENCION AL CLIENTE (con menu derecho) -->
+	<!-- UI ATENCION AL CLIENTE-->
 	<div id="ui_atencion_cliente_menu" class="ui-section wide selected">
 		<div class="gradient"></div>
 		<div class="header">
-			<img src="content/images/test_banner.jpg">
+			<img src="content/images/banner_atencion_cliente.png">
 			<h2>ATENCI&Oacute;N AL CLIENTE</h2>
+			<h3>ESTAMOS PARA AYUDARTE</h3>
 		</div>
 		<div style="position:relative">
-			<ul class="first-menu">
+			<ul class="first-menu" data-scroll_offset="330">
 				<li id="submenu_item_preguntas_frecuentes" class="selected" data-info="preguntas_frecuentes">
 					<label>Preguntas Frecuentes</label>
 					<div class="icon small"></div>
@@ -462,6 +397,20 @@
 					<li>opcion 5</li>
 					<li>opcion 6</li>
 				</ul>
+			</div>	
+			<!-- encuentra una oficina de BoA -->
+			<div id="info_encuentra_oficina" class="info">
+				<div class="icon"></div>
+				<div class="descripcion">
+					<h3>ENCUENTRA UNA OFICINA DE BOLIVIANA DE AVIACI&Oacute;N</h3>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br><br>
+				</div>
 			</div>		
 		</div>
 	</div> <!-- <<< UI ATENCION AL CLIENTE >>> -->

@@ -12,17 +12,10 @@ var autoCollapseTimeout;
 // ---------------------= =---------------------
 $(document).on('ready',function()
 {
-	// --------= MENU HANDLERS =--------
-	postprocess_header_links();
-
-	$(".secondary-menu li a").click(click_menu_item_from_home);
+	// Header first
+	initialize_header(false);
 
 	$("#buscador_vuelos .menu").click(click_menu_buscador_vuelos);
-
-	$(".dialog .btn-cerrar").click(function(){
-		$(".dialog-overlay").hide();
-		$(".dialog").hide();
-	});
 
 	// UI SETUP
 	$("#picker_salida").datepicker({ 
@@ -68,6 +61,7 @@ $(document).on('ready',function()
 		else
 			$("#btn_buscar_check_in").hide();
 	});
+
 	// radio buttons
 	$(".radio-button").click(toggle_radio_button);
 
@@ -106,9 +100,6 @@ $(document).on('ready',function()
 	// initialize service loading
 	$.getJSON(SLIDES_SERVICE_URL, async_receive_slides);
 
-	// DEFAULT ACTION AT BEGINNING
-	handle_action_from_querystring();
-
 	// handle "BUSCAR" from 'RESERVA DE VUELOS' button
 	$("#btn_buscar_vuelos").click(search_reserva_vuelos);
 
@@ -117,52 +108,6 @@ $(document).on('ready',function()
 	// automatic collapse of "caja de reservas"
 	autoCollapseTimeout = setTimeout(function(){$("#buscador_vuelos").removeClass("expanded").addClass("collapsed");}, MILLISECONDS_TO_AUTOCOLLAPSE_RESERVAS_BOX);
 });
-// ---------------------= =---------------------
-function click_menu_item_from_home(ev)
-{
-	ev.preventDefault();
-
-	var href = $(this).attr("href");
-	var btn = $("#btn_redirect");
-	var li = this.parentNode;
-	var isLink = $(li).data("is_link");
-	var action = $(li).data("action");
-
-	if(isLink) {
-		btn.attr("target","_blank");
-		btn.attr("href",href);
-		btn[0].click();
-		return;
-	}
-
-	if(action=="none") return;
-
-	var item = $(li).data("item");
-
-	if($(li).hasClass("primary")){
-		href = INFO_PAGE_LINK_ADDRESS + "?primary=" + item;
-		btn.attr("href",href);
-		btn[0].click();
-	}else{
-		href = INFO_PAGE_LINK_ADDRESS + "?item=" + item;
-
-		// buscando primario
-		do {
-			var prev = $(li).prev();
-			if(prev.length==0){
-				console.log("ERROR, PRIMARIO DE ITEM NO ENCONTRADO");
-				return;
-			}
-
-			li = prev[0];
-		} while(false == $(li).hasClass("primary"));
-
-		href = href + "&primary=" + $(li).data("item");
-
-		btn.attr("href",href);
-		btn[0].click();
-	}
-}
 // ---------------------------------------------------------------------------
 function click_menu_buscador_vuelos()
 {
@@ -177,22 +122,6 @@ function click_menu_buscador_vuelos()
 
 	$("#buscador_vuelos .content").hide();
 	$("#" + content_id).show();
-}
-// ---------------------= =---------------------
-function handle_action_from_querystring()
-{
-	var item = location.queryString['item'];
-	var action = location.queryString['action'];
-
-	// actions handler
-	if(action !== null){
-		switch(action){
-			case 'show_direcciones':
-				$(".dialog-overlay").show();
-				$("#dialog_direcciones").show();
-				break;
-		}
-	}
 }
 // ---------------------= =---------------------
 function async_receive_slides(response)
