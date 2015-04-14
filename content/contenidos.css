@@ -557,10 +557,9 @@
 #subtitle_politica_de_personal.collapsed 		.title .img{background-position: 0 -120px;}
 
 /* ---------------------------------------------------------- */
-/* ------------= RECONOCIMIENTOS Y PREMIOS =---------------- */
+/* ------------= RECONOCIMIENTOS Y PREMIOS =----------------- */
 /* ---------------------------------------------------------- */
 #ui_reconocimientos_premios .info .img-contenido {width: 125px;height: 125px;background-image: url("images/contenidos/image_reconocimientos_premios.png");}
-
 
 #image_premio_merito_social{		background-position: 0 0;}
 #image_premio_trabajo_liderazgo{	background-position: 0 -125px;}
@@ -573,6 +572,32 @@
 #image_premio_merco_bolivia{		background-position: 0 -875px;}
 #image_premio_prevencion_vih{		background-position: 0 -1000px;}
 
+/* ---------------------------------------------------------- */
+/* ---------------= ATENCION AL CLIENTE =-------------------- */
+/* ---------------------------------------------------------- */
+#ui_atencion_cliente .info .icon,
+#ui_atencion_cliente .first-menu li .icon { background-image: url("images/contenidos/icons_atencion_cliente.png"); }
+
+#submenu_item_preguntas_frecuentes 		.icon{background-position: 0px 0px;}
+#submenu_item_encuentra_oficina 		.icon{background-position: 0px -25px;}
+#submenu_item_hable_nosotros 			.icon{background-position: 0px -50px;}
+#submenu_item_redes_sociales 			.icon{background-position: 0px -75px;}
+#submenu_item_itinerario 				.icon{background-position: 0px -100px;}
+#submenu_item_reclamos_sugerencias 		.icon{background-position: 0px -125px;}
+
+#info_preguntas_frecuentes 				.icon{background-position: 	0px 0px; }
+#info_encuentra_oficina 				.icon{background-position: 	0px -80px; }
+#info_hable_nosotros 					.icon{background-position: 	0px -160px; }
+#info_redes_sociales 					.icon{background-position: 	0px -240px; }
+#info_itinerario 						.icon{background-position: 	0px -320px; }
+#info_reclamos_sugerencias 	 			.icon{background-position: 	0px -400px; }
+
+#info_preguntas_frecuentes.fixed 	.icon{background-position:	0px 0px; }
+#info_encuentra_oficina.fixed 		.icon{background-position: 	0px -50px; }
+#info_hable_nosotros.fixed 			.icon{background-position: 	0px -100px; }
+#info_redes_sociales.fixed 			.icon{background-position: 	0px -150px; }
+#info_itinerario.fixed 				.icon{background-position: 	0px -200px; }
+#info_reclamos_sugerencias.fixed 	.icon{background-position: 	0px -250px; }
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

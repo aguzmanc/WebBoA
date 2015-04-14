@@ -108,12 +108,31 @@ var first_menu_data = {
 	node:null,
 	nodeInfo:null
 };
+
 function click_first_menu(ev)
 {
+	// parameters
 	var scrollOffset = 0;
 	var scrollOffsetStr = $(this.parentNode).data("scroll_offset");
 	if(scrollOffsetStr != null)
 		scrollOffset = parseInt(scrollOffsetStr);
+
+	var isLink = $(this).data("is_link");
+	if(isLink != null){
+		ev.preventDefault();
+
+		var href = "";
+
+		if($(ev.target).is("a"))
+			href = $(ev.target).attr("href");
+		else 
+			href = $(this).find("a").attr("href");
+
+		var btn = $("#btn_redirect").attr("target","_blank").attr("href",href);
+		btn[0].click();
+
+		return;
+	}
 
 	$('html, body').animate({scrollTop : scrollOffset},300);
 

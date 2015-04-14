@@ -112,10 +112,18 @@ footer .validable,
 
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
-body{
+body {
 	overflow: hidden;
 }
 
+body.generic-container
+{
+	background-color: #A4C6EF;
+	padding:0;
+	margin:0;
+	overflow-y:auto !important;
+	overflow-x:hidden !important
+}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 header{
@@ -1519,6 +1527,10 @@ footer .form .button {
 
 .ui-section .first-menu > li.selected > label{
 	color: #FFF;
+}
+
+.ui-section .first-menu > li a{
+	color: #1F3656;
 }
 /* --------------------------------------------------------------------------- */
 .ui-section .info {
