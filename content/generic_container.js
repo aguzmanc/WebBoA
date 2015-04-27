@@ -2,19 +2,15 @@
 var HEADER_SCROLL_THRESHOLD = 170;
 var HEADER_SCROLL_THRESHOLD_FOR_MENU = 170;
 // ---------------------= =---------------------
-$(document).on('ready',function()
-{
-	initialize_header(false);
+// $(document).on('ready',function()
+// {
+// 	initialize_header(false);
 
-	initialize_ui_sections({anchor_section_headers:false});
+// 	initialize_ui_sections({anchor_section_headers:false});
 
-	// DEFAULT ACTION AT BEGINNING
-	handle_section_parameters_from_querystring();
-
-	$(document).scroll(function() {
-		// console.log($(window).scrollTop());
-	});
-});
+// 	// DEFAULT ACTION AT BEGINNING
+// 	handle_section_parameters_from_querystring();
+// });
 // ---------------------= =---------------------
 function initialize_ui_sections(parms)
 {

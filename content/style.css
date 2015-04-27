@@ -68,6 +68,9 @@ header #language_selector .content,
 .ui-section.wide .right-menu li,
 .content .validable,
 footer .validable,
+#widget_cambiar_vuelo,
+#widget_realizar_reserva,
+.day-selector,
 #home
 {
 	transition: all 0.5s;
@@ -2109,14 +2112,13 @@ footer .form .button {
 	position: relative;
 	width: 100%;
 	min-width: 850px;
-	height: auto;
 	display: flex;
 	padding: 0;
 }
 
 .ui-section.wide .header img {
 	width: 100%;
-	min-width: 850px;
+	min-width: 500px;
 }
 
 .ui-section.wide .header h2 {
@@ -2144,6 +2146,7 @@ footer .form .button {
 	bottom: -10px;
 	left: 0;
 	width: 100%;
+	min-width: 850px;
 }
 /* --------------------------------------------------------------------------- */
 .ui-section.wide .first-menu {
@@ -2203,6 +2206,160 @@ footer .form .button {
 }
 
 .ui-section.wide .right-menu li.selected{cursor: default;}
+/* --------------------------------------------------------------------------- */
+.ui-section.wide.results .info{ margin: 0;}
+
+.ui-section.wide.results .header  { 
+	background-image: url('images/banner_reserva_vuelos.png');
+}
+
+.ui-section.wide.results .descripcion h3 {
+	font-size: 40px;
+	margin: 0;
+}
+
+.ui-section.wide.results .header h2 {
+	font-size: 45px;
+	bottom: 10px;
+	left: 100px;
+}
+
+.ui-section.wide.results .header .icon-calendar {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 60px;
+	height: 60px;
+	background-color: #EFAA35;
+	border-radius: 100px;
+}
+
+.ui-section.wide.results .descripcion h2 {
+	font-size: 21px;
+	margin: 10px 0 10px 60px;
+}
+/*-- CAMBIAR VUELO --*/
+.ui-section.wide.results #widget_cambiar_vuelo {
+	position: absolute;
+	top: 50px;
+	right: 0;
+	overflow: hidden;
+	z-index: 101;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 180px;
+	height: 40px;
+	background-color: #EFAA35;
+	
+	font-family: "HelveticaNeuePro";
+	text-align: center;
+	color: rgb(255, 255, 255);
+	padding: 0px 20px 0px 0px;
+	font-size: 20px;
+	line-height: 40px;
+
+	cursor: pointer;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo.expanded {
+	z-index: 101;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo.collapsed .btn-expand:hover { background-color: #C28318; }
+.ui-section.wide.results #widget_cambiar_vuelo.expanded .btn-expand { cursor: default; }
+
+.ui-section.wide.results #widget_cambiar_vuelo .form{
+	position: absolute;
+    right: 0px;
+    top: 40px;
+    width: 500px;
+    height: 200px;
+    background-color: #EFAA35;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo.collapsed {width: 200px; height: 40px;}
+.ui-section.wide.results #widget_cambiar_vuelo.expanded {width: 500px;height: 250px;}
+
+/*----*/
+.ui-section.wide.results .info {
+	width: 100%;
+	min-width: 850px;
+}
+
+.ui-section.wide.results .descripcion table {
+	width: 100%;
+	margin: 0;	
+}
+
+.ui-section.wide.results .descripcion table.days-selector td{
+	padding: 5px;
+}
+
+.ui-section.wide.results .descripcion table .day-selector{
+	min-width: 69px;
+	height: 80px;
+	background-color: #34598C;
+	color: #FFF;
+	cursor: pointer;
+}
+
+.ui-section.wide.results .descripcion table .day-selector:hover:not(.selected) {
+	background-color: #1D3150;
+}
+
+.ui-section.wide.results .descripcion table .day-selector.selected {
+	background-color: #EFAA35;
+	cursor: default;
+}
+
+.ui-section.wide.results .descripcion table .day-selector h2 {
+	margin: 0;
+	height: 30px;
+	padding: 10px 0 0 0;
+	font-size: 18px;
+}
+
+.ui-section.wide.results .descripcion table .day-selector h2 span {
+	font-family: "HelveticaNeueProMd";
+	color: #EFAA35;
+	padding: 0px 0px 0px 10px;
+	font-size: 27px;
+}
+
+.ui-section.wide.results .descripcion table .day-selector.selected h2 span {
+	color: #34598C;
+}
+
+.ui-section.wide.results .descripcion table .day-selector h3 {
+	font-size: 24px;
+	text-align: center;
+	width: auto;
+	padding: 0;
+	font-family: "HelveticaNeueProMd";
+}
+
+.ui-section.wide.results .descripcion table th.class-group {
+	width: 90px;
+	min-width: 90px;
+}
+
+.ui-section.wide.results .descripcion table td span{font-size:13px;}
+
+.ui-section.wide.results .descripcion table td.disabled {
+ 	font-size: 12px;
+ 	color: rgb(158, 158, 158);
+}
+
+.ui-section.wide.results .descripcion table td.loading-cell .loading{
+	background-image: url('images/loading.gif');
+	width: 100px;
+	height: 100px;
+	margin: 30px auto;
+}
 /* --------------------------------------------------------------------------- */
 .weather-cell{width: 100px}
 .weather-info-cell .button{width: 50px;}
