@@ -2232,11 +2232,18 @@ footer .form .button {
 	height: 60px;
 	background-color: #EFAA35;
 	border-radius: 100px;
+
+	background-image: url('images/icon_calendario_reservas.png');
+	background-size: 60px;
 }
 
-.ui-section.wide.results .descripcion h2 {
+.ui-section.wide.results .descripcion > h2 {
 	font-size: 21px;
-	margin: 10px 0 10px 60px;
+	padding: 10px 0 10px 60px;
+	background-image: url('images/icon_avion_reservas.png');
+	background-size: 30px auto;
+	background-repeat: no-repeat;
+	background-position: 20px 5px;
 }
 /*-- CAMBIAR VUELO --*/
 .ui-section.wide.results #widget_cambiar_vuelo {
@@ -2297,9 +2304,16 @@ footer .form .button {
 
 .ui-section.wide.results .descripcion table.days-selector td{
 	padding: 5px;
+	width: 14%;
 }
 
-.ui-section.wide.results .descripcion table .day-selector{
+.ui-section.wide.results .descripcion table.days-selector td.no-flights {
+    background-color: #909090 !important;
+    color: #666 !important;
+    cursor: default !important;
+}
+
+.ui-section.wide.results .descripcion table .day-selector {
 	min-width: 69px;
 	height: 80px;
 	background-color: #34598C;
@@ -2312,7 +2326,7 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table .day-selector.selected {
-	background-color: #EFAA35;
+	background-color: #EFAA35 !important;
 	cursor: default;
 }
 
@@ -2321,6 +2335,11 @@ footer .form .button {
 	height: 30px;
 	padding: 10px 0 0 0;
 	font-size: 18px;
+}
+
+.ui-section.wide.results .descripcion table .day-selector h2 .empty-msg {
+	font-size: 60px;
+	margin: 30px 0;
 }
 
 .ui-section.wide.results .descripcion table .day-selector h2 span {
@@ -2335,7 +2354,7 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table .day-selector h3 {
-	font-size: 24px;
+	font-size: 15px;
 	text-align: center;
 	width: auto;
 	padding: 0;

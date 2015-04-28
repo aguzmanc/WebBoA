@@ -1,4 +1,8 @@
 // ---------------------------------------------------------------------------
+var CURRENCY = "bs"; // "euro", "bs" , "usd" 
+var HTML_CURRENCIES = {bs:"Bs.",euro:"&euro;",usd:"USD"};
+var CODE_CURRENCIES = {bs:"BOB",euro:"EU",usd:"USD"};
+// ---------------------------------------------------------------------------
 var urls = {
 	home : "home.html",
 	info_page : "info_page.html",

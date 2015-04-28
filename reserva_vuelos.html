@@ -27,10 +27,12 @@
 	<script type="text/javascript" src="content/reserva_vuelos.js"></script>
 	
 	<!-- COMMON SCRIPTS -->
+	<script type="text/javascript" src="content/language_data_es.js"></script> <!-- PT, EN -->
 	<script type="text/javascript" src="content/custom_handlers.js"></script>
 	<script type="text/javascript" src="content/common.js"></script>
 	<script type="text/javascript" src="content/header.js"></script>
 	<script type="text/javascript" src="content/generic_container.js"></script>
+
 
 	<!-- STYLE.CSS -->
 	<link href="content/style.css" media="screen" rel="stylesheet" type="text/css" />
@@ -320,43 +322,10 @@
 					<table cellspacing="0" cellpadding="0">
 						<tr>
 							<td colspan="6">
-								<table class="days-selector" data-salida_regreso="salida">
+								<table class="days-selector" data-salida_regreso="salida" 
+									id="tbl_days_selector_salida">
 									<tr>
-										<td>
-											<div class="day-selector" data-date="20150511">
-												<h2>Lu<span>11</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
-										<td>
-											<div class="day-selector" data-date="20150512">
-												<h2>Ma<span>12</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
-										<td>
-											<div class="day-selector" data-date="20150513">
-												<h2>Mi<span>13</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
-										<td>
-											<div class="day-selector selected" data-date="20150514">
-												<h2>Ju<span>14</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
-										<td>
-											<div class="day-selector" data-date="20150515">
-												<h2>Vi<span>15</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
-										<td>
-											<div class="day-selector" data-date="20150516">
-												<h2>Sa<span>16</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
-										<td>
-											<div class="day-selector" data-date="20150517">
-												<h2>Do<span>17</span></h2><h3>999 &euro;</h3>
-											</div>
-										</td>
+										<!-- DAYS HERE -->
 									</tr>
 								</table>
 							</td>
@@ -368,41 +337,30 @@
 							<th>Operado por</th>
 							<th class="class-group">Econ&oacute;mica</th>
 						</tr>
-						
-						<!-- <tr>
-							<td>06:50&nbsp;&nbsp;-&nbsp;&nbsp;8:00<br><span>Duración: 1h 10m</span></td>
-							<td>BoA</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>64 &euro;</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>332 &euro;<br><span>2 &uacute;ltimas plazas</span></td>
-						</tr>
-						<tr>
-							<td>06:50&nbsp;&nbsp;-&nbsp;&nbsp;8:00<br><span>Duración: 1h 10m</span></td>
-							<td>BoA</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>64 &euro;</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>332 &euro;<br><span>2 &uacute;ltimas plazas</span></td>
-						</tr>
-						<tr>
-							<td>06:50&nbsp;&nbsp;-&nbsp;&nbsp;8:00<br><span>Duración: 1h 10m</span></td>
-							<td>BoA</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>64 &euro;</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>332 &euro;<br><span>2 &uacute;ltimas plazas</span></td>
-						</tr>
-						<tr>
-							<td>06:50&nbsp;&nbsp;-&nbsp;&nbsp;8:00<br><span>Duración: 1h 10m</span></td>
-							<td>BoA</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>64 &euro;</td>
-							<td class="disabled"><span>No disponible</span></td>
-							<td>332 &euro;<br><span>2 &uacute;ltimas plazas</span></td>
-						</tr> -->
+						<!-- ROWS OF FLIGHTS HERE -->
 					</table>
 					<br><br>
+					<h2>Retorno: Santa Cruz(SCZ) - Cochabamba(CBBA)</h2>
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<td colspan="6">
+								<table class="days-selector" data-salida_regreso="regreso" 
+									id="tbl_days_selector_regreso">
+									<tr>
+										<!-- DAYS HERE -->
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+					<table cellspacing="0" cellpadding="0" id="tbl_regreso">
+						<tr>
+							<th>Salida - Llegada</th>
+							<th>Operado por</th>
+							<th class="class-group">Econ&oacute;mica</th>
+						</tr>
+						<!-- ROWS OF FLIGHTS HERE -->
+					</table>
 				</div>
 				<ul class="right-menu" style="">
 					<li data-item="opcion_uno">opcion 1</li>
