@@ -69,7 +69,7 @@ header #language_selector .content,
 .content .validable,
 footer .validable,
 #widget_cambiar_vuelo,
-#widget_realizar_reserva,
+.icon-cross,
 .day-selector,
 #home
 {
@@ -752,24 +752,24 @@ header .att-div{
 
 /*#slider_paginator:hover li{opacity: 1;}*/
 /* --------------------------------------------------------------------------- */
-.content label{
+.form label{
 	font-family: "HelveticaNeuePro";
 	font-size: 13px;
 	color: #FFF;
 }
 
-.content label a{
+.form label a{
 	color: #1F3656;
 	font-size: 15px;
 }
 
-.content label a:hover{text-decoration: underline;}
+.form label a:hover{text-decoration: underline;}
 
-.content .input-container{
+.form .input-container{
 	padding: 0 20px 5px 0;
 }
 
-.content select{
+.form select {
 	height: 34px;
 	border-radius: 0px;
 	border-width: 0 0 2px 0;
@@ -2112,6 +2112,7 @@ footer .form .button {
 	position: relative;
 	width: 100%;
 	min-width: 850px;
+	height: auto;
 	display: flex;
 	padding: 0;
 }
@@ -2211,6 +2212,7 @@ footer .form .button {
 
 .ui-section.wide.results .header  { 
 	background-image: url('images/banner_reserva_vuelos.png');
+	height: 100px;
 }
 
 .ui-section.wide.results .descripcion h3 {
@@ -2272,12 +2274,38 @@ footer .form .button {
 	cursor: pointer;
 }
 
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand .icon-cross {
+	position: absolute;
+	top: 5px;
+	left: 160px;
+	width: 30px;
+	height: 30px;
+
+	background-image: url('images/cross.png');
+	background-repeat: no-repeat;
+	background-size: 30px;
+
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+	-moz-transform: rotate(135deg);
+	-o-transform: rotate(135deg);
+	-ms-transform: rotate(135deg);
+
+}
+
 .ui-section.wide.results #widget_cambiar_vuelo.expanded {
 	z-index: 101;
 }
 
 .ui-section.wide.results #widget_cambiar_vuelo.collapsed .btn-expand:hover { background-color: #C28318; }
 .ui-section.wide.results #widget_cambiar_vuelo.expanded .btn-expand { cursor: default; }
+.ui-section.wide.results #widget_cambiar_vuelo.expanded .btn-expand .icon-cross {
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+}
 
 .ui-section.wide.results #widget_cambiar_vuelo .form{
 	position: absolute;
@@ -2378,6 +2406,96 @@ footer .form .button {
 	width: 100px;
 	height: 100px;
 	margin: 30px auto;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row td{cursor: pointer;}
+
+.ui-section.wide.results .descripcion table tr.flight-row:hover td {
+	background-color: #ABC6D8;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row td.tarifa:hover {
+	background-color: #78A2BF;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row .rbtn {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #FFF;
+	border-radius: 100px;
+	margin: 4px 4px 10px 4px;
+	vertical-align: middle;
+	opacity: 0;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row:hover .rbtn,
+.ui-section.wide.results .descripcion table tr.flight-row.selected .rbtn{
+	opacity: 1;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row .rbtn > div{
+	background-color: #000;
+	width: 10px;
+	height: 10px;
+	margin: 5px auto;
+	vertical-align: middle;
+	border-radius: 100px;
+	display: none;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row .rbtn.checked > div{display: block;}
+
+.ui-section.wide.results .descripcion table tr.flight-row.selected td {
+	background-color: #EFCF9B !important;
+}
+
+.ui-section.wide.results .descripcion table tr.flight-row.selected td{cursor: default;}
+/* --------------------------------------------------------------------------- */
+.ui-section.wide.results .cell-details {
+	background-color: #EFAA35;
+}
+
+.ui-section.wide.results .cell-details table {
+	width:10px;
+	margin: 0 100px;
+}
+
+.ui-section.wide.results .cell-details td {background-color: transparent;}
+
+.ui-section.wide.results .cell-details .icon-salida {
+	width: 100px;
+	height: 64px;
+	background-image: url("images/icon_salida.png");
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	background-size: 100px 64px;
+	padding: 10px;
+}
+
+.ui-section.wide.results .cell-details .icon-regreso {
+	width: 100px;
+	height: 64px;
+	background-image: url("images/icon_regreso.png");
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	background-size: 100px 64px;
+	padding: 10px;
+}
+
+.ui-section.wide.results .cell-details td {
+	color: #FFF;
+	font-size: 30px;
+	text-align: left;
+	font-family: "FuturaBook";
+	padding: 0;
+}
+
+.ui-section.wide.results .cell-details label{font-size:15px;}
+
+.ui-section.wide.results .cell-details h2 {
+	color: #1F3656;
+	font-size:15px;
 }
 /* --------------------------------------------------------------------------- */
 .weather-cell{width: 100px}

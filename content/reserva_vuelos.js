@@ -31,6 +31,7 @@ $(document).on('ready',function()
 
 	handle_initial_request();
 });
+
 // ---------------------= =---------------------
 function handle_initial_request()
 {
@@ -62,7 +63,11 @@ function handle_initial_request()
 		current_date_regreso = initial_parameters.fecha_regreso;
 
 		request_nearest_dates(initial_parameters.fecha_regreso, false, async_receive_regreso_dates);
+	} else {
+		$("#lbl_regreso, #tbl_dayselector_regreso, #tbl_regreso").hide();
 	}
+
+	$("#tbl_salida .tarifa").click(select_tarifa);
 }
 // ---------------------= =---------------------
 function change_day()
@@ -142,15 +147,17 @@ function request_nearest_dates(date, isSalida, results_callback)
 	var hh = ("00" + (now.getHours())).slice(-2);
 	var mm = ("00" + (now.getMinutes())).slice(-2);
 
+	var table = $("#tbl_days_selector_" + (isSalida?"salida":"regreso"));
+
 	var currentTimeStr = hh+""+mm;
 
 	$.ajax({
-		url: "content/fake_services/nearest_dates.json",
+		url: "content/fake_services/nearest_dates.php",
 		type: 'post',
 		dataType:'json',
 		success: results_callback,
 		data: {
-			credentials 	: "{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4}{59331f3e-a518-4e1e-85ca-8df59d14a420}", // x( 
+			credentials 	: "{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4}{59331f3e-a518-4e1e-85ca-8df59d14a420}", 
 			language 		: "ES",
 			currency 		: CODE_CURRENCIES[CURRENCY],
 			locationType 	: "N",
@@ -173,10 +180,12 @@ function request_nearest_dates(date, isSalida, results_callback)
 			cat19Discounts  : "", 
 			specialDiscounts: "",
 			booking 		: "",
-			ipAddress 		: "127.0.0.1", /*****xD*****/
+			ipAddress 		: "127.0.0.1", 
 			xmlOrJson 		: false  // false=json ; true=xml 
 		} 
 	});
+
+	table.find("tr").html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
 }
 // ---------------------= =---------------------
 function async_receive_salida_dates(response) 
@@ -185,7 +194,7 @@ function async_receive_salida_dates(response)
 
 	$("#tbl_days_selector_salida").find(".day-selector:not(.no-flights)").click(change_day);
 
-	get_for_date(initial_parameters.fecha_salida, true);
+	// get_for_date(initial_parameters.fecha_salida, true);
 }
 // ---------------------= =---------------------
 function async_receive_regreso_dates(response) 
@@ -219,7 +228,7 @@ function receive_nearest_dates(response, isSalida)
 							 requestedDateStr.substr(6,2), 0,0,0,0);
 
 	var tbl = $("#tbl_days_selector_" + (isSalida?"salida":"regreso"));
-	tbl.find("tr td").remove();
+	tbl.find("tr td").remove(); // clean
 
 	// check for 3 days after, and 3 days before
 	// if it does not exist, complete with "none" instead of the price
@@ -288,6 +297,7 @@ function fill_table(table, flights)
 		for(var i=0;i<flights.length; i++) {
 			var flight = flights[i];
 			var row = document.createElement("tr");
+			$(row).addClass("flight-row");
 			
 			// salida - llegada
 			var cell = document.createElement("td");
@@ -312,16 +322,16 @@ function fill_table(table, flights)
 				cell = document.createElement("td");
 				if(flight[clase]=="none")
 					$(cell).addClass("disabled").html("<span>No disponible</span>");
-				else
-					$(cell).html(flight[clase] + " " + HTML_CURRENCIES[CURRENCY]);
+				else{
+					$(cell).addClass("tarifa").html("<div class='rbtn'><div></div></div>" + flight[clase] + " " + HTML_CURRENCIES[CURRENCY]);
+					$(cell).click(select_tarifa);
+				}
 				row.appendChild(cell);	
 			}
 
 			table.appendChild(row);
 		}
 	}
-
-	
 }
 // ---------------------= =---------------------
 function fill_table_with_loading(table, flights)
@@ -332,6 +342,23 @@ function fill_table_with_loading(table, flights)
 	$(row).html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
 
 	table.appendChild(row);
+}
+// ---------------------= =---------------------
+function select_tarifa()
+{
+	console.log("tar");
+	var row = this.parentNode;
+	if($(row).hasClass("selected")) return;
+
+	var table = row.parentNode;
+	while(false == $(table).is("table")) // find parent table
+		table = table.parentNode;
+
+	$(table).find(".flight-row").removeClass("selected")
+	$(row).addClass("selected");
+
+	$(table).find(".rbtn").removeClass("checked");
+	$(this).find(".rbtn").addClass("checked");
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------

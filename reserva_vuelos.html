@@ -16,13 +16,6 @@
 		rel="stylesheet" type="text/css" />
 	<script src="content/lib/custom_scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-	<!-- ANIMATION LIBRARY -->
-	<script type="text/javascript" src="content/prototypes/Engine.js"></script>
-	<script type="text/javascript" src="content/prototypes/Transformable.js"></script>
-	<script type="text/javascript" src="content/prototypes/Transparent.js"></script>
-	<script type="text/javascript" src="content/prototypes/Cloud.js"></script>
-	<script type="text/javascript" src="content/prototypes/Sky.js"></script>
-
 	<!-- CUSTOM SCRIPTS -->
 	<script type="text/javascript" src="content/reserva_vuelos.js"></script>
 	
@@ -32,7 +25,6 @@
 	<script type="text/javascript" src="content/common.js"></script>
 	<script type="text/javascript" src="content/header.js"></script>
 	<script type="text/javascript" src="content/generic_container.js"></script>
-
 
 	<!-- STYLE.CSS -->
 	<link href="content/style.css" media="screen" rel="stylesheet" type="text/css" />
@@ -309,13 +301,56 @@
 			<div class="icon-calendar"></div>
 			<h2>RESERVA DE VUELOS</h2>
 			<div id="widget_cambiar_vuelo" class="collapsed">
-				<div class="btn-expand">Cambiar Vuelo</div>
-				<div class="form"></div>
+				<div class="btn-expand">Cambiar Vuelo <div class="icon-cross"></div></div>
+				<div class="form">
+					<table>
+						<tr>
+							<td><label>Desde:</label></td>
+							<td><label>A:</label></td>
+						</tr>
+						<tr>
+							<td class='input-container'>
+								<div class="validable">
+									<select id="select_desde" class="origen-destino">
+										<option value="">Origen</option>
+										<option value="CIJ">COBIJA</option>
+						                <option value="CBB">COCHABAMBA</option>
+						                <option value="LPB">LA PAZ</option>
+						                <option value="MAD">MADRID</option>
+						                <option value="VVI">SANTA CRUZ</option>
+						                <option value="SRE">SUCRE</option>
+						                <option value="TJA">TARIJA</option>
+						                <option value="TRI">TRINIDAD</option>
+						                <option value="EZE">BUENOS AIRES</option>
+						                <option value="GRU">SAO PAULO</option>
+									</select>	
+								</div>
+							</td>
+							<td class='input-container'>
+								<div class="validable">
+									<select id="select_hasta" class="origen-destino">
+										<option value="">Destino</option>
+										<option value="CIJ">COBIJA</option>
+						                <option value="CBB">COCHABAMBA</option>
+						                <option value="LPB">LA PAZ</option>
+						                <option value="MAD">MADRID</option>
+						                <option value="VVI">SANTA CRUZ</option>
+						                <option value="SRE">SUCRE</option>
+						                <option value="TJA">TARIJA</option>
+						                <option value="TRI">TRINIDAD</option>
+						                <option value="EZE">BUENOS AIRES</option>
+						                <option value="GRU">SAO PAULO</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div style="position:relative">
-			<!-- preguntas frecuentes -->
-			<div id="info_preguntas_frecuentes" class="info selected">
+			<!-- resultados vuelos -->
+			<div id="info_resultados_vuelos" class="info selected">
 				<div class="descripcion with-menu">
 					<h3>Selecciona tus vuelos</h3>
 					<h2>Ida: Cochabamba(CBBA) - Santa Cruz(SCZ)</h2>
@@ -338,10 +373,78 @@
 							<th class="class-group">Econ&oacute;mica</th>
 						</tr>
 						<!-- ROWS OF FLIGHTS HERE -->
+						<tr class="flight-row">
+							<td>08:35&nbsp;&nbsp;-&nbsp;&nbsp;17:35<br><span>Duración: 9h 0m</span></td>
+							<td>BoA</td>
+							<td class="tarifa"><div class="rbtn"><div></div></div>151 Bs.</td>
+						</tr>
+						<tr class="flight-row">
+							<td>15:48&nbsp;&nbsp;-&nbsp;&nbsp;16:41<br><span>Duración: 0h 53m</span></td>
+							<td>BoA</td>
+							<td class="tarifa"><div class="rbtn"><div></div></div>2 Bs.</td>
+						</tr>
+						<tr class="flight-row selected">
+							<td>17:47&nbsp;&nbsp;-&nbsp;&nbsp;17:59<br><span>Duración: 0h 12m</span></td>
+							<td>BoA</td>
+							<td class="tarifa"><div class="rbtn"><div></div></div>132 Bs.</td>
+						</tr>
+						<tr>
+							<td colspan="10" class="cell-details">
+								<table cellpadding="0" cellspacing="0" style="float:left">
+									<tr>
+										<td rowspan="2"><div class="icon-salida"></td>
+										<td>08:00</td>
+									</tr>
+									<tr>
+										<td>Hrs.</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<label>Duraci&oacute;n 40 min.</label>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<h2>Cochabamba</h2>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<label>Aeropuerto Jorge Wilstermann</label>
+										</td>
+									</tr>
+								</table>
+								<table cellpadding="0" cellspacing="0">
+									<tr>
+										<td rowspan="2"><div class="icon-regreso"></td>
+										<td>08:45</td>
+									</tr>
+									<tr>
+										<td>Hrs.</td>
+									</tr>
+									<tr><td colspan="2">&nbsp;</td></tr>
+									<tr>
+										<td colspan="2">
+											<h2>Santa Cruz</h2>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<label>Aeropuerto Viru Viru</label>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr class="flight-row">
+							<td>09:17&nbsp;&nbsp;-&nbsp;&nbsp;13:11<br><span>Duración: 3h 54m</span></td>
+							<td>BoA</td>
+							<td class="tarifa"><div class="rbtn"><div></div></div>298 Bs.</td>
+						</tr>
 					</table>
 					<br><br>
-					<h2>Retorno: Santa Cruz(SCZ) - Cochabamba(CBBA)</h2>
-					<table cellspacing="0" cellpadding="0">
+					<h2 id="lbl_regreso">Retorno: Santa Cruz(SCZ) - Cochabamba(CBBA)</h2>
+					<table id="tbl_dayselector_regreso" cellspacing="0" cellpadding="0">
 						<tr>
 							<td colspan="6">
 								<table class="days-selector" data-salida_regreso="regreso" 
