@@ -69,6 +69,7 @@ header #language_selector .content,
 .content .validable,
 footer .validable,
 #widget_cambiar_vuelo,
+.flight-details .cell-details, .flight-details .expandable,
 .icon-cross,
 .day-selector,
 #home
@@ -2497,6 +2498,17 @@ footer .form .button {
 	color: #1F3656;
 	font-size:15px;
 }
+
+.ui-section.wide.results .flight-details .expandable {
+	max-height: 300px;
+	overflow: hidden;
+}
+
+.ui-section.wide.results .flight-details.collapsed .expandable {
+	max-height: 0;
+}
+
+.ui-section.wide.results .flight-details.collapsed .cell-details{padding: 0;}
 /* --------------------------------------------------------------------------- */
 .weather-cell{width: 100px}
 .weather-info-cell .button{width: 50px;}

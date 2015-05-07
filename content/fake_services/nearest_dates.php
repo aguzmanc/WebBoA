@@ -1,8 +1,10 @@
 <?php 
 
-$r = fgets(fopen("nearest_dates.json","r"));
-echo $r;
+	$r = fgets(fopen("nearest_dates.json","r"));
 
-sleep(1);
+	$decoded = json_decode($r,true);
 
+	echo json_encode($decoded);
+
+	// sleep(1);
 ?>

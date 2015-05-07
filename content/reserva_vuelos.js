@@ -128,16 +128,42 @@ function request_flights(date, results_callback)
 {
 	dates_loading.push(date);
 
+	var now = new Date();
+	var hh = ("00" + (now.getHours())).slice(-2);
+	var mm = ("00" + (now.getMinutes())).slice(-2);
+
+	var currentTimeStr = hh + "" + mm;
+
 	$.ajax({
 		url: "content/fake_services/flights.php",
 		type: 'post',
 		dataType:'json',
 		success: results_callback,
 		data: {
-			desde: initial_parameters.desde,
-			hasta: initial_parameters.hasta,
-			fecha: date // T.O.D.O.  translate to actual service parms
-		} 
+			credentials 	: "{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4}{59331f3e-a518-4e1e-85ca-8df59d14a420}",
+			language 		: "ES",
+			currency 		: CODE_CURRENCIES[CURRENCY],
+			locationType 	: "N",
+			location 		: "BOLIVIA",
+
+			from 			: initial_parameters.desde,
+			to 				: initial_parameters.hasta,
+
+			rateType 		: "1",
+			departing 		: date,
+			returning 		: "",
+			days 			: "7",
+			ratesMax 		: "1",
+			sites 			: "1",
+			compartment 	: "0",
+			classes 		: "",
+			clientDate 		: todayStr,
+			clientHour 		: currentTimeStr,
+			forBook			: "1",
+			forRelease 		: "1",
+			ipAddress 		: "127.0.0.1",
+			xmlOrJson 		: "false"
+		}
 	});
 }
 // ---------------------= =---------------------
@@ -194,7 +220,7 @@ function async_receive_salida_dates(response)
 
 	$("#tbl_days_selector_salida").find(".day-selector:not(.no-flights)").click(change_day);
 
-	// get_for_date(initial_parameters.fecha_salida, true);
+	get_for_date(initial_parameters.fecha_salida, true);
 }
 // ---------------------= =---------------------
 function async_receive_regreso_dates(response) 
@@ -263,14 +289,19 @@ function receive_nearest_dates(response, isSalida)
 // ---------------------= =---------------------
 function async_receive_salida_flights(response)
 {
+	var fechaIdaConsultada = response["ResultAvailabilityPlusValuations"]["fechaIdaConsultada"];
+
 	// removes from date loading
-	dates_loading.splice(dates_loading.indexOf(response.requested_date), 1);
+	dates_loading.splice(dates_loading.indexOf(fechaIdaConsultada), 1);
+
+	var flights = response["ResultAvailabilityPlusValuations"]["vuelosYTarifas"]["vuelos"]["ida"]["vuelos"]["vuelo"];
+	var tarifas = response["ResultAvailabilityPlusValuations"]["vuelosYTarifas"]["tarifas"]["RT"]["tarifas"]["tarifa"];
 
 	// add to cache
-	dates_cache["f_" + response.requested_date] = response.flights;
+	dates_cache["f_" + response["fechaIdaConsultada"]] = flights;
 
-	if(current_date_salida == response.requested_date){
-		fill_table($("#tbl_salida")[0], response.flights);
+	if(current_date_salida == fechaIdaConsultada) {
+		fill_table($("#tbl_salida")[0], flights, tarifas);
 	}
 }
 // ---------------------= =---------------------
@@ -279,16 +310,25 @@ function async_receive_regreso_flights(response)
 	// removes from date loading
 	dates_loading.splice(dates_loading.indexOf(response.requested_date), 1);
 
-	// add to cache
-	dates_cache["f_" + response.requested_date] = response.flights;
+	var flights = response["ResultAvailabilityPlusValuations"]["vuelosYTarifas"]["vuelos"]["ida"]["vuelos"]["vuelo"];
+	var tarifas = response["ResultAvailabilityPlusValuations"]["vuelosYTarifas"]["tarifas"]["RT"]["tarifas"]["tarifa"];
 
-	if(current_date_regreso == response.requested_date){
-		fill_table($("#tbl_regreso")[0], response.flights);
+	// add to cache
+	dates_cache["f_" + response["fechaIdaConsultada"]] = flights;
+
+	if(current_date_regreso == response["fechaIdaConsultada"]) {
+		fill_table($("#tbl_regreso")[0], flights, tarifas);
 	}
 }
 // ---------------------= =---------------------
-function fill_table(table, flights)
+function fill_table(table, flights, rawTarifas)
 {
+	var tarifas = {};
+	for(var i=0;i<rawTarifas.length;i++){
+		var raw_tarifa = rawTarifas[i];
+		tarifas[raw_tarifa["clase"]] = raw_tarifa["importe"];
+	}
+
 	$(table).find("tr").not(":first").remove(); // clear table results
 
 	if(flights.length == 0){
@@ -297,36 +337,72 @@ function fill_table(table, flights)
 		for(var i=0;i<flights.length; i++) {
 			var flight = flights[i];
 			var row = document.createElement("tr");
-			$(row).addClass("flight-row");
+			$(row).addClass("flight-row")
+				  .attr("data-num_vuelo",flight["num_vuelo"]);
 			
 			// salida - llegada
 			var cell = document.createElement("td");
 
-			var timeA = [flight.salida.substr(0,2), flight.salida.substr(2,2)];
-			var timeB = [flight.llegada.substr(0,2), flight.llegada.substr(2,2)];
+			var timeA = [flight["hora_salida"].substr(0,2), flight["hora_salida"].substr(2,2)];
+			var timeB = [flight["hora_llegada"].substr(0,2), flight["hora_llegada"].substr(2,2)];
 			var totalMinutesA = parseInt(timeA[0]) * 60 + parseInt(timeA[1]);
 			var totalMinutesB = parseInt(timeB[0]) * 60 + parseInt(timeB[1]);
 			var totalMinutes = totalMinutesB - totalMinutesA;
 
 			var durationTime = parseInt(totalMinutes/60) + "h " + (totalMinutes%60) + "m";
+			var durationTimeExp = parseInt(totalMinutes/60) + "hrs. " + (totalMinutes%60) + "min.";
 
 			$(cell).html(timeA[0]+":"+timeA[1]+"&nbsp;&nbsp;-&nbsp;&nbsp;"+timeB[0]+":"+timeB[1]+"<br><span>Duraci&oacute;n: "+durationTime+"</span>");
 			row.appendChild(cell);
 
 			// Operado por
-			$(row).append("<td>BoA</td>")
+			$(row).append("<td>BoA</td>");
 
-			// cells for every kind of service (clase)
-			for(var k=0;k<clases.length;k++) {
-				var clase = clases[k];
-				cell = document.createElement("td");
-				if(flight[clase]=="none")
-					$(cell).addClass("disabled").html("<span>No disponible</span>");
-				else{
-					$(cell).addClass("tarifa").html("<div class='rbtn'><div></div></div>" + flight[clase] + " " + HTML_CURRENCIES[CURRENCY]);
-					$(cell).click(select_tarifa);
+			// find best tarifa
+			var rawClasses = flight["clases"]["clase"];
+			var bestTarifa = 999999;
+			var bestClase = "";
+			for(var k=0;k<rawClasses.length;k++){
+				var flightClass = rawClasses[k]["cls"];
+
+				if(flightClass in tarifas) {
+					var tarifa = parseInt(tarifas[flightClass]);
+					if(tarifa<bestTarifa && tarifa > 0){
+						bestTarifa=tarifa;
+						bestClase = flightClass;
+					}	
 				}
-				row.appendChild(cell);	
+			}
+
+			cell = document.createElement("td");
+			$(cell).addClass("tarifa")
+				   .html("<div class='rbtn'><div></div></div>" + bestTarifa + " " + HTML_CURRENCIES[CURRENCY]);
+			$(cell).click(select_tarifa);
+			row.appendChild(cell);	
+
+			table.appendChild(row);
+
+			row = document.createElement("tr");
+			$(row).addClass("flight-details").addClass("collapsed").html("<td colspan='10' class='cell-details'><div class='expandable'></div></td>");
+
+			var tbl;
+			for(var m=0;m<2;m++) {
+				var isSalida = (m==0);
+				tbl = document.createElement("table");
+				$(tbl).attr("cellpadding","0").attr("cellspacing","0")
+
+				if(isSalida)
+					$(tbl).css("float","left"); // if first
+
+				var timeStr = isSalida?(timeA[0]+":"+timeA[1]):(timeB[0]+":"+timeB[1]);
+
+				$(tbl).append("<tr><td rowspan='2'><div class='icon-"+(isSalida?"salida":"regreso")+"'></div></td><td>"+timeStr+"</td></tr>");
+				$(tbl).append("<tr><td>Hrs.</td></tr>");
+				$(tbl).append("<tr><td colspan='2'><label " + (isSalida?"":"style='visibility:hidden'") +">Duraci&oacute;n: &nbsp"+durationTimeExp+"</label></td></tr>");
+				$(tbl).append("<tr><td colspan='2'><h2>Cochabamba</h2></td></tr>");
+				$(tbl).append("<tr><td colspan='2'><label>Aeropuerto Jorge Wilstermann</label></td></tr>");
+
+				$(row).find(".expandable").append(tbl);
 			}
 
 			table.appendChild(row);
@@ -346,7 +422,6 @@ function fill_table_with_loading(table, flights)
 // ---------------------= =---------------------
 function select_tarifa()
 {
-	console.log("tar");
 	var row = this.parentNode;
 	if($(row).hasClass("selected")) return;
 
@@ -356,6 +431,10 @@ function select_tarifa()
 
 	$(table).find(".flight-row").removeClass("selected")
 	$(row).addClass("selected");
+
+	$(table).find(".flight-details").removeClass("expanded").addClass("collapsed");
+	var details = $(row).next();
+	details.removeClass("collapsed").addClass("expanded");
 
 	$(table).find(".rbtn").removeClass("checked");
 	$(this).find(".rbtn").addClass("checked");
