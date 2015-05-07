@@ -793,7 +793,6 @@ header .att-div{
 	text-overflow: '';
 }
 
-.content select::-ms-expand,
 .form select::-ms-expand{
   display:none;
 }
@@ -808,29 +807,26 @@ header .att-div{
 	background-position: 40px 10px;
 }
 
-.content input[type="text"] {
-	height: 34px;
+.form input[type="text"] {
 	border-radius: 0px;
 	border-width: 0 0 2px 0;
 	border-style: solid;
 	border-color: #959595;
 	font-family: "HelveticaNeuePro";
-	font-size: 15px;
 	color: #1F3656;
-	padding: 2px 40px 0 10px;
 }
 
-.content input.calendar {
+.form input.calendar {
 	background-image: url('images/icon_calendar.png');
 	background-repeat: no-repeat;
 	background-position: 150px 10px;
 	cursor: pointer;
 }
 
-.content input.calendar:hover {
+.form input.calendar:hover {
 	background-image: url('images/icon_calendar_hover.png');
 }
-.content .checkbox{
+.form .checkbox{
 	width: 35px;
 	height: 33px;
 	background-color: #FFF;
@@ -846,27 +842,27 @@ header .att-div{
 	display: inline-table;
 }
 
-.content .checkbox div{
+.form .checkbox div{
 	width:11px;
 	height:12px; 
 }
 
-.content .checkbox.checked{
+.form .checkbox.checked{
 	background-image: url('images/checkbox_mark.png');
 	background-repeat: no-repeat;
 	background-size: 15px;
 	background-position: 10px 8px;
 }
 
-.content .checkbox:hover{
+.form .checkbox:hover{
 	background-color: #9E9E9E;
 }
 
-.content .radio-button, .content .radio-button label {
+.form .radio-button, .content .radio-button label {
 	cursor: pointer;	
 }
 
-.content .radio-button .btn {
+.form .radio-button .btn {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -876,7 +872,7 @@ header .att-div{
 	vertical-align: middle;
 }
 
-.content .radio-button .btn div{
+.form .radio-button .btn div{
 	background-color: rgb(0, 0, 0);
 	width: 10px;
 	height: 10px;
@@ -886,22 +882,22 @@ header .att-div{
 	display: none;
 }
 
-.content .radio-button.checked .btn div{
+.form .radio-button.checked .btn div{
 	display: block;
 }
 
-.content .radio-button label{
+.form .radio-button label{
 	line-height: 20px;
 	display: inline-block;
 }
 
-.content .validable {
+.form .validable {
 	border-color: rgba(255, 0, 0, 0);
 	border-width: 3px;
 	border-style: solid;
 }
 
-.content .validable.active{ border-color: #F00;}
+.form .validable.active{ border-color: #F00;}
 
 .button{
 	position: absolute;
@@ -997,7 +993,7 @@ header .att-div{
 }
 
 #buscador_vuelos .menu:nth-child(2),
-#buscador_vuelos .menu.selected:nth-child(2):hover{
+#buscador_vuelos .menu.selected:nth-child(2):hover {
 	background-color: rgba(239, 170, 53, 0.9);	
 	color: #1F3656;
 }
@@ -1041,8 +1037,14 @@ header .att-div{
 
 #buscador_vuelos .content.selected{display: block;}
 
+#buscador_vuelos .form input[type="text"] {
+	height: 34px;
+	font-size: 15px;
+	padding: 2px 40px 0 10px;
+}
+
 /* ESTADOS DE CAJA DE RESERVAS */
-#buscador_vuelos.expanded #reserva_vuelos{ 
+#_vuelos.expanded #reserva_vuelos{ 
 	height: 270px;
 	padding: 20px 0px 30px 30px;
 }
@@ -1340,9 +1342,9 @@ footer .tooltip.active span{display: none;}
 
 footer .tooltip .form {
 	position: absolute;
-	width: 740px;
-	height: 40px;
-	left: -300px;
+	width: 810px;
+	height: 50px;
+	left: -400px;
 	bottom: 60px;
 	background-image: url("images/bg_footer_popup.png");
 	padding: 4px 0 12px 10px;
@@ -1416,11 +1418,14 @@ footer .form .radio-button label{
 
 footer .form input.calendar {
 	width: 120px;
+	height: 21px;
 	background-image: url("images/icon_calendar.png");
 	background-repeat: no-repeat;
 	background-position: 107px 3px;
 	background-size: auto 10px;
 	cursor: pointer;
+	padding: 2px 0px 0px 10px;
+	font-size: 13px;
 }
 
 footer .form .button {
@@ -2312,14 +2317,25 @@ footer .form .button {
 	position: absolute;
     right: 0px;
     top: 40px;
-    width: 500px;
-    height: 200px;
+    width: 470px;
+    height: 230px;
     background-color: #EFAA35;
 }
 
 .ui-section.wide.results #widget_cambiar_vuelo.collapsed {width: 200px; height: 40px;}
-.ui-section.wide.results #widget_cambiar_vuelo.expanded {width: 500px;height: 250px;}
+.ui-section.wide.results #widget_cambiar_vuelo.expanded {width: 500px;height: 270px;}
 
+.ui-section.wide.results #widget_cambiar_vuelo .form input[type="text"] {
+	height: 34px;
+	font-size: 15px;
+	padding: 2px 40px 0 10px;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo .form select{
+	background-position: 140px 10px;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo .form > table{margin: 10px 30px;}
 /*----*/
 .ui-section.wide.results .info {
 	width: 100%;

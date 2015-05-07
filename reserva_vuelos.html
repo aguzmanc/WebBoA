@@ -11,6 +11,12 @@
 	<!-- JQUERY LIBRARY -->
 	<script type="text/javascript" src="content/lib/jquery-1.11.1.min.js"></script>
 
+	<!-- JQUERY UI -->
+	<link rel="stylesheet" type="text/css" href="content/lib/jquery_ui/css/dot-luv/jquery-ui.min.css">
+	<script src="content/lib/jquery_ui/jquery-ui.min_es.js"></script> <!-- CHANGE BY LANGUAGE -->
+	<!-- <script src="content/lib/jquery_ui/jquery-ui.min_en.js"></script>  -->
+	<!-- <script src="content/lib/jquery_ui/jquery-ui.min_pt.js"></script>  -->
+
 	<!-- SCROLLBAR LIBRARY -->
 	<link href="content/lib/custom_scrollbar/jquery.mCustomScrollbar.css" 
 		rel="stylesheet" type="text/css" />
@@ -342,6 +348,46 @@
 						                <option value="GRU">SAO PAULO</option>
 									</select>
 								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="rbtn_ida" class="radio-button checked" data-group="ida_vuelta">
+									<div class="btn">
+										<div></div>
+									</div>
+									<label>Solo ida</label>
+								</div>
+							</td>
+							<td>
+								<div id="rbtn_ida_vuelta" class="radio-button" data-group="ida_vuelta">
+									<div class="btn">
+										<div></div>
+									</div>
+									<label>Ida y Vuelta</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>Salida:</label></td>
+							<td><label id="lbl_regreso" style="display:none">Regreso:</label></td>
+						</tr>
+						<tr>
+							<td class='input-container'>
+								<div class="validable">
+									<input type="text" id="picker_salida" class="calendar" text="(Ingrese fecha)" onkeypress="return false;">
+								</div>
+							</td>
+							<td class='input-container'>
+								<div class="validable">
+									<input type="text" id="picker_regreso" class="calendar" style="display:none"
+										onkeypress="return false;">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div id="btn_buscar_vuelo" class="button" >BUSCAR</div>
 							</td>
 						</tr>
 					</table>

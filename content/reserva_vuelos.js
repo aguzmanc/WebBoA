@@ -14,7 +14,6 @@ var todayStr = "";
 
 // configuration
 var currencies = {euro:"&euro;", usd:"USD"};
-var clases = ["economica"];
 // ---------------------= =---------------------
 $(document).on('ready',function()
 {
@@ -30,6 +29,25 @@ $(document).on('ready',function()
 	todayStr = today.getFullYear() + "" + mm + "" + dd;
 
 	handle_initial_request();
+
+	$("#picker_salida").datepicker({ 
+		dateFormat: 'dd MM yy',
+		numberOfMonths: 2, 
+		minDate: 0,
+		onSelect:function(selectedDate){
+			$( "#picker_regreso" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+
+	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
+		dateFormat: 'dd MM yy',
+		numberOfMonths: 2, 
+		minDate:0
+	});
+
+	$("#widget_cambiar_vuelo .form .radio-button").click(toggle_rbtn_ida_vuelta);
+
+	$("#btn_buscar_vuelo").click(validate_search);
 });
 
 // ---------------------= =---------------------
@@ -68,6 +86,21 @@ function handle_initial_request()
 	}
 
 	$("#tbl_salida .tarifa").click(select_tarifa);
+}
+// ---------------------= =---------------------
+function toggle_rbtn_ida_vuelta()
+{
+	var par = this.parentNode;
+	while(false == $(par).hasClass("form") )
+		par = par.parentNode;
+
+	$(par).find(".radio-button").removeClass("checked");
+	$(this).addClass("checked");
+
+	if(this.id == "rbtn_ida_vuelta")
+		$("#picker_regreso").show();
+	else
+		$("#picker_regreso").hide();
 }
 // ---------------------= =---------------------
 function change_day()
@@ -440,5 +473,94 @@ function select_tarifa()
 	$(this).find(".rbtn").addClass("checked");
 }
 // ---------------------= =---------------------
+function validate_search()
+{
+	var select_desde = $("#select_desde");
+	var select_hasta = $("#select_hasta");
+	var rbtn_ida = $("#rbtn_ida");
+	var rbtn_ida_vuelta = $("#rbtn_ida_vuelta");
+	var picker_salida = $("#picker_salida");
+	var picker_regreso = $("#picker_regreso");
+
+	var parms = {
+		desde: select_desde.val(),
+		hasta: select_hasta.val(),
+		fecha_salida: picker_salida.val(),
+		fecha_regreso: picker_regreso.val(),
+		solo_ida: rbtn_ida.hasClass("checked")
+	};
+
+	var raw_date;
+	// -----= VALIDATION PROCESS =------
+	var valid_form = true;
+
+	// origen
+	if(parms.desde=="") {
+		activate_validation(select_desde);
+		valid_form = false;
+	}
+
+	if(parms.hasta=="") {
+		activate_validation(select_hasta);
+		valid_form = false;
+	}
+
+
+	// same dates or both without selection
+	if(parms.desde == parms.hasta) {
+		activate_validation(select_desde);
+		activate_validation(select_hasta);
+
+		valid_form = false;
+	}
+
+	// fecha de salida
+	if(parms.fecha_salida=="") {
+		activate_validation(picker_salida);
+		valid_form = false;
+	}
+
+	if(false == parms.solo_ida && parms.fecha_regreso=="") {
+		activate_validation(picker_regreso);
+		valid_form = false;
+	}
+
+	// when no valid data, finish here
+	if(false == valid_form){
+		setTimeout(function() { $(".validable").removeClass("active"); },1500);
+		return;
+	}
+
+	return;
+
+	// -------= AT THIS POINT, DATA SEND BEGINS =-----------
+	var data = {
+		origen: parms.origen,
+		destino: parms.destino
+	};
+
+	// --- date formatting ---
+	// fecha salida
+	raw_date = picker_salida.val().split(" ");
+	data["fechaIda"] = raw_date[0] + '/' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '/' + raw_date[2];
+
+	if(false == parms.solo_ida){
+		raw_date = picker_regreso.val().split(" ");
+		data["fechaRegreso"] = raw_date[0] + '/' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '/' + raw_date[2];
+	}
+
+	var RESULTS_URL = urls["flight_schedule_results"];
+
+	var form = $('<form target="_blank" method="POST" action="' + RESULTS_URL + '">');
+	$.each(data, function(k,v){
+	    form.append('<input type="hidden" name="' + k + '" value="' + v + '">');
+	});
+
+	$("#div_submit").html("").append(form); // IE FIX
+
+	form.submit();
+
+	$("footer #horarios").removeClass("active");
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
