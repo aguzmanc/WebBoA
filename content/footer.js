@@ -100,23 +100,24 @@ function validar_busqueda_itinerario()
 
 	// -------= AT THIS POINT, DATA SEND BEGINS =-----------
 	var data = {
-		origen: parms.origen,
-		destino: parms.destino
+		desde: parms.origen,
+		hasta: parms.destino
 	};
-
+	
 	// --- date formatting ---
 	// fecha salida
 	raw_date = picker_salida.val().split(" ");
-	data["fechaIda"] = raw_date[0] + '/' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '/' + raw_date[2];
+
+	data["salida"] = raw_date[0] + '' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '' + raw_date[2];
 
 	if(false == parms.solo_ida){
 		raw_date = picker_regreso.val().split(" ");
-		data["fechaRegreso"] = raw_date[0] + '/' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '/' + raw_date[2];
+		data["regreso"] = raw_date[0] + '' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '' + raw_date[2];
 	}
 
 	var RESULTS_URL = urls["flight_schedule_results"];
 
-	var form = $('<form target="_blank" method="POST" action="' + RESULTS_URL + '">');
+	var form = $('<form target="_blank" method="GET" action="' + RESULTS_URL + '">');
 	$.each(data, function(k,v){
 	    form.append('<input type="hidden" name="' + k + '" value="' + v + '">');
 	});

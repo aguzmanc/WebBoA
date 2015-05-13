@@ -1,15 +1,12 @@
 <?php
-
 	$r = fgets(fopen("flights.json","r"));
-
-	$departing = $_POST	['departing'];
 
 	$decoded = json_decode($r,true);
 
-	$decoded["ResultAvailabilityPlusValuations"] = array('fechaIdaConsultada'=>$departing) + $decoded["ResultAvailabilityPlusValuations"];
-	
+	if($_POST["departing"])
+		$decoded["ResultAvailabilityPlusValuationsShort"]["fechaIdaConsultada"] = $_POST["departing"];
+
 	echo json_encode($decoded);
 
-	// sleep(1);
-
+	sleep(1);
 ?>

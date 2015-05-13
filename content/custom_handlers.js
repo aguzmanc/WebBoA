@@ -21,7 +21,7 @@ var urls = {
 	contrato_transporte: "content/docs/contrato_transporte.pdf",
 	convocatorias: "http://sms.obairlines.bo/webboa/menupublicaciones.htm",
 	/* RESULTADOS DE HORARIOS DE VUELOS */
-	flight_schedule_results : "http://localhost",
+	flight_schedule_results : "http://localhost/reserva_vuelos.html",
 	/* MAPAS DE OFICINAS */
 	office_maps : "http://localhost",
 	/* BOA EN REDES SOCIALES */

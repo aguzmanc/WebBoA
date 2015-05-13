@@ -2407,8 +2407,8 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table th.class-group {
-	width: 90px;
-	min-width: 90px;
+	width: 100px;
+	min-width: 100px;
 }
 
 .ui-section.wide.results .descripcion table td span{font-size:13px;}
@@ -2474,8 +2474,8 @@ footer .form .button {
 }
 
 .ui-section.wide.results .cell-details table {
-	width:10px;
-	margin: 0 100px;
+	width:300px;
+	margin: 0 50px 0 0;
 }
 
 .ui-section.wide.results .cell-details td {background-color: transparent;}
@@ -2483,20 +2483,18 @@ footer .form .button {
 .ui-section.wide.results .cell-details .icon-salida {
 	width: 100px;
 	height: 64px;
-	background-image: url("images/icon_salida.png");
+	background-image: url("images/icon_salida_regreso.png");
 	background-repeat: no-repeat;
-	background-position: 10px center;
-	background-size: 100px 64px;
+	background-position: 10px 20px;
 	padding: 10px;
 }
 
 .ui-section.wide.results .cell-details .icon-regreso {
 	width: 100px;
 	height: 64px;
-	background-image: url("images/icon_regreso.png");
+	background-image: url("images/icon_salida_regreso.png");
 	background-repeat: no-repeat;
-	background-position: 10px center;
-	background-size: 100px 64px;
+	background-position: 10px -64px;
 	padding: 10px;
 }
 
