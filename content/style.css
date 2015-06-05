@@ -66,7 +66,7 @@ header #language_selector .content,
 .ui-section .descripcion .desplegable .arrow,
 .ui-section .first-menu .icon:not(.small),
 .ui-section.wide .right-menu li,
-.content .validable,
+.form .validable,
 footer .validable,
 #widget_cambiar_vuelo,
 .flight-details .cell-details, .flight-details .expandable,
@@ -892,12 +892,13 @@ header .att-div{
 }
 
 .form .validable {
-	border-color: rgba(255, 0, 0, 0);
+	border-color: transparent;
 	border-width: 3px;
 	border-style: solid;
+	background-color: transparent;
 }
 
-.form .validable.active{ border-color: #F00;}
+.form .validable.active{ background-color: #F00;}
 
 .button{
 	position: absolute;
@@ -2328,14 +2329,17 @@ footer .form .button {
 .ui-section.wide.results #widget_cambiar_vuelo .form input[type="text"] {
 	height: 34px;
 	font-size: 15px;
-	padding: 2px 40px 0 10px;
+	padding: 2px 30px 0 10px;
 }
 
 .ui-section.wide.results #widget_cambiar_vuelo .form select{
-	background-position: 140px 10px;
+	background-position: 160px 10px;
+	width: 185px;
 }
 
 .ui-section.wide.results #widget_cambiar_vuelo .form > table{margin: 10px 30px;}
+
+.ui-section.wide.results #widget_cambiar_vuelo .form .button {width:166px;}
 /*----*/
 .ui-section.wide.results .info {
 	width: 100%;

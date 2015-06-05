@@ -2,6 +2,7 @@
 var CURRENCY = "bs"; // "euro", "bs" , "usd" 
 var HTML_CURRENCIES = {bs:"Bs.",euro:"&euro;",usd:"USD"};
 var CODE_CURRENCIES = {bs:"BOB",euro:"EU",usd:"USD"};
+var SERVICE_CREDENTIALS_KEY = "\{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4\}\{59331f3e-a518-4e1e-85ca-8df59d14a420\}";
 // ---------------------------------------------------------------------------
 var urls = {
 	home : "home.html",
@@ -27,7 +28,12 @@ var urls = {
 	/* BOA EN REDES SOCIALES */
 	social_networks: "http://localhost",
 	/* CALL CENTER */
-	call_center: "http://localhost"
+	call_center: "http://localhost", 
+
+	/* SERVICES */
+	// nearest_dates_service: "http://localhost/content/fake_services/nearest_dates.php",
+	nearest_dates_service: "http://skbpruebas.cloudapp.net/ServicesTest/BasicReservationService.svc/Calendar",
+	flights_schedule_service: "http://skbpruebas.cloudapp.net/ServicesTest/BasicReservationService.svc/AvailabilityPlusValuationsShort"
 };
 // ---------------------------------------------------------------------------
 function handle_reserva_vuelos(parameters)

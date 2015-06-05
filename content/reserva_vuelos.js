@@ -1,11 +1,11 @@
 // ---------------------= =---------------------
 var initial_parameters = {
-	desde:"",hasta:"",fecha_salida:""
+	origen:"",destino:"",fecha_salida:""
 };
 
 var dates_cache_salida = {};
-var dates_cache_salida_regreso = {};
-var tarifas_cache = {};
+var dates_cache_regreso = {};
+var tarifasCache = {};
 
 var dates_loading_salida = [];
 var dates_loading_regreso = [];
@@ -85,17 +85,17 @@ $(document).on('ready',function()
 // ---------------------= =---------------------
 function handle_initial_request()
 {
-	initial_parameters.desde = location.queryString['desde'];
-	initial_parameters.hasta = location.queryString['hasta'];
+	initial_parameters.origen = location.queryString['origen'];
+	initial_parameters.destino = location.queryString['destino'];
 	initial_parameters.fecha_salida = location.queryString['salida'];
 
-	// desde
-	if(initial_parameters.desde == null)
-		initial_parameters.desde = "CBBA";
+	// origen
+	if(initial_parameters.origen == null)
+		initial_parameters.origen = "CBB";
 
-	// hasta
-	if(initial_parameters.hasta == null)
-		initial_parameters.hasta = "SCZ";
+	// destino
+	if(initial_parameters.destino == null)
+		initial_parameters.destino = "VVI";
 
 	// salida
 	if(initial_parameters.fecha_salida == null) {
@@ -105,14 +105,12 @@ function handle_initial_request()
 	current_date_salida = initial_parameters.fecha_salida;
 
 	// setup labels
-	var desde = initial_parameters.desde;
-	var hasta = initial_parameters.hasta;
-	var cityDesde = cities[desde];
-	var cityHasta = cities[hasta];
+	var origen = initial_parameters.origen;
+	var destino = initial_parameters.destino;
+	var cityOrigen = cities[origen];
+	var cityDestino = cities[destino];
 
-	$("#lbl_salida").html("Ida: "+cityDesde+"("+desde+") - "+cityHasta+"("+hasta+")");
-
-	request_nearest_dates(initial_parameters.fecha_salida, true, async_receive_salida_dates);
+	$("#lbl_info_salida").html("Ida: "+cityOrigen+"("+origen+") - "+cityDestino+"("+destino+")");
 
 	// regreso
 	var fecha_regreso = location.queryString['regreso'];
@@ -120,12 +118,55 @@ function handle_initial_request()
 		initial_parameters['fecha_regreso'] = fecha_regreso;
 		current_date_regreso = initial_parameters.fecha_regreso;
 
-		request_nearest_dates(initial_parameters.fecha_regreso, false, async_receive_regreso_dates);
-
-		$("#lbl_regreso").html("Retorno: "+cityHasta+"("+hasta+") - "+cityDesde+"("+desde+")");
+		$("#lbl_info_regreso").show().html("Retorno: "+cityDestino+"("+destino+") - "+cityOrigen+"("+origen+")");
 	} else {
-		$("#lbl_regreso, #tbl_dayselector_regreso, #tbl_regreso").hide();
+		$("#lbl_info_regreso, #tbl_dayselector_regreso, #tbl_regreso").hide();
 	}
+
+	var now = new Date();
+	var hh = ("00" + (now.getHours())).slice(-2);
+	var mm = ("00" + (now.getMinutes())).slice(-2);
+
+	var currentTimeStr = hh+""+mm;
+
+	var data = {
+		credentials 	: SERVICE_CREDENTIALS_KEY, 
+		language 		: "ES",
+		currency 		: CODE_CURRENCIES[CURRENCY],
+		locationType 	: "N",
+		location 		: "BO",
+		from 			: initial_parameters.origen,
+		to 				: initial_parameters.destino,
+		rateType		: "1",
+		departing 		: initial_parameters.fecha_salida,
+		returning 		: (initial_parameters.fecha_regreso == null ? "" : initial_parameters.fecha_regreso),
+		days 			: "7",
+		ratesMax		: "1",
+		sites			: "1",
+		compartment 	: "0", 
+		classes 		: "",
+		clientDate 		: todayStr,
+		clientHour 		: currentTimeStr,
+		forBook			: "1",
+		forRelease 		: "1",
+		ipAddress 		: "127.0.0.1", 
+		xmlOrJson 		: false  // false=json ; true=xml 
+	};
+
+	var dataStr = JSON.stringify(data);
+
+	$.ajax({
+		url: urls["nearest_dates_service"],
+		type: 'POST',
+		dataType:'json',
+		contentType: "application/json; charset=utf-8",
+		success: async_receive_dates,
+		data: dataStr
+	});
+
+	$("#tbl_days_selector_salida, #tbl_days_selector_regreso")
+		.find("tr")
+		.html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
 
 	$("#tbl_salida .tarifa").click(select_tarifa);
 }
@@ -181,14 +222,19 @@ function toggle_widget_cambiar_vuelo()
 function get_flights_for_date(date, isSalida)
 {
 	var table = $("#tbl_" + (isSalida ? "salida" : "regreso"))[0];
+
 	var currentDate = (isSalida?current_date_salida:current_date_regreso);
 	var isCurrentDateSelected = (currentDate == date);
-	var existsInCache = (("f_" + date) in (isSalida?dates_cache_salida:dates_cache_salida_regreso) );
-	var hasBeenRequested = ($.inArray(date, isSalida?dates_loading_salida:dates_loading_regreso) != -1);
+
+	var datesCache = (isSalida?dates_cache_salida:dates_cache_regreso);
+	var datesLoading = isSalida?dates_loading_salida:dates_loading_regreso;
+
+	var existsInCache = (("f_" + date) in datesCache );
+	var hasBeenRequested = ($.inArray(date, datesLoading) != -1);
 
 	if(existsInCache) {
 		if(isCurrentDateSelected) {
-			fill_table(table, dates_cache_salida["f_" + date], tarifas_cache["f_" + date]);
+			fill_table(table, datesCache["f_" + date], tarifasCache["f_" + date]);
 		}
 	}else{
 		if(false == hasBeenRequested)
@@ -212,127 +258,95 @@ function request_flights(date, results_callback, isSalida)
 
 	var currentTimeStr = hh + "" + mm;
 
+	var data = {
+		credentials 	: SERVICE_CREDENTIALS_KEY,
+		language 		: "ES",
+		currency 		: CODE_CURRENCIES[CURRENCY],
+		locationType 	: "N",
+		location 		: "BO",
+		bringAv			: "1",
+		bringRates		: "3",
+		surcharges 		: true,
+		directionality  : "0",
+
+		from 			: initial_parameters.origen,
+		to 				: initial_parameters.destino,
+
+		departing 		: isSalida?date:"",
+		returning 		: isSalida?"":date,
+		sites 			: "1",
+		compartment 	: "0",
+		classes 		: "",
+		classesState 	: "",
+		clientDate 		: todayStr,
+		clientHour 		: currentTimeStr,
+		forRelease 		: "1",
+
+		cat19Discounts	: "true",
+		specialDiscounts: null,
+		book 			: "1",
+		booking 		: "",
+		bookingHour		: "",
+		responseType 	: "1",
+		releasingTime 	: "1",
+		ipAddress 		: "127.0.0.1",
+		xmlOrJson 		: "false"
+	};
+
+	var dataStr = JSON.stringify(data);
+
 	$.ajax({
-		url: "content/fake_services/flights.php",
-		type: 'post',
+		url: urls["flights_schedule_service"],
+		type: 'POST',
 		dataType:'json',
+		contentType: "application/json; charset=utf-8",
 		success: results_callback,
-		data: {
-			credentials 	: "{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4}{59331f3e-a518-4e1e-85ca-8df59d14a420}",
-			language 		: "ES",
-			currency 		: CODE_CURRENCIES[CURRENCY],
-			locationType 	: "N",
-			location 		: "BOLIVIA",
-
-			from 			: initial_parameters.desde,
-			to 				: initial_parameters.hasta,
-
-			rateType 		: "1",
-			departing 		: date,
-			returning 		: "",
-			days 			: "7",
-			ratesMax 		: "1",
-			sites 			: "1",
-			compartment 	: "0",
-			classes 		: "",
-			clientDate 		: todayStr,
-			clientHour 		: currentTimeStr,
-			forBook			: "1",
-			forRelease 		: "1",
-			ipAddress 		: "127.0.0.1",
-			xmlOrJson 		: "false"
-		}
+		data: dataStr
 	});
 }
 // ---------------------= =---------------------
-function request_nearest_dates(date, isSalida, results_callback)
+function async_receive_dates(response) 
 {
-	var now = new Date();
-	var hh = ("00" + (now.getHours())).slice(-2);
-	var mm = ("00" + (now.getMinutes())).slice(-2);
+	// fix to .NET dumbest encoding ever (possible bug here in future)
+	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
 
-	var table = $("#tbl_days_selector_" + (isSalida?"salida":"regreso"));
-
-	var currentTimeStr = hh+""+mm;
-
-	$.ajax({
-		url: "content/fake_services/nearest_dates.php",
-		type: 'post',
-		dataType:'json',
-		success: results_callback,
-		data: {
-			credentials 	: "{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4}{59331f3e-a518-4e1e-85ca-8df59d14a420}", 
-			language 		: "ES",
-			currency 		: CODE_CURRENCIES[CURRENCY],
-			locationType 	: "N",
-			location 		: "BOLIVIA",
-			bringAv 		: "1",
-			bringRates 		: "2",
-			surcharges 		: "0",
-			directionality 	: "0",
-			from 			: initial_parameters.desde,
-			to 				: initial_parameters.hasta,
-			departing 		: initial_parameters.fecha_salida,
-			returning 		: (initial_parameters.fecha_regreso == null ? "" : initial_parameters.fecha_regreso),
-			sites			: "1",
-			compartment 	: "0", 
-			classes 		: "",
-			classesState 	: "T",
-			clientDate 		: todayStr,
-			clientHour 		: currentTimeStr,
-			forRelease 		: "1",
-			cat19Discounts  : "", 
-			specialDiscounts: "",
-			booking 		: "",
-			ipAddress 		: "127.0.0.1", 
-			xmlOrJson 		: false  // false=json ; true=xml 
-		} 
-	});
-
-	table.find("tr").html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
-}
-// ---------------------= =---------------------
-function async_receive_salida_dates(response) 
-{
-	receive_nearest_dates(response, true);
-
-	$("#tbl_days_selector_salida").find(".day-selector:not(.no-flights)").click(change_day);
+	// start build info to UI
+	build_dates_selector(
+		response["calendarioOW"]["OW_Ida"]["salidas"]["salida"],
+		response["fechaIdaConsultada"], 
+		$("#tbl_days_selector_salida")
+	);
 
 	get_flights_for_date(initial_parameters.fecha_salida, true);
+
+	if(initial_parameters.fecha_regreso != null){
+		build_dates_selector(
+			response["calendarioOW"]["OW_Vuelta"]["salidas"]["salida"],
+			response["fechaVueltaConsultada"], 
+			$("#tbl_days_selector_regreso")
+		);
+
+		get_flights_for_date(initial_parameters.fecha_regreso, false);
+	}
 }
 // ---------------------= =---------------------
-function async_receive_regreso_dates(response) 
+function build_dates_selector(rawDates, requestedDateStr, table)
 {
-	receive_nearest_dates(response, false);
-
-	$("#tbl_days_selector_regreso").find(".day-selector:not(.no-flights)").click(change_day);
-
-	get_flights_for_date(initial_parameters.fecha_regreso, false);
-}
-// ---------------------= =---------------------
-function receive_nearest_dates(response, isSalida)
-{
-	var rawDates = response["ResultCalendar"]["calendarioOW"]["OW_Ida"]["salidas"]["salida"];
-
 	var tarifasByDate = { };
 
 	// mine some data first
 	for(var i=0;i<rawDates.length;i++){
 		var rawDate = rawDates[i];
 		var tarifaStr = rawDate["tarifas"]["tarifaCalen"]["importe"];
-		tarifaStr = tarifaStr.substr(0,tarifaStr.indexOf("."));
 
 		tarifasByDate[rawDate["fecha"]] = tarifaStr;
 	}
 
-	var requestedDateStr = response["ResultCalendar"]["fechaIdaConsultada"];
-
 	requestedDate = new Date(requestedDateStr.substr(0,4),
 							 requestedDateStr.substr(4,2),
 							 requestedDateStr.substr(6,2), 0,0,0,0);
-
-	var tbl = $("#tbl_days_selector_" + (isSalida?"salida":"regreso"));
-	tbl.find("tr td").remove(); // clean
+	
+	table.find("tr td").remove(); // clean
 
 	// check for 3 days after, and 3 days before
 	// if it does not exist, complete with "none" instead of the price
@@ -358,48 +372,47 @@ function receive_nearest_dates(response, isSalida)
 				   .append("<h3>No hay<br>vuelos</h3>");
 		}
 
-		tbl.find("tr").append(cell);
+		table.find("tr").append(cell);
 	}
 
 	// select middle date
-	tbl.find("tr td:nth-child(4)").addClass("selected");
+	table.find("tr td:nth-child(4)").addClass("selected");
+
+	table.find(".day-selector:not(.no-flights)").click(change_day);
 }
 // ---------------------= =---------------------
 function async_receive_salida_flights(response)
 {
-	var fechaIdaConsultada = response["ResultAvailabilityPlusValuationsShort"]["fechaIdaConsultada"];
-
-	// removes from date loading
-	dates_loading_salida.splice(dates_loading_salida.indexOf(fechaIdaConsultada), 1);
-
-	var flights = response["ResultAvailabilityPlusValuationsShort"]["vuelosYTarifas"]["Vuelos"]["ida"]["vuelos"]["vuelo"];
-	var tarifas = response["ResultAvailabilityPlusValuationsShort"]["vuelosYTarifas"]["Tarifas"]["TarifaPersoCombinabilityIdaVueltaShort"]["TarifasPersoCombinabilityID"]["TarifaPersoCombinabilityID"];
-
-	// add to cache
-	dates_cache_salida["f_" + fechaIdaConsultada] = flights;
-	tarifas_cache["f_" + fechaIdaConsultada] = tarifas;
-
-	if(current_date_salida == fechaIdaConsultada) {
-		fill_table($("#tbl_salida")[0], flights, tarifas);
-	}
+	receive_flights(true, response);
 }
 // ---------------------= =---------------------
 function async_receive_regreso_flights(response) 
 {
-	// var fechaIdaConsultada = response["ResultAvailabilityPlusValuationsShort"]["fechaIdaConsultada"];
+	receive_flights(false, response);
+}
+// ---------------------= =---------------------
+function receive_flights(isSalida, response)
+{
+	// should not be so complicated =/
+	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult).ResultAvailabilityPlusValuationsShort; 
 
-	// // removes from date loading
-	// dates_loading.splice(dates_loading.indexOf(response.requested_date), 1);
+	var fechaConsultada = response["fecha"+(isSalida?"Ida":"Vuelta")+"Consultada"];
 
-	// var flights = response["ResultAvailabilityPlusValuations"]["vuelosYTarifas"]["vuelos"]["ida"]["vuelos"]["vuelo"];
-	// var tarifas = response["ResultAvailabilityPlusValuations"]["vuelosYTarifas"]["tarifas"]["RT"]["tarifas"]["tarifa"];
+	var datesCache = isSalida ? dates_cache_salida : dates_cache_regreso;
+	var datesLoading = isSalida? dates_loading_salida : dates_loading_regreso;
 
-	// // add to cache
-	// dates_cache_salida["f_" + response["fechaIdaConsultada"]] = flights;
+	// removes from date loading
+	datesLoading.splice(datesLoading.indexOf(fechaConsultada), 1);
 
-	// if(current_date_regreso == response["fechaIdaConsultada"]) {
-	// 	fill_table($("#tbl_regreso")[0], flights, tarifas);
-	// }
+	var flights = response["vuelosYTarifas"]["Vuelos"][isSalida?"ida":"vuelta"]["vuelos"]["vuelo"];	
+	var tarifas = response["vuelosYTarifas"]["Tarifas"]["TarifaPersoCombinabilityIdaVueltaShort"]["TarifasPersoCombinabilityID"]["TarifaPersoCombinabilityID"];
+
+	// add to cache
+	datesCache["f_" + fechaConsultada] = flights;
+	tarifasCache["f_" + fechaConsultada] = tarifas;
+
+	if((isSalida?current_date_salida:current_date_regreso) == fechaConsultada) 
+		fill_table($("#tbl_" + (isSalida?"salida":"regreso"))[0], flights, tarifas);
 }
 // ---------------------= =---------------------
 function fill_table(table, flights, rawTarifas)
@@ -550,16 +563,16 @@ function select_tarifa()
 // ---------------------= =---------------------
 function validate_search()
 {
-	var select_desde = $("#select_desde");
-	var select_hasta = $("#select_hasta");
+	var select_origen = $("#select_origen");
+	var select_destino = $("#select_destino");
 	var rbtn_ida = $("#rbtn_ida");
 	var rbtn_ida_vuelta = $("#rbtn_ida_vuelta");
 	var picker_salida = $("#picker_salida");
 	var picker_regreso = $("#picker_regreso");
 
 	var parms = {
-		desde: select_desde.val(),
-		hasta: select_hasta.val(),
+		origen: select_origen.val(),
+		destino: select_destino.val(),
 		fecha_salida: picker_salida.val(),
 		fecha_regreso: picker_regreso.val(),
 		solo_ida: rbtn_ida.hasClass("checked")
@@ -570,20 +583,20 @@ function validate_search()
 	var valid_form = true;
 
 	// origen
-	if(parms.desde=="") {
-		activate_validation(select_desde);
+	if(parms.origen=="") {
+		activate_validation(select_origen);
 		valid_form = false;
 	}
 
-	if(parms.hasta=="") {
-		activate_validation(select_hasta);
+	if(parms.destino=="") {
+		activate_validation(select_destino);
 		valid_form = false;
 	}
 
 	// same dates or both without selection
-	if(parms.desde == parms.hasta) {
-		activate_validation(select_desde);
-		activate_validation(select_hasta);
+	if(parms.origen == parms.destino) {
+		activate_validation(select_origen);
+		activate_validation(select_destino);
 
 		valid_form = false;
 	}
@@ -605,36 +618,33 @@ function validate_search()
 		return;
 	}
 
-	return;
-
-	// -------= AT THIS POINT, DATA SEND BEGINS =-----------
+	// -------= AT THIS POINT, DATA SEND BEGINS (redirect) =-----------
 	var data = {
 		origen: parms.origen,
 		destino: parms.destino
 	};
 
-	// --- date formatting ---
 	// fecha salida
 	raw_date = picker_salida.val().split(" ");
-	data["fechaIda"] = raw_date[0] + '/' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '/' + raw_date[2];
+	data["salida"] = raw_date[2] +""+ MONTHS_LANGUAGE_TABLE[raw_date[1]] +""+ raw_date[0];
 
-	if(false == parms.solo_ida){
+	// fecha retornos
+	if(false == parms.solo_ida) {
 		raw_date = picker_regreso.val().split(" ");
-		data["fechaRegreso"] = raw_date[0] + '/' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '/' + raw_date[2];
+		data["regreso"] = raw_date[2] +""+ MONTHS_LANGUAGE_TABLE[raw_date[1]] +""+ raw_date[0];
 	}
 
-	var RESULTS_URL = urls["flight_schedule_results"];
+	var results_url = urls["flight_schedule_results"];
 
-	var form = $('<form target="_blank" method="POST" action="' + RESULTS_URL + '">');
-	$.each(data, function(k,v){
-	    form.append('<input type="hidden" name="' + k + '" value="' + v + '">');
-	});
+	results_url = results_url + "?origen=" + data.origen+"&destino=" + data.destino
+		+ "&salida=" + data.salida 
+		+ (parms.solo_ida?"":("&regreso=" + data.regreso));
 
-	$("#div_submit").html("").append(form); // IE FIX
+	var btn = $("#btn_redirect");
+	btn.attr("href",results_url)
+	   .attr("target","_self");
 
-	form.submit();
-
-	$("footer #horarios").removeClass("active");
+	btn[0].click();
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------
