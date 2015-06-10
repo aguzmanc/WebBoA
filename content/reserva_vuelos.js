@@ -453,8 +453,8 @@ function fill_table(table, raw_flights, rawTarifas)
 			flight.num_vuelo = raw_flight["num_vuelo"];
 
 			// calcular tiempo de vuelo, y formatear para lectura
-			var timeA = [raw_flight["hora_salida"].substr(0,2), flight["hora_salida"].substr(2,2)];
-			var timeB = [raw_flight["hora_llegada"].substr(0,2), flight["hora_llegada"].substr(2,2)];
+			var timeA = [raw_flight["hora_salida"].substr(0,2), raw_flight["hora_salida"].substr(2,2)];
+			var timeB = [raw_flight["hora_llegada"].substr(0,2), raw_flight["hora_llegada"].substr(2,2)];
 
 			flight.hora_salida = timeA[0]+":"+timeA[1];
 			flight.hora_llegada = timeB[0]+":"+timeB[1];
@@ -493,12 +493,12 @@ function fill_table(table, raw_flights, rawTarifas)
 				// then check for the compartments in tarifas of flight
 				if(false == (compartment_key in flight.tarifas)) { // first occurrence of compartment in flight
 					flight.tarifas[compartment_key] = {};
-					flight.tarifas[compartment_key]['tarifa'] = tarifa;
+					flight.tarifas[compartment_key]['cantidad'] = tarifa;
 					flight.tarifas[compartment_key]['clase'] = flightClass;
 					flight.tarifas[compartment_key]['nombre'] = compartment_names[compartment_key];
 				} else {
 					if(tarifa < flight.tarifas[compartment_key]['tarifa']) {
-						flight.tarifas[compartment_key]['tarifa'] = tarifa;
+						flight.tarifas[compartment_key]['cantidad'] = tarifa;
 						flight.tarifas[compartment_key]['clase'] = flightClass;
 						flight.tarifas[compartment_key]['nombre'] = compartment_names[compartment_key];
 					}
@@ -506,10 +506,10 @@ function fill_table(table, raw_flights, rawTarifas)
 			}
 
 			// datos de origen y destino
-			flight.ciudad_origen = cities[flight["origen"]];
-			flight.ciudad_destino = cities[flight["destino"]];
-			flight.aeropuerto_origen = airports[flight["origen"]];
-			flight.aeropuerto_destino = airports[flight["destino"]];
+			flight.ciudad_origen = cities[raw_flight["origen"]];
+			flight.ciudad_destino = cities[raw_flight["destino"]];
+			flight.aeropuerto_origen = airports[raw_flight["origen"]];
+			flight.aeropuerto_destino = airports[raw_flight["destino"]];
 
 			flights.push(flight);
 		}
@@ -530,7 +530,7 @@ function fill_table(table, raw_flights, rawTarifas)
 
 		// -- mostrar datos
 		for(var i=0;i<flights.length;i++) {
-			var flight = raw_flights[i];
+			var flight = flights[i];
 
 			var row = document.createElement("tr");
 			$(row).addClass("flight-row")
@@ -547,83 +547,52 @@ function fill_table(table, raw_flights, rawTarifas)
 			$(row).append("<td>"+flight.operador+"</td>");
 
 			// tarifas por compartimiento
-			for(var k=0;k<compartment_idx++;k++) {
+			for(var k=0;k<compartment_idx;k++) {
 				var tarifa=-1;
-				for(var compartment_key in flight.tarifas){
-					tarifa = flight.tarifas[compartment_key];
-					if(tarifa.compartment_idx == k)
+
+				for(var compartment_key in compartments) { 
+					if(compartments[compartment_key].idx == k){
+						tarifa = flight.tarifas[compartment_key].cantidad;
 						break;
+					}
 				}
 
 				cell = document.createElement("td");
 				$(cell).addClass("tarifa");
 				$(cell).html("<div class='rbtn'><div></div></div>" + tarifa + " " + HTML_CURRENCIES[CURRENCY]);
+				$(cell).click(select_tarifa);
 				row.appendChild(cell);	
 			}
 
 			table.appendChild(row);
+
+			// fila de detalles
+			row = document.createElement("tr");
+			$(row).addClass("flight-details").addClass("collapsed")
+				.html("<td colspan='10' class='cell-details'><div class='expandable'><table><tr class='tmp'></tr></table></div></td>");
+
+			var tbl;
+			for(var m=0;m<2;m++) {
+				var isSalida = (m==0);
+				tbl = document.createElement("table");
+				$(tbl).attr("cellpadding","0").attr("cellspacing","0");
+				$(tbl).addClass("detail");
+
+				var timeStr = isSalida?flight.hora_salida:flight.hora_llegada;
+
+				$(tbl).append("<tr><td rowspan='2'><div class='icon-"+(isSalida?"salida":"regreso")+"'></div></td><td>"+timeStr+"</td></tr>");
+				$(tbl).append("<tr><td>Hrs.</td></tr>");
+				$(tbl).append("<tr><td colspan='2'><label " + (isSalida?"":"style='visibility:hidden'") +">Duraci&oacute;n: &nbsp"+flight.duracion_ext+"</label></td></tr>");
+				$(tbl).append("<tr><td colspan='2'><h2>"+flight["ciudad_"+(isSalida?"origen":"destino")]+"</h2></td></tr>");
+				$(tbl).append("<tr><td colspan='2'><label>"+flight["aeropuerto_"+(isSalida?"origen":"destino")]+"</label></td></tr>");
+
+				var innerCell = document.createElement("td");
+				$(innerCell).append(tbl);
+				$(row).find(".expandable .tmp").append(innerCell);
+			}
+
+			table.appendChild(row);
 		}
-
-		//-----------
-		// for(var i=0;i<raw_flights.length; i++) {
-		// 	var flight = raw_flights[i];
-
-		// 	var row = document.createElement("tr");
-		// 	// numero vuelo
-		// 	$(row).addClass("flight-row").attr("data-num_vuelo",flight.num_vuelo);
-			
-		// 	// salida,llegada y duración
-		// 	var cell = document.createElement("td");
-		// 	$(cell).html(flight.hora_salida+"&nbsp;&nbsp;-&nbsp;&nbsp;"+flight.hora_llegada+"<br>" + 
-		// 		"<span>Duraci&oacute;n: "+flight.duracion+"</span>");
-		// 	row.appendChild(cell);
-
-		// 	// Operado por
-		// 	$(row).append("<td>"+flight.operador+"</td>");
-
-		// 	// remove all headers for previous compartments
-		// 	$(table).find("tr:first-child th.compartment-header").remove();
-
-		// 	for(var compartment in compartment_names){
-		// 		if(compartment in bestTarifasByCompartment){
-		// 			$(table).find("tr:first-child")
-		// 				.append("<th class='class-group compartment-header'>"+compartment_names[compartment]+"</th>");
-
-		// 			cell = document.createElement("td");
-		// 			$(cell).addClass("tarifa")
-		// 				   .html("<div class='rbtn'><div></div></div>" + bestTarifasByCompartment[compartment] + " " + HTML_CURRENCIES[CURRENCY]);
-		// 			$(cell).click(select_tarifa);
-		// 			row.appendChild(cell);	
-		// 		}
-		// 	}
-
-		// 	table.appendChild(row);
-
-		// 	row = document.createElement("tr");
-		// 	$(row).addClass("flight-details").addClass("collapsed").html("<td colspan='10' class='cell-details'><div class='expandable'></div></td>");
-
-		// 	var tbl;
-		// 	for(var m=0;m<2;m++) {
-		// 		var isSalida = (m==0);
-		// 		tbl = document.createElement("table");
-		// 		$(tbl).attr("cellpadding","0").attr("cellspacing","0");
-
-		// 		if(isSalida)
-		// 			$(tbl).css("float","left"); // if first
-
-		// 		var timeStr = isSalida?(timeA[0]+":"+timeA[1]):(timeB[0]+":"+timeB[1]);
-
-		// 		$(tbl).append("<tr><td rowspan='2'><div class='icon-"+(isSalida?"salida":"regreso")+"'></div></td><td>"+timeStr+"</td></tr>");
-		// 		$(tbl).append("<tr><td>Hrs.</td></tr>");
-		// 		$(tbl).append("<tr><td colspan='2'><label " + (isSalida?"":"style='visibility:hidden'") +">Duraci&oacute;n: &nbsp"+durationTimeExp+"</label></td></tr>");
-		// 		$(tbl).append("<tr><td colspan='2'><h2>"+cities[flight[isSalida?"origen":"destino"]]+"</h2></td></tr>");
-		// 		$(tbl).append("<tr><td colspan='2'><label>"+airports[flight[isSalida?"origen":"destino"]]+"</label></td></tr>");
-
-		// 		$(row).find(".expandable").append(tbl);
-		// 	}
-
-		// 	table.appendChild(row);
-		// }
 	}
 }
 // ---------------------= =---------------------
