@@ -269,11 +269,8 @@ function request_flights(date, results_callback, isSalida)
 		surcharges 		: true,
 		directionality  : "0",
 
-		from 			: initial_parameters.origen,
-		to 				: initial_parameters.destino,
-
-		departing 		: isSalida?date:"",
-		returning 		: isSalida?"":date,
+		departing 		: date,
+		returning 		: "",
 		sites 			: "1",
 		compartment 	: "0",
 		classes 		: "",
@@ -292,6 +289,15 @@ function request_flights(date, results_callback, isSalida)
 		ipAddress 		: "127.0.0.1",
 		xmlOrJson 		: "false"
 	};
+
+	if(isSalida){
+		data["from"] = initial_parameters.origen;
+		data["to"] = initial_parameters.destino;
+	}
+	else{
+		data["to"] = initial_parameters.origen;
+		data["from"] = initial_parameters.destino;
+	}
 
 	var dataStr = JSON.stringify(data);
 
@@ -396,7 +402,7 @@ function receive_flights(isSalida, response)
 	// should not be so complicated =/
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult).ResultAvailabilityPlusValuationsShort; 
 
-	var fechaConsultada = response["fecha"+(isSalida?"Ida":"Vuelta")+"Consultada"];
+	var fechaConsultada = response["fechaIdaConsultada"];
 
 	var datesCache = isSalida ? dates_cache_salida : dates_cache_regreso;
 	var datesLoading = isSalida? dates_loading_salida : dates_loading_regreso;
@@ -404,7 +410,7 @@ function receive_flights(isSalida, response)
 	// removes from date loading
 	datesLoading.splice(datesLoading.indexOf(fechaConsultada), 1);
 
-	var flights = response["vuelosYTarifas"]["Vuelos"][isSalida?"ida":"vuelta"]["vuelos"]["vuelo"];	
+	var flights = response["vuelosYTarifas"]["Vuelos"]["ida"]["vuelos"]["vuelo"];	
 	var tarifas = response["vuelosYTarifas"]["Tarifas"]["TarifaPersoCombinabilityIdaVueltaShort"]["TarifasPersoCombinabilityID"]["TarifaPersoCombinabilityID"];
 
 	// add to cache
@@ -569,7 +575,7 @@ function fill_table(table, raw_flights, rawTarifas)
 			// fila de detalles
 			row = document.createElement("tr");
 			$(row).addClass("flight-details").addClass("collapsed")
-				.html("<td colspan='10' class='cell-details'><div class='expandable'><table><tr class='tmp'></tr></table></div></td>");
+				.html("<td colspan='10' class='cell-details'><div class='expandable'><table style='width:100%'><tr class='details-row'></tr></table></div></td>");
 
 			var tbl;
 			for(var m=0;m<2;m++) {
@@ -577,18 +583,24 @@ function fill_table(table, raw_flights, rawTarifas)
 				tbl = document.createElement("table");
 				$(tbl).attr("cellpadding","0").attr("cellspacing","0");
 				$(tbl).addClass("detail");
+				$(tbl).css("width","100%");
 
 				var timeStr = isSalida?flight.hora_salida:flight.hora_llegada;
 
-				$(tbl).append("<tr><td rowspan='2'><div class='icon-"+(isSalida?"salida":"regreso")+"'></div></td><td>"+timeStr+"</td></tr>");
-				$(tbl).append("<tr><td>Hrs.</td></tr>");
+				$(tbl).append("<tr><td class='icon-cell' rowspan='2'><div class='icon-"+(isSalida?"salida":"regreso")+"'></div></td><td class='time-cell'>"+timeStr+"</td></tr>");
+				$(tbl).append("<tr><td class='hrs-cell'>Hrs.</td></tr>");
 				$(tbl).append("<tr><td colspan='2'><label " + (isSalida?"":"style='visibility:hidden'") +">Duraci&oacute;n: &nbsp"+flight.duracion_ext+"</label></td></tr>");
 				$(tbl).append("<tr><td colspan='2'><h2>"+flight["ciudad_"+(isSalida?"origen":"destino")]+"</h2></td></tr>");
 				$(tbl).append("<tr><td colspan='2'><label>"+flight["aeropuerto_"+(isSalida?"origen":"destino")]+"</label></td></tr>");
 
 				var innerCell = document.createElement("td");
+				$(innerCell).css("width","48%");
 				$(innerCell).append(tbl);
-				$(row).find(".expandable .tmp").append(innerCell);
+				$(row).find(".expandable .details-row").append(innerCell);
+
+				if(isSalida) {
+					$(row).find(".expandable .details-row").append("<td style='width:4%'></td>");
+				}
 			}
 
 			table.appendChild(row);
