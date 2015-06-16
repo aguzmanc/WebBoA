@@ -1,4 +1,3 @@
-
  /*
  * Theme Name: Boliviana de Aviación
  * Theme URI: http://www.wasp.bo/
@@ -2274,17 +2273,23 @@ footer .form .button {
 	font-family: "HelveticaNeuePro";
 	text-align: center;
 	color: rgb(255, 255, 255);
-	padding: 0px 20px 0px 0px;
+	padding: 2px 35px 0px 0px;
 	font-size: 20px;
 	line-height: 40px;
 
 	cursor: pointer;
 }
 
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand.searching {
+  background-color: #808080;
+  color: #BBB;
+  cursor: default;
+}
+
 .ui-section.wide.results #widget_cambiar_vuelo .btn-expand .icon-cross {
 	position: absolute;
 	top: 5px;
-	left: 160px;
+	left: 180px;
 	width: 30px;
 	height: 30px;
 
@@ -2297,14 +2302,41 @@ footer .form .button {
 	-moz-transform: rotate(135deg);
 	-o-transform: rotate(135deg);
 	-ms-transform: rotate(135deg);
-
 }
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand.searching .icon-cross{display: none;}
+
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand .icon-loading {
+	position: absolute;
+	top: 0px;
+	left: 175px;
+	width: 40px;
+	height: 40px;
+	background-image: url('images/loading.gif');
+	background-size: 40px;
+	background-repeat: no-repeat;
+	display:none;
+}
+
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand.searching .icon-loading {display: block;}
+
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand .cambiar{display: block;}
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand.searching .cambiar{display: none;}
+
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand .buscando{display: none;}
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand.searching .buscando{display: block;}
 
 .ui-section.wide.results #widget_cambiar_vuelo.expanded {
 	z-index: 101;
 }
 
 .ui-section.wide.results #widget_cambiar_vuelo.collapsed .btn-expand:hover { background-color: #C28318; }
+
+.ui-section.wide.results #widget_cambiar_vuelo .btn-expand:hover.searching {
+  background-color: #808080;
+  color: #BBB;
+  cursor: default;
+}
+
 .ui-section.wide.results #widget_cambiar_vuelo.expanded .btn-expand { cursor: default; }
 .ui-section.wide.results #widget_cambiar_vuelo.expanded .btn-expand .icon-cross {
 	transform: rotate(0deg);
@@ -2426,7 +2458,7 @@ footer .form .button {
 	background-image: url('images/loading.gif');
 	width: 100px;
 	height: 100px;
-	margin: 30px auto;
+	margin: 0 auto;
 }
 
 .ui-section.wide.results .descripcion table tr.flight-row td{cursor: pointer;}

@@ -1,11 +1,15 @@
 // ---------------------= =---------------------
-var initial_parameters = {
-	origen:"",destino:"",fecha_salida:""
+var current_parameters = {
+	origen:"",destino:"",fecha_salida:"",fecha_regreso:null
 };
 
 var dates_cache_salida = {};
 var dates_cache_regreso = {};
 var tarifasCache = {};
+var pendingTablesBuild = { // usado para habilitar/deshabilitar widget de busqueda
+	salida:false,
+	retorno:false
+}; 
 
 var dates_loading_salida = [];
 var dates_loading_regreso = [];
@@ -20,24 +24,26 @@ var currencies = {euro:"&euro;", usd:"USD"};
 
 var cities = {
 	LPB: "La Paz",
+	CIJ: "Cobija",
 	CBB: "Cochabamba",
 	MAD: "Madrid",
 	VVI: "Santa Cruz",
 	SRE: "Sucre",
 	TJA: "Tarija",
-	TRI: "Trinidad",
+	TDD: "Trinidad",
 	EZE: "Buenos Aires",
 	GRU: "Sao Paulo"
 };
 
 var airports = {
 	LPB: "Aeropuerto Internacional El Alto",
+	CIJ: "",
 	CBB: "Aeropuerto Internacional Jorge Wilstermann",
 	MAD: "",
 	VVI: "",
 	SRE: "",
 	TJA: "",
-	TRI: "",
+	TDD: "",
 	EZE: "",
 	GRU: ""
 };
@@ -80,48 +86,68 @@ $(document).on('ready',function()
 		minDate:0
 	});
 
+	setInterval(checkSearchWidgetAvailability, 200);
 }); // init
 
 // ---------------------= =---------------------
 function handle_initial_request()
 {
-	initial_parameters.origen = location.queryString['origen'];
-	initial_parameters.destino = location.queryString['destino'];
-	initial_parameters.fecha_salida = location.queryString['salida'];
+	current_parameters.origen = location.queryString['origen'];
+	current_parameters.destino = location.queryString['destino'];
+	current_parameters.fecha_salida = location.queryString['salida'];
+	current_parameters.fecha_regreso = location.queryString['regreso'];
 
 	// origen
-	if(initial_parameters.origen == null)
-		initial_parameters.origen = "CBB";
+	if(current_parameters.origen == null)
+		current_parameters.origen = "CBB";
 
 	// destino
-	if(initial_parameters.destino == null)
-		initial_parameters.destino = "VVI";
+	if(current_parameters.destino == null)
+		current_parameters.destino = "VVI";
 
 	// salida
-	if(initial_parameters.fecha_salida == null) {
-		initial_parameters.fecha_salida = todayStr;
+	if(current_parameters.fecha_salida == null) {
+		current_parameters.fecha_salida = todayStr;
 	}
 
-	current_date_salida = initial_parameters.fecha_salida;
+	request_search_parameters(current_parameters);
+}
+// ---------------------= =---------------------
+function request_search_parameters(parms)
+{
+	current_date_salida = parms.fecha_salida;
+	if(parms.fecha_regreso != null)
+		current_date_regreso = parms.fecha_regreso;
 
 	// setup labels
-	var origen = initial_parameters.origen;
-	var destino = initial_parameters.destino;
+	var origen = parms.origen;
+	var destino = parms.destino;
 	var cityOrigen = cities[origen];
 	var cityDestino = cities[destino];
 
 	$("#lbl_info_salida").html("Ida: "+cityOrigen+"("+origen+") - "+cityDestino+"("+destino+")");
 
 	// regreso
-	var fecha_regreso = location.queryString['regreso'];
-	if(fecha_regreso != null) {
-		initial_parameters['fecha_regreso'] = fecha_regreso;
-		current_date_regreso = initial_parameters.fecha_regreso;
-
-		$("#lbl_info_regreso").show().html("Retorno: "+cityDestino+"("+destino+") - "+cityOrigen+"("+origen+")");
+	if(parms.fecha_regreso != null) {
+		$("#lbl_info_regreso, #tbl_dayselector_regreso, #tbl_regreso").show();
+		$("#lbl_info_regreso").html("Retorno: "+cityDestino+"("+destino+") - "+cityOrigen+"("+origen+")");
 	} else {
 		$("#lbl_info_regreso, #tbl_dayselector_regreso, #tbl_regreso").hide();
+		$("#lbl_info_regreso").hide();
 	}
+
+	$("#tbl_days_selector_salida, #tbl_days_selector_regreso")
+		.find("tr")
+		.html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
+
+	fill_table_with_loading($("#tbl_salida")[0]);
+	if(parms.fecha_regreso != null){
+		fill_table_with_loading($("#tbl_regreso")[0]);
+	}
+
+	$("#widget_cambiar_vuelo .btn-expand").addClass("searching");
+
+
 
 	var now = new Date();
 	var hh = ("00" + (now.getHours())).slice(-2);
@@ -135,11 +161,11 @@ function handle_initial_request()
 		currency 		: CODE_CURRENCIES[CURRENCY],
 		locationType 	: "N",
 		location 		: "BO",
-		from 			: initial_parameters.origen,
-		to 				: initial_parameters.destino,
+		from 			: parms.origen,
+		to 				: parms.destino,
 		rateType		: "1",
-		departing 		: initial_parameters.fecha_salida,
-		returning 		: (initial_parameters.fecha_regreso == null ? "" : initial_parameters.fecha_regreso),
+		departing 		: parms.fecha_salida,
+		returning 		: (parms.fecha_regreso == null ? "" : parms.fecha_regreso),
 		days 			: "7",
 		ratesMax		: "1",
 		sites			: "1",
@@ -163,12 +189,6 @@ function handle_initial_request()
 		success: async_receive_dates,
 		data: dataStr
 	});
-
-	$("#tbl_days_selector_salida, #tbl_days_selector_regreso")
-		.find("tr")
-		.html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
-
-	$("#tbl_salida .tarifa").click(select_tarifa);
 }
 // ---------------------= =---------------------
 function toggle_rbtn_ida_vuelta()
@@ -189,8 +209,14 @@ function toggle_rbtn_ida_vuelta()
 function change_day()
 {
 	var table = this;
+
 	while(false == $(table).is("table")) // find parent table
 		table = table.parentNode;
+
+	if(table.id == "tbl_days_selector_salida")
+		pendingTablesBuild.salida = true;
+	else if(table.id == "tbl_days_selector_regreso")
+		pendingTablesBuild.regreso = true;
 
 	$(table).find(".day-selector").removeClass("selected");
 
@@ -210,6 +236,8 @@ function change_day()
 // ---------------------= =---------------------
 function toggle_widget_cambiar_vuelo()
 {
+	if($(this).hasClass("searching")) return;
+
 	var widget = $(this.parentNode);
 
 	if(widget.hasClass("collapsed")){
@@ -291,12 +319,12 @@ function request_flights(date, results_callback, isSalida)
 	};
 
 	if(isSalida){
-		data["from"] = initial_parameters.origen;
-		data["to"] = initial_parameters.destino;
+		data["from"] = current_parameters.origen;
+		data["to"] = current_parameters.destino;
 	}
 	else{
-		data["to"] = initial_parameters.origen;
-		data["from"] = initial_parameters.destino;
+		data["to"] = current_parameters.origen;
+		data["from"] = current_parameters.destino;
 	}
 
 	var dataStr = JSON.stringify(data);
@@ -311,11 +339,11 @@ function request_flights(date, results_callback, isSalida)
 	});
 }
 // ---------------------= =---------------------
+
 function async_receive_dates(response) 
 {
 	// fix to .NET dumbest encoding ever (possible bug here in future)
 	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
-
 	// start build info to UI
 	build_dates_selector(
 		response["calendarioOW"]["OW_Ida"]["salidas"]["salida"],
@@ -323,17 +351,25 @@ function async_receive_dates(response)
 		$("#tbl_days_selector_salida")
 	);
 
-	get_flights_for_date(initial_parameters.fecha_salida, true);
+	pendingTablesBuild.salida = true;
 
-	if(initial_parameters.fecha_regreso != null){
+	get_flights_for_date(current_parameters.fecha_salida, true);
+
+	if(current_parameters.fecha_regreso != null){
 		build_dates_selector(
 			response["calendarioOW"]["OW_Vuelta"]["salidas"]["salida"],
 			response["fechaVueltaConsultada"], 
 			$("#tbl_days_selector_regreso")
 		);
 
-		get_flights_for_date(initial_parameters.fecha_regreso, false);
+		pendingTablesBuild.regreso = true;
+
+		get_flights_for_date(current_parameters.fecha_regreso, false);
+	}else{
+		pendingTablesBuild.regreso = false;
 	}
+
+
 }
 // ---------------------= =---------------------
 function build_dates_selector(rawDates, requestedDateStr, table)
@@ -423,6 +459,11 @@ function receive_flights(isSalida, response)
 // ---------------------= =---------------------
 function fill_table(table, raw_flights, rawTarifas)
 {
+	if(table.id == "tbl_salida")
+		pendingTablesBuild.salida = false;
+	else if(table.id == "tbl_regreso")
+		pendingTablesBuild.regreso = false;
+
 	var tarifas = {};
 	for(var i=0;i<rawTarifas.length;i++) {
 		var raw_tarifa = rawTarifas[i];
@@ -606,6 +647,8 @@ function fill_table(table, raw_flights, rawTarifas)
 			table.appendChild(row);
 		}
 	}
+
+
 }
 // ---------------------= =---------------------
 function fill_table_with_loading(table, flights)
@@ -655,7 +698,6 @@ function validate_search()
 		solo_ida: rbtn_ida.hasClass("checked")
 	};
 
-	var raw_date;
 	// -----= VALIDATION PROCESS =------
 	var valid_form = true;
 
@@ -695,33 +737,35 @@ function validate_search()
 		return;
 	}
 
-	// -------= AT THIS POINT, DATA SEND BEGINS (redirect) =-----------
-	var data = {
-		origen: parms.origen,
-		destino: parms.destino
-	};
+	// -------= AT THIS POINT, A NEW REQUEST BEGINS =-----------
+	current_parameters.origen = parms.origen;
+	current_parameters.destino = parms.destino;
 
 	// fecha salida
-	raw_date = picker_salida.val().split(" ");
-	data["salida"] = raw_date[2] +""+ MONTHS_LANGUAGE_TABLE[raw_date[1]] +""+ raw_date[0];
-
-	// fecha retornos
-	if(false == parms.solo_ida) {
+	var raw_date = picker_salida.val().split(" ");
+	current_parameters.fecha_salida = raw_date[2] +""+ MONTHS_LANGUAGE_TABLE[raw_date[1]] +""+ raw_date[0];
+	
+	// fecha retorno
+	if(parms.solo_ida){
+		current_parameters.fecha_regreso = null
+	} else {
 		raw_date = picker_regreso.val().split(" ");
-		data["regreso"] = raw_date[2] +""+ MONTHS_LANGUAGE_TABLE[raw_date[1]] +""+ raw_date[0];
+		current_parameters.fecha_regreso = raw_date[2] +""+ MONTHS_LANGUAGE_TABLE[raw_date[1]] +""+ raw_date[0];
 	}
 
-	var results_url = urls["flight_schedule_results"];
+	request_search_parameters(current_parameters);
 
-	results_url = results_url + "?origen=" + data.origen+"&destino=" + data.destino
-		+ "&salida=" + data.salida 
-		+ (parms.solo_ida?"":("&regreso=" + data.regreso));
-
-	var btn = $("#btn_redirect");
-	btn.attr("href",results_url)
-	   .attr("target","_self");
-
-	btn[0].click();
+	$("#widget_cambiar_vuelo").removeClass("expanded").addClass("collapsed");
 }
+// ---------------------= =---------------------
+function checkSearchWidgetAvailability()
+{
+	if(pendingTablesBuild.salida == false && pendingTablesBuild.regreso == false)
+		$("#widget_cambiar_vuelo .btn-expand").removeClass("searching");
+	else
+		$("#widget_cambiar_vuelo .btn-expand").addClass("searching");
+}
+// ---------------------= =---------------------
+// ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------
