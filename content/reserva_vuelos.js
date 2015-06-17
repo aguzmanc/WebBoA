@@ -438,6 +438,8 @@ function receive_flights(isSalida, response)
 	// should not be so complicated =/
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult).ResultAvailabilityPlusValuationsShort; 
 
+	console.log(response);
+
 	var fechaConsultada = response["fechaIdaConsultada"];
 
 	var datesCache = isSalida ? dates_cache_salida : dates_cache_regreso;
@@ -446,7 +448,16 @@ function receive_flights(isSalida, response)
 	// removes from date loading
 	datesLoading.splice(datesLoading.indexOf(fechaConsultada), 1);
 
-	var flights = response["vuelosYTarifas"]["Vuelos"]["ida"]["vuelos"]["vuelo"];	
+	var flights = response["vuelosYTarifas"]["Vuelos"]["ida"]["vuelos"]["vuelo"];
+
+	// when there is only one result, the response is an object, not an array, 
+	// so it must be translated
+	if(flights.constructor !== Array){
+		var obj = flights;
+		flights = [];
+		flights.push(obj);
+	}
+
 	var tarifas = response["vuelosYTarifas"]["Tarifas"]["TarifaPersoCombinabilityIdaVueltaShort"]["TarifasPersoCombinabilityID"]["TarifaPersoCombinabilityID"];
 
 	// add to cache
