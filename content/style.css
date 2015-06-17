@@ -2372,7 +2372,16 @@ footer .form .button {
 .ui-section.wide.results #widget_cambiar_vuelo .form > table{margin: 10px 30px;}
 
 .ui-section.wide.results #widget_cambiar_vuelo .form .button {width:166px;}
-/*----*/
+/*--------------------------------------------------------*/
+#widget_resumen_reserva{
+	position: absolute;
+  	right: 0px;
+  	top: 0px;
+  	background-color: #3C5E8C;
+  	width: 200px;
+  	height: 100%;
+}
+/*--------------------------------------------------------*/
 .ui-section.wide.results .info {
 	width: 100%;
 	min-width: 850px;
@@ -2409,6 +2418,10 @@ footer .form .button {
 .ui-section.wide.results .descripcion table .day-selector.selected {
 	background-color: #EFAA35 !important;
 	cursor: default;
+}
+
+.ui-section.wide.results .descripcion table .day-selector.faded{
+	background-color: #7590B4;
 }
 
 .ui-section.wide.results .descripcion table .day-selector h2 {

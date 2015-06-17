@@ -115,6 +115,16 @@ function handle_initial_request()
 // ---------------------= =---------------------
 function request_search_parameters(parms)
 {
+	// Clear cache data first
+	dates_cache_salida = {};
+	dates_cache_regreso = {};
+	tarifasCache = {};
+	dates_loading_salida = [];
+	dates_loading_regreso = [];
+	current_date_salida = "";
+	current_date_regreso = "";
+
+	// start processing dates
 	current_date_salida = parms.fecha_salida;
 	if(parms.fecha_regreso != null)
 		current_date_regreso = parms.fecha_regreso;
@@ -136,9 +146,19 @@ function request_search_parameters(parms)
 		$("#lbl_info_regreso").hide();
 	}
 
-	$("#tbl_days_selector_salida, #tbl_days_selector_regreso")
-		.find("tr")
-		.html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
+	// $("#tbl_days_selector_salida, #tbl_days_selector_regreso")
+	// 	.find("tr")
+	// 	.html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
+
+	$("#tbl_days_selector_salida .day-selector, #tbl_days_selector_regreso .day-selector")
+		.removeClass("no-flights")
+		.removeClass("selected")
+		.addClass("faded")
+		.html("");
+
+	$("#tbl_days_selector_salida .day-selector:nth-child(4), #tbl_days_selector_regreso .day-selector:nth-child(4)")
+		.addClass("loading-cell")
+		.html("<div class='loading'></div>");
 
 	fill_table_with_loading($("#tbl_salida")[0]);
 	if(parms.fecha_regreso != null){
@@ -146,8 +166,6 @@ function request_search_parameters(parms)
 	}
 
 	$("#widget_cambiar_vuelo .btn-expand").addClass("searching");
-
-
 
 	var now = new Date();
 	var hh = ("00" + (now.getHours())).slice(-2);
@@ -438,8 +456,6 @@ function receive_flights(isSalida, response)
 	// should not be so complicated =/
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult).ResultAvailabilityPlusValuationsShort; 
 
-	console.log(response);
-
 	var fechaConsultada = response["fechaIdaConsultada"];
 
 	var datesCache = isSalida ? dates_cache_salida : dates_cache_regreso;
@@ -662,7 +678,7 @@ function fill_table(table, raw_flights, rawTarifas)
 
 }
 // ---------------------= =---------------------
-function fill_table_with_loading(table, flights)
+function fill_table_with_loading(table)
 {
 	$(table).find("tr").not(":first").remove(); // clear table results
 
@@ -675,7 +691,9 @@ function fill_table_with_loading(table, flights)
 function select_tarifa()
 {
 	var row = this.parentNode;
-	if($(row).hasClass("selected")) return;
+
+	if($(this).find(".rbtn").hasClass("checked"))
+		return;
 
 	var table = row.parentNode;
 	while(false == $(table).is("table")) // find parent table
