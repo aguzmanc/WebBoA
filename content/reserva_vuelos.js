@@ -37,15 +37,15 @@ var cities = {
 
 var airports = {
 	LPB: "Aeropuerto Internacional El Alto",
-	CIJ: "",
+	CIJ: "Aeropuerto Capit&aacute;n Anibal Arab",
 	CBB: "Aeropuerto Internacional Jorge Wilstermann",
-	MAD: "",
-	VVI: "",
-	SRE: "",
-	TJA: "",
-	TDD: "",
-	EZE: "",
-	GRU: ""
+	MAD: "Aeropuerto Internacional Adolfo Su&aacute;z Madrid-Barajas",
+	VVI: "Aeropuerto Internacional Viru Viru",
+	SRE: "Aeropuerto Juana Azurduy de Padilla",
+	TJA: "Aeropuerto Capitán Oriel Lea Plaza",
+	TDD: "Aeropuerto Teniente Jorge Henrich Arauz",
+	EZE: "Aeropuerto Internacional Ministro Pistarini",
+	GRU: "Aeropuerto Internacional de Guarulhos"
 };
 
 var compartment_names = {"compart_2":"Business","compart_3":"Econ&oacute;mica"};
@@ -87,6 +87,9 @@ $(document).on('ready',function()
 	});
 
 	setInterval(checkSearchWidgetAvailability, 200);
+
+	// cambio en fila de detalles de resultados segun ancho
+	$(window).resize(checkResultsTableWidth);
 }); // init
 
 // ---------------------= =---------------------
@@ -146,16 +149,14 @@ function request_search_parameters(parms)
 		$("#lbl_info_regreso").hide();
 	}
 
-	// $("#tbl_days_selector_salida, #tbl_days_selector_regreso")
-	// 	.find("tr")
-	// 	.html("<td colspan='20' class='loading-cell'><div class='loading'></div></td>");
-
+	//  cambiar aspecto de celdas a segundo plano
 	$("#tbl_days_selector_salida .day-selector, #tbl_days_selector_regreso .day-selector")
 		.removeClass("no-flights")
 		.removeClass("selected")
 		.addClass("faded")
 		.html("");
 
+	// añadir animacion de loading
 	$("#tbl_days_selector_salida .day-selector:nth-child(4), #tbl_days_selector_regreso .day-selector:nth-child(4)")
 		.addClass("loading-cell")
 		.html("<div class='loading'></div>");
@@ -386,8 +387,6 @@ function async_receive_dates(response)
 	}else{
 		pendingTablesBuild.regreso = false;
 	}
-
-
 }
 // ---------------------= =---------------------
 function build_dates_selector(rawDates, requestedDateStr, table)
@@ -540,8 +539,8 @@ function fill_table(table, raw_flights, rawTarifas)
 			var h = parseInt(totalMinutes/60);
 			var m = parseInt(totalMinutes%60);
 
-			flight.duracion = (h==0?"":(h+" h ")) + m==0?"":(m+" m");
-			flight.duracion_ext = (h==0?"":(h+" hrs. ")) + m==0?"":(m+" min.");
+			flight.duracion = (h==0?"":(h+" h ")) + (m==0?"":(m+" m"));
+			flight.duracion_ext = (h==0?"":(h+" hrs. ")) + (m==0?"":(m+" min."));
 			flight.operador = "BoA";
 
 			// buscar mejor tarifa por clase
@@ -640,42 +639,34 @@ function fill_table(table, raw_flights, rawTarifas)
 
 			table.appendChild(row);
 
-			// fila de detalles
+			/*** FILA DE DETALLES ***/
 			row = document.createElement("tr");
-			$(row).addClass("flight-details").addClass("collapsed")
-				.html("<td colspan='10' class='cell-details'><div class='expandable'><table style='width:100%'><tr class='details-row'></tr></table></div></td>");
 
-			var tbl;
+			$(row).addClass("flight-details").addClass("collapsed")
+				.html("<td colspan='10' class='cell-details'><div class='expandable'></div></td>");
+
+			var expandable = $(row).find(".expandable");
+
 			for(var m=0;m<2;m++) {
 				var isSalida = (m==0);
-				tbl = document.createElement("table");
-				$(tbl).attr("cellpadding","0").attr("cellspacing","0");
-				$(tbl).addClass("detail");
-				$(tbl).css("width","100%");
-
 				var timeStr = isSalida?flight.hora_salida:flight.hora_llegada;
 
-				$(tbl).append("<tr><td class='icon-cell' rowspan='2'><div class='icon-"+(isSalida?"salida":"regreso")+"'></div></td><td class='time-cell'>"+timeStr+"</td></tr>");
-				$(tbl).append("<tr><td class='hrs-cell'>Hrs.</td></tr>");
-				$(tbl).append("<tr><td colspan='2'><label " + (isSalida?"":"style='visibility:hidden'") +">Duraci&oacute;n: &nbsp"+flight.duracion_ext+"</label></td></tr>");
-				$(tbl).append("<tr><td colspan='2'><h2>"+flight["ciudad_"+(isSalida?"origen":"destino")]+"</h2></td></tr>");
-				$(tbl).append("<tr><td colspan='2'><label>"+flight["aeropuerto_"+(isSalida?"origen":"destino")]+"</label></td></tr>");
+				var detail = document.createElement("table");
+				$(detail).addClass("detail")
+					     .addClass(isSalida?"left":"right")
+						 .attr("cellspacing","0")
+						 .attr("cellpadding","0")
+						 .append("<tr><td class='icon-cell' rowspan='2'><div class='icon-"+(isSalida?"salida":"llegada")+"'></div></td><td class='time-cell'>"+timeStr+"<br>Hrs.</td><td class='airport-cell'>"+flight["aeropuerto_"+(isSalida?"origen":"destino")]+"</td></tr>")
+						 .append("<tr><td class='ciudad-cell'>"+flight["ciudad_"+(isSalida?"origen":"destino")]+"</td><td class='duracion-cell'>Duraci&oacute;n: "+flight.duracion_ext+"</td></tr>");
 
-				var innerCell = document.createElement("td");
-				$(innerCell).css("width","48%");
-				$(innerCell).append(tbl);
-				$(row).find(".expandable .details-row").append(innerCell);
-
-				if(isSalida) {
-					$(row).find(".expandable .details-row").append("<td style='width:4%'></td>");
-				}
+				expandable.append(detail);
 			}
 
 			table.appendChild(row);
 		}
+
+		checkResultsTableWidth();
 	}
-
-
 }
 // ---------------------= =---------------------
 function fill_table_with_loading(table)
@@ -795,6 +786,15 @@ function checkSearchWidgetAvailability()
 		$("#widget_cambiar_vuelo .btn-expand").addClass("searching");
 }
 // ---------------------= =---------------------
+/* cambio en fila de detalles de resultados segun ancho */
+function checkResultsTableWidth()
+{
+	var w = $("#tbl_salida").width();
+	if(w < 700)
+		$("#tbl_salida .expandable .detail, #tbl_regreso .expandable .detail").removeClass("stretched");
+	else
+		$("#tbl_salida .expandable .detail, #tbl_regreso .expandable .detail").addClass("stretched");
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

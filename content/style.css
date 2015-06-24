@@ -2176,7 +2176,7 @@ footer .form .button {
 }
 
 .ui-section.wide .info .descripcion.with-menu{
-	padding-right: 210px;
+	padding-right: 320px;
 }
 
 .ui-section.wide .descripcion.with-menu .subinfo {
@@ -2311,7 +2311,7 @@ footer .form .button {
 	left: 175px;
 	width: 40px;
 	height: 40px;
-	background-image: url('images/loading.gif');
+	background-image: url('images/loading_small.gif');
 	background-size: 40px;
 	background-repeat: no-repeat;
 	display:none;
@@ -2377,9 +2377,133 @@ footer .form .button {
 	position: absolute;
   	right: 0px;
   	top: 0px;
-  	background-color: #3C5E8C;
-  	width: 200px;
+  	background-color: #2D4565;
+  	width: 300px;
   	height: 100%;
+  	color: #FFF;
+}
+
+#widget_resumen_reserva .separator {
+	background-color: #4F6885;
+	width: 100%;
+	height: 3px;
+}
+
+#widget_resumen_reserva .head-tu-vuelo {
+	width: 170px;
+	height: 63px;
+	background-image: url('images/icon_tu_vuelo.png');
+	background-repeat: no-repeat;
+	background-size: 170px;
+	margin: 15px 0 0 21px;
+}
+
+#widget_resumen_reserva table{width:100%;}
+#widget_resumen_reserva td th{padding:0;}
+
+
+#widget_resumen_reserva th{
+	color: #FFF;
+	text-align: left;
+	font-size: 43px;
+	font-family: "FuturaLight";
+	font-style: italic;
+	padding: 3px 0 3px 15px;
+}
+
+#widget_resumen_reserva .cell-icon-ida{width:92px;}
+#widget_resumen_reserva .icon-ida{
+	width: 72;
+	height: 69px;
+	background-image: url('images/icon_avion_compra.png');
+	margin: 10px 10px 0 10px;
+}
+
+#widget_resumen_reserva .cell-icon-vuelta{width:92px;}
+#widget_resumen_reserva .icon-vuelta{
+	width: 72;
+	height: 69px;
+	background-image: url('images/icon_avion_compra.png');
+	background-position: 0 -69px;
+	margin: 10px 10px 0 10px;
+}
+
+#widget_resumen_reserva .cell-descripcion {
+	color: #DB9F3C;
+	font-family: "FuturaMedium";
+	letter-spacing: 1px;
+	font-size: 23px;
+	padding: 13px 0 0 23px;
+	vertical-align: bottom;
+}
+
+#widget_resumen_reserva .cell-descripcion span {
+	font-family: "FuturaLight";
+	font-size: 18px;
+	color: #FFF;
+	margin: 0 30px;
+}
+
+#widget_resumen_reserva .cell-cantidad {
+	color: #FFF;
+	font-family: "FuturaMedium";
+	font-style: italic;
+	font-size: 16px;
+	letter-spacing: 1px;
+	text-align: right;
+	padding: 0 25px 0 0;
+	margin: 0;
+	vertical-align: bottom;
+}
+
+#widget_resumen_reserva h1 {
+	color: #FFF;
+	margin: 0;
+  	padding: 0;
+  	font-family: "FuturaBook";
+}
+
+#widget_resumen_reserva .cell-origen-destino{
+	width: 160px;
+	color: #DB9F3C;
+	vertical-align: bottom;
+	text-align: center;
+	padding: 0;
+}
+#widget_resumen_reserva .cell-origen-destino span {
+	/*line-height: 1px;*/
+}
+
+#widget_resumen_reserva .cell-cod-origen-destino{
+	text-align: center;
+}
+
+#widget_resumen_reserva .cell-duracion {
+	color: #6094D9;
+	font-size: 12px;
+	text-align: center;
+	font-family: "FuturaHeavy";
+	font-style: italic;
+	letter-spacing: 1px;
+}
+
+#widget_resumen_reserva .cell-fecha{
+	color: #FFF;
+	font-family: "FuturaHeavy";
+	font-style: italic;
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+#widget_resumen_reserva .cell-hora {
+	color: #DB9F3C;
+	font-family: "FuturaBook";
+	font-size: 14px;
+	font-style: italic;
+	letter-spacing: 0;
+	text-align: center;
+	padding: 0;
 }
 /*--------------------------------------------------------*/
 .ui-section.wide.results .info {
@@ -2390,6 +2514,11 @@ footer .form .button {
 .ui-section.wide.results .descripcion table {
 	width: 100%;
 	margin: 0;	
+}
+
+.ui-section.wide.results .descripcion #tbl_salida,
+.ui-section.wide.results .descripcion #tbl_regreso {
+	min-width: 590px;
 }
 
 .ui-section.wide.results .descripcion table.days-selector td{
@@ -2421,7 +2550,7 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table .day-selector.faded{
-	background-color: #7590B4;
+	background-color: #ACC3D4;
 }
 
 .ui-section.wide.results .descripcion table .day-selector h2 {
@@ -2456,8 +2585,8 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table th.class-group {
-	width: 100px;
-	min-width: 100px;
+	width: 150px;
+	min-width: 150px;
 }
 
 .ui-section.wide.results .descripcion table td span{font-size:13px;}
@@ -2468,10 +2597,11 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table td.loading-cell .loading{
-	background-image: url('images/loading.gif');
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	margin: 0 auto;
+	background-image: url('images/loading.gif');
+	background-size: 80px;
 }
 
 .ui-section.wide.results .descripcion table tr.flight-row td{cursor: pointer;}
@@ -2520,32 +2650,28 @@ footer .form .button {
 /* --------------------------------------------------------------------------- */
 .ui-section.wide.results .cell-details {
 	background-color: #EFAA35;
-}
-
-.ui-section.wide.results .cell-details table {
-	width: 300px;
-	margin: 0 50px 0 0;
+	padding: 10px 0;
 }
 
 .ui-section.wide.results .cell-details td {background-color: transparent;}
 
 .ui-section.wide.results .cell-details .icon-salida {
-	width: 100px;
-	height: 100px;
-	background-image: url("images/icon_salida_regreso.png");
+	width: 70px;
+	height: 70px;
+	background-image: url("images/icon_salida_llegada.png");
 	background-repeat: no-repeat;
 	background-position: 10px 20px;
-	background-size: 100px;
+	background-size: 70px auto;
 	padding: 10px;
 }
 
-.ui-section.wide.results .cell-details .icon-regreso {
-	width: 100px;
-	height: 100px;
-	background-image: url("images/icon_salida_regreso.png");
+.ui-section.wide.results .cell-details .icon-llegada {
+	width: 70px;
+	height: 70px;
+	background-image: url("images/icon_salida_llegada.png");
 	background-repeat: no-repeat;
-	background-position: 10px -78px;
-	background-size: 100px;
+	background-position: 10px -53px;
+	background-size: 70px;
 	padding: 10px;
 }
 
@@ -2569,20 +2695,39 @@ footer .form .button {
 	padding: 0 30px;
 }
 
-.ui-section.wide.results .cell-details .detail {
-	width: 100%;
-	border-color: #CC8C1E;
-	border-width: 2px;
-	border-style: solid;
-	background-color: #E39B1F;
-}
+.ui-section.wide.results .cell-details .detail {width: 100%;}
+.ui-section.wide.results .cell-details .detail.stretched{width: 50%;}
+.ui-section.wide.results .cell-details .detail.stretched.left{float: left;}
+.ui-section.wide.results .cell-details .detail.stretched.righr{float: right;}
 
 .ui-section.wide.results .cell-details .detail .icon-cell {
-	width: 130px;
+	width: 80px;
 }
 
 .ui-section.wide.results .cell-details .detail .time-cell{
-	vertical-align: bottom;
+	vertical-align: middle;
+	font-family: "FuturaBold";
+	text-align: center;
+	font-size: 24px;
+}
+
+.ui-section.wide.results .cell-details .detail .ciudad-cell{
+	vertical-align: top;
+	font-family: "FuturaBold";
+	text-align: center;
+	color: #1F3656;
+	font-size: 17px;
+}
+
+.ui-section.wide.results .cell-details .detail .airport-cell {
+	color: #1F3656;
+	font-size: 16px;
+	padding: 0 0 0 20px;
+}
+
+.ui-section.wide.results .cell-details .detail .duracion-cell{
+	font-size: 12px;
+	padding: 0 0 0 20px;
 }
 
 .ui-section.wide.results .cell-details .detail .hrs-cell{

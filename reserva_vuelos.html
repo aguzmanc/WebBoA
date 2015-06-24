@@ -424,13 +424,72 @@
 							</td>
 						</tr>
 					</table>
-					<table cellspacing="0" cellpadding="0" id="tbl_salida">
+					<!-- <table cellspacing="0" cellpadding="0" id="tbl_salida">
 						<tr>
 							<th>Salida - Llegada</th>
 							<th>Operado por</th>
 						</tr>
+					</table> -->
+					<table id="tbl_salida" cellpadding="0" cellspacing="0">
+						<tbody>
+							<tr>
+								<th>Salida - Llegada</th>
+								<th style="width:20%">Operado por</th>
+								<!-- <th class="class-group compartment-header">Económica</th></tr> -->
 						<!-- ROWS OF FLIGHTS HERE -->
+						</tbody>
+						<tr data-num_vuelo="640" class="flight-row selected">
+							<td>
+								12:50&nbsp;&nbsp;-&nbsp;&nbsp;13:35<br>
+								<span>Duración: 45 m</span>
+							</td>
+							<td>BoA</td>
+							<td class="tarifa">
+								<div class="rbtn checked"><div></div></div>485 Bs.
+							</td>
+						</tr>
+						<tr class="flight-details expanded">
+							<td colspan="10" class="cell-details">
+								<div class="expandable">
+									<table class="detail left" cellpadding="0" cellspacing="0">
+										<tr>
+											<td class="icon-cell" rowspan="2">
+												<div class="icon-salida"></div>
+											</td>
+											<td class="time-cell">12:50<br>Hrs.</td>
+											<td class="airport-cell">
+												Aeropuerto Internacional Jorge Wilstermann
+											</td>
+										</tr>
+										<tr>
+											<td class="ciudad-cell">Cochabamba</td>
+											<td class="duracion-cell">Duraci&oacute;n: 45 mins.</td>
+										</tr>
+									</table>
+									<table class="detail right" cellpadding="0" cellspacing="0">
+										<tr>
+											<td class="icon-cell" rowspan="2">
+												<div class="icon-salida"></div>
+											</td>
+											<td class="time-cell">13:35<br>Hrs.</td>
+											<td class="airport-cell">
+												Aeropuerto Internacional Viru Viru
+											</td>
+										</tr>
+										<tr>
+											<td class="ciudad-cell">Cochabamba</td>
+											<td class="duracion-cell">Duraci&oacute;n: 45 mins.</td>
+										</tr>
+										<tr>
+											<td colspan="2"><label></label></td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
 					</table>
+
+
 					<br><br>
 					<h2 id="lbl_info_regreso"></h2>
 					<table id="tbl_dayselector_regreso" cellspacing="0" cellpadding="0">
@@ -452,29 +511,102 @@
 							</td>
 						</tr>
 					</table>
-					<table cellspacing="0" cellpadding="0" id="tbl_regreso">
+					<table id="tbl_regreso" cellspacing="0" cellpadding="0">
 						<tr>
 							<th>Salida - Llegada</th>
-							<th>Operado por</th>
+							<th style="width:20%">Operado por</th>
 						</tr>
 						<!-- ROWS OF FLIGHTS HERE -->
 					</table>
 				</div>
 				<div id="widget_resumen_reserva">
-					<div class="main-head">Tu Vuelo</div>
+					<div class="head-tu-vuelo"></div>
 					<div class="separator"></div>
 					<table>
 						<tr>
-							<td>
+							<td rowspan="2" class="cell-icon-ida">
 								<div class="icon-ida"></div>
-								<span>Duraci&oacute;n: 40 min.</span>
 							</td>
-							<td>
-								<label>Origen</label>
+							<td colspan="3" class="cell-origen-destino">
+								<span>Origen</span>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span class="lbl-origen-destino">Destino</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" class="cell-cod-origen-destino">
+								<h1>LPB - VVI</h1>
+							</td>
+						</tr>
+						<tr>
+							<td class="cell-duracion">
+								Duraci&oacute;n: 40 min.
+							</td>
+							<td colspan="5" class="cell-fecha">
+								<span>Mi&eacute;rcoles 28 de Septiembre</span>
+							</td>
+							<td class="cell-hora">
+								<span>14:30 PM</span>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td rowspan="2" class="cell-icon-vuelta">
+								<div class="icon-vuelta"></div>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span>Origen</span>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span class="lbl-origen-destino">Destino</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" class="cell-cod-origen-destino">
+								<h1>VVI - LPB</h1>
+							</td>
+						</tr>
+						<tr>
+							<td class="cell-duracion">
+								Duraci&oacute;n: 40 min.
+							</td>
+							<td colspan="5" class="cell-fecha">
+								<span>Martes 8 de Octubre</span>
+							</td>
+							<td class="cell-hora">
+								<span>09:15 PM</span>
 							</td>
 						</tr>
 					</table>
 					<div class="separator"></div>
+					<table>
+						<tr>
+							<th colspan="2">Tarifas</th>
+						</tr>
+						<tr>
+							<td colspan="2" class="cell-separator"><div></div></td>
+						</tr>
+						<tr>
+							<td class="cell-descripcion">Adultos<span>x2</span></td>
+							<td class="cell-cantidad">Bs. 300</td>
+						</tr>
+						<tr>
+							<td class="cell-descripcion">Ni&ntilde;o</td>
+							<td class="cell-cantidad">Bs. 150</td>
+						</tr>
+						<tr>
+							<td class="cell-descripcion">Adulto Mayor</td>
+							<td class="cell-cantidad">Bs. 200</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="cell-separator"><div></div></td>
+						</tr>
+						<tr>
+							
+						</tr>
+					</table>
 					<div class="separator"></div>
 
 				</div>
