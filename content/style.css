@@ -89,14 +89,14 @@ footer .validable,
 	-ms-transition: opacity 0.5s;
 }
 
-/*
-{
-	transition: all 1.5s;
-	-moz-transition: all 1.5s;
-	-webkit-transition: all 1.5s;
-	-o-transition: all 1.5s;
-	-ms-transition: all 1.5s;
-}*/
+#tbl_seleccion_ida,
+#tbl_seleccion_vuelta{
+	transition: all 1.0s;
+	-moz-transition: all 1.0s;
+	-webkit-transition: all 1.0s;
+	-o-transition: all 1.0s;
+	-ms-transition: all 1.0s;
+}
 /* --------------------------------------------------------------------------- */
 @-moz-document url-prefix(){
       .ui-select{
@@ -2389,6 +2389,19 @@ footer .form .button {
 	height: 3px;
 }
 
+#widget_resumen_reserva .empty-selection{
+	height: 80px;
+	border-color: #EFAA35;
+	border-style: dashed;
+	border-width: 2px;
+	line-height: 34px;
+	font-family: "FuturaLight";
+	font-size: 28px;
+	text-align: center;
+	margin: 10px;
+	padding: 20px 0 0 0;
+}
+
 #widget_resumen_reserva .head-tu-vuelo {
 	width: 170px;
 	height: 63px;
@@ -2400,7 +2413,6 @@ footer .form .button {
 
 #widget_resumen_reserva table{width:100%;}
 #widget_resumen_reserva td th{padding:0;}
-
 
 #widget_resumen_reserva th{
 	color: #FFF;
@@ -2461,6 +2473,7 @@ footer .form .button {
 	margin: 0;
   	padding: 0;
   	font-family: "FuturaBook";
+  	font-size: 30px;
 }
 
 #widget_resumen_reserva .cell-origen-destino{
@@ -2504,6 +2517,16 @@ footer .form .button {
 	letter-spacing: 0;
 	text-align: center;
 	padding: 0;
+}
+
+#widget_resumen_reserva #tbl_seleccion_ida.changed,
+#widget_resumen_reserva #tbl_seleccion_vuelta.changed{
+	background-color: #C1DBFF;
+	transition: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
 }
 /*--------------------------------------------------------*/
 .ui-section.wide.results .info {

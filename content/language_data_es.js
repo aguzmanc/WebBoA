@@ -15,8 +15,14 @@ var MONTHS_LANGUAGE_TABLE = {
 	Diciembre:"12"
 };
 // ---------------------= =---------------------
+var MONTHS_2_CHARS_LANGUAGE_TABLE = [
+	"","Enero","Febrero","Marzo","Abril","Mayo","Junio",
+	"Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+// ---------------------= =---------------------
 var WEEKDAYS_2_CHARS_LANGUAGE_TABLE = ["Do","Lu","Ma","Mi","Ju","Vi","Sa"];
 // ---------------------= =---------------------
+var WEEKDAYS_LONG_2_CHARS_LANGUAGE_TABLE = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","S&aacute;bado"];
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

@@ -19,6 +19,27 @@ var current_date_regreso = "";
 
 var todayStr = "";
 
+var seleccionVuelo = {
+	ida:{
+		numVuelo: 		"",
+		tarifa: 		"",
+		adultos: 		0,
+		infantes: 		0,
+		bebes: 			0,
+		adultosMayores: 0
+	},
+	vuelta:{
+		numVuelo: 		"",
+		tarifa: 		"",
+		adultos: 		0,
+		infantes: 		0,
+		bebes: 			0,
+		adultosMayores: 0
+	}
+};
+
+var flightsByNum = {};
+
 // configuration
 var currencies = {euro:"&euro;", usd:"USD"};
 
@@ -90,7 +111,10 @@ $(document).on('ready',function()
 
 	// cambio en fila de detalles de resultados segun ancho
 	$(window).resize(checkResultsTableWidth);
+
+	$(window).scroll(handleScroll);
 }); // init
+
 
 // ---------------------= =---------------------
 function handle_initial_request()
@@ -210,6 +234,15 @@ function request_search_parameters(parms)
 	});
 }
 // ---------------------= =---------------------
+function handleScroll(){
+	var h = $(this).scrollTop();
+	var widget = $("#widget_resumen_reserva");
+	if(h > 150)
+		widget.css("margin",(h-150)+"px 0 0 0");
+	else
+		widget.css("margin","0");
+}
+// ---------------------= =---------------------
 function toggle_rbtn_ida_vuelta()
 {
 	var par = this.parentNode;
@@ -281,7 +314,7 @@ function get_flights_for_date(date, isSalida)
 
 	if(existsInCache) {
 		if(isCurrentDateSelected) {
-			fill_table(table, datesCache["f_" + date], tarifasCache["f_" + date]);
+			fill_table(table, datesCache["f_" + date], tarifasCache["f_" + date], date);
 		}
 	}else{
 		if(false == hasBeenRequested)
@@ -467,7 +500,7 @@ function receive_flights(isSalida, response)
 
 	// when there is only one result, the response is an object, not an array, 
 	// so it must be translated
-	if(flights.constructor !== Array){
+	if(flights.constructor !== Array) {
 		var obj = flights;
 		flights = [];
 		flights.push(obj);
@@ -480,10 +513,10 @@ function receive_flights(isSalida, response)
 	tarifasCache["f_" + fechaConsultada] = tarifas;
 
 	if((isSalida?current_date_salida:current_date_regreso) == fechaConsultada) 
-		fill_table($("#tbl_" + (isSalida?"salida":"regreso"))[0], flights, tarifas);
+		fill_table($("#tbl_" + (isSalida?"salida":"regreso"))[0], flights, tarifas, fechaConsultada);
 }
 // ---------------------= =---------------------
-function fill_table(table, raw_flights, rawTarifas)
+function fill_table(table, raw_flights, rawTarifas, date)
 {
 	if(table.id == "tbl_salida")
 		pendingTablesBuild.salida = false;
@@ -517,7 +550,8 @@ function fill_table(table, raw_flights, rawTarifas)
 				ciudad_origen:"",
 				ciudad_destino:"",
 				aeropuerto_origen:"",
-				aeropuerto_destino:""
+				aeropuerto_destino:"",
+				fecha: date
 			};
 
 			var raw_flight = raw_flights[i];
@@ -579,12 +613,16 @@ function fill_table(table, raw_flights, rawTarifas)
 			}
 
 			// datos de origen y destino
+			flight.origen = raw_flight["origen"];
+			flight.destino = raw_flight["destino"];
 			flight.ciudad_origen = cities[raw_flight["origen"]];
 			flight.ciudad_destino = cities[raw_flight["destino"]];
 			flight.aeropuerto_origen = airports[raw_flight["origen"]];
 			flight.aeropuerto_destino = airports[raw_flight["destino"]];
 
 			flights.push(flight);
+
+			flightsByNum[flight.num_vuelo] = flight;
 		}
 
 		// --- setup cabecera
@@ -634,6 +672,7 @@ function fill_table(table, raw_flights, rawTarifas)
 				$(cell).addClass("tarifa");
 				$(cell).html("<div class='rbtn'><div></div></div>" + tarifa + " " + HTML_CURRENCIES[CURRENCY]);
 				$(cell).click(select_tarifa);
+				$(cell).attr("data-tarifa",tarifa);
 				row.appendChild(cell);	
 			}
 
@@ -690,7 +729,7 @@ function select_tarifa()
 	while(false == $(table).is("table")) // find parent table
 		table = table.parentNode;
 
-	$(table).find(".flight-row").removeClass("selected")
+	$(table).find(".flight-row").removeClass("selected");
 	$(row).addClass("selected");
 
 	$(table).find(".flight-details").removeClass("expanded").addClass("collapsed");
@@ -699,6 +738,40 @@ function select_tarifa()
 
 	$(table).find(".rbtn").removeClass("checked");
 	$(this).find(".rbtn").addClass("checked");
+
+	seleccionVuelo.ida.num_vuelo = $(row).data("num_vuelo");
+	seleccionVuelo.ida.tarifa = $(this).data("tarifa");
+
+	var flight = flightsByNum[seleccionVuelo.ida.num_vuelo];
+
+	console.log(flight);
+
+	var tipo = $(table).data("tipo");
+
+	var tblSeleccion = $("#tbl_seleccion_"+tipo);
+
+	$(tblSeleccion).find(".cell-cod-origen-destino h1").html(flight.origen + " - " + flight.destino);
+	$(tblSeleccion).find(".cell-duracion").html("Duraci&oacute;n:<br>" + flight.duracion_ext);
+
+	var yyyy = parseInt(flight.fecha.substr(0,4)),
+	    mm = parseInt(flight.fecha.substr(4,2))-1, // months are indexed from zero
+	    dd = parseInt(flight.fecha.substr(6,2));
+
+	var d = new Date(yyyy, mm, dd, 0,0,0,0);
+
+	var formatted = WEEKDAYS_LONG_2_CHARS_LANGUAGE_TABLE[d.getDay()] + ", " + dd + " de " + 
+		MONTHS_2_CHARS_LANGUAGE_TABLE[mm+1];
+
+	$(tblSeleccion).find(".cell-fecha").html(formatted);
+	$(tblSeleccion).find(".cell-hora span").html(flight.hora_salida);
+	$(tblSeleccion).css("display","block");
+	$(tblSeleccion).addClass("changed");
+
+	setTimeout(function(){
+		$(tblSeleccion).removeClass("changed");
+	},100);
+
+	$("#div_empty_vuelo").css("display","none");
 }
 // ---------------------= =---------------------
 function validate_search()
