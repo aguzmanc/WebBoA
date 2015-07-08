@@ -2627,17 +2627,17 @@ footer .form .button {
 	background-size: 80px;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row td{cursor: pointer;}
+.ui-section.wide.results .descripcion table tr.flights-option-row td{cursor: pointer;}
 
-.ui-section.wide.results .descripcion table tr.flight-row:hover td {
+.ui-section.wide.results .descripcion table tr.flights-option-row:hover td {
 	background-color: #ABC6D8;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row td.tarifa:hover {
+.ui-section.wide.results .descripcion table tr.flights-option-row td.tarifa:hover {
 	background-color: #78A2BF;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row .rbtn {
+.ui-section.wide.results .descripcion table tr.flights-option-row .rbtn {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -2648,12 +2648,12 @@ footer .form .button {
 	opacity: 0;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row:hover .rbtn,
-.ui-section.wide.results .descripcion table tr.flight-row.selected .rbtn{
+.ui-section.wide.results .descripcion table tr.flights-option-row:hover .rbtn,
+.ui-section.wide.results .descripcion table tr.flights-option-row.selected .rbtn {
 	opacity: 1;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row .rbtn > div{
+.ui-section.wide.results .descripcion table tr.flights-option-row .rbtn > div{
 	background-color: #000;
 	width: 10px;
 	height: 10px;
@@ -2663,13 +2663,13 @@ footer .form .button {
 	display: none;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row .rbtn.checked > div{display: block;}
+.ui-section.wide.results .descripcion table tr.flights-option-row .rbtn.checked > div{display: block;}
 
-.ui-section.wide.results .descripcion table tr.flight-row.selected td {
+.ui-section.wide.results .descripcion table tr.flights-option-row.selected td {
 	background-color: #EFCF9B !important;
 }
 
-.ui-section.wide.results .descripcion table tr.flight-row.selected td{cursor: default;}
+.ui-section.wide.results .descripcion table tr.flights-option-row.selected td{cursor: default;}
 /* --------------------------------------------------------------------------- */
 .ui-section.wide.results .cell-details {
 	background-color: #EFAA35;
