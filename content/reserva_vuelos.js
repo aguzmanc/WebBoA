@@ -1,6 +1,6 @@
 // ---------------------= =---------------------
 var searchParameters = {
-	origen:"",destino:"",fecha_salida:"",fecha_regreso:null
+	origen:"", destino:"", fecha_salida:"", fecha_regreso:null
 };
 
 var dates_cache_salida = {};
@@ -105,6 +105,8 @@ $(document).on('ready',function()
 		numberOfMonths: 2, 
 		minDate:0
 	});
+
+	$("#widget_resumen_reserva td.selector-pax ul li").click(changeNumPassengers);
 
 	setInterval(checkSearchWidgetAvailability, 200);
 
@@ -390,7 +392,6 @@ function request_flights(date, results_callback, isSalida)
 	});
 }
 // ---------------------= =---------------------
-
 function async_receive_dates(response) 
 {
 	// fix to .NET dumbest encoding ever (possible bug here in future)
@@ -483,8 +484,9 @@ function build_flight_option_row(opc, compartments)
 	// salida,llegada y duración
 	var cell = document.createElement("td");
 	$(cell).html(
-		(opc.horaSalida.hh+":"+opc.horaSalida.mm)+"&nbsp;&nbsp;-&nbsp;&nbsp;"+(opc.horaLlegada.hh+":"+opc.horaLlegada.mm)+"<br>" +
-		"<span>Duraci&oacute;n: " + formatDuracion(opc.duracion) + "</span>");
+		formatTime(opc.horaSalida)+"&nbsp;&nbsp;-&nbsp;&nbsp;"+formatTime(opc.horaLlegada)+"<br>" +
+			"<span>Duraci&oacute;n en Vuelo: <u>"+formatDuracion(opc.duracionVuelo)+"</u></span><br>" +
+			"<span>Duraci&oacute;n Total: <u>" + formatDuracion(opc.duracionTotal) + "</u></span>");
 
 	row.appendChild(cell);
 
@@ -516,12 +518,7 @@ function build_flight_detail_row(opc, flight) {
 
 	for(var m=0;m<2;m++) {
 		var isSalida = (m==0);
-		var timeStr = isSalida?
-			(flight.horaSalida.hh+":"+flight.horaSalida.mm):
-			(flight.horaLlegada.hh+":"+flight.horaLlegada.mm);
-
-		var duracionStr = (flight.duracion.hrs > 0 ? (flight.duracion.hrs + " Hrs. ") : "")
-			+ (flight.duracion.mins > 0 ? (flight.duracion.mins + "mins."):"");
+		var timeStr = formatTime(isSalida?flight.horaSalida:flight.horaLlegada);
 
 		var detail = document.createElement("table");
 		$(detail).addClass("detail")
@@ -529,7 +526,7 @@ function build_flight_detail_row(opc, flight) {
 				 .attr("cellspacing","0")
 				 .attr("cellpadding","0")
 				 .append("<tr><td class='icon-cell' rowspan='2'><div class='icon-"+(isSalida?"salida":"llegada")+"'></div></td><td class='time-cell'>"+timeStr+"<br>Hrs.</td><td class='airport-cell'>"+ airports[flight[isSalida?"origen":"destino"]]+"</td></tr>")
-				 .append("<tr><td class='ciudad-cell'>"+cities[flight[isSalida?"origen":"destino"]]+"</td><td class='duracion-cell'>" +(isSalida?("Duraci&oacute;n: "+ duracionStr):"")+ "</td></tr>");
+				 .append("<tr><td class='ciudad-cell'>"+cities[flight[isSalida?"origen":"destino"]]+"</td><td class='duracion-cell'>" +(isSalida?("Duraci&oacute;n: "+ formatDuracion(flight.duracion)):"")+ "</td></tr>");
 
 		expandable.append(detail);
 	}
@@ -559,8 +556,16 @@ function async_receive_regreso_flights(response)
 // ---------------------= =---------------------
 function receive_flights(isSalida, response)
 {
+	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult);
+
+	if(response.ResultInfoOrError != null){
+		fill_table_with_message($("#tbl_" + (isSalida?"salida":"regreso"))[0], response.ResultInfoOrError.messageError);
+
+		return;
+	}
+
 	// should not be so complicated =/
-	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult).ResultAvailabilityPlusValuationsShort; 
+	response = response.ResultAvailabilityPlusValuationsShort; 
 
 	var fechaConsultada = response["fechaIdaConsultada"];
 
@@ -676,16 +681,17 @@ function fill_table(table, rawFlights, rawTarifas, date)
 			// procesamiento de las opciones
 			if(typeof(opcionesVuelo[flight.numOpcion]) === 'undefined') { // primera escala
 				opcionesVuelo[flight.numOpcion] = {
-					numOpcion 	: flight.numOpcion,
-					vuelos 		: [],
-					duracion 	: {hrs:0,mins:0},
-					horaSalida 	: null,
-					horaLlegada : null,
-					origen 		: "",
-					destino 	: "",
+					numOpcion 		: flight.numOpcion,
+					vuelos 			: [],
+					duracionVuelo	: {hrs:0,mins:0},
+					duracionTotal	: {hrs:0,mins:0},
+					horaSalida 		: null,
+					horaLlegada 	: null,
+					origen 			: "",
+					destino 		: "",
 					// los vuelos de una misma opcion deberian tener las mismas tarifas
-					tarifas     : flight.tarifas,
-					code 		: generateRandomCode(10)
+					tarifas     	: flight.tarifas,
+					code 			: generateRandomCode(10)
 				};
 
 				// allOptions[opcionesVuelo[flight.numOpcion].code] = opcionesVuelo[flight.numOpcion];
@@ -709,14 +715,31 @@ function fill_table(table, rawFlights, rawTarifas, date)
 
 			opc.horaSalida = opc.vuelos[0].horaSalida;
 			opc.horaLlegada = opc.vuelos[opc.vuelos.length-1].horaLlegada;
+
 			// calcular duracion total
-			var mins=0;
+			var minsVuelo = 0;
+			var minsTotal = 0;
 			for(var k=0;k<opc.vuelos.length;k++) {
-				mins += opc.vuelos[k].duracion.hrs*60 + opc.vuelos[k].duracion.mins;
+				minsVuelo += parseInt(opc.vuelos[k].duracion.hrs)*60 
+					 	   + parseInt(opc.vuelos[k].duracion.mins);
+
+				if(k>0){ // es el segundo vuelo o mayor
+					console.log(opc.vuelos[k]);
+					console.log(opc.vuelos[k-1]);
+
+					minsTotal += calculateMinutesDifference(
+						opc.vuelos[k-1].horaLlegada, 
+						opc.vuelos[k].horaSalida);
+				}
 			}
 
-			opc.duracion.hrs = parseInt(mins/60);
-			opc.duracion.mins = mins%60;
+			minsTotal += minsVuelo;
+
+			opc.duracionVuelo.hrs = parseInt(minsVuelo/60);
+			opc.duracionVuelo.mins = minsVuelo%60;
+
+			opc.duracionTotal.hrs = parseInt(minsTotal/60);
+			opc.duracionTotal.mins = minsTotal%60;
 
 			allOptions[opc.code] = opc;
 		}
@@ -753,6 +776,16 @@ function fill_table_with_loading(table)
 	table.appendChild(row);
 }
 // ---------------------= =---------------------
+function fill_table_with_message(table, message)
+{
+	$(table).find("tr").not(":first").remove(); // clear table results
+
+	var row = document.createElement("tr");
+	$(row).html("<td colspan='20' class='message'>"+message+"</td>");
+
+	table.appendChild(row);
+}
+// ---------------------= =---------------------
 function select_tarifa()
 {
 	var row = this.parentNode;
@@ -780,24 +813,20 @@ function select_tarifa()
 
 	seleccionVuelo.ida.vuelos = opcion.vuelos;
 
-	console.log(opcion);
-
 	var tipo = $(table).data("tipo");
 	var tblSeleccion = $("#tbl_seleccion_" + tipo);
 
-	$(tblSeleccion).find(".cell-cod-origen-destino h1").html(opcion.origen + " - " + opcion.destino);
+	tblSeleccion.find(".cell-cod-origen-destino h1").html(opcion.origen + " - " + opcion.destino);
 
-	$(tblSeleccion).find(".cell-duracion").html("Duraci&oacute;n:<br>" + formatDuracion(opcion.duracion) );
+	tblSeleccion.find(".cell-duracion").html("Duraci&oacute;n:<br>" + formatDuracion(opcion.duracionVuelo) );
 
-	console.log(formatDate(opcion.vuelos[0].fecha));
+	tblSeleccion.find(".cell-fecha").html(formatDate(opcion.vuelos[0].fecha));
+	tblSeleccion.find(".cell-hora span").html("Salida:<br>" + formatTime(opcion.horaSalida));
+	tblSeleccion.css("display","block");
+	tblSeleccion.addClass("changed");
 
-	$(tblSeleccion).find(".cell-fecha").html(formatDate(opcion.vuelos[0].fecha));
-	$(tblSeleccion).find(".cell-hora span").html(formatTime(opcion.horaSalida));
-	$(tblSeleccion).css("display","block");
-	$(tblSeleccion).addClass("changed");
-
-	setTimeout(function(){
-		$(tblSeleccion).removeClass("changed");
+	setTimeout(function() {
+		tblSeleccion.removeClass("changed");
 	},100);
 
 	$("#div_empty_vuelo").css("display","none");
@@ -880,6 +909,43 @@ function validate_search()
 	$("#widget_cambiar_vuelo").removeClass("expanded").addClass("collapsed");
 }
 // ---------------------= =---------------------
+function changeNumPassengers()
+{
+	var ul = $(this.parentNode);
+	var count = parseInt($(this).data("count"));
+
+	var counting = ["one","two","three","four","five","six","seven","eight"];
+
+	if(ul.hasClass("active")){
+		ul.removeClass("active");
+		if(false == $(this).hasClass("selected")){
+			ul.find("li").attr("class","");
+			$(this).addClass("selected");
+
+			// previous options
+			var prev = $(this);
+			for(var i=0;i<8;i++){
+				prev = prev.prev();
+				if(prev.length==0) break;
+				prev.addClass("minus-" + counting[i]);
+			}
+
+			// next options
+			var next = $(this);
+			for(var i=0;i<8;i++){
+				next = next.next();
+				if(next.length==0) break;
+				next.addClass("plus-" + counting[i]);
+			}
+		}
+	}else {
+		if(false == $(this).hasClass("selected"))
+			return;
+
+		$(this.parentNode).addClass("active");
+	}
+}
+// ---------------------= =---------------------
 function checkSearchWidgetAvailability()
 {
 	if(pendingTablesBuild.salida == false && pendingTablesBuild.regreso == false)
@@ -930,4 +996,21 @@ function formatDate(date)
 		MONTHS_2_CHARS_LANGUAGE_TABLE[mm+1];
 
 	return formatted;
+}
+// ---------------------= =---------------------
+function formatTime(time)
+{
+	var str = 
+		(("00"+time.hh).slice(-2)) + ":" +
+		(("00"+time.mm).slice(-2));
+
+	return str;
+}
+// ---------------------= =---------------------
+function calculateMinutesDifference(timeIni, timeFin)
+{
+	if(timeIni.hh > timeFin.hh)
+		timeIni.hh += 24;
+
+	return (timeFin.hh - timeIni.hh) * 60 + (timeFin.mm - timeIni.mm);
 }

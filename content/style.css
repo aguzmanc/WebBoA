@@ -71,6 +71,7 @@ footer .validable,
 .flight-details .cell-details, .flight-details .expandable,
 .icon-cross,
 .day-selector,
+#widget_resumen_reserva td.selector-pax ul li,
 #home
 {
 	transition: all 0.5s;
@@ -2308,13 +2309,14 @@ footer .form .button {
 .ui-section.wide.results #widget_cambiar_vuelo .btn-expand .icon-loading {
 	position: absolute;
 	top: 0px;
-	left: 175px;
-	width: 40px;
-	height: 40px;
+	left: 160px;
+	width: 50px;
+	height: 25px;
 	background-image: url('images/loading_small.gif');
-	background-size: 40px;
+	background-size: 50px;
 	background-repeat: no-repeat;
-	display:none;
+	display: none;
+	margin: 10px 0;
 }
 
 .ui-section.wide.results #widget_cambiar_vuelo .btn-expand.searching .icon-loading {display: block;}
@@ -2449,12 +2451,7 @@ footer .form .button {
 	vertical-align: bottom;
 }
 
-#widget_resumen_reserva .cell-descripcion span {
-	font-family: "FuturaLight";
-	font-size: 18px;
-	color: #FFF;
-	margin: 0 30px;
-}
+
 
 #widget_resumen_reserva .cell-cantidad {
 	color: #FFF;
@@ -2528,6 +2525,79 @@ footer .form .button {
 	-o-transition: none;
 	-ms-transition: none;
 }
+
+/*--------------------------------------------------------*/
+#widget_resumen_reserva td.selector-pax {
+  width: 50px;
+  position: relative;
+}
+
+#widget_resumen_reserva td.selector-pax ul {
+	position: absolute;
+	top: 12px;
+	left: 6px;
+	width: 40px;
+	height: 40px;
+	z-index: 100;
+}
+
+#widget_resumen_reserva td.selector-pax ul.active {
+	z-index: 101;
+}
+
+#widget_resumen_reserva td.selector-pax ul li {
+	position: absolute;
+	width: 40px;
+	height: 30px;
+	background-color: transparent;
+	color: #FFF;
+	font-family: "FuturaLight";
+	text-align: center;
+	line-height: 30px;
+	border-style: solid;
+	border-color: transparent;
+	border-width: 0 0 1px 0;
+	z-index: 100;
+	cursor: default;
+	display: none;
+}
+#widget_resumen_reserva td.selector-pax ul li.selected{
+	display: block;
+	cursor: pointer;
+}
+
+#widget_resumen_reserva td.selector-pax ul li:hover.selected{
+	background-color: #0A2953;
+}
+
+#widget_resumen_reserva td.selector-pax ul.active li {
+	background-color: #0A2953;
+	border-color: #FFF;
+	display: block;
+}
+
+#widget_resumen_reserva td.selector-pax ul li:not(.selected):hover{
+	background-color: #4F86D0;
+	cursor: pointer;
+}
+
+#widget_resumen_reserva td.selector-pax ul li.minus-one{top:-31px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-two{top:-62px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-three{top:-93px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-four{top:-124px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-five{top:-155px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-six{top:-186px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-seven{top:-217px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-eight{top:-248px;}
+
+#widget_resumen_reserva td.selector-pax ul li.plus-one{top:31px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-two{top:62px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-three{top:93px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-four{top:124px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-five{top:155px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-six{top:186px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-seven{top:217px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-eight{top:248px;}
 /*--------------------------------------------------------*/
 .ui-section.wide.results .info {
 	width: 100%;
@@ -2625,6 +2695,14 @@ footer .form .button {
 	margin: 0 auto;
 	background-image: url('images/loading.gif');
 	background-size: 80px;
+}
+.ui-section.wide.results .descripcion table td.message {
+	font-size: 46px;
+	font-variant: small-caps;
+	padding: 20px 80px;
+	color: #FFF;
+	font-family: "HelveticaNeuePro";
+	background-color: #EFAA35;
 }
 
 .ui-section.wide.results .descripcion table tr.flights-option-row td{cursor: pointer;}
