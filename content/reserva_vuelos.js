@@ -483,10 +483,17 @@ function build_flight_option_row(opc, compartments)
 
 	// salida,llegada y duración
 	var cell = document.createElement("td");
-	$(cell).html(
-		formatTime(opc.horaSalida)+"&nbsp;&nbsp;-&nbsp;&nbsp;"+formatTime(opc.horaLlegada)+"<br>" +
-			"<span>Duraci&oacute;n en Vuelo: <u>"+formatDuracion(opc.duracionVuelo)+"</u></span><br>" +
-			"<span>Duraci&oacute;n Total: <u>" + formatDuracion(opc.duracionTotal) + "</u></span>");
+
+	var strDuracion = formatTime(opc.horaSalida)+"&nbsp;&nbsp;-&nbsp;&nbsp;"+formatTime(opc.horaLlegada)+"<br>";
+
+	if(opc.vuelos.length == 1)
+		strDuracion += "<span>Duraci&oacute;n: <label>"+formatDuracion(opc.duracionVuelo)+"</label></span>";
+	else
+		strDuracion += 
+			"<span>Duraci&oacute;n en Vuelo: <label>"+formatDuracion(opc.duracionVuelo)+"</label></span><br>" +
+			"<span>Duraci&oacute;n Total: <label>" + formatDuracion(opc.duracionTotal) + "</label></span>";
+
+	$(cell).html(strDuracion);
 
 	row.appendChild(cell);
 
@@ -512,7 +519,7 @@ function build_flight_detail_row(opc, flight) {
 	$(row).attr("data-opc_code",opc.code)
 	      .attr("data-num_vuelo",flight.numVuelo)
 		  .addClass("flight-details").addClass("collapsed")
-	 	  .html("<td colspan='10' class='cell-details'><div class='expandable'></div></td>");
+	 	  .html("<td colspan='10' class='cell-details'><div class='expandable'></div><div class='separator'></div></td>");
 
 	var expandable = $(row).find(".expandable");
 
@@ -724,9 +731,9 @@ function fill_table(table, rawFlights, rawTarifas, date)
 					 	   + parseInt(opc.vuelos[k].duracion.mins);
 
 				if(k>0){ // es el segundo vuelo o mayor
-					console.log(opc.vuelos[k]);
-					console.log(opc.vuelos[k-1]);
-
+					console.log(opc.vuelos[k-1].horaLlegada);
+					console.log(opc.vuelos[k].horaSalida);
+					
 					minsTotal += calculateMinutesDifference(
 						opc.vuelos[k-1].horaLlegada, 
 						opc.vuelos[k].horaSalida);
@@ -918,7 +925,9 @@ function changeNumPassengers()
 
 	if(ul.hasClass("active")){
 		ul.removeClass("active");
-		if(false == $(this).hasClass("selected")){
+		var row = $(ul[0].parentNode.parentNode);
+
+		if(false == $(this).hasClass("selected")) {
 			ul.find("li").attr("class","");
 			$(this).addClass("selected");
 
@@ -937,6 +946,13 @@ function changeNumPassengers()
 				if(next.length==0) break;
 				next.addClass("plus-" + counting[i]);
 			}
+
+			// change row status
+			if(count==0)
+				row.addClass("inactive");
+			else
+				row.removeClass("inactive");
+
 		}
 	}else {
 		if(false == $(this).hasClass("selected"))

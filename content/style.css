@@ -72,6 +72,7 @@ footer .validable,
 .icon-cross,
 .day-selector,
 #widget_resumen_reserva td.selector-pax ul li,
+.btn-plus,
 #home
 {
 	transition: all 0.5s;
@@ -2561,6 +2562,7 @@ footer .form .button {
 	cursor: default;
 	display: none;
 }
+
 #widget_resumen_reserva td.selector-pax ul li.selected{
 	display: block;
 	cursor: pointer;
@@ -2568,6 +2570,10 @@ footer .form .button {
 
 #widget_resumen_reserva td.selector-pax ul li:hover.selected{
 	background-color: #0A2953;
+}
+
+#widget_resumen_reserva tr.inactive td.selector-pax ul li:hover.selected{
+	background-color:transparent;
 }
 
 #widget_resumen_reserva td.selector-pax ul.active li {
@@ -2598,6 +2604,37 @@ footer .form .button {
 #widget_resumen_reserva td.selector-pax ul li.plus-six{top:186px;}
 #widget_resumen_reserva td.selector-pax ul li.plus-seven{top:217px;}
 #widget_resumen_reserva td.selector-pax ul li.plus-eight{top:248px;}
+
+#widget_resumen_reserva tr.tarifa.inactive td{
+	color: gray;
+}
+
+#widget_resumen_reserva .btn-plus{
+	width: 20px;
+	height: 20px;
+	background-image: url('images/cross.png');
+	background-size: 15px;
+	background-color: #DB9F3C;
+	background-repeat: no-repeat;
+	background-position: 6px;
+	margin: 0 auto;
+	padding: 3px;
+	border-radius: 30px;
+	display: none;
+	
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+}
+
+#widget_resumen_reserva .btn-plus:hover {
+	background-color: #FFF;
+}
+
+#widget_resumen_reserva tr.tarifa.inactive ul li span{display: none;}
+#widget_resumen_reserva tr.tarifa.inactive ul li .btn-plus{display: block;}
 /*--------------------------------------------------------*/
 .ui-section.wide.results .info {
 	width: 100%;
@@ -2683,6 +2720,7 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table td span{font-size:13px;}
+.ui-section.wide.results .descripcion table td span label{font-family: "FuturaHeavy";}
 
 .ui-section.wide.results .descripcion table td.disabled {
  	font-size: 12px;
@@ -2795,6 +2833,15 @@ footer .form .button {
 	font-size: 18px;
 	padding: 0 30px;
 }
+
+.ui-section.wide.results .cell-details .separator {
+	width: 70%;
+	height: 2px;
+	background-color: #FFF;
+	margin: 10px auto 0 auto;
+	display: none;
+}
+.ui-section.wide.results .flight-details.expanded .cell-details .separator{display: block;}
 
 .ui-section.wide.results .cell-details .detail {width: 100%;}
 .ui-section.wide.results .cell-details .detail.stretched{width: 50%;}
