@@ -18,6 +18,95 @@ function redirect_with_parms(url_key, parms)
 	btn.attr("href",url);
 	btn[0].click();
 }
+
+/********************************************************* 
+ ******************** FORMAT UTILITIES *******************
+ **********************************************************/
+// ---------------------= =---------------------
+function generateRandomCode(length) {
+	var code = "";
+	var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	for(var i=0;i<length;i++) {
+		var r = parseInt(Math.random() * 100000) % chars.length;
+		code += chars.substr(r,1);
+	}
+
+	return code;
+}
+// ---------------------= =---------------------
+/* formats custom time {hrs,mins} to expanded format eg: 
+   {hrs:9,mins:30} -> 9 hrs. 30 mins */
+function formatExpandedTime(time)
+{
+	var str = 
+		(time.hrs == 0 ? "" : (time.hrs + " hrs. " )) + 
+		(time.mins == 0 ? "" : (time.mins + " mins."));
+
+	return str;
+}
+// ---------------------= =---------------------
+/* from JS date to very long format: 
+   ej: (9/10/15) -> Viernes, 09 de Octubre de 2015 */
+function formatExpandedDate(date) 
+{
+	var yyyy = parseInt(date.substr(0,4)),
+	    mm = parseInt(date.substr(4,2))-1, // months are indexed from zero in Date object
+	    dd = parseInt(date.substr(6,2));
+
+	var d = new Date(yyyy, mm, dd, 0,0,0,0);
+
+	var formatted = WEEKDAYS_LONG_2_CHARS_LANGUAGE_TABLE[d.getDay()] + ", " + dd + " de " + 
+		MONTHS_2_CHARS_LANGUAGE_TABLE[mm+1];
+
+	return formatted;
+}
+// ---------------------= =---------------------
+function formatTime(time)
+{
+	var str =
+		(("00"+time.hh).slice(-2)) + ":" +
+		(("00"+time.mm).slice(-2));
+
+	return str;
+}
+// ---------------------= =---------------------
+function calculateMinutesDifference(timeIni, timeFin)
+{
+	if(timeIni.hh > timeFin.hh)
+		timeIni.hh += 24;
+
+	return (timeFin.hh - timeIni.hh) * 60 + (timeFin.mm - timeIni.mm);
+}
+// ---------------------= =---------------------
+function formatCurrencyQuantity(quantity)
+{
+	var mult = quantity * 100;
+
+	return HTML_CURRENCIES[CURRENCY] + "&nbsp;" + parseInt(mult/100) + "." + parseInt(mult%100);
+}
+// ---------------------= =---------------------
+/* formats JS date to YYYYMMDD ej: 20150827 */
+function formatCompactDate(date)
+{
+	var mm = ("00" + (date.getMonth()+1)).slice(-2);
+	var dd = ("00" + (date.getDate())).slice(-2);
+	return date.getFullYear() + "" + mm + "" + dd;
+}
+// ---------------------= =---------------------
+/* formats JS date to hhmm ej: (21:30 pm) -> 2130 */
+function formatCompactTime(dateTime)
+{
+	var hh = fillWithLeadingZeros(dateTime.getHours(), 2);
+	var mm = fillWithLeadingZeros(dateTime.getMinutes(), 2);
+
+	return hh+""+mm;
+}
+// ---------------------= =---------------------
+function fillWithLeadingZeros(quantity, length)
+{
+	return (Array(length+1).join("0") + quantity).slice(-length);
+}
+// ---------------------= =---------------------
 // ---------------------= VALIDATION =---------------------
 /* Used with "validable" class as parent of ui_element  */ 
 function activate_validation(ui_element) 
