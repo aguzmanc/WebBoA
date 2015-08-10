@@ -721,8 +721,20 @@ function fillTable(table, rawFlights, rawTarifas, date)
 			flight.duracion.hrs = rawFlight["tiempo_vuelo"].substr(0,2);
 			flight.duracion.mins = rawFlight["tiempo_vuelo"].substr(3,2);
 
+			console.log(flight);
+			console.log(flight.horaLlegada);
+			console.log("--------");
+
 			// buscar mejor tarifa por clase
 			var rawClasses = rawFlight["clases"]["clase"];
+
+			// console.log(flight.horaLlegada);
+			// console.log(flight);
+
+			// console.log(parseInt(rawFlight["hora_llegada"].substr(0,2)));
+			
+			// console.log("-------");
+
 
 			for(var k=0;k<rawClasses.length;k++) {
 				var flightClass = rawClasses[k]["cls"];
@@ -802,12 +814,12 @@ function fillTable(table, rawFlights, rawTarifas, date)
 			// calcular duracion total
 			var minsVuelo = 0;
 			var minsTotal = 0;
+
 			for(var k=0;k<opc.vuelos.length;k++) {
 				minsVuelo += parseInt(opc.vuelos[k].duracion.hrs)*60 
 					 	   + parseInt(opc.vuelos[k].duracion.mins);
 
 				if(k>0){ // es el segundo vuelo o mayor
-					
 					minsTotal += calculateMinutesDifference(
 						opc.vuelos[k-1].horaLlegada, 
 						opc.vuelos[k].horaSalida);
@@ -839,6 +851,7 @@ function fillTable(table, rawFlights, rawTarifas, date)
 				var vuelo = opcion.vuelos[i];
 
 				var detail = buildFlightDetailRow(opcion, vuelo);
+
 				table.appendChild(detail);
 			}
 		}

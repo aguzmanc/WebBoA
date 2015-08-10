@@ -72,10 +72,14 @@ function formatTime(time)
 // ---------------------= =---------------------
 function calculateMinutesDifference(timeIni, timeFin)
 {
-	if(timeIni.hh > timeFin.hh)
-		timeIni.hh += 24;
+	// safe copy before making calculations
+	var ini = {hh:timeIni.hh, mm:timeIni.mm};
+	var fin = {hh:timeFin.hh, mm:timeFin.mm};
 
-	return (timeFin.hh - timeIni.hh) * 60 + (timeFin.mm - timeIni.mm);
+	if(ini.hh > fin.hh)
+		ini.hh += 24;
+
+	return (fin.hh - fin.hh) * 60 + (fin.mm - ini.mm);
 }
 // ---------------------= =---------------------
 function formatCurrencyQuantity(quantity)
