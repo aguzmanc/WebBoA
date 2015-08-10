@@ -102,6 +102,16 @@ function formatCompactTime(dateTime)
 	return hh+""+mm;
 }
 // ---------------------= =---------------------
+/* converts compart date '20150926' to JS Date (26, sep, 2015) */
+function compactToJSDate(date)
+{
+	var yyyy = parseInt(date.substr(0,4));
+	var mm = parseInt(date.substr(4,2));
+	var dd = parseInt(date.substr(6,2));
+
+	return new Date(yyyy,mm,dd);
+}
+// ---------------------= =---------------------
 function fillWithLeadingZeros(quantity, length)
 {
 	return (Array(length+1).join("0") + quantity).slice(-length);

@@ -107,7 +107,10 @@ $(document).on('ready',function()
 		onSelect:function(selectedDate){
 			$( "#picker_regreso" ).datepicker( "option", "minDate", selectedDate );
 		}
+		// , defaultDate: new Date()
 	});
+
+
 
 	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
 		dateFormat: 'dd MM yy',
@@ -120,6 +123,12 @@ $(document).on('ready',function()
 	$(window).scroll(handleScroll);
 
 	setInterval(checkSearchWidgetAvailability, 200);
+
+	flapperTotal = $("#precio_total").flapper({
+		width:6,
+		align:'right'
+	});
+	
 }); // init
 // ---------------------= =---------------------
 function handleScroll(){
@@ -827,7 +836,7 @@ function fillTable(table, rawFlights, rawTarifas, date)
 			table.appendChild(row);
 
 			for(var i=0;i<opcion.vuelos.length;i++) {
-				var vuelo = opc.vuelos[i];
+				var vuelo = opcion.vuelos[i];
 
 				var detail = buildFlightDetailRow(opcion, vuelo);
 				table.appendChild(detail);
@@ -880,6 +889,23 @@ function handleInitialRequest()
 	if(searchParameters.fechaSalida == null) {
 		searchParameters.fechaSalida = todayStr;
 	}
+
+	$("#select_origen").val(searchParameters.origen);
+	$("#select_destino").val(searchParameters.destino);
+
+	console.log(compactToJSDate(searchParameters.fechaSalida));
+
+	$('#picker_salida').datepicker("setDate", 
+		compactToJSDate(searchParameters.fechaSalida)
+	);
+
+	//continuar aqui, poniendo la fecha en date pickers
+
+	// console.log(searchParameters.fechaSalida);
+
+	
+
+	// $('#picker_salida').datepicker("setDate", new Date() );
 
 	requestSearchParameters(searchParameters);
 }
@@ -1100,15 +1126,20 @@ function updatePriceByTipo(tipo)
 	}
 
 	var span = $("#precio_" + tipo);
-	var spanTotal = $("#precio_total");
-	if(seleccionVuelo.ida != null) 
-	{
+
+	// flapperTotal.val(12345).change();
+
+	if(seleccionVuelo.ida != null)  {
 		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal));
-		spanTotal.html(formatCurrencyQuantity(seleccionVuelo.precioTotal));
+		// flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal))
+		// 	.change();
+		flapperTotal.val(seleccionVuelo[tipo].precioTotal).change();
+		// spanTotal.html(formatCurrencyQuantity(seleccionVuelo.precioTotal));
 	}
 	else{
 		span.html("?");
-		spanTotal.html("?");
+		// spanTotal.html("?");
+		flapperTotal.val("???????").change();
 	}
 }
 // ---------------------= =---------------------
