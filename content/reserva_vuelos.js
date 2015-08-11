@@ -110,8 +110,6 @@ $(document).on('ready',function()
 		// , defaultDate: new Date()
 	});
 
-
-
 	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
 		dateFormat: 'dd MM yy',
 		numberOfMonths: 2, 
@@ -428,7 +426,7 @@ function changeNumPassengers()
 
 			// calculo de precio a pagar
 			seleccionVuelo[tipo].num = count;
-			updatePriceByTipo(tipo);
+			updatePriceByTipo(tipo,true);
 		}
 	}else {
 		if(false == $(this).hasClass("selected"))
@@ -721,20 +719,8 @@ function fillTable(table, rawFlights, rawTarifas, date)
 			flight.duracion.hrs = rawFlight["tiempo_vuelo"].substr(0,2);
 			flight.duracion.mins = rawFlight["tiempo_vuelo"].substr(3,2);
 
-			console.log(flight);
-			console.log(flight.horaLlegada);
-			console.log("--------");
-
 			// buscar mejor tarifa por clase
 			var rawClasses = rawFlight["clases"]["clase"];
-
-			// console.log(flight.horaLlegada);
-			// console.log(flight);
-
-			// console.log(parseInt(rawFlight["hora_llegada"].substr(0,2)));
-			
-			// console.log("-------");
-
 
 			for(var k=0;k<rawClasses.length;k++) {
 				var flightClass = rawClasses[k]["cls"];
@@ -915,8 +901,6 @@ function handleInitialRequest()
 	//continuar aqui, poniendo la fecha en date pickers
 
 	// console.log(searchParameters.fechaSalida);
-
-	
 
 	// $('#picker_salida').datepicker("setDate", new Date() );
 
@@ -1105,7 +1089,7 @@ function requestFlights(date, results_callback, isSalida)
 	});
 }
 // ---------------------= =---------------------
-function updatePriceByTipo(tipo)
+function updatePriceByTipo(tipo, changeFlapper)
 {
 	var precio = -1;
 	var num = seleccionVuelo[tipo].num;
@@ -1140,27 +1124,30 @@ function updatePriceByTipo(tipo)
 
 	var span = $("#precio_" + tipo);
 
-	// flapperTotal.val(12345).change();
-
 	if(seleccionVuelo.ida != null)  {
 		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal));
-		// flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal))
-		// 	.change();
-		flapperTotal.val(seleccionVuelo[tipo].precioTotal).change();
-		// spanTotal.html(formatCurrencyQuantity(seleccionVuelo.precioTotal));
+
+		if(changeFlapper)
+			flapperTotal.val(seleccionVuelo.precioTotal).change();
 	}
 	else{
 		span.html("?");
-		// spanTotal.html("?");
-		flapperTotal.val("???????").change();
+
+		if(changeFlapper)
+			flapperTotal.val("???????").change();
 	}
 }
 // ---------------------= =---------------------
 function updateAllPrices()
 {
-	updatePriceByTipo("adulto");
-	updatePriceByTipo("ninho");
-	updatePriceByTipo("infante");
+	updatePriceByTipo("adulto",false);
+	updatePriceByTipo("ninho",false);
+	updatePriceByTipo("infante",false);
+
+	if(seleccionVuelo.ida != null)
+		flapperTotal.val(seleccionVuelo.precioTotal).change();
+	else
+		flapperTotal.val("???????").change();
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------
