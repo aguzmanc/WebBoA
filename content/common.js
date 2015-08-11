@@ -82,12 +82,22 @@ function calculateMinutesDifference(timeIni, timeFin)
 	return (fin.hh - fin.hh) * 60 + (fin.mm - ini.mm);
 }
 // ---------------------= =---------------------
-function formatCurrencyQuantity(quantity)
+function formatCurrencyQuantity(quantity, includeCurrency, digits)
 {
-	var mult = quantity * 100;
+	var digitFactor = 1;
+	for(var i=0;i<digits;i++){
+		digitFactor *= 10;
+	}
 
-	return HTML_CURRENCIES[CURRENCY] + "&nbsp;" + parseInt(mult/100) + "." + parseInt(mult%100);
+	var mult = quantity * digitFactor;
+
+	var str = "";
+	if(includeCurrency)
+		str = HTML_CURRENCIES[CURRENCY] + "&nbsp;";
+
+	return  str + parseInt(mult/digitFactor) + "." + parseInt(mult%digitFactor);
 }
+// ---------------------= =---------------------
 // ---------------------= =---------------------
 /* formats JS date to YYYYMMDD ej: 20150827 */
 function formatCompactDate(date)

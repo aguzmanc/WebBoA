@@ -123,10 +123,10 @@ $(document).on('ready',function()
 	setInterval(checkSearchWidgetAvailability, 200);
 
 	flapperTotal = $("#precio_total").flapper({
-		width:6,
-		align:'right'
+		width: 7,
+		align: 'right'
+		// , format: ",#####.0"
 	});
-	
 }); // init
 // ---------------------= =---------------------
 function handleScroll(){
@@ -892,8 +892,6 @@ function handleInitialRequest()
 	$("#select_origen").val(searchParameters.origen);
 	$("#select_destino").val(searchParameters.destino);
 
-	console.log(compactToJSDate(searchParameters.fechaSalida));
-
 	$('#picker_salida').datepicker("setDate", 
 		compactToJSDate(searchParameters.fechaSalida)
 	);
@@ -1125,10 +1123,10 @@ function updatePriceByTipo(tipo, changeFlapper)
 	var span = $("#precio_" + tipo);
 
 	if(seleccionVuelo.ida != null)  {
-		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal));
+		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true,2));
 
 		if(changeFlapper)
-			flapperTotal.val(seleccionVuelo.precioTotal).change();
+			flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,1)).change();
 	}
 	else{
 		span.html("?");
@@ -1145,7 +1143,7 @@ function updateAllPrices()
 	updatePriceByTipo("infante",false);
 
 	if(seleccionVuelo.ida != null)
-		flapperTotal.val(seleccionVuelo.precioTotal).change();
+		flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,1)).change();
 	else
 		flapperTotal.val("???????").change();
 }

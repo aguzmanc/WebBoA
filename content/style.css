@@ -2448,23 +2448,21 @@ footer .form .button {
 
 #widget_resumen_reserva .cell-descripcion {
 	color: #DB9F3C;
-	font-family: "FuturaMedium";
+	font-family: "FuturaHeavy";
 	letter-spacing: 1px;
 	font-size: 23px;
 	padding: 13px 0 0 23px;
 	vertical-align: bottom;
 }
 
-
-
 #widget_resumen_reserva .cell-cantidad {
 	color: #FFF;
-	font-family: "FuturaMedium";
+	font-family: "HelveticaNeuePro";
 	font-style: italic;
 	font-size: 16px;
 	letter-spacing: 1px;
 	text-align: right;
-	padding: 0 25px 0 0;
+	padding: 0 10px 0 0;
 	margin: 0;
 	vertical-align: bottom;
 }
