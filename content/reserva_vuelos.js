@@ -125,15 +125,14 @@ $(document).on('ready',function()
 	flapperTotal = $("#precio_total").flapper({
 		width: 7,
 		align: 'right'
-		// , format: ",#####.0"
 	});
 }); // init
 // ---------------------= =---------------------
 function handleScroll(){
 	var h = $(this).scrollTop();
 	var widget = $("#widget_resumen_reserva");
-	if(h > 150)
-		widget.css("margin",(h-150)+"px 0 0 0");
+	if(h > 245)
+		widget.css("margin",(h-245)+"px 0 0 0");
 	else
 		widget.css("margin","0");
 }
@@ -501,6 +500,8 @@ function asyncReceiveRegresoFlights(response)
 function receiveFlights(isSalida, response)
 {
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult);
+
+	console.log(response);
 
 	if(response.ResultInfoOrError != null){
 		fillTableWithMessage($("#tbl_" + (isSalida?"salida":"regreso"))[0], response.ResultInfoOrError.messageError);
@@ -960,7 +961,7 @@ function requestSearchParameters(parms)
 	var currentTimeStr = formatCompactTime(new Date());
 
 	var data = {
-		credentials 	: SERVICE_CREDENTIALS_KEY, 
+		tokenAv 		: SERVICE_CREDENTIALS_KEY, 
 		language 		: "ES",
 		currency 		: CODE_CURRENCIES[CURRENCY],
 		locationType 	: "N",
@@ -1035,7 +1036,7 @@ function requestFlights(date, results_callback, isSalida)
 	var currentTimeStr = hh + "" + mm;
 
 	var data = {
-		credentials 	: SERVICE_CREDENTIALS_KEY,
+		tokenAv 		: SERVICE_CREDENTIALS_KEY,
 		language 		: "ES",
 		currency 		: CODE_CURRENCIES[CURRENCY],
 		locationType 	: "N",

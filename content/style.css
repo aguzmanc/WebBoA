@@ -2467,6 +2467,31 @@ footer .form .button {
 	vertical-align: bottom;
 }
 
+#widget_resumen_reserva .cell-submit {
+	position: relative;
+	height: 60px;
+	background-image: url('images/icon_compra.png');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: 30px 15px;
+}
+
+#widget_resumen_reserva .cell-submit .button {
+	position: absolute;
+    top: 20px;
+    right: 5px;
+    background-color: #1F3656;
+    color: #DB9F3C;
+    font-family: "FuturaLight";
+    padding: 5px 0;
+    border: 0;
+}
+
+#widget_resumen_reserva .cell-submit .button:hover {
+	color: #FFF;
+	background-color: #DB9F3C;
+}
+
 #widget_resumen_reserva h1 {
 	color: #FFF;
 	margin: 0;
