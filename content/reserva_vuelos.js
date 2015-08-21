@@ -107,7 +107,6 @@ $(document).on('ready',function()
 		onSelect:function(selectedDate){
 			$( "#picker_regreso" ).datepicker( "option", "minDate", selectedDate );
 		}
-		// , defaultDate: new Date()
 	});
 
 	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
@@ -198,7 +197,7 @@ function selectTarifa()
 	var row = this.parentNode;
 	var opcCode = $(row).data("opc_code");
 	var opcion = allOptions[opcCode];
-	var tarifa = parseInt($(this).data("tarifa"));
+	var compartment = parseInt($(this).data("compartment"));
 
 	if($(this).find(".rbtn").hasClass("checked"))
 		return;
@@ -212,12 +211,12 @@ function selectTarifa()
 	if(tipo=="ida") {
 		seleccionVuelo.ida = {};
 		seleccionVuelo.ida.opcCode = opcCode;
-		seleccionVuelo.ida.tarifa = tarifa;
+		seleccionVuelo.ida.compartment = compartment;
 		$("#empty_ida_slot").css("display","none");
 	} else {
 		seleccionVuelo.vuelta = {};
 		seleccionVuelo.vuelta.opcCode = opcCode;	
-		seleccionVuelo.vuelta.tarifa = tarifa;
+		seleccionVuelo.vuelta.compartment = compartment;
 
 		$("#empty_ida_slot").css("display",
 			seleccionVuelo.ida == null ? "block":"none");
@@ -457,7 +456,7 @@ function checkResultsTableWidth()
  ********************** ASYNC HANDLERS ******************
  ********************************************************/
 // ---------------------= =---------------------
-function asyncReceiveDates(response) 
+function asyncReceiveDates(response)
 {
 	// fix to .NET dumbest encoding ever (possible bug here in future)
 	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
@@ -501,8 +500,6 @@ function receiveFlights(isSalida, response)
 {
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult);
 
-	console.log(response);
-
 	if(response.ResultInfoOrError != null){
 		fillTableWithMessage($("#tbl_" + (isSalida?"salida":"regreso"))[0], response.ResultInfoOrError.messageError);
 
@@ -511,6 +508,39 @@ function receiveFlights(isSalida, response)
 
 	// should not be so complicated =/
 	response = response.ResultAvailabilityPlusValuationsShort; 
+
+	// parse percentaje per passengers
+	var percentPassengers = {};
+
+	var rawPercentajes = response["porcentajeTipoPasajero"]["PorcentajeTipoPasajero"]; // why double :S .. dunno
+
+	var tipoPasajeroEquiv = {
+		"Adulto" : "adulto",
+		"Niño"	 : "ninho",
+		"Infante": "infante"
+	};
+
+	var esVueloNacional = true;
+
+	for(var i=0;i<rawPercentajes.length;i++) {
+		var rawPe = rawPercentajes[i];
+
+		if(false === (rawPe.clase in percentPassengers)) {
+			percentPassengers[rawPe.clase] = {
+				adulto: 0,
+				ninho: 0,
+				infante: 0
+			};
+		}
+
+		var keyPx = tipoPasajeroEquiv[rawPe['tipoPasajero']];
+
+		percentPassengers [rawPe.clase][keyPx] 
+			= (parseInt(rawPe['porcentaje'])/100.0);
+
+		if(rawPe["esLocal"] != "true")
+			esVueloNacional = false;
+	}
 
 	var fechaConsultada = response["fechaIdaConsultada"];
 
@@ -537,7 +567,7 @@ function receiveFlights(isSalida, response)
 	tarifasCache["f_" + fechaConsultada] = tarifas;
 
 	if((isSalida?currentDateSalida:currentDateRegreso) == fechaConsultada) 
-		fillTable($("#tbl_" + (isSalida?"salida":"regreso"))[0], flights, tarifas, fechaConsultada);
+		fillTable($("#tbl_" + (isSalida?"salida":"regreso"))[0], flights, tarifas, fechaConsultada, percentPassengers);
 }
 
 /***************************************************** 
@@ -602,10 +632,21 @@ function buildFlightOptionRow(opc, compartments)
 
 	$(row).attr("data-opc_code",opc.code);
 
-	// salida,llegada y duración
+	// salida, llegada y duración
 	var cell = document.createElement("td");
 
-	var strDuracion = formatTime(opc.horaSalida)+"&nbsp;&nbsp;-&nbsp;&nbsp;"+formatTime(opc.horaLlegada)+"<br>";
+	var iconSalida = (opc.horaSalida.hh >= 5 && opc.horaSalida.hh <= 12) ? "am" : 
+		((opc.horaSalida.hh <= 18) ? "pm" : "night");
+
+	var iconLlegada = (opc.horaLlegada.hh >= 5 && opc.horaLlegada.hh <= 12) ? "am" : 
+		((opc.horaLlegada.hh <= 18) ? "pm" : "night");
+
+	var strDuracion = 
+		"<div class='icon-dia-noche salida " + iconSalida + "'></div>" + 
+		formatTime(opc.horaSalida) + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
+		formatTime(opc.horaLlegada) +
+		"<div class='icon-dia-noche llegada " + iconLlegada + "'></div>" + 
+		"<br>";
 
 	if(opc.vuelos.length == 1)
 		strDuracion += "<span>Duraci&oacute;n: <label>"+formatExpandedTime(opc.duracionVuelo)+"</label></span>";
@@ -620,13 +661,16 @@ function buildFlightOptionRow(opc, compartments)
 
 	// tarifas por compartimiento
 	for(var i=0;i<compartments.length;i++) {
-		var tarifa = opc.tarifas[compartments[i]]
+		var tarifa = opc.tarifas[compartments[i]];
+
+		if(tarifa == null) 
+			continue; // it should have, but it doesn't :S
 
 		cell = document.createElement("td");
 		$(cell).addClass("tarifa");
 		$(cell).html("<div class='rbtn'><div></div></div>" + tarifa.monto + " " + HTML_CURRENCIES[CURRENCY]);
 		$(cell).click(selectTarifa);
-		$(cell).attr("data-tarifa",tarifa.monto);
+		$(cell).attr("data-compartment", tarifa.compart);
 		row.appendChild(cell);	
 	}
 
@@ -672,7 +716,7 @@ function buildCompartmentsHeader(table, compartments)
 	return row;
 }
 // ---------------------= =---------------------
-function fillTable(table, rawFlights, rawTarifas, date)
+function fillTable(table, rawFlights, rawTarifas, date, porcentajesPasajero)
 {
 	if(table.id == "tbl_salida")
 		pendingTablesBuild.salida = false;
@@ -752,6 +796,13 @@ function fillTable(table, rawFlights, rawTarifas, date)
 				}
 			}
 
+			// añadir porcentajes por pasajero por tasa y tipo
+			for(var compKey in flight.tarifas) {
+				var cls = flight.tarifas[compKey].clase;
+
+				flight.tarifas[compKey]['porcentajes'] = porcentajesPasajero[cls];
+			}
+
 			flights.push(flight);
 			flightsByNum[flight.numVuelo] = flight;
 
@@ -768,12 +819,7 @@ function fillTable(table, rawFlights, rawTarifas, date)
 					destino 		: "",
 					// los vuelos de una misma opcion deberian tener las mismas tarifas
 					tarifas     	: flight.tarifas,
-					code 			: generateRandomCode(10),
-					tarifasByPax	: {
-						adulto: {tasa: 1.0, constante:0},
-						ninho: {tasa:  0.8, constante:20},
-						infante: {tasa: 0, constante:30}
-					}
+					code 			: generateRandomCode(10)
 				};
 
 				// allOptions[opcionesVuelo[flight.numOpcion].code] = opcionesVuelo[flight.numOpcion];
@@ -816,10 +862,10 @@ function fillTable(table, rawFlights, rawTarifas, date)
 			minsTotal += minsVuelo;
 
 			opc.duracionVuelo.hrs = parseInt(minsVuelo/60);
-			opc.duracionVuelo.mins = minsVuelo%60;
+			opc.duracionVuelo.mins = minsVuelo % 60;
 
 			opc.duracionTotal.hrs = parseInt(minsTotal/60);
-			opc.duracionTotal.mins = minsTotal%60;
+			opc.duracionTotal.mins = minsTotal % 60;
 
 			allOptions[opc.code] = opc;
 		}
@@ -1096,17 +1142,15 @@ function updatePriceByTipo(tipo, changeFlapper)
 	if(seleccionVuelo.ida != null) {
 		var opcionIda = allOptions[seleccionVuelo.ida.opcCode];
 		
-		var tarifaByPax = opcionIda.tarifasByPax[tipo];
-		var tarifa = seleccionVuelo.ida.tarifa;
+		var tarifa = opcionIda.tarifas[seleccionVuelo.ida.compartment];
 
-		var precio = tarifa * tarifaByPax.tasa + tarifaByPax.constante;
+		var precio = tarifa.monto * tarifa.porcentajes[tipo];
 
 		if(seleccionVuelo.vuelta != null) {
 			var opcionVuelta = allOptions[seleccionVuelo.vuelta.opcCode];
-			tarifa = seleccionVuelo.vuelta.tarifa;
-			tarifaByPax = opcionVuelta.tarifasByPax[tipo];
+			tarifa = opcionVuelta.tarifas[seleccionVuelo.ida.compartment];
 
-			precio += tarifa * tarifaByPax.tasa + tarifaByPax.constante;
+			precio += tarifa.monto * tarifa.porcentajes[tipo];
 		}
 
 		seleccionVuelo[tipo].num = num;

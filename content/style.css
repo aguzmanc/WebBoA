@@ -2802,7 +2802,11 @@ footer .form .button {
 	background-color: #EFAA35;
 }
 
-.ui-section.wide.results .descripcion table tr.flights-option-row td{cursor: pointer;}
+.ui-section.wide.results .descripcion table tr.flights-option-row td {
+	position: relative;
+    height: 70px;
+	cursor: pointer;
+}
 
 .ui-section.wide.results .descripcion table tr.flights-option-row:hover td {
 	background-color: #ABC6D8;
@@ -2845,6 +2849,37 @@ footer .form .button {
 }
 
 .ui-section.wide.results .descripcion table tr.flights-option-row.selected td{cursor: default;}
+
+.ui-section.wide.results .descripcion table tr.flights-option-row .icon-dia-noche {
+	position: absolute;
+	top: 5px;
+	width: 74px;
+    height: 40px;
+	background-image: url('images/icons_dia_noche.png');
+    background-repeat: no-repeat;
+    /*background-color: #F00;*/
+}
+
+.ui-section.wide.results .descripcion table tr.flights-option-row .icon-dia-noche.salida {
+	left: 35px;
+}
+
+.ui-section.wide.results .descripcion table tr.flights-option-row .icon-dia-noche.llegada {
+	left: auto;
+    right: 35px;
+}
+
+.ui-section.wide.results .descripcion table tr.flights-option-row .icon-dia-noche.am {
+	background-position: 0 0;
+}
+
+.ui-section.wide.results .descripcion table tr.flights-option-row .icon-dia-noche.pm {
+	background-position: 0 -40px;
+}
+
+.ui-section.wide.results .descripcion table tr.flights-option-row .icon-dia-noche.night {
+	background-position: 0 -80px;
+}
 /* --------------------------------------------------------------------------- */
 .ui-section.wide.results .cell-details {
 	background-color: #EFAA35;
