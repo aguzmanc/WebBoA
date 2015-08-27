@@ -44,10 +44,15 @@ var seleccionVuelo = {
 	precioTotal:    0
 };
 
+var tasasPorPasajero = {
+	adulto:  [],
+	ninho:   [],
+	infante: []
+};
+
 var flightsByNum = {};
 var allOptions = {};
 
-// configuration
 var currencies = {euro:"&euro;", usd:"USD"};
 
 var cities = {
@@ -76,7 +81,15 @@ var airports = {
 	GRU: "Aeropuerto Internacional de Guarulhos"
 };
 
+var tipoPasajeroEquiv = {
+	"Adulto" : "adulto",
+	"Niño"	 : "ninho",
+	"Infante": "infante"
+};
+
 var compartmentNames = {"2":"Business","3":"Econ&oacute;mica"};
+
+var nombreTasas = {};
 // ---------------------= =---------------------
 /********************************************************* 
  ********************** UI HANDLERS **********************
@@ -509,16 +522,25 @@ function receiveFlights(isSalida, response)
 	// should not be so complicated =/
 	response = response.ResultAvailabilityPlusValuationsShort; 
 
+	// process tasas
+	var rawTasas = response['tasaTipoPasajero'];
+	for(var i=0;i<rawTasas.length;i++) {
+		var rawTasa = rawTasas[i];
+
+		// update tasas
+		nombreTasas[rawTasa.tipoTasa] = rawTasa.tasa;
+
+		// update tasas por pasajero
+		tasasPorPasajero = {}; // reset
+		var tasas = tasasPorPasajero[tipoPasajeroEquiv[rawTasa.tipoPasajero]];
+		if(tasas.indexOf(rawTasa.tipoTasa) != -1)
+			tasas.push(rawTasa.tipoTasa);
+	}
+
 	// parse percentaje per passengers
 	var percentPassengers = {};
 
 	var rawPercentajes = response["porcentajeTipoPasajero"]["PorcentajeTipoPasajero"]; // why double :S .. dunno
-
-	var tipoPasajeroEquiv = {
-		"Adulto" : "adulto",
-		"Niño"	 : "ninho",
-		"Infante": "infante"
-	};
 
 	var esVueloNacional = true;
 
@@ -677,7 +699,8 @@ function buildFlightOptionRow(opc, compartments)
 	return row;
 }
 // ---------------------= =---------------------
-function buildFlightDetailRow(opc, flight) {
+function buildFlightDetailRow(opc, flight) 
+{
 	/*** FILA DE DETALLES ***/
 	row = document.createElement("tr");
 
@@ -771,6 +794,9 @@ function fillTable(table, rawFlights, rawTarifas, date, porcentajesPasajero)
 				var flightClass = rawClasses[k]["cls"];
 
 				if(false==(flightClass in tarifas)) 
+					continue;
+
+				if(false==(flightClass in porcentajesPasajero)) // parche!
 					continue;
 
 				var monto = parseInt(tarifas[flightClass]);
