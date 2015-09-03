@@ -1243,11 +1243,12 @@ function updatePriceByTipo(tipo, changeFlapper)
 		seleccionVuelo[tipo].ida.precioBase = tarifa.monto * tarifa.porcentajes[tipo];
 
 		seleccionVuelo[tipo].ida.tasas = {}; // reset
-		for(var keyTasa in tasasPorPasajero[tipo]) {
+		for(var i=0;i<tasasPorPasajero[tipo].length;i++) {
+			var keyTasa = tasasPorPasajero[tipo][i];
 			var tasa = tasas[keyTasa];
 
 			seleccionVuelo[tipo].ida.tasas[keyTasa] = 
-				seleccionVuelo[tipo].ida.precioBase * (tasa.porcentaje/100.0) + tasa.fijo;
+				seleccionVuelo[tipo].ida.precioBase * (tasa.ida.porcentaje/100.0) + tasa.ida.fijo;
 		}
 
 		/* CALCULOS PARA VUELTA */
@@ -1262,22 +1263,27 @@ function updatePriceByTipo(tipo, changeFlapper)
 				var tasa = tasas[keyTasa];
 
 				seleccionVuelo[tipo].vuelta.tasas[keyTasa] = 
-					seleccionVuelo[tipo].vuelta.precioBase * (tasa.porcentaje/100.0) + tasa.fijo;
+					seleccionVuelo[tipo].vuelta.precioBase * (tasa.vuelta.porcentaje/100.0) + tasa.vuelta.fijo;
 			}
 		}
 
 		/* CALCULO DE PRECIO TOTAL */
-		console.log(seleccionVuelo[tipo]); 
-		// CONTINUAR AQUI, CALCULAR EL PRECIO TOTAL TENIENDO
-		// TODAS LAS TASAS Y PRECIOS :S
-		seleccionVuelo[tipo].precioTotal = 0.0;
+		seleccionVuelo[tipo].precioTotal = seleccionVuelo[tipo].ida.precioBase;
+		for(var keyTasa in seleccionVuelo[tipo].ida.tasas)  // ida
+			seleccionVuelo[tipo].precioTotal += seleccionVuelo[tipo].ida.tasas[keyTasa];
+
+		if(seleccionVuelo.vuelta != null) {
+			seleccionVuelo[tipo].precioTotal += seleccionVuelo[tipo].vuelta.precioBase;
+			for(var keyTasa in seleccionVuelo[tipo].vuelta.tasas)  // vuelta
+				seleccionVuelo[tipo].precioTotal += seleccionVuelo[tipo].vuelta.tasas[keyTasa];	
+		}
+
+		seleccionVuelo[tipo].precioTotal *= seleccionVuelo[tipo].num;
 
 		seleccionVuelo.precioTotal = 
 			seleccionVuelo.adulto.precioTotal + 
 			seleccionVuelo.ninho.precioTotal + 
 			seleccionVuelo.infante.precioTotal; 
-
-		console.log(seleccionVuelo);
 	}else {
 		seleccionVuelo.precioTotal = -1;
 	}
