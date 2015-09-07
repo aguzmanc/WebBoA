@@ -2513,9 +2513,18 @@ footer .form .button {
 	font-style: normal;
 }
 
+#widget_resumen_reserva .cell-descripcion .tooltip th h1{
+	color: #EFAA35;
+	font-size: 23px;
+	font-family: "HelveticaNeueProMd";
+	margin: 0;
+	text-align: right;
+}
+
 #widget_resumen_reserva .cell-descripcion .tooltip th h3{
 	color: #EFAA35;
 	font-size: 19px;
+	margin: 0 0 10px 0;
 }
 
 #widget_resumen_reserva .cell-cantidad {

@@ -85,8 +85,10 @@ function calculateMinutesDifference(timeIni, timeFin)
 function formatCurrencyQuantity(quantity, includeCurrency, digits)
 {
 	var digitFactor = 1;
+	var zeroes = "";
 	for(var i=0;i<digits;i++){
 		digitFactor *= 10;
+		zeroes += "0";
 	}
 
 	var mult = quantity * digitFactor;
@@ -95,7 +97,9 @@ function formatCurrencyQuantity(quantity, includeCurrency, digits)
 	if(includeCurrency)
 		str = HTML_CURRENCIES[CURRENCY] + "&nbsp;";
 
-	return  str + parseInt(mult/digitFactor) + "." + parseInt(mult%digitFactor);
+	var decimalPart = (zeroes + parseInt(mult%digitFactor)).slice(-digits);
+
+	return  str + parseInt(mult/digitFactor) + "." + decimalPart;
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------
