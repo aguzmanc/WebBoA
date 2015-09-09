@@ -182,10 +182,7 @@ function changeDay()
 	while(false == $(table).is("table")) // find parent table
 		table = table.parentNode;
 
-	if(table.id == "tbl_days_selector_salida")
-		pendingTablesBuild.salida = true;
-	else if(table.id == "tbl_days_selector_regreso")
-		pendingTablesBuild.regreso = true;
+	waitingForFlightsData = true;
 
 	$(table).find(".day-selector").removeClass("selected");
 
@@ -195,10 +192,14 @@ function changeDay()
 
 	var selected_date = $(this).data("date");
 
-	if(isSalida)
+	if(isSalida){
 		currentDateIda = selected_date;
-	else 
+		fillTableWithLoading($("#tbl_salida")[0]);
+	}
+	else {
 		currentDateVuelta = selected_date;
+		fillTableWithLoading($("#tbl_regreso")[0]);
+	}
 
 	requestFlights(currentDateIda, currentDateVuelta);
 }
@@ -891,7 +892,7 @@ function requestSearchParameters(parms)
 	});
 }
 // ---------------------= =---------------------
-function requestFlights(dateIda, dateVuelta) 
+function requestFlights(dateIda, dateVuelta)
 {
 	// now!
 	var now = new Date();
@@ -1037,8 +1038,6 @@ function updateAllPrices()
 // ---------------------= =---------------------
 function buildDetailPrices(info, tipo)
 {
-	if(tipo != 'adulto') return;
-
 	var titles = {adulto:"ADULTO",ninho:"NI&Ntilde;O",infante:"INFANTE"};
 
 	var tooltip = $("#tooltip_" + tipo);
@@ -1053,7 +1052,7 @@ function buildDetailPrices(info, tipo)
 
 	tbl.append("<tr><th colspan='3'><h1>"+titles[tipo]+"</h1></th></tr>");
 	tbl.append("<tr><th class='subtitle' colspan='3'><div>Ida</div></th></tr>");
-	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>Bs.</td><td class='qty'>"+formatCurrencyQuantity(info.ida.precioBase,false,2)+"</td></tr>");
+	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.ida.precioBase,false,2)+"</td></tr>");
 
 	for(var keyTasa in info.ida.tasas) {
 		var tr = document.createElement("tr");
@@ -1062,7 +1061,7 @@ function buildDetailPrices(info, tipo)
 		     .append("<td class='qty'>"+formatCurrencyQuantity(info.ida.tasas[keyTasa],false,2)+"</td>");
 		     
 		tbl.append(tr);
-		tbl.append("<tr><td class='detail' colspan='2'>"+tasas[keyTasa].nombre+"</tr>");
+		tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
 	}
 
 	if(seleccionVuelo.vuelta != null) {
@@ -1076,9 +1075,24 @@ function buildDetailPrices(info, tipo)
 			     .append("<td class='qty'>"+formatCurrencyQuantity(info.vuelta.tasas[keyTasa],false,2)+"</td>");
 			     
 			tbl.append(tr);
-			tbl.append("<tr><td class='detail' colspan='2'>"+tasas[keyTasa].nombre+"</tr>");
+			tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
 		}		
 	}
+
+	var subtotal = info.ida.precioBase;
+	for(var key in info.ida.tasas)
+		subtotal += info.ida.tasas[key];
+	if(seleccionVuelo.vuelta != null) {
+		subtotal += info.vuelta.precioBase;
+		for(var key in info.vuelta.tasas)
+			subtotal += info.vuelta.tasas[key];
+	}
+
+	tbl.append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
+	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(subtotal,false,2) +"</td></tr>")
+	   .append("<tr><td></td><td></td><td class='qty'><h3>x "+info.num+"</h3></td></tr>")
+	   .append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
+	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.num * subtotal,false,2)+"</td></tr>");
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------
@@ -1140,11 +1154,11 @@ function translateTaxes(fromResponse)
 
 	// tasas vuelta
 	if(rawVueltaTaxes != null) {
-		for(var i=0;i<rawVueltaTaxes;i++){
+		for(var i=0;i<rawVueltaTaxes.length;i++) {
 			var rawTax = rawVueltaTaxes[i];
 			var taxKey = rawTax['tipo_tasa']['#text'];
 
-			tasas[taxKey].vuelta = { fijo: 0.0, porcentaje: 0.0 }; // adding
+			to.byTax[taxKey].vuelta = { fijo: 0.0, porcentaje: 0.0 }; // adding
 
 			if('importe' in rawTax){
 				to.byTax[taxKey].vuelta.fijo = parseFloat(rawTax['importe']['#text']);

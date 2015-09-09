@@ -2458,17 +2458,24 @@ footer .form .button {
 
 #widget_resumen_reserva .cell-descripcion .tooltip {
 	position: absolute;
-	width: 300px;
-    top: 0;
-    left: -300px;
+	width: 200px;
+    top: -250px;
+    left: -200px;
     background-color: #2D4565;
     color: #FFF;
     font-family: "FuturaLight";
+    cursor: default;
+
+    display: none;
 
     box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+#widget_resumen_reserva tr.tarifa:not(.inactive):hover .tooltip {
+	display: block;	
 }
 
 #widget_resumen_reserva .cell-descripcion .tooltip table {
@@ -2481,14 +2488,16 @@ footer .form .button {
 
 #widget_resumen_reserva .cell-descripcion .tooltip td.currency {
 	text-align: right;
+	font-size: 10px;
 }
 
 #widget_resumen_reserva .cell-descripcion .tooltip td.qty {
 	text-align: right;
+	font-size: 10px;
 }
 
 #widget_resumen_reserva .cell-descripcion .tooltip td.detail {
-	font-size: 10px;
+	font-size: 7px;
     height: 10px;
     padding: 0 0 0 10px;
     color: #EFAA35 !important;
@@ -2505,11 +2514,11 @@ footer .form .button {
 	width: 100%;
     height: 2px;
     background-color: #4F6885;
-    margin: 15px 0;
+    margin: 5px 0;
 }
 
 #widget_resumen_reserva .cell-descripcion .tooltip th {
-	font-size: 15px;	
+	font-size: 12px;	
 	font-style: normal;
 }
 
@@ -2523,8 +2532,7 @@ footer .form .button {
 
 #widget_resumen_reserva .cell-descripcion .tooltip th h3{
 	color: #EFAA35;
-	font-size: 19px;
-	margin: 0 0 10px 0;
+	font-size: 15px;
 }
 
 #widget_resumen_reserva .cell-cantidad {
@@ -2743,7 +2751,12 @@ footer .form .button {
 #widget_resumen_reserva td.selector-pax ul li.plus-seven{top:217px;}
 #widget_resumen_reserva td.selector-pax ul li.plus-eight{top:248px;}
 
-#widget_resumen_reserva tr.tarifa.inactive td{
+#widget_resumen_reserva tr.tarifa:hover:not(.inactive) {
+	background-color: #496892;
+	cursor: pointer;
+}
+
+#widget_resumen_reserva tr.tarifa.inactive td {
 	color: gray;
 }
 
