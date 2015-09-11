@@ -177,6 +177,9 @@ function toggleRbtnIdaVuelta()
 // ---------------------= =---------------------
 function changeDay()
 {
+	deleteIda();
+	deleteVuelta();
+
 	var table = this;
 
 	while(false == $(table).is("table")) // find parent table
@@ -184,11 +187,11 @@ function changeDay()
 
 	waitingForFlightsData = true;
 
+	var isSalida = ($(table).data("salida_regreso") == "salida");
+
 	$(table).find(".day-selector").removeClass("selected");
 
 	$(this).addClass("selected");
-
-	var isSalida = ($(table).data("salida_regreso") == "salida");
 
 	var selected_date = $(this).data("date");
 
@@ -210,7 +213,7 @@ function toggleWidgetCambiarVuelo()
 
 	var widget = $(this.parentNode);
 
-	if(widget.hasClass("collapsed")){
+	if(widget.hasClass("collapsed")) {
 		widget.removeClass("collapsed").addClass("expanded");
 	} else {
 		widget.removeClass("expanded").addClass("collapsed");
@@ -361,6 +364,9 @@ function validateSearch()
 // ---------------------= =---------------------
 function deleteIda()
 {
+	if(seleccionVuelo.ida == null)
+		return;
+
 	var opcCode = seleccionVuelo.ida.opcCode;
 	seleccionVuelo.ida = null;
 
@@ -385,6 +391,9 @@ function deleteIda()
 // ---------------------= =---------------------
 function deleteVuelta()
 {
+	if(seleccionVuelo.vuelta == null)
+		return;
+
 	var opcCode = seleccionVuelo.vuelta.opcCode;
 	seleccionVuelo.vuelta = null;
 
@@ -486,23 +495,29 @@ function asyncReceiveDates(response)
 	// fix to .NET dumbest encoding ever (possible bug here in future)
 	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
 	
-	// construir selector de fechas para vuelos de ida
+	// construir selector de fechas para vuelos de ida y vuelta
 	currentDateIda = response["fechaIdaConsultada"];
+	if(searchParameters.fechaVuelta != null)
+		currentDateVuelta = response["fechaVueltaConsultada"];
+
+	// (las fechas de ida y vuelta deben estar establecidas 
+	//	antes de construir el selector de fechas)
 	buildDatesSelector(
 		response["calendarioOW"]["OW_Ida"]["salidas"]["salida"],
 		response["fechaIdaConsultada"], 
-		$("#tbl_days_selector_salida")
+		$("#tbl_days_selector_salida"),
+		true // isIda
 	);
 
 	// construir selector de fechas para vuelos de vuelta
 	if(searchParameters.fechaVuelta != null) {
-		currentDateVuelta = response["fechaVueltaConsultada"];
 		buildDatesSelector(
 			response["calendarioOW"]["OW_Vuelta"]["salidas"]["salida"],
 			response["fechaVueltaConsultada"], 
-			$("#tbl_days_selector_regreso")
+			$("#tbl_days_selector_regreso"),
+			false
 		);
-	}else 
+	} else 
 		currentDateVuelta = null;
 
 	waitingForFlightsData = true;
@@ -572,7 +587,7 @@ function asyncReceiveFlights(response)
 /***************************************************** 
  *************** UI BUILDING FUNCTIONS ***************
  *****************************************************/
-function buildDatesSelector(rawDates, requestedDateStr, table)
+function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 {
 	var tarifasByDate = { };
 
@@ -587,12 +602,17 @@ function buildDatesSelector(rawDates, requestedDateStr, table)
 	requestedDate = new Date(requestedDateStr.substr(0,4),
 							 requestedDateStr.substr(4,2),
 							 requestedDateStr.substr(6,2), 0,0,0,0);
+
+	console.log(requestedDate);
+	console.log(currentDateIda);
+
 	
+
 	table.find("tr td").remove(); // clean
 
 	// check for 3 days after, and 3 days before
 	// if it does not exist, complete with "none" instead of the price
-	for(var i=-3;i<=3;i++){
+	for(var i=-3;i<=3;i++) {
 		// same process for days after
 		var d = new Date(requestedDate);
 		d.setDate(requestedDate.getDate() + i);
@@ -605,6 +625,16 @@ function buildDatesSelector(rawDates, requestedDateStr, table)
 
 		$(cell).html("<h2>" + WEEKDAYS_2_CHARS_LANGUAGE_TABLE[d.getDay()] + 
 			"<span>" + (("00" + d.getDate()).slice(-2)) + "</span></h2>");
+
+		var inRange = true;
+		if(isIda && if(seleccionVuelo.vuelta != null)) {
+			inRange = (d <= currentDateVuelta);
+		} else if(false == isIda) {
+			inRange = (d >= currentDateIda);
+		}
+
+		// continuar aqui ... 
+		// Si inRange == false    deshabilitar esa celda de fecha
 
 		if(dateStr in tarifasByDate) {
 			$(cell).append("<h3>" + tarifasByDate[dateStr] + "&nbsp;" + HTML_CURRENCIES[CURRENCY] +"</h3>");
@@ -794,7 +824,11 @@ function handleInitialRequest()
 	var tomorrowDate = new Date();
 	tomorrowDate.setDate(tomorrowDate.getDate()+1);
 	tomorrowStr = formatCompactDate(tomorrowDate);
-	searchParameters.fechaVuelta = tomorrowStr;
+	searchParameters.fechaIda = tomorrowStr;
+
+	var oneTomorrow = new Date();
+	oneTomorrow.setDate(oneTomorrow.getDate()+2);
+	searchParameters.fechaVuelta = formatCompactDate(oneTomorrow);
 	// --------
 
 	$("#select_origen").val(searchParameters.origen);
@@ -932,6 +966,8 @@ function requestFlights(dateIda, dateVuelta)
 		from: searchParameters.origen,
 		to: searchParameters.destino
 	};
+
+	console.log(data);
 
 	var dataStr = JSON.stringify(data);
 
