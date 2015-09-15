@@ -2858,6 +2858,22 @@ footer .form .button {
 	font-family: "HelveticaNeueProMd";
 }
 
+.ui-section.wide.results .descripcion table.days-selector tr.months td {
+	width: 95%;
+    background-color: #1F3656;
+    color: #FFF;
+    cursor: default;
+}
+
+.ui-section.wide.results .descripcion table.days-selector tr.months h3{
+	text-align: center;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    color: #FFF;
+}
+
 .ui-section.wide.results .descripcion table th.class-group {
 	width: 150px;
 	min-width: 150px;

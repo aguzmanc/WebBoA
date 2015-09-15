@@ -15,6 +15,7 @@ var currentDateIda = "";
 var currentDateVuelta = "";
 
 var todayStr = "";
+var rawDatesCache = {ida:null,vuelta:null};
 
 var seleccionVuelo = {
 	ida: 			null,
@@ -497,8 +498,16 @@ function asyncReceiveDates(response)
 	
 	// construir selector de fechas para vuelos de ida y vuelta
 	currentDateIda = response["fechaIdaConsultada"];
-	if(searchParameters.fechaVuelta != null)
+	rawDatesCache.ida = response["calendarioOW"]["OW_Ida"]["salidas"]["salida"];
+
+	if(searchParameters.fechaVuelta != null){
 		currentDateVuelta = response["fechaVueltaConsultada"];
+		rawDatesCache.vuelta = response["calendarioOW"]["OW_Vuelta"]["salidas"]["salida"];
+	}
+	else{
+		currentDatevuelta = null;
+		rawDatesCache.vuelta = null;
+	}
 
 	// (las fechas de ida y vuelta deben estar establecidas 
 	//	antes de construir el selector de fechas)
@@ -517,8 +526,7 @@ function asyncReceiveDates(response)
 			$("#tbl_days_selector_regreso"),
 			false
 		);
-	} else 
-		currentDateVuelta = null;
+	} 
 
 	waitingForFlightsData = true;
 
@@ -538,7 +546,7 @@ function asyncReceiveFlights(response)
 		return;
 	}
 
-	// should not be so complicated =/
+	// el verdadero response esta mas adentro ¬¬
 	response = response['ResultAvailabilityPlusValuationsShort']; 
 
 	var fechaIdaConsultada = response["fechaIdaConsultada"];
@@ -569,6 +577,9 @@ function asyncReceiveFlights(response)
 		fechaIdaConsultada,
 		porcentajesPorPasajero);
 
+	// reconstruir tabla de fechas (ida)
+	buildDatesSelector(rawDatesCache.ida, searchParameters.fechaIda, $("#tbl_days_selector_salida"), true);
+	// construir tabla de vuelos
 	buildFlightsTable("tbl_salida", dataIda.flightOptions, dataIda.compartments);
 
 	if(currentDateVuelta != null) {
@@ -578,6 +589,9 @@ function asyncReceiveFlights(response)
 			fechaIdaConsultada,
 			porcentajesPorPasajero);
 
+		// reconstruir tabla de fechas (vuelta)
+		buildDatesSelector(rawDatesCache.vuelta, searchParameters.fechaVuelta, $("#tbl_days_selector_regreso"), false);
+		// construir tabla de vuelos
 		buildFlightsTable("tbl_regreso", dataVuelta.flightOptions, dataIda.compartments);
 	}
 
@@ -599,16 +613,12 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 		tarifasByDate[rawDate["fecha"]] = tarifaStr;
 	}
 
-	requestedDate = new Date(requestedDateStr.substr(0,4),
-							 requestedDateStr.substr(4,2),
-							 requestedDateStr.substr(6,2), 0,0,0,0);
+	requestedDate = compactToJSDate(requestedDateStr);
 
-	console.log(requestedDate);
-	console.log(currentDateIda);
+	table.find("tr.months").html(""); // clean months row
+	table.find("tr.days td").remove(); // clean dates row
 
-	
-
-	table.find("tr td").remove(); // clean
+	var monthsInDays = {};
 
 	// check for 3 days after, and 3 days before
 	// if it does not exist, complete with "none" instead of the price
@@ -616,6 +626,12 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 		// same process for days after
 		var d = new Date(requestedDate);
 		d.setDate(requestedDate.getDate() + i);
+
+		var mm = "" + d.getMonth();
+		if(false == (mm in monthsInDays))
+			monthsInDays[mm] = 1;
+		else
+			monthsInDays[mm]++;
 
 		var dateStr = d.getFullYear() + ("00" + (d.getMonth()) ).slice(-2) + (("00" + d.getDate()).slice(-2));
 
@@ -627,30 +643,44 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 			"<span>" + (("00" + d.getDate()).slice(-2)) + "</span></h2>");
 
 		var inRange = true;
-		if(isIda && if(seleccionVuelo.vuelta != null)) {
-			inRange = (d <= currentDateVuelta);
-		} else if(false == isIda) {
-			inRange = (d >= currentDateIda);
+
+		// evitar mostrar fechas cruzadas (de ida y vuelta)
+		if(currentDateVuelta != null) { 
+			var otherDate = compactToJSDate(isIda ? currentDateVuelta:currentDateIda);
+			if(isIda)
+				inRange = (d <= otherDate);
+			else
+				inRange = (d >= otherDate);
 		}
 
-		// continuar aqui ... 
-		// Si inRange == false    deshabilitar esa celda de fecha
-
-		if(dateStr in tarifasByDate) {
-			$(cell).append("<h3>" + tarifasByDate[dateStr] + "&nbsp;" + HTML_CURRENCIES[CURRENCY] +"</h3>");
+		if(false == inRange) {
+			$(cell).css("display","none"); // no mostrar fechas cruzadas
 		}
-		else {
+		else if(false == (dateStr in tarifasByDate)) {
 			$(cell).addClass("no-flights")
 				   .append("<h3>No hay<br>vuelos</h3>");
+		} else {
+			$(cell).append("<h3>" + tarifasByDate[dateStr] + "&nbsp;" + HTML_CURRENCIES[CURRENCY] +"</h3>");
+			if(dateStr == (isIda?currentDateIda:currentDateVuelta))
+				$(cell).addClass("selected");				
 		}
 
-		table.find("tr").append(cell);
+		table.find("tr.days").append(cell);
 	}
 
-	// select middle date
-	table.find("tr td:nth-child(4)").addClass("selected");
+	// build months data
+	var monthsRow = table.find("tr.months");
+	for(var key in monthsInDays) {
+		var td = $(document.createElement("td"));
+		td.attr("colspan",monthsInDays[key])
+		  .addClass("month")
+		  .html("<h3>" + MONTHS_2_CHARS_LANGUAGE_TABLE[parseInt(key)] + "</h3>");
+		monthsRow.append(td);
+	}
 
-	table.find(".day-selector:not(.no-flights)").click(changeDay);
+	table.prepend(monthsRow);
+
+	table.find("tr.days td.day-selector:not(.no-flights)").click(changeDay);
 }
 // ---------------------= =---------------------
 function buildFlightsTable(tableName, flightOptions, compartments)
@@ -966,8 +996,6 @@ function requestFlights(dateIda, dateVuelta)
 		from: searchParameters.origen,
 		to: searchParameters.destino
 	};
-
-	console.log(data);
 
 	var dataStr = JSON.stringify(data);
 
