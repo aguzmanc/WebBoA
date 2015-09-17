@@ -361,6 +361,9 @@ function validateSearch()
 	requestSearchParameters(searchParameters);
 
 	$("#widget_cambiar_vuelo").removeClass("expanded").addClass("collapsed");
+	// remover vuelos seleccionados
+	deleteIda();
+	deleteVuelta();
 }
 // ---------------------= =---------------------
 function deleteIda()
@@ -542,6 +545,7 @@ function asyncReceiveFlights(response)
 
 	if(response.ResultInfoOrError != null) {
 		fillTableWithMessage($("#tbl_salida")[0], response.ResultInfoOrError.messageError);
+		waitingForFlightsData = false; // mutex data
 
 		return;
 	}
@@ -627,13 +631,13 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 		var d = new Date(requestedDate);
 		d.setDate(requestedDate.getDate() + i);
 
-		var mm = "" + d.getMonth();
+		var mm = "" + (d.getMonth()+1);
 		if(false == (mm in monthsInDays))
 			monthsInDays[mm] = 1;
 		else
 			monthsInDays[mm]++;
 
-		var dateStr = d.getFullYear() + ("00" + (d.getMonth()) ).slice(-2) + (("00" + d.getDate()).slice(-2));
+		var dateStr = d.getFullYear() + ("00" + (d.getMonth() + 1)).slice(-2) + (("00" + d.getDate()).slice(-2));
 
 		var cell = document.createElement("td");
 
@@ -661,9 +665,10 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 				   .append("<h3>No hay<br>vuelos</h3>");
 		} else {
 			$(cell).append("<h3>" + tarifasByDate[dateStr] + "&nbsp;" + HTML_CURRENCIES[CURRENCY] +"</h3>");
-			if(dateStr == (isIda?currentDateIda:currentDateVuelta))
-				$(cell).addClass("selected");				
 		}
+
+		if(dateStr == (isIda?currentDateIda:currentDateVuelta))
+			$(cell).addClass("selected");
 
 		table.find("tr.days").append(cell);
 	}
@@ -851,14 +856,14 @@ function handleInitialRequest()
 	}
 
 	// DEBUG
-	var tomorrowDate = new Date();
-	tomorrowDate.setDate(tomorrowDate.getDate()+1);
-	tomorrowStr = formatCompactDate(tomorrowDate);
-	searchParameters.fechaIda = tomorrowStr;
+	// var tomorrowDate = new Date();
+	// tomorrowDate.setDate(tomorrowDate.getDate()+1);
+	// tomorrowStr = formatCompactDate(tomorrowDate);
+	// searchParameters.fechaIda = tomorrowStr;
 
-	var oneTomorrow = new Date();
-	oneTomorrow.setDate(oneTomorrow.getDate()+2);
-	searchParameters.fechaVuelta = formatCompactDate(oneTomorrow);
+	// var oneTomorrow = new Date();
+	// oneTomorrow.setDate(oneTomorrow.getDate()+2);
+	// searchParameters.fechaVuelta = formatCompactDate(oneTomorrow);
 	// --------
 
 	$("#select_origen").val(searchParameters.origen);
@@ -943,6 +948,8 @@ function requestSearchParameters(parms)
 		ipAddress 		: "127.0.0.1", 
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
+
+	console.log(data);
 
 	var dataStr = JSON.stringify(data);
 
@@ -1074,6 +1081,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 
 	if(seleccionVuelo.ida != null)  {
 		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true,2));
+		span.parent().parent().addClass("calculated");
 
 		buildDetailPrices(seleccionVuelo[tipo], tipo);
 
@@ -1082,6 +1090,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 	}
 	else{
 		span.html("?");
+		span.parent().parent().removeClass("calculated");
 
 		if(changeFlapper)
 			flapperTotal.val("???????").change();

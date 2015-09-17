@@ -124,7 +124,7 @@ function formatCompactTime(dateTime)
 function compactToJSDate(date)
 {
 	var yyyy = parseInt(date.substr(0,4));
-	var mm = parseInt(date.substr(4,2));
+	var mm = parseInt(date.substr(4,2))-1;
 	var dd = parseInt(date.substr(6,2));
 
 	return new Date(yyyy,mm,dd);

@@ -2474,7 +2474,7 @@ footer .form .button {
 	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 }
 
-#widget_resumen_reserva tr.tarifa:not(.inactive):hover .tooltip {
+#widget_resumen_reserva tr.tarifa.calculated:not(.inactive):hover .tooltip {
 	display: block;	
 }
 
@@ -2804,6 +2804,10 @@ footer .form .button {
     background-color: #909090 !important;
     color: #666 !important;
     cursor: default !important;
+}
+
+.ui-section.wide.results .descripcion table.days-selector td.no-flights.selected {
+	background-color: #EFAA35 !important;
 }
 
 .ui-section.wide.results .descripcion table .day-selector {
