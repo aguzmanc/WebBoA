@@ -99,7 +99,13 @@ function formatCurrencyQuantity(quantity, includeCurrency, digits)
 
 	var decimalPart = (zeroes + parseInt(mult%digitFactor)).slice(-digits);
 
-	return  str + parseInt(mult/digitFactor) + "." + decimalPart;
+	if(digits == 0)
+		str = str + Math.round(parseFloat(mult/digitFactor));
+	else
+		str =  str + parseInt(mult/digitFactor) + "." + decimalPart;
+
+
+	return  str;
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------

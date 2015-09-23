@@ -543,6 +543,8 @@ function asyncReceiveFlights(response)
 
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult);
 
+	console.log(response);
+
 	if(response.ResultInfoOrError != null) {
 		fillTableWithMessage($("#tbl_salida")[0], response.ResultInfoOrError.messageError);
 		waitingForFlightsData = false; // mutex data
@@ -587,6 +589,7 @@ function asyncReceiveFlights(response)
 	buildFlightsTable("tbl_salida", dataIda.flightOptions, dataIda.compartments);
 
 	if(currentDateVuelta != null) {
+		console.log(response);	
 		var dataVuelta = translateFlights(
 			response["vuelosYTarifas"]["Vuelos"]["vuelta"]["vuelos"]["vuelo"],
 			rawTarifas, 
@@ -949,8 +952,6 @@ function requestSearchParameters(parms)
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
 
-	console.log(data);
-
 	var dataStr = JSON.stringify(data);
 
 	$.ajax({
@@ -1036,7 +1037,16 @@ function updatePriceByTipo(tipo, changeFlapper)
 			var tasa = tasas[keyTasa];
 
 			seleccionVuelo[tipo].ida.tasas[keyTasa] = 
-				seleccionVuelo[tipo].ida.precioBase * (tasa.ida.porcentaje/100.0) + tasa.ida.fijo;
+				seleccionVuelo[tipo].ida.precioBase * (tasa.ida.porcentaje/100.0) + tasa.ida.fijo;	
+		}
+
+		// tasa BO se calcula de forma distinta
+		// BO = (Neto + QM) * %
+		if('BO' in seleccionVuelo[tipo].ida.tasas &&
+		   'QM' in seleccionVuelo[tipo].ida.tasas) {
+		  	seleccionVuelo[tipo].ida.tasas['BO'] = 
+				(seleccionVuelo[tipo].ida.precioBase + seleccionVuelo[tipo].ida.tasas['QM']) * 
+				(tasas['BO'].ida.porcentaje/100.0);
 		}
 
 		/* CALCULOS PARA VUELTA */
@@ -1053,6 +1063,15 @@ function updatePriceByTipo(tipo, changeFlapper)
 
 				seleccionVuelo[tipo].vuelta.tasas[keyTasa] = 
 					seleccionVuelo[tipo].vuelta.precioBase * (tasa.vuelta.porcentaje/100.0) + tasa.vuelta.fijo;
+			}
+
+			// tasa BO se calcula de forma distinta
+			// BO = (Neto + QM) * %
+			if('BO' in seleccionVuelo[tipo].vuelta.tasas &&
+			   'QM' in seleccionVuelo[tipo].vuelta.tasas) {
+			  	seleccionVuelo[tipo].vuelta.tasas['BO'] = 
+					(seleccionVuelo[tipo].vuelta.precioBase + seleccionVuelo[tipo].vuelta.tasas['QM']) * 
+					(tasas['BO'].vuelta.porcentaje/100.0);
 			}
 		}
 
@@ -1086,7 +1105,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 		buildDetailPrices(seleccionVuelo[tipo], tipo);
 
 		if(changeFlapper)
-			flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,1)).change();
+			flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,0)).change();
 	}
 	else{
 		span.html("?");
@@ -1104,7 +1123,7 @@ function updateAllPrices()
 	updatePriceByTipo("infante", false);
 
 	if(seleccionVuelo.ida != null)
-		flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,1)).change();
+		flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,0)).change();
 	else
 		flapperTotal.val("???????").change();
 }
