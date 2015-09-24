@@ -1031,13 +1031,18 @@ function updatePriceByTipo(tipo, changeFlapper)
 		seleccionVuelo[tipo].num = num;
 		seleccionVuelo[tipo].ida.precioBase = tarifa.monto * tarifa.porcentajes[tipo];
 
+		console.log(tasas);
+
 		seleccionVuelo[tipo].ida.tasas = {}; // reset
 		for(var i=0;i<tasasPorPasajero[tipo].length;i++) {
 			var keyTasa = tasasPorPasajero[tipo][i];
 			var tasa = tasas[keyTasa];
 
-			seleccionVuelo[tipo].ida.tasas[keyTasa] = 
-				seleccionVuelo[tipo].ida.precioBase * (tasa.ida.porcentaje/100.0) + tasa.ida.fijo;	
+			// algunas tasas solo existen de vuelta
+			if(tasa.ida != null) {
+				seleccionVuelo[tipo].ida.tasas[keyTasa] = 
+				seleccionVuelo[tipo].ida.precioBase * (tasa.ida.porcentaje/100.0) + tasa.ida.fijo;		
+			}
 		}
 
 		// tasa BO se calcula de forma distinta
@@ -1061,8 +1066,11 @@ function updatePriceByTipo(tipo, changeFlapper)
 				var keyTasa = tasasPorPasajero[tipo][i];
 				var tasa = tasas[keyTasa];
 
-				seleccionVuelo[tipo].vuelta.tasas[keyTasa] = 
-					seleccionVuelo[tipo].vuelta.precioBase * (tasa.vuelta.porcentaje/100.0) + tasa.vuelta.fijo;
+				// algunas tasas solo existen de ida
+				if(tasa.vuelta != null) {
+					seleccionVuelo[tipo].vuelta.tasas[keyTasa] = 
+						seleccionVuelo[tipo].vuelta.precioBase * (tasa.vuelta.porcentaje/100.0) + tasa.vuelta.fijo;
+				}
 			}
 
 			// tasa BO se calcula de forma distinta
