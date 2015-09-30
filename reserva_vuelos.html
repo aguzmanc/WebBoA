@@ -411,8 +411,8 @@
 			</div>
 		</div>
 		<div style="position:relative">
-			<!-- resultados vuelos -->
-			<div id="info_resultados_vuelos" class="info selected">
+			<!-- RESULTADOS VUELOS -->
+			<div id="info_resultados_vuelos" class="info phase selected active">
 				<div class="descripcion with-menu">
 					<h3>Selecciona tus vuelos</h3>
 					<h2 id="lbl_info_salida"></h2>
@@ -436,7 +436,6 @@
 							</td>
 						</tr>
 					</table>
-					
 					<table id="tbl_salida" cellpadding="0" cellspacing="0" data-tipo="ida">
 						<tbody>
 							<tr>
@@ -494,8 +493,6 @@
 							</td>
 						</tr>
 					</table>
-
-
 					<br><br>
 					<h2 id="lbl_info_regreso"></h2>
 					<table id="tbl_dayselector_regreso" cellspacing="0" cellpadding="0">
@@ -519,182 +516,285 @@
 						</tr>
 					</table>
 					<table id="tbl_regreso" cellspacing="0" cellpadding="0" data-tipo="vuelta">
-						
 						<!-- ROWS OF FLIGHTS HERE -->
 					</table>
 				</div>
-				<div id="widget_resumen_reserva">
-					<div class="head-tu-vuelo"></div>
-					<div class="separator"></div>
-					<div class="empty-selection" id="div_empty_vuelo">SELECCIONE<br>SU VUELO</div>
-					<div class="div-seleccion">
-						<table id="tbl_seleccion_ida" style="display:none">
-							<tr>
-								<td rowspan="2" class="cell-icon-ida">
-									<div class="icon-ida"></div>
-								</td>
-								<td colspan="3" class="cell-origen-destino">
-									<span>Origen</span>
-								</td>
-								<td colspan="3" class="cell-origen-destino">
-									<span class="lbl-origen-destino">Destino</span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6" class="cell-cod-origen-destino">
-									<h1>LPB - VVI</h1>
-								</td>
-							</tr>
-							<tr>
-								<td class="cell-duracion">
-									Duraci&oacute;n: 40 min.
-								</td>
-								<td colspan="5" class="cell-fecha">
-									<span>Mi&eacute;rcoles 28 de Septiembre</span>
-								</td>
-								<td class="cell-hora">
-									<span>14:30 PM</span>
-								</td>
-							</tr>
-						</table>
-						<div id="empty_ida_slot" class="empty-selection" style="display:none">SELECCIONE<br>VUELO DE IDA</div>
-						<div id="overlay_ida" class="overlay" style="display:none">
-							<div id="btn_borrar_ida" class="btn-borrar">Quitar este vuelo</div>
+			</div>
+
+			<!-- REGISTRO DE PASAJEROS -->
+			<div id="info_registro_pasajeros" class="info phase selected" >
+				<div class="descripcion with-menu">
+					<div id="div_formulario_personas">
+						<div class="persona">
+							<div class="left-label">
+								<label class="lbl-tipo">ADULTO</label>
+								<label class="nro-pasajero">PASAJERO 1</label>
+							</div>
+							<div class="form">
+								<table cellpadding="0" cellspacing="0">
+									<tr>
+										<th>NOMBRES</th>
+										<th>TIPO DE DOCUMENTO</th>
+										<th># DE DOCUMENTO</th>
+										<th>TEL&Eacute;FONO</th>
+									</tr>
+									<tr>
+										<td><input type="text" id="tbx_px1_nombres"></td>
+										<td>
+											<select id="select_px1_tipo_documento">
+												<option value="">Tipo de Documento</option>
+								                <option value="CI">CI</option>
+								                <option value="PASAPORTE">PASAPORTE</option>
+								                <option value="DNI">DNI</option>
+											</select>
+										</td>
+										<td><input type="text" id="tbx_px1_documento"></td>
+										<td><input type="text" id="tbx_px1_telefono"></td>
+									</tr>
+									<tr>
+										<th>APELLIDOS</th>
+										<th colspan="2">EMAIL</th>
+										<th># VIAJERO FRECUENTE</th>
+									</tr>
+									<tr>
+										<td><input type="text" id="tbx_px1_apellidos"></td>
+										<td colspan="2"><input type="text" id="tbx_px1_email"></td>
+										<td><input type="text" id="tbx_px1_px_frecuente"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<span>&iquest;No eres viajero frecuente?<a href="#">REG&Iacute;STRATE</a></span>
+											
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="persona inactive">
+							<div class="left-label">
+								<label class="lbl-tipo">ADULTO</label>
+								<label class="nro-pasajero">PASAJERO 1</label>
+							</div>
+							<div class="form">
+								<table cellpadding="0" cellspacing="0">
+									<tr>
+										<th>NOMBRES</th>
+										<th>TIPO DE DOCUMENTO</th>
+										<th># DE DOCUMENTO</th>
+										<th>TEL&Eacute;FONO</th>
+									</tr>
+									<tr>
+										<td><input type="text" id="tbx_px1_nombres"></td>
+										<td>
+											<select id="select_px1_tipo_documento">
+												<option value="">Tipo de Documento</option>
+								                <option value="CI">CI</option>
+								                <option value="PASAPORTE">PASAPORTE</option>
+								                <option value="DNI">DNI</option>
+											</select>
+										</td>
+										<td><input type="text" id="tbx_px1_documento"></td>
+										<td><input type="text" id="tbx_px1_telefono"></td>
+									</tr>
+									<tr>
+										<th>APELLIDOS</th>
+										<th colspan="2">EMAIL</th>
+										<th># VIAJERO FRECUENTE</th>
+									</tr>
+									<tr>
+										<td><input type="text" id="tbx_px1_apellidos"></td>
+										<td colspan="2"><input type="text" id="tbx_px1_email"></td>
+										<td><input type="text" id="tbx_px1_px_frecuente"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<span>&iquest;No eres viajero frecuente?<a href="#">REG&Iacute;STRATE</a></span>
+											
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="persona">
+						</div>
+						<div class="persona">
 						</div>
 					</div>
-					<div class="div-seleccion">
-						<table id="tbl_seleccion_vuelta" style="display:none">
-							<tr>
-								<td rowspan="2" class="cell-icon-vuelta">
-									<div class="icon-vuelta"></div>
-								</td>
-								<td colspan="3" class="cell-origen-destino">
-									<span>Origen</span>
-								</td>
-								<td colspan="3" class="cell-origen-destino">
-									<span class="lbl-origen-destino">Destino</span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6" class="cell-cod-origen-destino">
-									<h1>VVI - LPB</h1>
-								</td>
-							</tr>
-							<tr>
-								<td class="cell-duracion">
-									Duraci&oacute;n: 40 min.
-								</td>
-								<td colspan="5" class="cell-fecha">
-									<span>Martes 8 de Octubre</span>
-								</td>
-								<td class="cell-hora">
-									<span>09:15 PM</span>
-								</td>
-							</tr>
-						</table>
-						<div id="overlay_vuelta" class="overlay" style="display:none">
-							<div id="btn_borrar_vuelta" class="btn-borrar">Quitar este vuelo</div>
-						</div>
-					</div>
-					<div class="separator"></div>
-					<table cellspacing="0" cellpadding="0">
-						<tr>
-							<th colspan="3">Tarifas</th>
-						</tr>
-						<tr>
-							<td colspan="3" class="cell-separator"><div></div></td>
-						</tr>
-						<tr class="tarifa inactive">
-							<td class="cell-descripcion">
-								Adultos
-								<div id="tooltip_adulto" class="tooltip"></div>
-							</td>
-							<td class="selector-pax">
-								<ul data-tipo="adulto">
-									<li class="selected" data-count="0">
-										<span>0</span>
-										<div class="btn-plus"></div>
-									</li>
-									<li class="plus-one" data-count="1">x1</li>
-									<li class="plus-two" data-count="2">x2</li>
-									<li class="plus-three" data-count="3">x3</li>
-									<li class="plus-four" data-count="4">x4</li>
-									<li class="plus-five" data-count="5">x5</li>
-									<li class="plus-six" data-count="6">x6</li>
-									<li class="plus-seven" data-count="7">x7</li>
-									<li class="plus-eight" data-count="8">x8</li>
-								</ul>
-							</td>
-							<td class="cell-cantidad">
-								<span id="precio_adulto">Bs. 0</span>
-							</td>
-						</tr>
-						<tr class="tarifa inactive">
-							<td class="cell-descripcion">
-								Ni&ntilde;o
-								<div id="tooltip_ninho" class="tooltip"></div>
-							</td>
-							<td class="selector-pax">
-								<ul data-tipo="ninho">
-									<li class="selected" data-count="0">
-										<span>0</span>
-										<div class="btn-plus"></div>
-									</li>
-									<li class="plus-one" data-count="1">x1</li>
-									<li class="plus-two" data-count="2">x2</li>
-									<li class="plus-three" data-count="3">x3</li>
-									<li class="plus-four" data-count="4">x4</li>
-									<li class="plus-five" data-count="5">x5</li>
-									<li class="plus-six" data-count="6">x6</li>
-									<li class="plus-seven" data-count="7">x7</li>
-									<li class="plus-eight" data-count="8">x8</li>
-								</ul>
-							</td>
-							<td class="cell-cantidad">
-								<span id="precio_ninho">Bs. 0</span>
-							</td>
-						</tr>
-						<tr class="tarifa inactive">
-							<td class="cell-descripcion">
-								Infantes
-								<div id="tooltip_infante" class="tooltip"></div>
-							</td>
-							<td class="selector-pax">
-								<ul data-tipo="infante">
-									<li class="selected" data-count="0">
-										<span>0</span>
-										<div class="btn-plus"></div>
-									</li>
-									<li class="plus-one" data-count="1">x1</li>
-									<li class="plus-two" data-count="2">x2</li>
-									<li class="plus-three" data-count="3">x3</li>
-									<li class="plus-four" data-count="4">x4</li>
-									<li class="plus-five" data-count="5">x5</li>
-								</ul>
-							</td>
-							<td class="cell-cantidad">
-								<span id="precio_infante">Bs. 0</span>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2" class="cell-separator"><div></div></td>
-						</tr>
-					</table>
-					<div class="separator"></div>
-					<table>
-						<tr class="tarifa">
-							<td class="cell-descripcion">Total</td>
-							<td class="cell-cantidad">
-								<input id="precio_total" class="display XS">
-							</td>
-						</tr>
-						<tr>
-							<td class="cell-submit" colspan="2">
-								<div class="button">Continuar mi compra</div>
-							</td>
-						</tr>
-					</table>
 				</div>
+			</div>
+
+			<!-- WIDGET RESUMEN -->
+			<div id="widget_resumen_reserva">
+				<div class="head-tu-vuelo"></div>
+				<div class="separator"></div>
+				<div class="empty-selection" id="div_empty_vuelo">SELECCIONE<br>SU VUELO</div>
+				<div class="div-seleccion">
+					<table id="tbl_seleccion_ida" style="display:none">
+						<tr>
+							<td rowspan="2" class="cell-icon-ida">
+								<div class="icon-ida"></div>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span>Origen</span>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span class="lbl-origen-destino">Destino</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" class="cell-cod-origen-destino">
+								<h1>LPB - VVI</h1>
+							</td>
+						</tr>
+						<tr>
+							<td class="cell-duracion">
+								Duraci&oacute;n: 40 min.
+							</td>
+							<td colspan="5" class="cell-fecha">
+								<span>Mi&eacute;rcoles 28 de Septiembre</span>
+							</td>
+							<td class="cell-hora">
+								<span>14:30 PM</span>
+							</td>
+						</tr>
+					</table>
+					<div id="empty_ida_slot" class="empty-selection" style="display:none">SELECCIONE<br>VUELO DE IDA</div>
+					<div id="overlay_ida" class="overlay" style="display:none">
+						<div id="btn_borrar_ida" class="btn-borrar">Quitar este vuelo</div>
+					</div>
+				</div>
+				<div class="div-seleccion">
+					<table id="tbl_seleccion_vuelta" style="display:none">
+						<tr>
+							<td rowspan="2" class="cell-icon-vuelta">
+								<div class="icon-vuelta"></div>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span>Origen</span>
+							</td>
+							<td colspan="3" class="cell-origen-destino">
+								<span class="lbl-origen-destino">Destino</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" class="cell-cod-origen-destino">
+								<h1>VVI - LPB</h1>
+							</td>
+						</tr>
+						<tr>
+							<td class="cell-duracion">
+								Duraci&oacute;n: 40 min.
+							</td>
+							<td colspan="5" class="cell-fecha">
+								<span>Martes 8 de Octubre</span>
+							</td>
+							<td class="cell-hora">
+								<span>09:15 PM</span>
+							</td>
+						</tr>
+					</table>
+					<div id="overlay_vuelta" class="overlay" style="display:none">
+						<div id="btn_borrar_vuelta" class="btn-borrar">Quitar este vuelo</div>
+					</div>
+				</div>
+				<div class="separator"></div>
+				<table cellspacing="0" cellpadding="0">
+					<tr>
+						<th colspan="3">Tarifas</th>
+					</tr>
+					<tr>
+						<td colspan="3" class="cell-separator"><div></div></td>
+					</tr>
+					<tr class="tarifa inactive">
+						<td class="cell-descripcion">
+							Adultos
+							<div id="tooltip_adulto" class="tooltip"></div>
+						</td>
+						<td class="selector-pax">
+							<ul data-tipo="adulto">
+								<li class="selected" data-count="0">
+									<span>0</span>
+									<div class="btn-plus"></div>
+								</li>
+								<li class="plus-one" data-count="1">x1</li>
+								<li class="plus-two" data-count="2">x2</li>
+								<li class="plus-three" data-count="3">x3</li>
+								<li class="plus-four" data-count="4">x4</li>
+								<li class="plus-five" data-count="5">x5</li>
+								<li class="plus-six" data-count="6">x6</li>
+								<li class="plus-seven" data-count="7">x7</li>
+								<li class="plus-eight" data-count="8">x8</li>
+							</ul>
+						</td>
+						<td class="cell-cantidad">
+							<span id="precio_adulto">Bs. 0</span>
+						</td>
+					</tr>
+					<tr class="tarifa inactive">
+						<td class="cell-descripcion">
+							Ni&ntilde;o
+							<div id="tooltip_ninho" class="tooltip"></div>
+						</td>
+						<td class="selector-pax">
+							<ul data-tipo="ninho">
+								<li class="selected" data-count="0">
+									<span>0</span>
+									<div class="btn-plus"></div>
+								</li>
+								<li class="plus-one" data-count="1">x1</li>
+								<li class="plus-two" data-count="2">x2</li>
+								<li class="plus-three" data-count="3">x3</li>
+								<li class="plus-four" data-count="4">x4</li>
+								<li class="plus-five" data-count="5">x5</li>
+								<li class="plus-six" data-count="6">x6</li>
+								<li class="plus-seven" data-count="7">x7</li>
+								<li class="plus-eight" data-count="8">x8</li>
+							</ul>
+						</td>
+						<td class="cell-cantidad">
+							<span id="precio_ninho">Bs. 0</span>
+						</td>
+					</tr>
+					<tr class="tarifa inactive">
+						<td class="cell-descripcion">
+							Infantes
+							<div id="tooltip_infante" class="tooltip"></div>
+						</td>
+						<td class="selector-pax">
+							<ul data-tipo="infante">
+								<li class="selected" data-count="0">
+									<span>0</span>
+									<div class="btn-plus"></div>
+								</li>
+								<li class="plus-one" data-count="1">x1</li>
+								<li class="plus-two" data-count="2">x2</li>
+								<li class="plus-three" data-count="3">x3</li>
+								<li class="plus-four" data-count="4">x4</li>
+								<li class="plus-five" data-count="5">x5</li>
+							</ul>
+						</td>
+						<td class="cell-cantidad">
+							<span id="precio_infante">Bs. 0</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="cell-separator"><div></div></td>
+					</tr>
+				</table>
+				<div class="separator"></div>
+				<table>
+					<tr class="tarifa">
+						<td class="cell-descripcion">Total</td>
+						<td class="cell-cantidad">
+							<input id="precio_total" class="display XS">
+						</td>
+					</tr>
+					<tr>
+						<td class="cell-submit" colspan="2">
+							<div id="btn_continuar_compra" class="button">Continuar mi compra</div>
+						</td>
+					</tr>
+				</table>
 			</div>	
 		</div>
 	</div> <!-- <<< UI RESULTADOS VUELOS >>> -->

@@ -140,6 +140,10 @@ $(document).on('ready',function()
 		minDate:0
 	});
 
+	$("#btn_continuar_compra").click(continuarCompra);
+
+	$(".persona input").focusin(focusOnPersona);
+
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
 	$(window).scroll(handleScroll);
@@ -470,6 +474,24 @@ function changeNumPassengers()
 
 		$(this.parentNode).addClass("active");
 	}
+}
+// ---------------------= =---------------------
+function continuarCompra()
+{
+	$("#info_resultados_vuelos").removeClass("active");
+	$("#info_registro_pasajeros").addClass("active");
+
+	console.log(seleccionVuelo);
+}
+// ---------------------= =---------------------
+function focusOnPersona()
+{
+	var curr = $(this);
+	while(false == curr.hasClass("persona"))
+		curr = curr.parent();
+
+	$("#div_formulario_personas .persona").addClass("inactive");
+	curr.removeClass("inactive");
 }
 // ---------------------= =---------------------
 function checkSearchWidgetAvailability()
