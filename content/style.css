@@ -1677,7 +1677,7 @@ footer .form .button {
 /* --------------------------------------------------------------------------- */
 .ui-section .descripcion{
 	color: #212121;
-	padding: 0px 30px 30px 20px;
+	padding: 0px 30px 30px 50px;
 	font-size: 18px;
 	font-family: "FuturaLight";
 	letter-spacing: 0px;
@@ -2263,7 +2263,7 @@ footer .form .button {
 /*--------------------- DE PERSONAS ----------------------*/
 /*--------------------------------------------------------*/
 .ui-section.wide.results .info.phase { 
-	left: -1500px;
+	left: -2500px;
 	/* Animaciones :3 */ 
 	transition: left 1.5s !important;
 	-moz-transition: left 1.5s !important;
@@ -2287,25 +2287,23 @@ footer .form .button {
 }
 
 #info_registro_pasajeros .persona .left-label{
+	position: relative;
+	width: 60px;
+	height: 200px;
+	float: left;
 	background-color: #1F3656;
-    height: 200px;
-    width: 60px;
-    float: left;
-
-    box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
-	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 }
 
 #info_registro_pasajeros .persona .left-label .lbl-tipo {
 	position: absolute;
-	top: 150px;
-    left: -15px;
-	color: #32DCFF;
+    bottom: 55px;
+    left: -25px;
+    width: 100px;
+    color: #32DCFF;
 
-	transform: rotate(-90deg);
-	-webkit-transform: rotate(-90deg);
+	transform-origin: bottom;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
@@ -2314,14 +2312,15 @@ footer .form .button {
 
 #info_registro_pasajeros .persona .left-label .nro-pasajero {
 	position: absolute;
-    top: 120px;
-    left: -20px;
+    bottom: 70px;
+    left: -30px;
+    width: 150px;
     color: #FFF;
     font-family: "FuturaBook";
     font-size: 22px;
 
-	transform: rotate(-90deg);
-	-webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
@@ -2360,7 +2359,14 @@ footer .form .button {
     height: 25px;
 	border-width: 1px;
 	border-color: #A0A0A0;
+	background-color: #FFF;
     font-size: 20px;
+}
+
+#info_registro_pasajeros .persona .form input[type="text"]:focus,
+#info_registro_pasajeros .persona .form select:focus {
+    background-color: #FFE7BF;
+    border-color: #FF9F00;
 }
 
 #info_registro_pasajeros .persona .form select {

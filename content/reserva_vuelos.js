@@ -142,7 +142,7 @@ $(document).on('ready',function()
 
 	$("#btn_continuar_compra").click(continuarCompra);
 
-	$(".persona input").focusin(focusOnPersona);
+	
 
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
@@ -478,10 +478,16 @@ function changeNumPassengers()
 // ---------------------= =---------------------
 function continuarCompra()
 {
+	var form = $("#div_formulario_personas");
+	form.html("");
+
+	var numPx = 1;
+	for(var key in {adulto:null,ninho:null,infante:null}) // weirdo and fast :P
+		for(var i=0;i<seleccionVuelo[key].num;i++)
+			form.append(buildRegistroPersona(key,numPx++));
+
 	$("#info_resultados_vuelos").removeClass("active");
 	$("#info_registro_pasajeros").addClass("active");
-
-	console.log(seleccionVuelo);
 }
 // ---------------------= =---------------------
 function focusOnPersona()
@@ -1174,13 +1180,13 @@ function buildDetailPrices(info, tipo)
 
 	tbl.append("<tr><th colspan='3'><h1>"+titles[tipo]+"</h1></th></tr>");
 	tbl.append("<tr><th class='subtitle' colspan='3'><div>Ida</div></th></tr>");
-	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.ida.precioBase,false,2)+"</td></tr>");
+	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.ida.precioBase,false,0)+"</td></tr>");
 
 	for(var keyTasa in info.ida.tasas) {
 		var tr = document.createElement("tr");
 		$(tr).append("<th>"+keyTasa+"</th>")
 		     .append("<td></td>")
-		     .append("<td class='qty'>"+formatCurrencyQuantity(info.ida.tasas[keyTasa],false,2)+"</td>");
+		     .append("<td class='qty'>"+formatCurrencyQuantity(info.ida.tasas[keyTasa],false,0)+"</td>");
 		     
 		tbl.append(tr);
 		tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
@@ -1194,7 +1200,7 @@ function buildDetailPrices(info, tipo)
 			var tr = document.createElement("tr");
 			$(tr).append("<th>"+keyTasa+"</th>")
 			     .append("<td></td>")
-			     .append("<td class='qty'>"+formatCurrencyQuantity(info.vuelta.tasas[keyTasa],false,2)+"</td>");
+			     .append("<td class='qty'>"+formatCurrencyQuantity(info.vuelta.tasas[keyTasa],false,0)+"</td>");
 			     
 			tbl.append(tr);
 			tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
@@ -1211,10 +1217,46 @@ function buildDetailPrices(info, tipo)
 	}
 
 	tbl.append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
-	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(subtotal,false,2) +"</td></tr>")
+	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(subtotal,false,0) +"</td></tr>")
 	   .append("<tr><td></td><td></td><td class='qty'><h3>x "+info.num+"</h3></td></tr>")
 	   .append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
-	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.num * subtotal,false,2)+"</td></tr>");
+	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.num * subtotal,false,0)+"</td></tr>");
+}
+// ---------------------= =---------------------
+function buildRegistroPersona(tipo, numPx)
+{
+	var namesByTipo = {adulto:"ADULTO",ninho:"NI&Ntilde;O",infante:"INFANTE"};
+
+	var persona = document.createElement("div");
+	$(persona).addClass("persona")
+			  .addClass("inactive")
+			  .append("<div class='left-label'><label class='lbl-tipo'>"+namesByTipo[tipo]+"</label><label class='nro-pasajero'>PASAJERO "+numPx+"</label></div>")
+			  .append("<div class='form'><table cellpadding='0' cellspacing='0'></table></div>");
+
+    var tbl = $(persona).find(".form table");
+
+    tbl.append("<tr><th>NOMBRES</th><th>TIPO DE DOCUMENTO</th><th># DE DOCUMENTO</th><th>TEL&Eacute;FONO</th></tr>")
+	   .append("<tr><td><input type='text' id='tbx_px1_nombres'></td><td>" +
+						"<select id='select_px1_tipo_documento'>" +
+							"<option value=''>Tipo de Documento</option>" +
+			                "<option value='CI'>CI</option>" +
+			                "<option value='PASAPORTE'>PASAPORTE</option>" +
+			                "<option value='DNI'>DNI</option>" +
+						"</select>" +
+					"</td>" +
+					"<td><input type='text' id='tbx_px1_documento'></td>" +
+					"<td><input type='text' id='tbx_px1_telefono'></td></tr>")
+	  	.append("<tr><th>APELLIDOS</th><th colspan='2'>EMAIL</th><th># VIAJERO FRECUENTE</th></tr>")
+	  	.append("<tr>" +
+					"<td><input type='text' id='tbx_px1_apellidos'></td>" +
+					"<td colspan='2'><input type='text' id='tbx_px1_email'></td>" +
+					"<td><input type='text' id='tbx_px1_px_frecuente'></td>" +
+				"</tr>")
+	  	.append("<tr><td colspan='4'><span>&iquest;No eres viajero frecuente?<a href='#''>REG&Iacute;STRATE</a></span></td></tr>");
+
+	$(persona).find("input").focusin(focusOnPersona);
+
+	return persona;
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------
