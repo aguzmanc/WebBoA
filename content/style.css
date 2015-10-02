@@ -72,6 +72,8 @@ footer .validable,
 .icon-cross,
 .day-selector,
 #widget_resumen_reserva td.selector-pax ul li,
+.ui-section.wide.results .header .stage span,
+.ui-section.wide.results .header .stage .number,
 .btn-borrar, .overlay,
 #info_registro_pasajeros .persona, 
 #home
@@ -2212,8 +2214,7 @@ footer .form .button {
 }
 
 .ui-section.wide .right-menu li:hover,
-.ui-section.wide .right-menu li.selected
-{
+.ui-section.wide .right-menu li.selected {
 	background-color: #98BDEF
 }
 
@@ -2222,8 +2223,19 @@ footer .form .button {
 .ui-section.wide.results .info{ margin: 0;}
 
 .ui-section.wide.results .header  { 
-	background-image: url('images/banner_reserva_vuelos.png');
-	height: 100px;
+	position: absolute;
+    z-index: 100;
+    margin: 0 0 0 0;
+
+	/* background-image: url('images/banner_reserva_vuelos.png'); */
+    height: 100px;
+    background-color: #1EAAD1;
+
+    transition: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
 }
 
 .ui-section.wide.results .descripcion h3 {
@@ -2235,6 +2247,65 @@ footer .form .button {
 	font-size: 45px;
 	bottom: 10px;
 	left: 100px;
+}
+
+.ui-section.wide.results .header .stages {
+    position: absolute;
+    left: 180px;
+    top: 30px;
+}
+
+.ui-section.wide.results .header .stage {
+	float: left;
+	margin: 0 0 0 35px;
+}
+
+.ui-section.wide.results .header .stage .number {
+    width: 30px;
+    height: 30px;
+    float: left;
+    color: #1EAAD1;
+    font-family: "HelveticaNeueProMd";
+    font-size: 18px;
+    background-color: #1F3656;
+    border-radius: 100px;
+    text-align: center;
+    line-height: 37px;
+}
+
+.ui-section.wide.results .header .stage.active .number {
+	position: relative;
+    top: -10px;
+    width: 50px;
+    height: 50px;
+	background-color: #238fac;
+    color: #FFF;
+    font-size: 30px;
+    line-height: 56px;
+
+    box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+.ui-section.wide.results .header .stage span {
+	float: left;
+	color: #1F3656;
+	font-family: "FuturaMedium";
+	font-size: 15px;
+    line-height: 37px;
+    margin: 0 0 0 10px;
+}
+
+.ui-section.wide.results .header .stage.active span {
+	color: #FFF;
+    font-family: "FuturaBold";
+    font-size: 20px;
+    text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 }
 
 .ui-section.wide.results .header .icon-calendar {

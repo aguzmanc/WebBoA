@@ -158,11 +158,9 @@ $(document).on('ready',function()
 // ---------------------= =---------------------
 function handleScroll(){
 	var h = $(this).scrollTop();
-	var widget = $("#widget_resumen_reserva");
-	if(h > 245)
-		widget.css("margin",(h-245)+"px 0 0 0");
-	else
-		widget.css("margin","0");
+
+	$("#ui_resultados_vuelos .header").css("margin", ((h>50)?(h-50):0)+"px 0 0 0");
+	$("#widget_resumen_reserva").css("margin",((h>145)?(h-35):110)+"px 0 0 0");
 }
 // ---------------------= =---------------------
 function toggleRbtnIdaVuelta()
@@ -488,6 +486,9 @@ function continuarCompra()
 
 	$("#info_resultados_vuelos").removeClass("active");
 	$("#info_registro_pasajeros").addClass("active");
+
+	$("#stage_seleccion").removeClass("active");
+	$("#stage_registro").addClass("active");
 }
 // ---------------------= =---------------------
 function focusOnPersona()
