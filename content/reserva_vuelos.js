@@ -283,6 +283,8 @@ function selectTarifa()
 
 	updateAllPrices();
 
+	validateSeleccionVuelo();
+
 	setTimeout(function() {
 		tblSeleccion.removeClass("changed");
 	},100);
@@ -368,6 +370,19 @@ function validateSearch()
 	deleteVuelta();
 }
 // ---------------------= =---------------------
+function validateSeleccionVuelo()
+{
+	var btn = $("#btn_continuar_compra");
+
+	if(seleccionVuelo.ida == null || 
+	  (seleccionVuelo.adulto.num == 0 && seleccionVuelo.ninho.num==0 && seleccionVuelo.infante.num==0 ))
+		btn.hide();
+	else
+		btn.show();
+
+	console.log(seleccionVuelo);
+}
+// ---------------------= =---------------------
 function deleteIda()
 {
 	if(seleccionVuelo.ida == null)
@@ -393,6 +408,8 @@ function deleteIda()
 	rowDetails.removeClass("expanded").addClass("collapsed");
 
 	updateAllPrices();
+
+	validateSeleccionVuelo();
 }
 // ---------------------= =---------------------
 function deleteVuelta()
@@ -420,6 +437,8 @@ function deleteVuelta()
 	rowDetails.removeClass("expanded").addClass("collapsed");
 
 	updateAllPrices();
+	
+	validateSeleccionVuelo();
 }
 // ---------------------= =---------------------
 function changeNumPassengers()
@@ -439,8 +458,6 @@ function changeNumPassengers()
 		if(false == $(this).hasClass("selected")) {
 			ul.find("li").attr("class","");
 			$(this).addClass("selected");
-
-
 
 			// previous options list
 			var prev = $(this);
@@ -467,6 +484,7 @@ function changeNumPassengers()
 			// calculo de precio a pagar
 			seleccionVuelo[tipo].num = count;
 			updatePriceByTipo(tipo,true);
+			validateSeleccionVuelo();
 
 			ul.parent().find("span").html($(this).html());
 		}
@@ -582,8 +600,6 @@ function asyncReceiveFlights(response)
 		return;
 
 	response = $.parseJSON(response.AvailabilityPlusValuationsShortResult);
-
-	console.log(response);
 
 	if(response.ResultInfoOrError != null) {
 		fillTableWithMessage($("#tbl_salida")[0], response.ResultInfoOrError.messageError);
@@ -1070,8 +1086,6 @@ function updatePriceByTipo(tipo, changeFlapper)
 
 		seleccionVuelo[tipo].num = num;
 		seleccionVuelo[tipo].ida.precioBase = tarifa.monto * tarifa.porcentajes[tipo];
-
-		console.log(tasas);
 
 		seleccionVuelo[tipo].ida.tasas = {}; // reset
 		for(var i=0;i<tasasPorPasajero[tipo].length;i++) {
