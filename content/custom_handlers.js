@@ -3,7 +3,8 @@ var CURRENCY = "bs"; // "euro", "bs" , "usd"
 var HTML_CURRENCIES = {bs:"Bs.",euro:"&euro;",usd:"USD"};
 var CODE_CURRENCIES = {bs:"BOB",euro:"EU",usd:"USD"};
 // var SERVICE_CREDENTIALS_KEY = "\{ae7419a1-dbd2-4ea9-9335-2baa08ba78b4\}\{59331f3e-a518-4e1e-85ca-8df59d14a420\}";
-var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYiWsLM0DWn3z/6CRc62LJUi9s3PVIw4bY685kLdtsYmRIB94FEXPDqDBjHdbBYbIl9ivU522Ww+rg==";
+// var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYiWsLM0DWn3z/6CRc62LJUi9s3PVIw4bY685kLdtsYmRIB94FEXPDqDBjHdbBYbIl9ivU522Ww+rg==";
+var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYjodw11Skn4GuEa/vBjimiJIHskXyu0UociT0HglEoORow3WSwyaHUu0tdZEfahPHdOHcfEkRelOw==";
 // ---------------------------------------------------------------------------
 var urls = {
 	home : "home.html",

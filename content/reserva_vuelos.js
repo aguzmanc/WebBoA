@@ -431,7 +431,7 @@ function changeNumPassengers()
 
 	var counting = ["one","two","three","four","five","six","seven","eight"];
 
-	if(ul.hasClass("active")){
+	if(ul.hasClass("active")) {
 		ul.removeClass("active");
 		var row = $(ul[0].parentNode.parentNode);
 
@@ -439,6 +439,8 @@ function changeNumPassengers()
 		if(false == $(this).hasClass("selected")) {
 			ul.find("li").attr("class","");
 			$(this).addClass("selected");
+
+
 
 			// previous options list
 			var prev = $(this);
@@ -465,6 +467,8 @@ function changeNumPassengers()
 			// calculo de precio a pagar
 			seleccionVuelo[tipo].num = count;
 			updatePriceByTipo(tipo,true);
+
+			ul.parent().find("span").html($(this).html());
 		}
 	}else {
 		if(false == $(this).hasClass("selected"))
@@ -489,6 +493,10 @@ function continuarCompra()
 
 	$("#stage_seleccion").removeClass("active");
 	$("#stage_registro").addClass("active");
+
+	$("#widget_resumen_reserva").addClass("read-only");
+
+	window.scrollTo(0,0); // scroll hacia arriba
 }
 // ---------------------= =---------------------
 function focusOnPersona()
@@ -525,6 +533,9 @@ function checkResultsTableWidth()
 // ---------------------= =---------------------
 function asyncReceiveDates(response)
 {
+	console.log(response);
+
+
 	// fix to .NET dumbest encoding ever (possible bug here in future)
 	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
 	

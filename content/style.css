@@ -1051,7 +1051,7 @@ header .att-div{
 }
 
 /* ESTADOS DE CAJA DE RESERVAS */
-#_vuelos.expanded #reserva_vuelos{ 
+#vuelos.expanded #reserva_vuelos{ 
 	height: 270px;
 	padding: 20px 0px 30px 30px;
 }
@@ -1094,16 +1094,16 @@ header .att-div{
 	width: 500px;
 }
 
-#web_check_in .tbl_tipo_identificacion td{
+#web_check_in .tbl_tipo_identificacion td {
 	width: 270px;
 }
 
-#web_check_in .tbl_tipo_identificacion label{
+#web_check_in .tbl_tipo_identificacion label {
 	color: #1F3656;
-	font-size: 15px
+	font-size: 15px;
 }
 
-#web_check_in .tbl_tipo_identificacion input[type="radio"]{
+#web_check_in .tbl_tipo_identificacion input[type="radio"] {
 	float: right;
 }
 
@@ -1196,10 +1196,38 @@ footer #icons_util {
 
 footer #icons_redes_sociales {
 	position: absolute;
-	bottom: 0;
-	right: 0;
-	height: 45px;
-	width: 100px;
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    width: 150px;
+}
+
+footer #icons_redes_sociales div {
+	position: absolute;
+	top: 10px;
+	width: 25px;
+    height: 25px;
+	background-image: url('images/icons_redes_sociales.png');
+    background-size: 25px;
+    border-radius: 5px;
+
+    box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.57);
+	-webkit-box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.57);
+	-moz-box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.57);
+	-ms-box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.57);
+
+	transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+}
+
+footer #icons_redes_sociales div:hover {
+    background-size: 40px;
+    width: 36px;
+    height: 36px;
+    top: 2px;
 }
 
 footer .tooltip {
@@ -1268,32 +1296,32 @@ footer #reservas.active {
 
 footer #icon_facebook {
 	right: 15px;
-	background-position: -92px -2px;
+	background-position: 0px 0px;
 }
 
 footer #icon_facebook:hover{ 
 	right: 10px;
-	background-position: -137px -3px;
+	background-position: 0px 0px;
 }
 
 footer #icon_twitter {
 	right: 55px;
-	background-position: -122px -2px;
+	background-position: 0px -25px;
 }
 
 footer #icon_twitter:hover{ 
-	right: 50px;
-	background-position: -181px -3px;
+	right: 47px;
+	background-position: 0px -40px;
 }
 
 footer #icon_youtube {
 	right: 95px;
-	background-position: -152px -2px;
+	background-position: 0px -50px;
 }
 
 footer #icon_youtube:hover{ 
-	right: 90px;
-	background-position: -227px -3px;
+	right: 87px;
+	background-position: 0 -83px;
 }
 
 footer .tooltip span {
@@ -2344,6 +2372,10 @@ footer .form .button {
 }
 .ui-section.wide.results .info.phase.active { left: 0px;}
 
+#ui_resultados_vuelos .info .descripcion {
+	padding-top: 100px;
+}
+
 #info_registro_pasajeros .persona {
 	position: relative;
     width: 100%;
@@ -2946,7 +2978,16 @@ footer .form .button {
 	display: none;
 }
 
-#widget_resumen_reserva td.selector-pax ul li.selected{
+#widget_resumen_reserva td.selector-pax span {
+	position: absolute;
+	width: 50px;
+    color: #FFF;
+    font-family: "FuturaLight";
+    text-align: center;
+    display: none;
+}
+
+#widget_resumen_reserva td.selector-pax ul li.selected {
 	display: block;
 	cursor: pointer;
 }
@@ -3016,6 +3057,13 @@ footer .form .button {
 
 #widget_resumen_reserva tr.tarifa.inactive ul li span{display: none;}
 #widget_resumen_reserva tr.tarifa.inactive ul li .btn-plus{display: block;}
+/* (read only widget)  -----------------------------------*/
+#widget_resumen_reserva.read-only .tarifa.inactive { display: none; } 
+#widget_resumen_reserva.read-only .div-seleccion .overlay:hover .btn-borrar{ display: none; }
+#widget_resumen_reserva.read-only .div-seleccion .overlay:hover{ background-color: transparent; }
+#widget_resumen_reserva.read-only td.selector-pax ul {display: none;}
+#widget_resumen_reserva.read-only td.selector-pax span {display: block;}
+
 /*--------------------------------------------------------*/
 .ui-section.wide.results .info {
 	width: 100%;
