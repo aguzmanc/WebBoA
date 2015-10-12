@@ -1197,7 +1197,7 @@ footer #icons_util {
 footer #icons_redes_sociales {
 	position: absolute;
     bottom: 0;
-    right: 0;
+    right: 150px;
     height: 45px;
     width: 150px;
 }
@@ -1228,6 +1228,27 @@ footer #icons_redes_sociales div:hover {
     width: 36px;
     height: 36px;
     top: 2px;
+}
+
+footer #call_center {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    width: 150px;
+    color: #FFF;
+}
+
+footer #call_center h2 {
+	font-family: "FuturaLight";
+    font-size: 14px;
+    margin: 3px 0 0 0;
+}
+
+footer #call_center h1 {
+	font-family: "FuturaBook";
+    font-size: 19px;
+    margin: 3px 0 0 0;
 }
 
 footer .tooltip {
@@ -2698,21 +2719,38 @@ footer .form .button {
 	padding: 3px 0 3px 15px;
 }
 
-#widget_resumen_reserva .cell-icon-ida{width:92px;}
-#widget_resumen_reserva .icon-ida{
+#widget_resumen_reserva .cell-icon-ida,
+#widget_resumen_reserva .cell-icon-vuelta {width:92px;}
+
+#widget_resumen_reserva .cell-icon-ida.small{width:auto;}
+
+#widget_resumen_reserva .icon-ida,
+#widget_resumen_reserva .icon-vuelta{
 	width: 72;
 	height: 69px;
 	background-image: url('images/icon_avion_compra.png');
+	background-repeat: no-repeat;
 	margin: 10px 10px 0 10px;
 }
 
-#widget_resumen_reserva .cell-icon-vuelta{width:92px;}
-#widget_resumen_reserva .icon-vuelta{
+#widget_resumen_reserva .icon-ida.small,
+#widget_resumen_reserva .icon-vuelta.small {
+	width: 40px;
+    height: 38px;
+    background-size: 40px;
+    margin: 5px;
+}
+
+#widget_resumen_reserva .icon-vuelta {
 	width: 72;
 	height: 69px;
 	background-image: url('images/icon_avion_compra.png');
 	background-position: 0 -69px;
 	margin: 10px 10px 0 10px;
+}
+
+#widget_resumen_reserva .icon-vuelta.small {
+	background-position: 0 -38px;
 }
 
 #widget_resumen_reserva .cell-descripcion {

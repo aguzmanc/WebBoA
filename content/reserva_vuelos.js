@@ -514,6 +514,11 @@ function continuarCompra()
 
 	$("#widget_resumen_reserva").addClass("read-only");
 
+	$("#tbl_seleccion_ida").hide();
+	$("#tbl_seleccion_vuelta").hide();
+	$("#tbl_seleccion_ida_small").show();
+	$("#tbl_seleccion_vuelta_small").show();
+
 	window.scrollTo(0,0); // scroll hacia arriba
 }
 // ---------------------= =---------------------
@@ -551,9 +556,6 @@ function checkResultsTableWidth()
 // ---------------------= =---------------------
 function asyncReceiveDates(response)
 {
-	console.log(response);
-
-
 	// fix to .NET dumbest encoding ever (possible bug here in future)
 	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
 	
