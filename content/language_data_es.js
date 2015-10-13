@@ -24,6 +24,7 @@ var WEEKDAYS_2_CHARS_LANGUAGE_TABLE = ["Do","Lu","Ma","Mi","Ju","Vi","Sa"];
 // ---------------------= =---------------------
 var WEEKDAYS_LONG_2_CHARS_LANGUAGE_TABLE = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","S&aacute;bado"];
 // ---------------------= =---------------------
+var COMPACT_MONTH_NAMES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

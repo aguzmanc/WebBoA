@@ -99,8 +99,6 @@ var airports = {
 	GRU: "Aeropuerto Internacional de Guarulhos"
 };
 
-
-
 var compartmentNames = {"2":"Business","3":"Econ&oacute;mica"};
 // ---------------------= =---------------------
 /********************************************************* 
@@ -137,15 +135,14 @@ $(document).on('ready',function()
 	$("#picker_regreso, #picker_estado_vuelo").datepicker({ 
 		dateFormat: 'dd MM yy',
 		numberOfMonths: 2, 
-		minDate:0
+		minDate: 0
 	});
 
 	$("#btn_continuar_compra").click(continuarCompra);
 
-	
-
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
+	handleScroll();
 	$(window).scroll(handleScroll);
 
 	setInterval(checkSearchWidgetAvailability, 200);
@@ -265,16 +262,19 @@ function selectTarifa()
 	$(table).find(".rbtn").removeClass("checked");
 	$(this).find(".rbtn").addClass("checked");
 	
-	var tblSeleccion = $("#tbl_seleccion_" + tipo);
+	var tblSeleccion = $("#tbl_seleccion_" + tipo + ", #tbl_seleccion_" + tipo + "_small");
 
 	tblSeleccion.find(".cell-cod-origen-destino h1").html(opcion.origen + " - " + opcion.destino);
+	tblSeleccion.find(".cell-duracion").html(formatExpandedTime(opcion.duracionVuelo) + " vuelo");
+	
+	$("#tbl_seleccion_" + tipo).find(".cell-fecha").html(formatExpandedDate(opcion.vuelos[0].fecha));
+	$("#tbl_seleccion_" + tipo + "_small").find(".cell-fecha").html(formatShortDate(opcion.vuelos[0].fecha));
 
-	tblSeleccion.find(".cell-duracion").html("Duraci&oacute;n:<br>" + formatExpandedTime(opcion.duracionVuelo) );
+	$("#tbl_seleccion_" + tipo).find(".cell-hora span").html("Salida:<br>" + formatTime(opcion.horaSalida));
+	$("#tbl_seleccion_" + tipo + "_small").find(".cell-hora span").html(formatTime(opcion.horaSalida));
 
-	tblSeleccion.find(".cell-fecha").html(formatExpandedDate(opcion.vuelos[0].fecha));
-	tblSeleccion.find(".cell-hora span").html("Salida:<br>" + formatTime(opcion.horaSalida));
-	tblSeleccion.css("display","block");
-	tblSeleccion.addClass("changed");
+	$("#tbl_seleccion_" + tipo).css("display","block");
+	$("#tbl_seleccion_" + tipo).addClass("changed");
 
 	$("#overlay_"+tipo).css("display","block");
 	$("#btn_borrar_ida").attr("data-opc_code",opcCode);
@@ -517,7 +517,9 @@ function continuarCompra()
 	$("#tbl_seleccion_ida").hide();
 	$("#tbl_seleccion_vuelta").hide();
 	$("#tbl_seleccion_ida_small").show();
-	$("#tbl_seleccion_vuelta_small").show();
+
+	if(seleccionVuelo.vuelta != null)
+		$("#tbl_seleccion_vuelta_small").show();
 
 	window.scrollTo(0,0); // scroll hacia arriba
 }

@@ -61,6 +61,21 @@ function formatExpandedDate(date)
 	return formatted;
 }
 // ---------------------= =---------------------
+function formatShortDate(date)
+{
+	var yyyy = parseInt(date.substr(0,4)),
+	    mm = parseInt(date.substr(4,2))-1, // months are indexed from zero in Date object
+	    dd = parseInt(date.substr(6,2));
+
+	var d = new Date(yyyy, mm, dd, 0,0,0,0);
+
+	console.log(d);
+
+	var formatted = d.getDay() + " " + COMPACT_MONTH_NAMES[d.getMonth()] + " " + yyyy;
+
+	return formatted; 
+}
+// ---------------------= =---------------------
 function formatTime(time)
 {
 	var str =
