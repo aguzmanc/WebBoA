@@ -115,7 +115,7 @@ $(document).on('ready',function()
 	handleInitialRequest();
 
 	/*----------= UI SETUP HANDLERS =-----------*/
-	$("#widget_cambiar_vuelo .btn-expand").click(toggleWidgetCambiarVuelo);
+	$("#widget_cambiar_vuelo #btn_cambiar_vuelo").click(toggleWidgetCambiarVuelo);
 	$("#widget_cambiar_vuelo .form .radio-button").click(toggleRbtnIdaVuelta);
 	$("#widget_resumen_reserva td.selector-pax ul li").click(changeNumPassengers);
 	$("#btn_borrar_ida").click(deleteIda);
@@ -139,6 +139,7 @@ $(document).on('ready',function()
 	});
 
 	$("#btn_continuar_compra").click(continuarCompra);
+	$("#btn_volver_vuelos").click(backToFlightStage);
 
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
@@ -520,6 +521,32 @@ function continuarCompra()
 
 	if(seleccionVuelo.vuelta != null)
 		$("#tbl_seleccion_vuelta_small").show();
+
+	window.scrollTo(0,0); // scroll hacia arriba
+
+	$("#btn_cambiar_vuelo").hide();
+	$("#btn_volver_vuelos").show();
+}
+// ---------------------= =---------------------
+function backToFlightStage() 
+{
+	$("#info_resultados_vuelos").addClass("active");
+	$("#info_registro_pasajeros").removeClass("active");
+
+	$("#stage_seleccion").addClass("active");
+	$("#stage_registro").removeClass("active");
+
+	$("#btn_cambiar_vuelo").show();
+	$("#btn_volver_vuelos").hide();
+
+	$("#widget_resumen_reserva").removeClass("read-only");
+
+	$("#tbl_seleccion_ida").show();
+	if(seleccionVuelo.vuelta != null)
+		$("#tbl_seleccion_vuelta").show();
+
+	$("#tbl_seleccion_ida_small").hide();
+	$("#tbl_seleccion_vuelta_small").hide();
 
 	window.scrollTo(0,0); // scroll hacia arriba
 }

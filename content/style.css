@@ -2986,8 +2986,8 @@ footer .form .button {
 
 /*--------------------------------------------------------*/
 #widget_resumen_reserva td.selector-pax {
-  width: 50px;
-  position: relative;
+	width: 50px;
+	position: relative;
 }
 
 #widget_resumen_reserva td.selector-pax ul {
@@ -2996,7 +2996,7 @@ footer .form .button {
 	left: 6px;
 	width: 40px;
 	height: 40px;
-	z-index: 100;
+	z-index: 99;
 }
 
 #widget_resumen_reserva td.selector-pax ul.active {
