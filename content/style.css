@@ -2772,6 +2772,7 @@ footer .form .button {
     color: #FFF;
     font-family: "FuturaLight";
     cursor: default;
+    z-index: 100;
 
     display: none;
 
