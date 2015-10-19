@@ -1728,7 +1728,7 @@ footer .form .button {
 /* --------------------------------------------------------------------------- */
 .ui-section .descripcion{
 	color: #212121;
-	padding: 0px 30px 30px 50px;
+	padding: 0px 30px 30px 20px;
 	font-size: 18px;
 	font-family: "FuturaLight";
 	letter-spacing: 0px;
@@ -2167,13 +2167,14 @@ footer .form .button {
 /* --------------------------------------------------------------------------- */
 .ui-section.wide {
 	width: 90%;
+	min-width: 1024px;
 	margin: 0 auto;
 }
 
 .ui-section.wide .header {
 	position: relative;
 	width: 100%;
-	min-width: 850px;
+	min-width: 1024px;
 	height: auto;
 	display: flex;
 	padding: 0;
@@ -2410,8 +2411,10 @@ footer .form .button {
 	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 }
 
-#info_registro_pasajeros .persona .left-label{
-	position: relative;
+#info_registro_pasajeros .persona .left-label {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 60px;
 	height: 200px;
 	float: left;
@@ -2452,9 +2455,8 @@ footer .form .button {
 }
 
 #info_registro_pasajeros .persona .form {
-	float: right;
-	width: 90%;
-	padding: 40px 0 0 0;
+	position: relative;
+    padding: 0 5px 0 75px;
 }
 
 #info_registro_pasajeros .persona table tr:first-child th:first-child{width:30%;}
@@ -2529,7 +2531,7 @@ footer .form .button {
 	position: relative;
     width: 90%;
     background-color: #A0A0A0;
-    margin: 0 0 20px 50px;
+    margin: 0 0 20px 0;
 
     box-shadow: none;
     -webkit-box-shadow: none;
