@@ -1192,7 +1192,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 	var span = $("#precio_" + tipo);
 
 	if(seleccionVuelo.ida != null)  {
-		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true,2));
+		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true, 0));
 		span.parent().parent().addClass("calculated");
 
 		buildDetailPrices(seleccionVuelo[tipo], tipo);
@@ -1287,7 +1287,7 @@ function buildRegistroPersona(tipo, numPx)
 	var persona = document.createElement("div");
 	$(persona).addClass("persona")
 			  .addClass("inactive")
-			  .append("<div class='left-label'><label class='lbl-tipo'>"+namesByTipo[tipo]+"</label><label class='nro-pasajero'>PASAJERO "+numPx+"</label></div>")
+			  .append("<div class='left-label'><label class='lbl-tipo'>"+namesByTipo[tipo]+"</label><label class='nro-pasajero'>PASAJERO "+numPx+"</label><div class='icon-pasajero "+tipo+"'></div></div>")
 			  .append("<div class='form'><table cellpadding='0' cellspacing='0'></table></div>");
 
     var tbl = $(persona).find(".form table");

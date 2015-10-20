@@ -2156,11 +2156,11 @@ footer .form .button {
 	border-style: solid;
 }
 
-.ui-section .second-menu #div_preguntas_frecuentes.descripcion{
+.ui-section .second-menu #div_preguntas_frecuentes.descripcion {
 	height: 130px;
 }
 
-.ui-section .second-menu .descripcion h4{
+.ui-section .second-menu .descripcion h4 {
 	font-size: 24px;
 	font-family: "HelveticaNeueProMd";
 }
@@ -2452,6 +2452,30 @@ footer .form .button {
     -o-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     -ms-writing-mode: lr-tb;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero {
+	position: absolute;
+    top: 5px;
+    left: 19px;
+    width: 25px;
+    height: 50px;
+	background-image: url('images/icons_tipo_pasajero.png');
+    background-size: 25px;
+    background-repeat: no-repeat;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero.adulto{
+	background-position: 0 0;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero.ninho{
+	background-position: 0 -50px;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero.infante{
+	top: -5px;
+	background-position: 0 -100px;
 }
 
 #info_registro_pasajeros .persona .form {
