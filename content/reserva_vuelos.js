@@ -642,6 +642,8 @@ function asyncReceiveFlights(response)
 	// el verdadero response esta mas adentro ¬¬
 	response = response['ResultAvailabilityPlusValuationsShort']; 
 
+	console.log(response);
+
 	var fechaIdaConsultada = response["fechaIdaConsultada"];
 	var fechaVueltaConsultada = response["fechaVueltaConsultada"];
 	
@@ -1438,7 +1440,10 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	var ratesByClass = {};
 	for(var i=0;i<rawTarifas.length;i++) {
 		var rawTarifa = rawTarifas[i];
-		if(rawTarifa["clases"]!=null) 
+
+		if(rawTarifa["clases"] != null 
+			&& rawTarifa["fare_code"] != "SSENIOR" // exception rule (hardcoded :S )
+		  ) 
 			ratesByClass[rawTarifa["clases"]] = rawTarifa["importe"];
 	}
 
@@ -1479,6 +1484,9 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 		var rawClasses = rawFlight["clases"]["clase"];
 
 		for(var k=0;k<rawClasses.length;k++) {
+			if(rawClasses[k]["estado"] != "A") // solo tomar en cuenta estado A
+				continue;
+
 			var flightClass = rawClasses[k]["cls"];
 
 			if(false==(flightClass in ratesByClass)) 
@@ -1486,9 +1494,6 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 
 			if(false==(flightClass in paxPercentsByClass)) // parche!
 				continue;
-
-			// console.log(rawTarifas[flightClass]);
-			// console.log(ratesByClass[flightClass]);
 
 			var rateValue = parseInt(ratesByClass[flightClass]);
 			var compartmentKey = rawClasses[k]["compart"];
