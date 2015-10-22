@@ -1,6 +1,8 @@
 // ---------------------= =---------------------
 /***** CONFIG PARAMETERS *****/
 var CACHE_DISABLED = false;
+var IGNORED_TARIFAS_BY_FARE_CODE = ["SSENIOR"];
+var ALLOWED_TARIFAS_BY_ESTADO = ['A'];
 // ---------------------= =---------------------
 var searchParameters = {
 	origen : "", 
@@ -138,7 +140,7 @@ $(document).on('ready',function()
 		minDate: 0
 	});
 
-	$("#btn_continuar_compra").click(continuarCompra);
+	$("#btn_continuar_compra").click(validateSeleccionVueloAndSend);
 	$("#btn_volver_vuelos").click(backToFlightStage);
 
 	// WINDOW SETUP
@@ -380,8 +382,6 @@ function validateSeleccionVuelo()
 		btn.hide();
 	else
 		btn.show();
-
-	console.log(seleccionVuelo);
 }
 // ---------------------= =---------------------
 function deleteIda()
@@ -497,6 +497,85 @@ function changeNumPassengers()
 	}
 }
 // ---------------------= =---------------------
+function validateSeleccionVueloAndSend()
+{
+	/* PREPARE AND SEND DATA */
+	var sendData = {};
+	sendData.adulto = seleccionVuelo.adulto;
+	sendData.ninho = seleccionVuelo.ninho;
+	sendData.infante = seleccionVuelo.infante;
+	sendData.vuelosIda = [];
+
+	var vuelos = allOptions[seleccionVuelo.ida.opcCode].vuelos;
+
+	for(var i=0;i<vuelos.length;i++) { 
+		var vuelo = vuelos[i]; 
+		sendData.vuelosIda.push(
+			{
+				horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
+				horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
+				numVuelo: vuelo.numVuelo,
+				tipoAvion: vuelo.tipoAvion,
+				fechaSalida: vuelo.fecha,
+				fareCode: vuelo.tarifas[seleccionVuelo.ida.compartment].fareCode
+			}
+		);
+	}
+
+	if(seleccionVuelo.vuelta != null) {
+		sendData.vuelosVuelta = [];
+		vuelos = allOptions[seleccionVuelo.vuelta.opcCode].vuelos;
+
+		for(var i=0;i<vuelos.length;i++) { 
+			var vuelo = vuelos[i]; 
+			sendData.vuelosVuelta.push(
+				{
+					horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
+					horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
+					numVuelo: vuelo.numVuelo,
+					tipoAvion: vuelo.tipoAvion,
+					fechaSalida: vuelo.fecha,
+					fareCode: vuelo.tarifas[seleccionVuelo.vuelta.compartment].fareCode
+				}
+			);
+		}
+	}
+
+	console.log(sendData);
+
+	var dataStr = JSON.stringify(sendData);
+
+	$.ajax({
+		url: urls["validate_flight_selection_service"],
+		type: 'POST',
+		dataType:'json',
+		contentType: "application/json; charset=utf-8",
+		success: asyncValidateSeleccionVuelo,
+		data: dataStr
+	});
+
+
+
+	// var form = $(
+	// 	'<form target="_blank" method="POST" action="' + url.validate_flight_selection_service + '">' + 
+	// 		'<input type="hidden" name="json_data" value="'+ sendData + '">' +
+	// 	'</form>'
+	// );
+
+	// $("#div_submit").html("").append(form); // IE FIX
+
+	// form.submit();
+
+
+	// console.log(seleccionVuelo);
+	// console.log(allOptions);
+}
+// ---------------------= =---------------------
+function asyncValidateSeleccionVuelo(response)
+{
+	console.log(response);
+}
+// ---------------------= =---------------------
 function continuarCompra()
 {
 	var form = $("#div_formulario_personas");
@@ -526,6 +605,9 @@ function continuarCompra()
 
 	$("#btn_cambiar_vuelo").hide();
 	$("#btn_volver_vuelos").show();
+
+
+	
 }
 // ---------------------= =---------------------
 function backToFlightStage() 
@@ -1345,6 +1427,7 @@ function translateTaxes(fromResponse)
 		var rawTax = rawTaxesByPx[i];
 
 		var taxKey = rawTax['tipoTasa'];
+		console.log(taxKey);
 		var taxName = rawTax['tasa'];
 		var pxKey = keyEquiv[rawTax['tipoPasajero']];
 
@@ -1362,7 +1445,7 @@ function translateTaxes(fromResponse)
 	}
 
 	// tasas ida
-	for(var i=0;i<rawIdaTaxes.length;i++){
+	for(var i=0;i<rawIdaTaxes.length;i++) {
 		var rawTax = rawIdaTaxes[i];
 		var taxKey = rawTax['tipo_tasa']['#text'];
 
@@ -1438,13 +1521,19 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	}
 
 	var ratesByClass = {};
+	var fareCodesByClass = {};
+
 	for(var i=0;i<rawTarifas.length;i++) {
 		var rawTarifa = rawTarifas[i];
 
 		if(rawTarifa["clases"] != null 
+			&& rawTarifa["fare_code"] != null
 			&& rawTarifa["fare_code"] != "SSENIOR" // exception rule (hardcoded :S )
 		  ) 
+		{
 			ratesByClass[rawTarifa["clases"]] = rawTarifa["importe"];
+			fareCodesByClass[rawTarifa["clases"]] = rawTarifa["fare_code"];
+		}
 	}
 
 	var to = {
@@ -1466,6 +1555,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			tarifas 		: {}, // por compartimiento
 			origen 			: rawFlight["origen"],
 			destino 		: rawFlight["destino"],
+			tipoAvion		: rawFlight["tipo_avion"],
 			fecha 			: date,
 			numOpcion 		: parseInt(rawFlight["num_opcion"])
 		};
@@ -1507,13 +1597,15 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 				if(rateValue < flight.tarifas[compartmentKey].monto) {
 					flight.tarifas[compartmentKey].monto = rateValue;
 					flight.tarifas[compartmentKey].clase = flightClass;
+					flight.tarifas[compartmentKey].fareCode = fareCodesByClass[flightClass];
 				}
 			} else {
 				flight.tarifas[compartmentKey] = { // crear nuevo
 					clase: 	 flightClass,
 					monto: 	 rateValue,
 					compart: compartmentKey,
-					index: 	 to.compartments.indexOf(compartmentKey)
+					index: 	 to.compartments.indexOf(compartmentKey),
+					fareCode : fareCodesByClass[flightClass]
 				};
 			}
 		}
