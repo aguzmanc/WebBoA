@@ -140,7 +140,7 @@ $(document).on('ready',function()
 		minDate: 0
 	});
 
-	$("#btn_continuar_compra").click(validateSeleccionVueloAndSend);
+	$("#btn_validar_vuelos").click(validateSeleccionVueloAndSend);
 	$("#btn_volver_vuelos").click(backToFlightStage);
 
 	// WINDOW SETUP
@@ -375,7 +375,7 @@ function validateSearch()
 // ---------------------= =---------------------
 function validateSeleccionVuelo()
 {
-	var btn = $("#btn_continuar_compra");
+	var btn = $("#btn_validar_vuelos");
 
 	if(seleccionVuelo.ida == null || 
 	  (seleccionVuelo.adulto.num == 0 && seleccionVuelo.ninho.num==0 && seleccionVuelo.infante.num==0 ))
@@ -541,8 +541,6 @@ function validateSeleccionVueloAndSend()
 		}
 	}
 
-	console.log(sendData);
-
 	var dataStr = JSON.stringify(sendData);
 
 	$.ajax({
@@ -554,7 +552,8 @@ function validateSeleccionVueloAndSend()
 		data: dataStr
 	});
 
-
+	$("#loading_compra").show();
+	$("#btn_validar_vuelos").hide();
 
 	// var form = $(
 	// 	'<form target="_blank" method="POST" action="' + url.validate_flight_selection_service + '">' + 
@@ -573,41 +572,45 @@ function validateSeleccionVueloAndSend()
 // ---------------------= =---------------------
 function asyncValidateSeleccionVuelo(response)
 {
-	console.log(response);
-}
-// ---------------------= =---------------------
-function continuarCompra()
-{
-	var form = $("#div_formulario_personas");
-	form.html("");
+	if(response["success"] == true) {
+		// continuando compra
+		var form = $("#div_formulario_personas");
+		form.html("");
 
-	var numPx = 1;
-	for(var key in {adulto:null,ninho:null,infante:null}) // weirdo and fast :P
-		for(var i=0;i<seleccionVuelo[key].num;i++)
-			form.append(buildRegistroPersona(key,numPx++));
+		var numPx = 1;
+		for(var key in {adulto:null,ninho:null,infante:null}) // weirdo and fast :P
+			for(var i=0;i<seleccionVuelo[key].num;i++)
+				form.append(buildRegistroPersona(key,numPx++));
 
-	$("#info_resultados_vuelos").removeClass("active");
-	$("#info_registro_pasajeros").addClass("active");
+		form.find(".calendar").datepicker({ 
+			dateFormat: 'dd MM yy',
+			numberOfMonths: 1, 
+			maxDate: 0
+		});
 
-	$("#stage_seleccion").removeClass("active");
-	$("#stage_registro").addClass("active");
+		$("#info_resultados_vuelos").removeClass("active");
+		$("#info_registro_pasajeros").addClass("active");
 
-	$("#widget_resumen_reserva").addClass("read-only");
+		$("#stage_seleccion").removeClass("active");
+		$("#stage_registro").addClass("active");
 
-	$("#tbl_seleccion_ida").hide();
-	$("#tbl_seleccion_vuelta").hide();
-	$("#tbl_seleccion_ida_small").show();
+		$("#widget_resumen_reserva").addClass("read-only");
 
-	if(seleccionVuelo.vuelta != null)
-		$("#tbl_seleccion_vuelta_small").show();
+		$("#tbl_seleccion_ida").hide();
+		$("#tbl_seleccion_vuelta").hide();
+		$("#tbl_seleccion_ida_small").show();
 
-	window.scrollTo(0,0); // scroll hacia arriba
+		if(seleccionVuelo.vuelta != null)
+			$("#tbl_seleccion_vuelta_small").show();
 
-	$("#btn_cambiar_vuelo").hide();
-	$("#btn_volver_vuelos").show();
+		window.scrollTo(0,0); // scroll hacia arriba
 
+		$("#btn_cambiar_vuelo").hide();
+		$("#btn_volver_vuelos").show();
 
-	
+		$("#loading_compra").hide();
+		$("#btn_validar_pasajeros").show();
+	}
 }
 // ---------------------= =---------------------
 function backToFlightStage() 
@@ -629,6 +632,9 @@ function backToFlightStage()
 
 	$("#tbl_seleccion_ida_small").hide();
 	$("#tbl_seleccion_vuelta_small").hide();
+
+	$("#btn_validar_pasajeros").hide();
+	$("#btn_validar_vuelos").show();
 
 	window.scrollTo(0,0); // scroll hacia arriba
 }
@@ -723,8 +729,6 @@ function asyncReceiveFlights(response)
 
 	// el verdadero response esta mas adentro ¬¬
 	response = response['ResultAvailabilityPlusValuationsShort']; 
-
-	console.log(response);
 
 	var fechaIdaConsultada = response["fechaIdaConsultada"];
 	var fechaVueltaConsultada = response["fechaVueltaConsultada"];
@@ -1368,6 +1372,8 @@ function buildRegistroPersona(tipo, numPx)
 {
 	var namesByTipo = {adulto:"ADULTO",ninho:"NI&Ntilde;O",infante:"INFANTE"};
 
+	var isAdulto = (tipo=='adulto');
+
 	var persona = document.createElement("div");
 	$(persona).addClass("persona")
 			  .addClass("inactive")
@@ -1387,12 +1393,20 @@ function buildRegistroPersona(tipo, numPx)
 					"</td>" +
 					"<td><input type='text' id='tbx_px1_documento'></td>" +
 					"<td><input type='text' id='tbx_px1_telefono'></td></tr>")
-	  	.append("<tr><th>APELLIDOS</th><th colspan='2'>EMAIL</th><th># VIAJERO FRECUENTE</th></tr>")
-	  	.append("<tr>" +
-					"<td><input type='text' id='tbx_px1_apellidos'></td>" +
-					"<td colspan='2'><input type='text' id='tbx_px1_email'></td>" +
-					"<td><input type='text' id='tbx_px1_px_frecuente'></td>" +
-				"</tr>")
+		.append("<tr><th>APELLIDOS</th><th colspan='2'>"+(isAdulto?"EMAIL":"FECHA NACIMIENTO")+"</th><th># VIAJERO FRECUENTE</th></tr>")
+		.append(
+			"<tr>" +
+				"<td><input type='text' id='tbx_px1_apellidos'></td>" +
+				"<td colspan='"+(isAdulto?'2':'1')+"'>" +
+					(isAdulto?
+						"<input type='text' id='tbx_px1_email'>" :
+						"<div class='validable'><input type='text' id='picker_px1_nacimiento' class='calendar' text='(Ingrese fecha de nacimiento)' onkeypress='return false;'></div>"		
+					) +
+				"</td>" +
+				(isAdulto?"":"<td></td>") +
+				"<td><input type='text' id='tbx_px1_px_frecuente'></td>" +
+			"</tr>"
+		)
 	  	.append("<tr><td colspan='4'><span>&iquest;No eres viajero frecuente?<a href='#''>REG&Iacute;STRATE</a></span></td></tr>");
 
 	$(persona).find("input").focusin(focusOnPersona);
@@ -1427,7 +1441,6 @@ function translateTaxes(fromResponse)
 		var rawTax = rawTaxesByPx[i];
 
 		var taxKey = rawTax['tipoTasa'];
-		console.log(taxKey);
 		var taxName = rawTax['tasa'];
 		var pxKey = keyEquiv[rawTax['tipoPasajero']];
 
