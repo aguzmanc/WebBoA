@@ -1,0 +1,925 @@
+@charset "UTF-8";
+@import "lib/reset.css";
+
+@font-face {
+    font-family: "HelveticaNeuePro";
+    src: url('fonts/HelveticaNeueLTPro-Th.woff');
+}
+@font-face {
+    font-family: "HelveticaNeueProMd";
+    src: url('fonts/HelveticaNeueLTPro-Md.woff');
+}
+@font-face {
+    font-family: "FuturaBold";
+    src: url('fonts/FuturaStd-Bold.woff');
+}
+@font-face {
+    font-family: "FuturaHeavy";
+    src: url('fonts/FuturaStd-Heavy.woff');
+}
+@font-face {
+    font-family: "FuturaMedium";
+    src: url('fonts/FuturaStd-Medium.woff');
+}
+@font-face {
+    font-family: "FuturaBook";
+    src: url('fonts/FuturaStd-Book.woff');
+}
+@font-face {
+    font-family: "FuturaLight";
+    src: url('fonts/FuturaStd-Light.woff');
+}
+
+#ui_reserva_vuelos {
+	position: relative;
+	top: 125px;
+    width: 90%;
+	min-width: 1024px;
+	margin: 0 auto;
+	opacity: 1;
+	z-index: 1000;
+}
+
+#ui_reserva_vuelos .info{
+	min-height: 700px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: "HelveticaNeuePro";
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding: 40px 0 0 0;
+}
+
+#ui_reserva_vuelos .header {
+	position: absolute;
+	display: flex;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100px;
+    min-width: 1024px;
+	border-color: #1F3656;
+	border-style: solid;
+	border-width: 10px 0 0 0;
+	margin: 0;
+	padding: 0;
+	background-image: url('images/banner_reserva_vuelos.png'); 
+	background-color: #1EAAD1;
+	z-index: 100;
+
+	transition: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+}
+
+#ui_reserva_vuelos .header .stages {
+    position: absolute;
+    left: 180px;
+    top: 30px;
+}
+
+#ui_reserva_vuelos .header .stage {
+	float: left;
+	margin: 0 0 0 35px;
+}
+
+#ui_reserva_vuelos .header .stage .number {
+    width: 30px;
+    height: 30px;
+    float: left;
+    color: #1EAAD1;
+    font-family: "HelveticaNeueProMd";
+    font-size: 18px;
+    background-color: #1F3656;
+    border-radius: 100px;
+    text-align: center;
+    line-height: 37px;
+}
+
+#ui_reserva_vuelos .header .stage.active .number {
+	position: relative;
+    top: -10px;
+    width: 50px;
+    height: 50px;
+	background-color: #238fac;
+    color: #FFF;
+    font-size: 30px;
+    line-height: 56px;
+
+    box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+#ui_reserva_vuelos .header .stage span {
+	float: left;
+	color: #1F3656;
+	font-family: "FuturaMedium";
+	font-size: 15px;
+    line-height: 37px;
+    margin: 0 0 0 10px;
+}
+
+#ui_reserva_vuelos .header .stage.active span {
+	color: #FFF;
+    font-family: "FuturaBold";
+    font-size: 20px;
+    text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+
+#ui_reserva_vuelos .info .descripcion > h3 {
+	width: 540px;
+	font-size: 40px;
+	font-family: "HelveticaNeuePro";
+	text-align: left;
+	color: #212121;
+	letter-spacing: 0px;
+	padding: 3px 0 0 0;
+	margin: 0;
+}
+
+
+
+/*--------------------------------------------------------*/
+/*--------------- FORMULARIO DE REGISTRO -----------------*/
+/*--------------------- DE PERSONAS ----------------------*/
+/*--------------------------------------------------------*/
+#ui_reserva_vuelos .info.phase { 
+	left: -2500px;
+	/* Animaciones :3 */ 
+	transition: left 1.5s !important;
+	-moz-transition: left 1.5s !important;
+	-webkit-transition: left 1.5s !important;
+	-o-transition: left 1.5s !important;
+	-ms-transition: left 1.5s !important;
+}
+#ui_reserva_vuelos .info.phase.active { left: 0px;}
+
+#ui_reserva_vuelos .info .descripcion {
+	padding-top: 100px;
+}
+
+#info_registro_pasajeros .persona {
+	position: relative;
+    width: 100%;
+    height: 200px;
+    background-color: #E1E1E1;
+    margin: 15px 0;
+
+    box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+#info_registro_pasajeros .persona .left-label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 60px;
+	height: 200px;
+	float: left;
+	background-color: #1F3656;
+}
+
+#info_registro_pasajeros .persona .left-label .lbl-tipo {
+	position: absolute;
+    bottom: 55px;
+    left: -25px;
+    width: 100px;
+    color: #32DCFF;
+
+	transform-origin: bottom;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -ms-writing-mode: lr-tb;
+}
+
+#info_registro_pasajeros .persona .left-label .nro-pasajero {
+	position: absolute;
+    bottom: 70px;
+    left: -30px;
+    width: 150px;
+    color: #FFF;
+    font-family: "FuturaBook";
+    font-size: 22px;
+
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -ms-writing-mode: lr-tb;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero {
+	position: absolute;
+    top: 5px;
+    left: 19px;
+    width: 25px;
+    height: 50px;
+	background-image: url('images/icons_tipo_pasajero.png');
+    background-size: 25px;
+    background-repeat: no-repeat;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero.adulto{
+	background-position: 0 0;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero.ninho{
+	background-position: 0 -50px;
+}
+
+#info_registro_pasajeros .persona .left-label .icon-pasajero.infante{
+	top: -5px;
+	background-position: 0 -100px;
+}
+
+#info_registro_pasajeros .persona .form {
+	position: relative;
+    padding: 0 5px 0 75px;
+}
+
+#info_registro_pasajeros .persona table tr:first-child th:first-child{width:30%;}
+#info_registro_pasajeros .persona table tr:first-child th:nth-child(2){width:25%;}
+
+#info_registro_pasajeros .persona table th{
+	color: #1F3656;
+	background-color: transparent;
+	border: none;
+	font-size: 13px;
+    font-family: "FuturaBook";
+    text-align: left;
+    padding: 10px 0 0 0;
+}
+
+#info_registro_pasajeros .persona table td{
+	color: #1F3656;
+    background-color: transparent;
+    text-align: left;
+    padding: 0 20px 0 0;
+}
+
+#info_registro_pasajeros .persona .form input[type="text"],
+#info_registro_pasajeros .persona .form select{
+	width: 100%;
+    height: 25px;
+	border-width: 1px;
+	border-color: #A0A0A0;
+	background-color: #FFF;
+    font-size: 20px;
+}
+
+#info_registro_pasajeros .persona .form input[type="text"]:focus,
+#info_registro_pasajeros .persona .form select:focus {
+    background-color: #FFE7BF;
+    border-color: #FF9F00;
+}
+
+#info_registro_pasajeros .persona .form .calendar{
+	font-size: 15px !important;
+	background-position: 137px 3px;
+}
+
+#info_registro_pasajeros .persona.inactive .form .calendar{
+	background-position: 120px 3px;
+}
+
+#info_registro_pasajeros .persona .form select {
+	height: 25px;
+    border-radius: 0;
+    border-width: 1px;
+    font-family: "FuturaBook";
+    font-size: 12px;
+    color: #1F3656;
+    background-image: url('images/icon_arrow_down.png');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    text-indent: 0px;
+    text-overflow: '';
+    padding: 5px;
+}
+
+#info_registro_pasajeros .persona .form span {
+	display: block;
+    text-align: right;
+    padding: 20px 0 0 0;
+}
+
+#info_registro_pasajeros .persona .form span a{
+	display: inline;
+    padding: 0 0 0 11px;
+    font-family: "FuturaBook";
+    font-size: 15px;
+}
+/*-----------------  ESTADO INACTIVO -------------------*/
+#info_registro_pasajeros .persona.inactive {
+	position: relative;
+    width: 90%;
+    background-color: #A0A0A0;
+    margin: 0 0 20px 0;
+
+    box-shadow: none;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-ms-box-shadow: none;
+}
+
+#info_registro_pasajeros .persona.inactive .left-label {
+	background-color: #3D5B86;
+}
+
+#info_registro_pasajeros .persona.inactive table th{
+	color: #FFF;
+}
+
+
+/*------------------------------------------------------*/
+/*--------------- WIDGET CAMBIAR VUELO -----------------*/
+/*------------------------------------------------------*/
+#widget_cambiar_vuelo {
+	position: absolute;
+	top: 50px;
+	right: 0;
+	overflow: hidden;
+	z-index: 101;
+}
+
+#widget_cambiar_vuelo .btn-expand {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 180px;
+	height: 40px;
+	background-color: #EFAA35;
+	
+	font-family: "HelveticaNeuePro";
+	text-align: center;
+	color: rgb(255, 255, 255);
+	padding: 2px 35px 0px 0px;
+	font-size: 20px;
+	line-height: 40px;
+
+	cursor: pointer;
+}
+
+#widget_cambiar_vuelo .btn-expand.searching {
+  background-color: #808080;
+  color: #BBB;
+  cursor: default;
+}
+
+#widget_cambiar_vuelo .btn-expand .icon-cross {
+	position: absolute;
+	top: 5px;
+	left: 180px;
+	width: 30px;
+	height: 30px;
+
+	background-image: url('images/cross.png');
+	background-repeat: no-repeat;
+	background-size: 30px;
+
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+	-moz-transform: rotate(135deg);
+	-o-transform: rotate(135deg);
+	-ms-transform: rotate(135deg);
+}
+#widget_cambiar_vuelo .btn-expand.searching .icon-cross{display: none;}
+
+#widget_cambiar_vuelo .btn-expand .icon-loading {
+	position: absolute;
+	top: 0px;
+	left: 160px;
+	width: 50px;
+	height: 25px;
+	background-image: url('images/loading_small.gif');
+	background-size: 50px;
+	background-repeat: no-repeat;
+	display: none;
+	margin: 10px 0;
+}
+
+#widget_cambiar_vuelo .btn-expand.searching .icon-loading {display: block;}
+
+#widget_cambiar_vuelo .btn-expand .cambiar{display: block;}
+#widget_cambiar_vuelo .btn-expand.searching .cambiar{display: none;}
+
+#widget_cambiar_vuelo .btn-expand .buscando{display: none;}
+#widget_cambiar_vuelo .btn-expand.searching .buscando{display: block;}
+
+#widget_cambiar_vuelo.expanded {
+	z-index: 101;
+}
+
+#widget_cambiar_vuelo.collapsed .btn-expand:hover { background-color: #C28318; }
+
+#widget_cambiar_vuelo .btn-expand:hover.searching {
+  background-color: #808080;
+  color: #BBB;
+  cursor: default;
+}
+
+#widget_cambiar_vuelo.expanded .btn-expand { cursor: default; }
+#widget_cambiar_vuelo.expanded .btn-expand .icon-cross {
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+}
+
+#widget_cambiar_vuelo .form{
+	position: absolute;
+    right: 0px;
+    top: 40px;
+    width: 470px;
+    height: 230px;
+    background-color: #EFAA35;
+}
+
+#widget_cambiar_vuelo.collapsed {width: 200px; height: 40px;}
+#widget_cambiar_vuelo.expanded {width: 500px;height: 270px;}
+
+#widget_cambiar_vuelo .form input[type="text"] {
+	height: 34px;
+	font-size: 15px;
+	padding: 2px 30px 0 10px;
+}
+
+#widget_cambiar_vuelo .form select{
+	background-position: 160px 10px;
+	width: 185px;
+}
+
+#widget_cambiar_vuelo .form > table{margin: 10px 30px;}
+
+#widget_cambiar_vuelo .form .button {width:166px;}
+
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+/*--------------- WIDGET RESUMEN RESERVA----------------*/
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+#widget_resumen_reserva {
+	position: absolute;
+	width: 300px;
+  	right: 0px;
+  	top: 0px;
+  	background-color: #2D4565;
+  	color: #FFF;
+}
+
+#widget_resumen_reserva .separator {
+	width: 100%;
+	height: 3px;
+	background-color: #4F6885;
+	margin: 5px 0;
+}
+
+#widget_resumen_reserva .empty-selection{
+	height: 80px;
+	border-color: #EFAA35;
+	border-style: dashed;
+	border-width: 2px;
+	line-height: 34px;
+	font-family: "FuturaLight";
+	font-size: 28px;
+	text-align: center;
+	margin: 10px;
+	padding: 20px 0 0 0;
+}
+
+#widget_resumen_reserva .head-tu-vuelo {
+	width: 170px;
+	height: 63px;
+	background-image: url('images/icon_tu_vuelo.png');
+	background-repeat: no-repeat;
+	background-size: 170px;
+	margin: 15px 0 0 21px;
+}
+
+#widget_resumen_reserva table{width:100%;}
+#widget_resumen_reserva td th{padding:0;}
+
+#widget_resumen_reserva th{
+	color: #FFF;
+	text-align: left;
+	font-size: 43px;
+	font-family: "FuturaLight";
+	font-style: italic;
+	padding: 3px 0 3px 15px;
+}
+
+#widget_resumen_reserva .cell-icon-ida,
+#widget_resumen_reserva .cell-icon-vuelta {width:92px;}
+
+#widget_resumen_reserva .cell-icon-ida.small{width:auto;}
+
+#widget_resumen_reserva .icon-ida,
+#widget_resumen_reserva .icon-vuelta{
+	width: 72;
+	height: 69px;
+	background-image: url('images/icon_avion_compra.png');
+	background-repeat: no-repeat;
+	margin: 10px 10px 0 10px;
+}
+
+#widget_resumen_reserva .icon-ida.small,
+#widget_resumen_reserva .icon-vuelta.small {
+	width: 30px;
+    height: 28px;
+    background-size: 30px;
+    margin: 5px;
+}
+
+#widget_resumen_reserva .icon-vuelta {
+	width: 72;
+	height: 69px;
+	background-image: url('images/icon_avion_compra.png');
+	background-position: 0 -69px;
+	margin: 10px 10px 0 10px;
+}
+
+#widget_resumen_reserva .icon-vuelta.small {
+	background-position: 0 -29px;
+}
+
+#widget_resumen_reserva .cell-descripcion {
+	position: relative;
+	color: #DB9F3C;
+	font-family: "FuturaHeavy";
+	letter-spacing: 1px;
+	font-size: 23px;
+	padding: 13px 0 0 23px;
+	vertical-align: bottom;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip {
+	position: absolute;
+	width: 200px;
+    top: -250px;
+    left: -200px;
+    background-color: #2D4565;
+    color: #FFF;
+    font-family: "FuturaLight";
+    cursor: default;
+    z-index: 100;
+
+    display: none;
+
+    box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+#widget_resumen_reserva tr.tarifa.calculated:not(.inactive):hover .tooltip {
+	display: block;	
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip table {
+	padding: 10px;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip td{
+	color: #FFF !important;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip td.currency {
+	text-align: right;
+	font-size: 10px;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip td.qty {
+	text-align: right;
+	font-size: 10px;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip td.detail {
+	font-size: 7px;
+    height: 10px;
+    padding: 0 0 0 10px;
+    color: #EFAA35 !important;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip th.subtitle div{
+	background-color: #182E48;
+    margin: 10px 0;
+    padding: 3px 0 3px 31px;
+    font-size: 13px;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip td.cell-separator div {
+	width: 100%;
+    height: 2px;
+    background-color: #4F6885;
+    margin: 5px 0;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip th {
+	font-size: 12px;	
+	font-style: normal;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip th h1{
+	color: #EFAA35;
+	font-size: 23px;
+	font-family: "HelveticaNeueProMd";
+	margin: 0;
+	text-align: right;
+}
+
+#widget_resumen_reserva .cell-descripcion .tooltip th h3{
+	color: #EFAA35;
+	font-size: 15px;
+}
+
+#widget_resumen_reserva .cell-cantidad {
+	color: #FFF;
+	font-family: "HelveticaNeuePro";
+	font-style: italic;
+	font-size: 16px;
+	letter-spacing: 1px;
+	text-align: right;
+	padding: 0 10px 0 0;
+	margin: 0;
+	vertical-align: bottom;
+}
+
+#widget_resumen_reserva .cell-submit {
+	position: relative;
+	height: 60px;
+	background-image: url('images/icon_compra.png');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: 30px 15px;
+}
+
+#widget_resumen_reserva .cell-submit .button {
+	position: absolute;
+    top: 20px;
+    right: 5px;
+    background-color: #1F3656;
+    color: #DB9F3C;
+    font-family: "FuturaLight";
+    padding: 5px 0;
+    border: 0;
+}
+
+#widget_resumen_reserva .cell-submit .button:hover {
+	color: #FFF;
+	background-color: #DB9F3C;
+}
+
+#widget_resumen_reserva .cell-submit .loading {
+	width: 50px;
+    height: 50px;
+    margin: 0 90px 0 auto;
+    background-image: url('images/loading.gif');
+    background-size: 50px;
+}
+
+#widget_resumen_reserva h1 {
+	color: #FFF;
+	margin: 0;
+  	padding: 0;
+  	font-family: "FuturaBook";
+  	font-size: 30px;
+}
+
+#widget_resumen_reserva .cell-origen-destino{
+	width: 160px;
+	color: #DB9F3C;
+	vertical-align: bottom;
+	text-align: center;
+	padding: 0;
+}
+#widget_resumen_reserva .cell-origen-destino span {
+	/*line-height: 1px;*/
+}
+
+#widget_resumen_reserva .cell-cod-origen-destino {
+	text-align: center;
+}
+
+#widget_resumen_reserva .cell-cod-origen-destino.small h1 {
+	font-size: 20px;
+}
+
+#widget_resumen_reserva .cell-duracion {
+	color: #6094D9;
+	font-size: 12px;
+	text-align: center;
+	font-family: "FuturaHeavy";
+	font-style: italic;
+	letter-spacing: 1px;
+}
+
+#widget_resumen_reserva .cell-fecha{
+	color: #FFF;
+	font-family: "FuturaHeavy";
+	font-style: italic;
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+#widget_resumen_reserva .cell-hora {
+	color: #DB9F3C;
+	font-family: "FuturaBook";
+	font-size: 14px;
+	font-style: italic;
+	letter-spacing: 0;
+	text-align: center;
+	padding: 0;
+}
+
+#widget_resumen_reserva #tbl_seleccion_ida.changed,
+#widget_resumen_reserva #tbl_seleccion_vuelta.changed{
+	background-color: #C1DBFF;
+	transition: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+}
+
+#widget_resumen_reserva .div-seleccion {
+	position: relative;
+}
+
+#widget_resumen_reserva .div-seleccion .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	cursor: default;
+}
+
+#widget_resumen_reserva .div-seleccion .overlay:hover {
+	background-color: rgba(0, 110, 255, 0.49);
+}
+
+#widget_resumen_reserva .div-seleccion .overlay .btn-borrar{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 100px;
+	background-color: #F05858;
+	font-size: 13px;
+	text-align: center;
+	font-family: "FuturaLight";
+	padding: 5px;
+	cursor: pointer;
+	display: none;
+}
+
+#widget_resumen_reserva .div-seleccion .overlay .btn-borrar:hover {
+	background-color:#B70000;
+}
+
+#widget_resumen_reserva .div-seleccion .overlay:hover .btn-borrar{
+	display: block;
+}
+
+/*--------------------------------------------------------*/
+#widget_resumen_reserva td.selector-pax {
+	width: 50px;
+	position: relative;
+}
+
+#widget_resumen_reserva td.selector-pax ul {
+	position: absolute;
+	top: 12px;
+	left: 6px;
+	width: 40px;
+	height: 40px;
+	z-index: 99;
+}
+
+#widget_resumen_reserva td.selector-pax ul.active {
+	z-index: 101;
+}
+
+#widget_resumen_reserva td.selector-pax ul li {
+	position: absolute;
+	width: 40px;
+	height: 30px;
+	background-color: transparent;
+	color: #FFF;
+	font-family: "FuturaLight";
+	text-align: center;
+	line-height: 30px;
+	border-style: solid;
+	border-color: transparent;
+	border-width: 0 0 1px 0;
+	z-index: 100;
+	cursor: default;
+	display: none;
+}
+
+#widget_resumen_reserva td.selector-pax span {
+	position: absolute;
+	width: 50px;
+    color: #FFF;
+    font-family: "FuturaLight";
+    text-align: center;
+    display: none;
+}
+
+#widget_resumen_reserva td.selector-pax ul li.selected {
+	display: block;
+	cursor: pointer;
+}
+
+#widget_resumen_reserva td.selector-pax ul li:hover.selected{
+	background-color: #0A2953;
+}
+
+#widget_resumen_reserva tr.inactive td.selector-pax ul li:hover.selected{
+	background-color:transparent;
+}
+
+#widget_resumen_reserva td.selector-pax ul.active li {
+	background-color: #0A2953;
+	border-color: #FFF;
+	display: block;
+}
+
+#widget_resumen_reserva td.selector-pax ul li:not(.selected):hover{
+	background-color: #4F86D0;
+	cursor: pointer;
+}
+
+#widget_resumen_reserva td.selector-pax ul li.minus-one{top:-31px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-two{top:-62px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-three{top:-93px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-four{top:-124px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-five{top:-155px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-six{top:-186px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-seven{top:-217px;}
+#widget_resumen_reserva td.selector-pax ul li.minus-eight{top:-248px;}
+
+#widget_resumen_reserva td.selector-pax ul li.plus-one{top:31px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-two{top:62px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-three{top:93px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-four{top:124px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-five{top:155px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-six{top:186px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-seven{top:217px;}
+#widget_resumen_reserva td.selector-pax ul li.plus-eight{top:248px;}
+
+#widget_resumen_reserva tr.tarifa:hover:not(.inactive) {
+	background-color: #496892;
+	cursor: pointer;
+}
+
+#widget_resumen_reserva tr.tarifa.inactive td {
+	color: gray;
+}
+
+#widget_resumen_reserva .btn-plus{
+	width: 26px;
+	height: 25px;
+	background-image: url('images/btn_plus.png');
+	background-repeat: no-repeat;
+	background-color: transparent;
+	margin: 0 auto;
+	display: none;
+}
+
+#widget_resumen_reserva .btn-plus:hover {
+	background-size: 30px;
+	width: 25px;
+	height: 24px;
+	padding: 3px;
+}
+
+#widget_resumen_reserva tr.tarifa.inactive ul li span{display: none;}
+#widget_resumen_reserva tr.tarifa.inactive ul li .btn-plus{display: block;}
+/* (read only widget)  -----------------------------------*/
+#widget_resumen_reserva.read-only .tarifa.inactive { display: none; } 
+#widget_resumen_reserva.read-only .div-seleccion .overlay:hover .btn-borrar{ display: none; }
+#widget_resumen_reserva.read-only .div-seleccion .overlay:hover{ background-color: transparent; }
+#widget_resumen_reserva.read-only td.selector-pax ul {display: none;}
+#widget_resumen_reserva.read-only td.selector-pax span {display: block;}
+
+
