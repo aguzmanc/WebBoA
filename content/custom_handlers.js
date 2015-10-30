@@ -36,7 +36,8 @@ var urls = {
 	// nearest_dates_service: "http://localhost/content/fake_services/nearest_dates.php",
 	nearest_dates_service: "http://skbpruebas.cloudapp.net/Services/BasicReservationService.svc/Calendar",
 	flights_schedule_service: "http://skbpruebas.cloudapp.net/Services/BasicReservationService.svc/AvailabilityPlusValuationsShort",
-	validate_flight_selection_service: "http://localhost/content/fake_services/validate_flight_selection_service.php"
+	validate_flight_selection_service: "http://localhost/content/fake_services/validate_flight_selection_service.php",
+	register_passengers_service: "http://localhost/content/fake_services/register_passengers_service.php"
 };
 // ---------------------------------------------------------------------------
 function handle_reserva_vuelos(parameters)

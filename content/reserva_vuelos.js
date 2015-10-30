@@ -108,9 +108,10 @@ var compartmentNames = {"2":"Business","3":"Econ&oacute;mica"};
  **********************************************************/
 $(document).on('ready',function()
 {
-	initialize_header(true);
-
-	initialize_ui_sections({anchor_section_headers:false});
+	if($("#ui_reserva_vuelos").data("mode") !="widget"){
+		initialize_header(true);
+		initialize_ui_sections({anchor_section_headers:false});	
+	}
 
 	todayStr = formatCompactDate(new Date()); // today 
 
@@ -140,8 +141,9 @@ $(document).on('ready',function()
 		minDate: 0
 	});
 
-	$("#btn_validar_vuelos").click(validateSeleccionVueloAndSend);
+	$("#btn_validar_vuelos").click(validateSeleccionVuelo);
 	$("#btn_volver_vuelos").click(backToFlightStage);
+	$("#btn_validar_pasajeros").click(validatePassengers);
 
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
@@ -160,7 +162,7 @@ function handleScroll(){
 	var h = $(this).scrollTop();
 
 	$("#ui_resultados_vuelos .header").css("margin", ((h>50)?(h-50):0)+"px 0 0 0");
-	$("#widget_resumen_reserva").css("margin",((h>145)?(h-35):110)+"px 0 0 0");
+	// $("#widget_resumen_reserva").css("margin",((h>145)?(h-35):110)+"px 0 0 0");
 }
 // ---------------------= =---------------------
 function toggleRbtnIdaVuelta()
@@ -286,7 +288,7 @@ function selectTarifa()
 
 	updateAllPrices();
 
-	validateSeleccionVuelo();
+	checkCompleteSeleccionVuelo();
 
 	setTimeout(function() {
 		tblSeleccion.removeClass("changed");
@@ -373,7 +375,7 @@ function validateSearch()
 	deleteVuelta();
 }
 // ---------------------= =---------------------
-function validateSeleccionVuelo()
+function checkCompleteSeleccionVuelo()
 {
 	var btn = $("#btn_validar_vuelos");
 
@@ -410,7 +412,7 @@ function deleteIda()
 
 	updateAllPrices();
 
-	validateSeleccionVuelo();
+	checkCompleteSeleccionVuelo();
 }
 // ---------------------= =---------------------
 function deleteVuelta()
@@ -439,7 +441,7 @@ function deleteVuelta()
 
 	updateAllPrices();
 	
-	validateSeleccionVuelo();
+	checkCompleteSeleccionVuelo();
 }
 // ---------------------= =---------------------
 function changeNumPassengers()
@@ -485,7 +487,7 @@ function changeNumPassengers()
 			// calculo de precio a pagar
 			seleccionVuelo[tipo].num = count;
 			updatePriceByTipo(tipo,true);
-			validateSeleccionVuelo();
+			checkCompleteSeleccionVuelo();
 
 			ul.parent().find("span").html($(this).html());
 		}
@@ -497,49 +499,10 @@ function changeNumPassengers()
 	}
 }
 // ---------------------= =---------------------
-function validateSeleccionVueloAndSend()
+function validateSeleccionVuelo()
 {
 	/* PREPARE AND SEND DATA */
-	var sendData = {};
-	sendData.adulto = seleccionVuelo.adulto;
-	sendData.ninho = seleccionVuelo.ninho;
-	sendData.infante = seleccionVuelo.infante;
-	sendData.vuelosIda = [];
-
-	var vuelos = allOptions[seleccionVuelo.ida.opcCode].vuelos;
-
-	for(var i=0;i<vuelos.length;i++) { 
-		var vuelo = vuelos[i]; 
-		sendData.vuelosIda.push(
-			{
-				horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
-				horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
-				numVuelo: vuelo.numVuelo,
-				tipoAvion: vuelo.tipoAvion,
-				fechaSalida: vuelo.fecha,
-				fareCode: vuelo.tarifas[seleccionVuelo.ida.compartment].fareCode
-			}
-		);
-	}
-
-	if(seleccionVuelo.vuelta != null) {
-		sendData.vuelosVuelta = [];
-		vuelos = allOptions[seleccionVuelo.vuelta.opcCode].vuelos;
-
-		for(var i=0;i<vuelos.length;i++) { 
-			var vuelo = vuelos[i]; 
-			sendData.vuelosVuelta.push(
-				{
-					horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
-					horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
-					numVuelo: vuelo.numVuelo,
-					tipoAvion: vuelo.tipoAvion,
-					fechaSalida: vuelo.fecha,
-					fareCode: vuelo.tarifas[seleccionVuelo.vuelta.compartment].fareCode
-				}
-			);
-		}
-	}
+	var sendData = prepareSeleccionVueloToSend();
 
 	var dataStr = JSON.stringify(sendData);
 
@@ -554,20 +517,116 @@ function validateSeleccionVueloAndSend()
 
 	$("#loading_compra").show();
 	$("#btn_validar_vuelos").hide();
+}
+// ---------------------= =---------------------
+function validatePassengers()
+{
+	// validate here!!!
+	var personas = $("#div_formulario_personas .persona");
 
-	// var form = $(
-	// 	'<form target="_blank" method="POST" action="' + url.validate_flight_selection_service + '">' + 
-	// 		'<input type="hidden" name="json_data" value="'+ sendData + '">' +
-	// 	'</form>'
-	// );
+	var infoPasajeros = [];
+	var isAllValid = true;
+	for(var i=0;i<personas.length;i++) {
+		var persona = $(personas[i]);
+		var dataPersona = {
+			nombres : "",
+			apellidos : "",
+			tipoDocumento : "",
+			nroDocumento  : "",
+			telefono : "",
+			nroViajeroFrecuente: ""
+		};
 
-	// $("#div_submit").html("").append(form); // IE FIX
+		var tipo = persona.attr("data-tipo");
 
-	// form.submit();
+		var isValid = true;
 
+		// nombres
+		var tbxNombres = persona.find(".nombres");
+		if($.trim(tbxNombres.val())=="") {
+			isValid = false;
+			tbxNombres.parent().addClass("active");
+		} else {
+			dataPersona["nombres"] = tbxNombres.val();
+		}
 
-	// console.log(seleccionVuelo);
-	// console.log(allOptions);
+		// apellidos
+		var tbxApellidos = persona.find(".apellidos");
+		if($.trim(tbxApellidos.val())=="") {
+			isValid = false;
+			tbxApellidos.parent().addClass('active');
+		} else {
+			dataPersona["apellidos"] = tbxApellidos.val();
+		}
+
+		// tipo de documento
+		var selectTipoDocumento = persona.find(".tipo-documento");
+		if(selectTipoDocumento.val()=="NONE") {
+			isValid = false;
+			selectTipoDocumento.parent().addClass('active');
+		} else {
+			dataPersona["tipoDocumento"] = selectTipoDocumento.val();
+		}
+
+		var tbxNroDocumento = persona.find(".nro-documento");
+		if($.trim(tbxNroDocumento.val()) == "") {
+			isValid = false;
+			tbxNroDocumento.parent().addClass('active');
+		} else {
+			dataPersona["nroDocumento"] = tbxNroDocumento.val();
+		}
+
+		dataPersona["telefono"] = persona.find(".telefono").val();
+		dataPersona["nroViajeroFrecuente"] = persona.find(".nro-viajero-frecuente").val();
+
+		if(tipo=="infante" || tipo=="ninho") {
+			var pickerNacimiento = persona.find(".nacimiento");
+			console.log($.trim(pickerNacimiento.val()));
+			if($.trim(pickerNacimiento.val()=="") ) {
+				isValid = false;
+				pickerNacimiento.parent().addClass('active');
+			} else {
+				var rawDate = pickerNacimiento.val().split(" ");	
+				dataPersona["nacimiento"] = rawDate[2] +""+ MONTHS_LANGUAGE_TABLE[rawDate[1]] +""+ rawDate[0];
+			}
+		}
+
+		
+
+		if(false == isValid){
+			persona.addClass("invalid");
+			setTimeout(function() {
+				$("#div_formulario_personas .persona").removeClass("invalid");
+				$("#div_formulario_personas .persona .validable").removeClass("active");
+			}, 2000);
+			isAllValid = false;
+		}
+	}
+
+	if(isAllValid) { 
+		/* PREPARE AND SEND DATA */
+		var sendData = {
+			seleccionVuelo: prepareSeleccionVueloToSend(),
+			infoPasajeros: 
+		};
+
+		var dataStr = JSON.stringify(sendData);
+
+		$.ajax({
+			url: urls["register_passengers_service"],
+			type: 'POST',
+			dataType:'json',
+			contentType: "application/json; charset=utf-8",
+			success: asyncRegisterPassengers,
+			data: dataStr
+		});
+	}
+}
+// ---------------------= =---------------------
+function asyncRegisterPassengers(response)
+{
+	console.log("success!!");
+	console.log(response);
 }
 // ---------------------= =---------------------
 function asyncValidateSeleccionVuelo(response)
@@ -1377,34 +1436,35 @@ function buildRegistroPersona(tipo, numPx)
 	var persona = document.createElement("div");
 	$(persona).addClass("persona")
 			  .addClass("inactive")
+			  .attr("data-tipo",tipo)
 			  .append("<div class='left-label'><label class='lbl-tipo'>"+namesByTipo[tipo]+"</label><label class='nro-pasajero'>PASAJERO "+numPx+"</label><div class='icon-pasajero "+tipo+"'></div></div>")
 			  .append("<div class='form'><table cellpadding='0' cellspacing='0'></table></div>");
 
     var tbl = $(persona).find(".form table");
 
     tbl.append("<tr><th>NOMBRES</th><th>TIPO DE DOCUMENTO</th><th># DE DOCUMENTO</th><th>TEL&Eacute;FONO</th></tr>")
-	   .append("<tr><td><input type='text' id='tbx_px1_nombres'></td><td>" +
-						"<select id='select_px1_tipo_documento'>" +
-							"<option value=''>Tipo de Documento</option>" +
+	   .append("<tr><td><div class='validable'><input type='text' id='tbx_px"+numPx+"_nombres' class='nombres'></div></td><td>" +
+						"<div class='validable'><select id='select_px"+numPx+"_tipo_documento' class='tipo-documento'>" +
+							"<option value='NONE'>Tipo de Documento</option>" +
 			                "<option value='CI'>CI</option>" +
 			                "<option value='PASAPORTE'>PASAPORTE</option>" +
 			                "<option value='DNI'>DNI</option>" +
-						"</select>" +
+						"</select></div>" +
 					"</td>" +
-					"<td><input type='text' id='tbx_px1_documento'></td>" +
-					"<td><input type='text' id='tbx_px1_telefono'></td></tr>")
+					"<td><div class='validable'><input type='text' id='tbx_px"+numPx+"_documento' class='nro-documento'></div></td>" +
+					"<td><input type='text' id='tbx_px"+numPx+"_telefono' class='telefono'></td></tr>")
 		.append("<tr><th>APELLIDOS</th><th colspan='2'>"+(isAdulto?"EMAIL":"FECHA NACIMIENTO")+"</th><th># VIAJERO FRECUENTE</th></tr>")
 		.append(
 			"<tr>" +
-				"<td><input type='text' id='tbx_px1_apellidos'></td>" +
+				"<td><div class='validable'><input type='text' id='tbx_px"+numPx+"_apellidos' class='apellidos'></div></td>" +
 				"<td colspan='"+(isAdulto?'2':'1')+"'>" +
 					(isAdulto?
-						"<input type='text' id='tbx_px1_email'>" :
-						"<div class='validable'><input type='text' id='picker_px1_nacimiento' class='calendar' text='(Ingrese fecha de nacimiento)' onkeypress='return false;'></div>"		
+						"<input type='text' id='tbx_px"+numPx+"_email' class='email'>" :
+						"<div class='validable'><input type='text' id='picker_px"+numPx+"_nacimiento' class='calendar nacimiento' text='(Ingrese fecha de nacimiento)' onkeypress='return false;'></div>"		
 					) +
 				"</td>" +
 				(isAdulto?"":"<td></td>") +
-				"<td><input type='text' id='tbx_px1_px_frecuente'></td>" +
+				"<td><input type='text' id='tbx_px"+numPx+"_px_frecuente' class='nro-viajero-frecuente'></td>" +
 			"</tr>"
 		)
 	  	.append("<tr><td colspan='4'><span>&iquest;No eres viajero frecuente?<a href='#''>REG&Iacute;STRATE</a></span></td></tr>");
@@ -1698,6 +1758,51 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	return to;
 }
 // ---------------------= =---------------------
+function prepareSeleccionVueloToSend()
+{
+	var packedSeleccionVuelo = { };
+	packedSeleccionVuelo.adulto = seleccionVuelo.adulto;
+	packedSeleccionVuelo.ninho = seleccionVuelo.ninho;
+	packedSeleccionVuelo.infante = seleccionVuelo.infante;
+	packedSeleccionVuelo.vuelosIda = [];
+
+	var vuelos = allOptions[seleccionVuelo.ida.opcCode].vuelos;
+
+	for(var i=0;i<vuelos.length;i++) { 
+		var vuelo = vuelos[i]; 
+		packedSeleccionVuelo.vuelosIda.push(
+			{
+				horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
+				horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
+				numVuelo: vuelo.numVuelo,
+				tipoAvion: vuelo.tipoAvion,
+				fechaSalida: vuelo.fecha,
+				fareCode: vuelo.tarifas[seleccionVuelo.ida.compartment].fareCode
+			}
+		);
+	}
+
+	if(seleccionVuelo.vuelta != null) {
+		packedSeleccionVuelo.vuelosVuelta = [];
+		vuelos = allOptions[seleccionVuelo.vuelta.opcCode].vuelos;
+
+		for(var i=0;i<vuelos.length;i++) { 
+			var vuelo = vuelos[i];
+			packedSeleccionVuelo.vuelosVuelta.push(
+				{
+					horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
+					horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
+					numVuelo: vuelo.numVuelo,
+					tipoAvion: vuelo.tipoAvion,
+					fechaSalida: vuelo.fecha,
+					fareCode: vuelo.tarifas[seleccionVuelo.vuelta.compartment].fareCode
+				}
+			);
+		}
+	}
+
+	return packedSeleccionVuelo;
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

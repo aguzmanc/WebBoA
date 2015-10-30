@@ -30,6 +30,31 @@
     src: url('fonts/FuturaStd-Light.woff');
 }
 
+/* **** ANIMACIONES **** */
+#widget_cambiar_vuelo, 
+.flight-details .cell-details, .flight-details .expandable,
+#widget_resumen_reserva td.selector-pax ul li,
+.ui-section.wide.results .header .stage span,
+.ui-section.wide.results .header .stage .number,
+#info_registro_pasajeros .persona 
+{
+	transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+}
+
+
+#tbl_seleccion_ida,
+#tbl_seleccion_vuelta{
+	transition: all 1.0s;
+	-moz-transition: all 1.0s;
+	-webkit-transition: all 1.0s;
+	-o-transition: all 1.0s;
+	-ms-transition: all 1.0s;
+}
+
 #ui_reserva_vuelos {
 	position: relative;
 	top: 125px;
@@ -38,6 +63,11 @@
 	margin: 0 auto;
 	opacity: 1;
 	z-index: 1000;
+}
+
+#ui_reserva_vuelos[data-mode="widget"] {
+	position: initial;
+	width:100%;
 }
 
 #ui_reserva_vuelos .info{
@@ -132,7 +162,57 @@
 	-ms-text-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 }
 
+/* FORM */
+#ui_reserva_vuelos .form .validable {
+	border-color: transparent;
+	border-width: 3px;
+	border-style: solid;
+	background-color: transparent;
+}
 
+#ui_reserva_vuelos .form .validable.active{ background-color: #F00;}
+
+#ui_reserva_vuelos .form select {
+	height: 34px;
+	border-radius: 0px;
+	border-width: 0 0 2px 0;
+	border-style: solid;
+	border-color: #959595;
+	font-family: "HelveticaNeuePro";
+	font-size: 15px;
+	color: #1F3656;
+	padding: 2px 44px 0 10px;
+	background-image: url('images/icon_arrow_down.png');
+	background-repeat: no-repeat;
+	background-position: 165px 10px;
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+
+	text-indent: 0.01px;
+	text-overflow: '';
+}
+
+#ui_reserva_vuelos .form select::-ms-expand{
+  display:none;
+}
+
+#ui_reserva_vuelos .form label{
+	font-family: "HelveticaNeuePro";
+	font-size: 13px;
+	color: #FFF;
+}
+
+#ui_reserva_vuelos .form label a{
+	color: #1F3656;
+	font-size: 15px;
+}
+
+#ui_reserva_vuelos .form label a:hover{text-decoration: underline;}
+
+/* INFO */
 #ui_reserva_vuelos .info .descripcion > h3 {
 	width: 540px;
 	font-size: 40px;
@@ -144,6 +224,365 @@
 	margin: 0;
 }
 
+#ui_reserva_vuelos .descripcion > h2 {
+	font-size: 21px;
+	padding: 10px 0 10px 60px;
+	background-image: url('images/icon_avion_reservas.png');
+	background-size: 30px auto;
+	background-repeat: no-repeat;
+	background-position: 20px 5px;
+}
+
+#ui_reserva_vuelos .info .descripcion {
+	color: #212121;
+	padding: 100px 320px 30px 20px;
+	font-size: 18px;
+	font-family: "FuturaLight";
+	letter-spacing: 0px;
+	text-align: justify;
+	overflow: hidden;
+	max-height: 9999px
+}
+
+/* --------------------------------------------- */
+/* ----------- RESULTADOS DE VUELOS ------------ */
+/* --------------------------------------------- */
+#ui_reserva_vuelos .info {
+	position: absolute;
+	width: 100%;
+	min-width: 850px;
+}
+
+#ui_reserva_vuelos .descripcion table { 
+	width: 100%;
+	margin: 0;	
+}
+
+#ui_reserva_vuelos .descripcion table th{
+	color: #FFF;
+    font-family: "FuturaLight";
+    font-size: 18px;
+    font-weight: 100;
+    padding: 10px;
+    text-align: center;
+    background-color: #1F3656;
+    border-style: solid;
+    border-color: #FFF;
+    border-width: 1px 0 1px 1px;
+}
+
+#ui_reserva_vuelos .descripcion table td {
+	color: #1F3656;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+}
+
+#ui_reserva_vuelos .descripcion #tbl_salida,
+#ui_reserva_vuelos .descripcion #tbl_regreso {
+	min-width: 590px;
+}
+
+#ui_reserva_vuelos .descripcion table.days-selector td{
+	padding: 5px;
+	width: 14%;
+	text-align: center;
+}
+
+#ui_reserva_vuelos .descripcion table.days-selector td.no-flights {
+    background-color: #909090 !important;
+    color: #666 !important;
+    cursor: default !important;
+}
+
+#ui_reserva_vuelos .descripcion table.days-selector td.no-flights.selected {
+	background-color: #EFAA35 !important;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector {
+	min-width: 69px;
+	height: 80px;
+	background-color: #34598C;
+	color: #FFF;
+	cursor: pointer;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector:hover:not(.selected) {
+	background-color: #1D3150;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector.selected {
+	background-color: #EFAA35 !important;
+	cursor: default;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector.faded{
+	background-color: #ACC3D4;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector h2 {
+	margin: 0;
+	height: 30px;
+	padding: 10px 0 0 0;
+	font-size: 18px;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector h2 .empty-msg {
+	font-size: 60px;
+	margin: 30px 0;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector h2 span {
+	font-family: "HelveticaNeueProMd";
+	color: #EFAA35;
+	padding: 0px 0px 0px 10px;
+	font-size: 27px;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector.selected h2 span {
+	color: #34598C;
+}
+
+#ui_reserva_vuelos .descripcion table .day-selector h3 {
+	font-size: 15px;
+	text-align: center;
+	width: auto;
+	padding: 0;
+	font-family: "HelveticaNeueProMd";
+}
+
+#ui_reserva_vuelos .descripcion table.days-selector tr.months td {
+	width: 95%;
+    background-color: #1F3656;
+    color: #FFF;
+    cursor: default;
+}
+
+#ui_reserva_vuelos .descripcion table.days-selector tr.months h3{
+	text-align: center;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    color: #FFF;
+}
+
+#ui_reserva_vuelos .descripcion table th.class-group {
+	width: 150px;
+	min-width: 150px;
+}
+
+#ui_reserva_vuelos .descripcion table td span{font-size:13px;}
+#ui_reserva_vuelos .descripcion table td span label{font-family: "FuturaHeavy";}
+
+#ui_reserva_vuelos .descripcion table td.disabled {
+ 	font-size: 12px;
+ 	color: rgb(158, 158, 158);
+}
+
+#ui_reserva_vuelos .descripcion table td.loading-cell .loading{
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	background-image: url('images/loading.gif');
+	background-size: 80px;
+}
+#ui_reserva_vuelos .descripcion table td.message {
+	font-size: 46px;
+	font-variant: small-caps;
+	padding: 20px 80px;
+	color: #FFF;
+	font-family: "HelveticaNeuePro";
+	background-color: #EFAA35;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row td {
+	position: relative;
+    height: 70px;
+	cursor: pointer;
+	background-color: #CADAE5;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row:hover td {
+	background-color: #ABC6D8;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row td.tarifa:hover {
+	background-color: #78A2BF;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .rbtn {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #FFF;
+	border-radius: 100px;
+	margin: 4px 4px 10px 4px;
+	vertical-align: middle;
+	opacity: 0;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row:hover .rbtn,
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.selected .rbtn {
+	opacity: 1;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .rbtn > div{
+	background-color: #000;
+	width: 10px;
+	height: 10px;
+	margin: 5px auto;
+	vertical-align: middle;
+	border-radius: 100px;
+	display: none;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .rbtn.checked > div{display: block;}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.selected td {
+	background-color: #EFCF9B !important;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.selected td{cursor: default;}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche {
+	position: absolute;
+	top: 5px;
+	width: 74px;
+    height: 40px;
+	background-image: url('images/icons_dia_noche.png');
+    background-repeat: no-repeat;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.salida {
+	left: 35px;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.llegada {
+	left: auto;
+    right: 35px;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.am {
+	background-position: 0 0;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.pm {
+	background-position: 0 -40px;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.night {
+	background-position: 0 -80px;
+}
+
+
+/* detalles de celda */ 
+#ui_reserva_vuelos .descripcion table td.cell-details {
+	background-color: #EFAA35 !important;
+	padding: 10px 0;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details td {background-color: transparent;}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .icon-salida {
+	width: 70px;
+	height: 70px;
+	background-image: url("images/icon_salida_llegada.png");
+	background-repeat: no-repeat;
+	background-position: 10px 20px;
+	background-size: 70px auto;
+	padding: 10px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .icon-llegada {
+	width: 70px;
+	height: 70px;
+	background-image: url("images/icon_salida_llegada.png");
+	background-repeat: no-repeat;
+	background-position: 10px -53px;
+	background-size: 70px;
+	padding: 10px;
+}
+
+
+#ui_reserva_vuelos .descripcion table td.cell-details td {
+	color: #FFF;
+	font-size: 30px;
+	text-align: left;
+	font-family: "FuturaBook";
+	padding: 0;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details label{ 
+	display: block;
+	font-size: 20px;
+	padding: 10px 0 10px 30px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details h2 {
+	color: #1F3656;
+	font-size: 18px;
+	padding: 0 30px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .separator {
+	width: 70%;
+	height: 2px;
+	background-color: #FFF;
+	margin: 10px auto 0 auto;
+	display: none;
+}
+#ui_reserva_vuelos .flight-details.expanded .cell-details .separator{display: block;}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail {width: 100%;}
+#ui_reserva_vuelos .descripcion table td.cell-details .detail.stretched{width: 50%;}
+#ui_reserva_vuelos .descripcion table td.cell-details .detail.stretched.left{float: left;}
+#ui_reserva_vuelos .descripcion table td.cell-details .detail.stretched.righr{float: right;}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .icon-cell {
+	width: 80px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .time-cell{
+	vertical-align: middle;
+	font-family: "FuturaBold";
+	text-align: center;
+	font-size: 24px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .ciudad-cell{
+	vertical-align: top;
+	font-family: "FuturaBold";
+	text-align: center;
+	color: #1F3656;
+	font-size: 17px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .airport-cell {
+	color: #1F3656;
+	font-size: 16px;
+	padding: 0 0 0 20px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .duracion-cell{
+	font-size: 12px;
+	padding: 0 0 0 20px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .hrs-cell{
+	vertical-align: top;
+}
+
+#ui_reserva_vuelos .flight-details .expandable {
+	max-height: 300px;
+	overflow: hidden;
+}
+
+#ui_reserva_vuelos .flight-details.collapsed .expandable {
+	max-height: 0;
+}
+
+#ui_reserva_vuelos .flight-details.collapsed .cell-details{padding: 0;}
 
 
 /*--------------------------------------------------------*/
@@ -152,7 +591,6 @@
 /*--------------------------------------------------------*/
 #ui_reserva_vuelos .info.phase { 
 	left: -2500px;
-	/* Animaciones :3 */ 
 	transition: left 1.5s !important;
 	-moz-transition: left 1.5s !important;
 	-webkit-transition: left 1.5s !important;
@@ -172,10 +610,18 @@
     background-color: #E1E1E1;
     margin: 15px 0;
 
+	border-style: solid;
+	border-width: 3px;
+    border-color: transparent;
+
     box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
 	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+}
+
+#info_registro_pasajeros .persona.invalid {
+    border-color: red;
 }
 
 #info_registro_pasajeros .persona .left-label {
@@ -268,16 +714,21 @@
     background-color: transparent;
     text-align: left;
     padding: 0 20px 0 0;
+
 }
 
 #info_registro_pasajeros .persona .form input[type="text"],
-#info_registro_pasajeros .persona .form select{
+#info_registro_pasajeros .persona .form select {
 	width: 100%;
     height: 25px;
 	border-width: 1px;
 	border-color: #A0A0A0;
+	border-radius: 0px;
+    border-style: solid;
 	background-color: #FFF;
     font-size: 20px;
+    font-family: "HelveticaNeuePro";
+    color: #1F3656;
 }
 
 #info_registro_pasajeros .persona .form input[type="text"]:focus,
@@ -289,6 +740,9 @@
 #info_registro_pasajeros .persona .form .calendar{
 	font-size: 15px !important;
 	background-position: 137px 3px;
+	background-image: url('images/icon_calendar.png');
+	background-repeat: no-repeat;
+	cursor: pointer;
 }
 
 #info_registro_pasajeros .persona.inactive .form .calendar{
@@ -322,9 +776,12 @@
 
 #info_registro_pasajeros .persona .form span a{
 	display: inline;
-    padding: 0 0 0 11px;
+	color: #1F3656;
     font-family: "FuturaBook";
     font-size: 15px;
+	text-decoration: underline;
+	padding: 0 0 0 11px;
+	margin: 10px 0px;
 }
 /*-----------------  ESTADO INACTIVO -------------------*/
 #info_registro_pasajeros .persona.inactive {
@@ -469,7 +926,63 @@
 
 #widget_cambiar_vuelo .form > table{margin: 10px 30px;}
 
-#widget_cambiar_vuelo .form .button {width:166px;}
+#widget_cambiar_vuelo .form .button {
+	position: absolute;
+	width: 166px;
+	font-size: 17px;
+	font-family: "HelveticaNeuePro";
+	color: #FFF;
+	text-align: center;
+	background-color: #085794;
+	border-color: #096CB9;
+	border-width: 0 0 4px 0;
+	border-style: solid;
+	padding: 10px 10px 6px 10px;
+	cursor: pointer;
+}
+
+#widget_cambiar_vuelo .form input.calendar {
+	background-image: url('images/icon_calendar.png');
+    background-repeat: no-repeat;
+    background-position: 150px 10px;
+    cursor: pointer;
+	border-style: solid;
+    border-color: #959595;
+    border-radius: 0px;
+    border-width: 0 0 2px 0;
+    font-family: "HelveticaNeuePro";
+    color: #1F3656;
+
+
+}
+
+#widget_cambiar_vuelo .form .radio-button, .content .radio-button label {
+	cursor: pointer;	
+}
+
+#widget_cambiar_vuelo .form .radio-button .btn {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border-radius: 100px;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+#widget_cambiar_vuelo .form .radio-button .btn div{
+	background-color: rgb(0, 0, 0);
+	width: 10px;
+	height: 10px;
+	margin: 5px auto;
+	vertical-align: middle;
+	border-radius: 100px;
+	display: none;
+}
+
+#widget_cambiar_vuelo .form .radio-button.checked .btn div{
+	display: block;
+}
 
 /*------------------------------------------------------*/
 /*------------------------------------------------------*/
@@ -483,6 +996,7 @@
   	top: 0px;
   	background-color: #2D4565;
   	color: #FFF;
+  	padding: 100px 0 0 0;
 }
 
 #widget_resumen_reserva .separator {
@@ -675,11 +1189,15 @@
 	position: absolute;
     top: 20px;
     right: 5px;
+	width: 200px;
     background-color: #1F3656;
     color: #DB9F3C;
     font-family: "FuturaLight";
+    text-align: center;
+    font-size: 17px;
     padding: 5px 0;
     border: 0;
+    cursor: pointer;
 }
 
 #widget_resumen_reserva .cell-submit .button:hover {
@@ -711,7 +1229,8 @@
 	padding: 0;
 }
 #widget_resumen_reserva .cell-origen-destino span {
-	/*line-height: 1px;*/
+	font-family: "HelveticaNeueProMd";
+    font-size: 15px;
 }
 
 #widget_resumen_reserva .cell-cod-origen-destino {
@@ -826,6 +1345,7 @@
 	background-color: transparent;
 	color: #FFF;
 	font-family: "FuturaLight";
+	font-size: 16px;
 	text-align: center;
 	line-height: 30px;
 	border-style: solid;
