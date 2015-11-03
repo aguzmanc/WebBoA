@@ -522,13 +522,13 @@ function validateSeleccionVuelo()
 function validatePassengers()
 {
 	// validate here!!!
-	var personas = $("#div_formulario_personas .persona");
+	var divPersonas = $("#div_formulario_personas .persona");
 
-	var infoPasajeros = [];
+	var pasajeros = [];
 	var isAllValid = true;
 	for(var i=0;i<personas.length;i++) {
-		var persona = $(personas[i]);
-		var dataPersona = {
+		var divPersona = $(disPersonas[i]);
+		var persona = {
 			nombres : "",
 			apellidos : "",
 			tipoDocumento : "",
@@ -537,64 +537,63 @@ function validatePassengers()
 			nroViajeroFrecuente: ""
 		};
 
-		var tipo = persona.attr("data-tipo");
+		var tipo = divPersona.attr("data-tipo");
 
 		var isValid = true;
 
 		// nombres
-		var tbxNombres = persona.find(".nombres");
+		var tbxNombres = divPersona.find(".nombres");
 		if($.trim(tbxNombres.val())=="") {
 			isValid = false;
 			tbxNombres.parent().addClass("active");
 		} else {
-			dataPersona["nombres"] = tbxNombres.val();
+			persona["nombres"] = tbxNombres.val();
 		}
 
 		// apellidos
-		var tbxApellidos = persona.find(".apellidos");
+		var tbxApellidos = divPersona.find(".apellidos");
 		if($.trim(tbxApellidos.val())=="") {
 			isValid = false;
 			tbxApellidos.parent().addClass('active');
 		} else {
-			dataPersona["apellidos"] = tbxApellidos.val();
+			persona["apellidos"] = tbxApellidos.val();
 		}
 
 		// tipo de documento
-		var selectTipoDocumento = persona.find(".tipo-documento");
+		var selectTipoDocumento = divPersona.find(".tipo-documento");
 		if(selectTipoDocumento.val()=="NONE") {
 			isValid = false;
 			selectTipoDocumento.parent().addClass('active');
 		} else {
-			dataPersona["tipoDocumento"] = selectTipoDocumento.val();
+			persona["tipoDocumento"] = selectTipoDocumento.val();
 		}
 
-		var tbxNroDocumento = persona.find(".nro-documento");
+		var tbxNroDocumento = divPersona.find(".nro-documento");
 		if($.trim(tbxNroDocumento.val()) == "") {
 			isValid = false;
 			tbxNroDocumento.parent().addClass('active');
 		} else {
-			dataPersona["nroDocumento"] = tbxNroDocumento.val();
+			persona["nroDocumento"] = tbxNroDocumento.val();
 		}
 
-		dataPersona["telefono"] = persona.find(".telefono").val();
-		dataPersona["nroViajeroFrecuente"] = persona.find(".nro-viajero-frecuente").val();
+		persona["telefono"] = divPersona.find(".telefono").val();
+		persona["nroViajeroFrecuente"] = divPersona.find(".nro-viajero-frecuente").val();
 
 		if(tipo=="infante" || tipo=="ninho") {
-			var pickerNacimiento = persona.find(".nacimiento");
-			console.log($.trim(pickerNacimiento.val()));
+			var pickerNacimiento = divPersona.find(".nacimiento");
 			if($.trim(pickerNacimiento.val()=="") ) {
 				isValid = false;
 				pickerNacimiento.parent().addClass('active');
 			} else {
 				var rawDate = pickerNacimiento.val().split(" ");	
-				dataPersona["nacimiento"] = rawDate[2] +""+ MONTHS_LANGUAGE_TABLE[rawDate[1]] +""+ rawDate[0];
+				persona["nacimiento"] = rawDate[2] +""+ MONTHS_LANGUAGE_TABLE[rawDate[1]] +""+ rawDate[0];
 			}
 		}
 
-		
-
-		if(false == isValid){
-			persona.addClass("invalid");
+		if(isValid)
+			personas.push(persona);
+		else {
+			divPersona.addClass("invalid");
 			setTimeout(function() {
 				$("#div_formulario_personas .persona").removeClass("invalid");
 				$("#div_formulario_personas .persona .validable").removeClass("active");
@@ -607,7 +606,7 @@ function validatePassengers()
 		/* PREPARE AND SEND DATA */
 		var sendData = {
 			seleccionVuelo: prepareSeleccionVueloToSend(),
-			infoPasajeros: 
+			pasajeros : pasajeros 
 		};
 
 		var dataStr = JSON.stringify(sendData);
