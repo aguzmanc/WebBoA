@@ -739,14 +739,10 @@
 
 #info_registro_pasajeros .persona .form .calendar{
 	font-size: 15px !important;
-	background-position: 137px 3px;
+	background-position: right center;
 	background-image: url('images/icon_calendar.png');
 	background-repeat: no-repeat;
 	cursor: pointer;
-}
-
-#info_registro_pasajeros .persona.inactive .form .calendar{
-	background-position: 120px 3px;
 }
 
 #info_registro_pasajeros .persona .form select {

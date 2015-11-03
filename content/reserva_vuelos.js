@@ -503,6 +503,7 @@ function validateSeleccionVuelo()
 {
 	/* PREPARE AND SEND DATA */
 	var sendData = prepareSeleccionVueloToSend();
+	console.log(sendData);
 
 	var dataStr = JSON.stringify(sendData);
 
@@ -526,8 +527,8 @@ function validatePassengers()
 
 	var pasajeros = [];
 	var isAllValid = true;
-	for(var i=0;i<personas.length;i++) {
-		var divPersona = $(disPersonas[i]);
+	for(var i=0;i<divPersonas.length;i++) {
+		var divPersona = $(divPersonas[i]);
 		var persona = {
 			nombres : "",
 			apellidos : "",
@@ -581,7 +582,8 @@ function validatePassengers()
 
 		if(tipo=="infante" || tipo=="ninho") {
 			var pickerNacimiento = divPersona.find(".nacimiento");
-			if($.trim(pickerNacimiento.val()=="") ) {
+			console.log(pickerNacimiento.val());
+			if($.trim(pickerNacimiento.val())=="" ) {
 				isValid = false;
 				pickerNacimiento.parent().addClass('active');
 			} else {
@@ -643,7 +645,8 @@ function asyncValidateSeleccionVuelo(response)
 		form.find(".calendar").datepicker({ 
 			dateFormat: 'dd MM yy',
 			numberOfMonths: 1, 
-			maxDate: 0
+			maxDate: 0,
+			changeYear:true
 		});
 
 		$("#info_resultados_vuelos").removeClass("active");
@@ -1760,9 +1763,9 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 function prepareSeleccionVueloToSend()
 {
 	var packedSeleccionVuelo = { };
-	packedSeleccionVuelo.adulto = seleccionVuelo.adulto;
-	packedSeleccionVuelo.ninho = seleccionVuelo.ninho;
-	packedSeleccionVuelo.infante = seleccionVuelo.infante;
+	packedSeleccionVuelo.adulto = translateSeleccionVueloForService(seleccionVuelo.adulto);
+	packedSeleccionVuelo.ninho = translateSeleccionVueloForService(seleccionVuelo.ninho);
+	packedSeleccionVuelo.infante = translateSeleccionVueloForService(seleccionVuelo.infante);
 	packedSeleccionVuelo.vuelosIda = [];
 
 	var vuelos = allOptions[seleccionVuelo.ida.opcCode].vuelos;
@@ -1789,8 +1792,8 @@ function prepareSeleccionVueloToSend()
 			var vuelo = vuelos[i];
 			packedSeleccionVuelo.vuelosVuelta.push(
 				{
-					horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
-					horaLlegada: ("00"+vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
+					horaSalida: ("00" + vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
+					horaLlegada: ("00" + vuelo.horaLlegada.hh).slice(-2) + ("00"+vuelo.horaLlegada.mm).slice(-2),
 					numVuelo: vuelo.numVuelo,
 					tipoAvion: vuelo.tipoAvion,
 					fechaSalida: vuelo.fecha,
@@ -1803,6 +1806,30 @@ function prepareSeleccionVueloToSend()
 	return packedSeleccionVuelo;
 }
 // ---------------------= =---------------------
+function translateSeleccionVueloForService(sel) 
+{
+	return {
+		num: 			sel.num,
+		precioTotal: 	sel.precioTotal,
+		ida: 			translateSeleccionVueloDetailForService(sel.ida),
+		vuelta: 		translateSeleccionVueloDetailForService(sel.vuelta)
+	};
+}
+// ---------------------= =---------------------
+function translateSeleccionVueloDetailForService(detail)
+{
+	if(detail.precioBase == null) // it might be a empty object
+		return {};
+
+	var tasas = [];
+	for(var k in detail.tasas) 
+		tasas.push({key:k, value:detail.tasas[k]});
+
+	return {
+		precioBase	: detail.precioBase,
+		tasas 		: tasas
+	}
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------
