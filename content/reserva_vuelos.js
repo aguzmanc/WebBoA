@@ -508,7 +508,7 @@ function validateSeleccionVuelo()
 	var dataStr = JSON.stringify(sendData);
 
 	$.ajax({
-		url: urls["validate_flight_selection_service"],
+		url: BoA.urls["validate_flight_selection_service"],
 		type: 'POST',
 		dataType:'json',
 		contentType: "application/json; charset=utf-8",
@@ -614,7 +614,7 @@ function validatePassengers()
 		var dataStr = JSON.stringify(sendData);
 
 		$.ajax({
-			url: urls["register_passengers_service"],
+			url: BoA.urls["register_passengers_service"],
 			type: 'POST',
 			dataType:'json',
 			contentType: "application/json; charset=utf-8",
@@ -917,6 +917,7 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 	for(var key in monthsInDays) {
 		var td = $(document.createElement("td"));
 		td.attr("colspan",monthsInDays[key])
+		  .css("width",(100 * (monthsInDays[key]/7.0))+"%")
 		  .addClass("month")
 		  .html("<h3>" + MONTHS_2_CHARS_LANGUAGE_TABLE[parseInt(key)] + "</h3>");
 		monthsRow.append(td);
@@ -1191,7 +1192,7 @@ function requestSearchParameters(parms)
 	var dataStr = JSON.stringify(data);
 
 	$.ajax({
-		url: urls["nearest_dates_service"],
+		url: BoA.urls["nearest_dates_service"],
 		type: 'POST',
 		dataType:'json',
 		contentType: "application/json; charset=utf-8",
@@ -1244,7 +1245,7 @@ function requestFlights(dateIda, dateVuelta)
 	var dataStr = JSON.stringify(data);
 
 	$.ajax({
-		url: urls["flights_schedule_service"],
+		url: BoA.urls["flights_schedule_service"],
 		type: 'POST',
 		dataType:'json',
 		contentType: "application/json; charset=utf-8",

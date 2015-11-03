@@ -1,7 +1,7 @@
 // ---------------------= =---------------------
 function redirect(url_key)
 {
-	var url = urls[url_key];
+	var url = BoA.urls[url_key];
 
 	var btn = $("#btn_redirect");
 
@@ -11,7 +11,7 @@ function redirect(url_key)
 // ---------------------= =---------------------
 function redirect_with_parms(url_key, parms)
 {
-	var url = urls[url_key] + parms;
+	var url = BoA.urls[url_key] + parms;
 
 	var btn = $("#btn_redirect");
 

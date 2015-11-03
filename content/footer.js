@@ -115,7 +115,7 @@ function validar_busqueda_itinerario()
 		data["regreso"] = raw_date[0] + '' + MONTHS_LANGUAGE_TABLE[raw_date[1]] + '' + raw_date[2];
 	}
 
-	var RESULTS_URL = urls["flight_schedule_results"];
+	var RESULTS_URL = BoA.urls["flight_schedule_results"];
 
 	var form = $('<form target="_blank" method="GET" action="' + RESULTS_URL + '">');
 	$.each(data, function(k,v){
