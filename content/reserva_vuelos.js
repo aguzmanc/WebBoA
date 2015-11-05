@@ -503,7 +503,6 @@ function validateSeleccionVuelo()
 {
 	/* PREPARE AND SEND DATA */
 	var sendData = prepareSeleccionVueloToSend();
-	console.log(sendData);
 
 	var dataStr = JSON.stringify(sendData);
 
@@ -1423,11 +1422,15 @@ function buildDetailPrices(info, tipo)
 			subtotal += info.vuelta.tasas[key];
 	}
 
+	// just for UI purposes 
+	var fakeSubtotal = parseInt(formatCurrencyQuantity(subtotal,false,0));
+	var fakeTotal = parseInt(formatCurrencyQuantity(info.num * fakeSubtotal,false,0));
+
 	tbl.append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
-	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(subtotal,false,0) +"</td></tr>")
+	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+fakeSubtotal+"</td></tr>")
 	   .append("<tr><td></td><td></td><td class='qty'><h3>x "+info.num+"</h3></td></tr>")
 	   .append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
-	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.num * subtotal,false,0)+"</td></tr>");
+	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+fakeTotal+"</td></tr>");
 }
 // ---------------------= =---------------------
 function buildRegistroPersona(tipo, numPx)
@@ -1445,8 +1448,11 @@ function buildRegistroPersona(tipo, numPx)
 
     var tbl = $(persona).find(".form table");
 
-    tbl.append("<tr><th>NOMBRES</th><th>TIPO DE DOCUMENTO</th><th># DE DOCUMENTO</th><th>TEL&Eacute;FONO</th></tr>")
-	   .append("<tr><td><div class='validable'><input type='text' id='tbx_px"+numPx+"_nombres' class='nombres'></div></td><td>" +
+    tbl.append("<tr><th style='width:25%'>NOMBRES</th><th style='width:25%'>APELLIDOS</th><th style='width:25%'>TIPO DE DOCUMENTO</th><th style='width:25%'># DE DOCUMENTO</th></tr>")
+	   .append("<tr>" + 
+	   				"<td><div class='validable'><input type='text' id='tbx_px"+numPx+"_nombres' class='nombres'></div></td>"+
+	   				"<td><div class='validable'><input type='text' id='tbx_px"+numPx+"_apellidos' class='apellidos'></div></td>" +
+	   				"<td>" +
 						"<div class='validable'><select id='select_px"+numPx+"_tipo_documento' class='tipo-documento'>" +
 							"<option value='NONE'>Tipo de Documento</option>" +
 			                "<option value='CI'>CI</option>" +
@@ -1455,11 +1461,12 @@ function buildRegistroPersona(tipo, numPx)
 						"</select></div>" +
 					"</td>" +
 					"<td><div class='validable'><input type='text' id='tbx_px"+numPx+"_documento' class='nro-documento'></div></td>" +
-					"<td><input type='text' id='tbx_px"+numPx+"_telefono' class='telefono'></td></tr>")
-		.append("<tr><th>APELLIDOS</th><th colspan='2'>"+(isAdulto?"EMAIL":"FECHA NACIMIENTO")+"</th><th># VIAJERO FRECUENTE</th></tr>")
+					
+				"</tr>")
+		.append("<tr><th>TEL&Eacute;FONO</th><th colspan='2'>"+(isAdulto?"EMAIL":"FECHA NACIMIENTO")+"</th><th class='disabled'># VIAJERO FRECUENTE</th></tr>")
 		.append(
 			"<tr>" +
-				"<td><div class='validable'><input type='text' id='tbx_px"+numPx+"_apellidos' class='apellidos'></div></td>" +
+				"<td><input type='text' id='tbx_px"+numPx+"_telefono' class='telefono'></td>" +
 				"<td colspan='"+(isAdulto?'2':'1')+"'>" +
 					(isAdulto?
 						"<input type='text' id='tbx_px"+numPx+"_email' class='email'>" :
@@ -1467,10 +1474,10 @@ function buildRegistroPersona(tipo, numPx)
 					) +
 				"</td>" +
 				(isAdulto?"":"<td></td>") +
-				"<td><input type='text' id='tbx_px"+numPx+"_px_frecuente' class='nro-viajero-frecuente'></td>" +
+				"<td><input readonly type='text' id='tbx_px"+numPx+"_px_frecuente' class='nro-viajero-frecuente'></td>" +
 			"</tr>"
 		)
-	  	.append("<tr><td colspan='4'><span>&iquest;No eres viajero frecuente?<a href='#''>REG&Iacute;STRATE</a></span></td></tr>");
+	  	.append("<tr><td colspan='4'><span class='disabled'>&iquest;No eres viajero frecuente?<a href='#''>REG&Iacute;STRATE</a></span></td></tr>");
 
 	$(persona).find("input").focusin(focusOnPersona);
 
@@ -1780,10 +1787,13 @@ function prepareSeleccionVueloToSend()
 				numVuelo: vuelo.numVuelo,
 				tipoAvion: vuelo.tipoAvion,
 				fechaSalida: vuelo.fecha,
-				fareCode: vuelo.tarifas[seleccionVuelo.ida.compartment].fareCode
+				fareCode: vuelo.tarifas[seleccionVuelo.ida.compartment].fareCode,
+				origen: vuelo.origen,
+				destino: vuelo.destino
 			}
 		);
 	}
+
 
 	if(seleccionVuelo.vuelta != null) {
 		packedSeleccionVuelo.vuelosVuelta = [];
@@ -1798,7 +1808,9 @@ function prepareSeleccionVueloToSend()
 					numVuelo: vuelo.numVuelo,
 					tipoAvion: vuelo.tipoAvion,
 					fechaSalida: vuelo.fecha,
-					fareCode: vuelo.tarifas[seleccionVuelo.vuelta.compartment].fareCode
+					fareCode: vuelo.tarifas[seleccionVuelo.vuelta.compartment].fareCode,
+					origen: vuelo.origen,
+					destino: vuelo.destino
 				}
 			);
 		}

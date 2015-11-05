@@ -699,7 +699,7 @@
 #info_registro_pasajeros .persona table tr:first-child th:first-child{width:30%;}
 #info_registro_pasajeros .persona table tr:first-child th:nth-child(2){width:25%;}
 
-#info_registro_pasajeros .persona table th{
+#info_registro_pasajeros .persona table th {
 	color: #1F3656;
 	background-color: transparent;
 	border: none;
@@ -707,6 +707,10 @@
     font-family: "FuturaBook";
     text-align: left;
     padding: 10px 0 0 0;
+}
+
+#info_registro_pasajeros .persona table th.disabled {
+	color: #B1B1B1 !important;
 }
 
 #info_registro_pasajeros .persona table td{
@@ -729,6 +733,13 @@
     font-size: 20px;
     font-family: "HelveticaNeuePro";
     color: #1F3656;
+}
+
+/*DISABLED TEMPORARLY!!!*/
+#info_registro_pasajeros .persona .form input[type="text"].nro-viajero-frecuente,
+#info_registro_pasajeros .persona .form input[type="text"].nro-viajero-frecuente:focus {
+	background-color: #C5C5C5;
+	border-color: #A0A0A0;
 }
 
 #info_registro_pasajeros .persona .form input[type="text"]:focus,
@@ -768,6 +779,11 @@
 	display: block;
     text-align: right;
     padding: 20px 0 0 0;
+}
+
+#info_registro_pasajeros .persona .form span.disabled,
+#info_registro_pasajeros .persona .form span.disabled a {
+	color: #B1B1B1;
 }
 
 #info_registro_pasajeros .persona .form span a{
