@@ -78,8 +78,6 @@ function initializeCloudsBackground()
 
 	$(window).resize(function(ev) {
 		graphicsEngine.setSize(this.innerWidth, this.innerHeight);
-
-		console.log(this.innerWidth, this.innerHeight);
 	});
 
 	sky = new Sky();
