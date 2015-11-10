@@ -1328,6 +1328,8 @@ function updatePriceByTipo(tipo, changeFlapper)
 				seleccionVuelo[tipo].precioTotal += seleccionVuelo[tipo].vuelta.tasas[keyTasa];	
 		}
 
+		// Redondeo al subtotal y total
+		seleccionVuelo[tipo].precioTotal = parseInt(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal,false,0));
 		seleccionVuelo[tipo].precioTotal *= seleccionVuelo[tipo].num;
 
 		seleccionVuelo.precioTotal = 
