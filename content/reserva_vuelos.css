@@ -36,7 +36,8 @@
 #widget_resumen_reserva td.selector-pax ul li,
 .ui-section.wide.results .header .stage span,
 .ui-section.wide.results .header .stage .number,
-#info_registro_pasajeros .persona 
+#info_registro_pasajeros .persona,
+#info_pago_bancos .bank
 {
 	transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -816,6 +817,39 @@
 	color: #FFF;
 }
 
+/*--------------------------------------------------*/
+/*--------------- PANTALLA DE PAGO -----------------*/
+/*--------------- HACIA LOS BANCOS -----------------*/
+/*--------------------------------------------------*/
+
+#info_pago_bancos .banks-container td{
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	background-color: transparent; 
+	padding: 0;
+}
+
+#info_pago_bancos .bank {
+	width: 140px;
+	height: 140px;
+	background-color: #F00;
+	background-size: 140px;
+	margin: 0 auto;
+	border-radius: 30px;
+	cursor: pointer;
+}
+
+#info_pago_bancos .bank:hover {
+	width: 160px;
+	height: 160px;
+	background-size: 160px;
+	border-radius: 0;
+}
+
+.bank.union {
+	background-image: url('images/bancos/union.png');
+}
 
 /*------------------------------------------------------*/
 /*--------------- WIDGET CAMBIAR VUELO -----------------*/

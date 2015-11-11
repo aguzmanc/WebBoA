@@ -711,10 +711,14 @@ function focusOnPersona()
 // ---------------------= =---------------------
 function checkSearchWidgetAvailability()
 {
-	if(waitingForFlightsData)
+	if(waitingForFlightsData){
 		$("#widget_cambiar_vuelo .btn-expand").addClass("searching");
-	else
+		$("#widget_cambiar_vuelo .form").hide();
+	}
+	else{
 		$("#widget_cambiar_vuelo .btn-expand").removeClass("searching");
+		$("#widget_cambiar_vuelo .form").show();
+	}
 }
 // ---------------------= =---------------------
 /* cambio en fila de detalles de resultados segun ancho */
@@ -1083,11 +1087,11 @@ function handleInitialRequest()
 
 	// origen
 	if(searchParameters.origen == null)
-		searchParameters.origen = "CBB";
+		searchParameters.origen = BoA.defaultOrigen;
 
 	// destino
 	if(searchParameters.destino == null)
-		searchParameters.destino = "VVI";
+		searchParameters.destino = BoA.defaultDestino;
 
 	// salida
 	if(searchParameters.fechaIda == null) {
@@ -1335,7 +1339,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 		seleccionVuelo.precioTotal = 
 			seleccionVuelo.adulto.precioTotal + 
 			seleccionVuelo.ninho.precioTotal + 
-			seleccionVuelo.infante.precioTotal; 
+			seleccionVuelo.infante.precioTotal;
 	}else {
 		seleccionVuelo.precioTotal = -1;
 	}

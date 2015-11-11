@@ -1,0 +1,61 @@
+ /*
+ * Theme Name: Boliviana de Aviación
+ * Theme URI: http://www.wasp.bo/
+ * Description: Skin para la página web de Boa
+ * Author: Arnold Marcelo Guzmán C.; Brian Terceros Salinas
+ * Author URI: http://
+ * Version: 1.0
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags: boa, boliviana, aviacion, bolivia, viajes
+ * Text Domain: boa
+ */
+
+@charset "UTF-8";
+@import "lib/reset.css";
+
+@font-face {
+    font-family: "HelveticaNeuePro";
+    src: url('fonts/HelveticaNeueLTPro-Th.woff');
+}
+@font-face {
+    font-family: "HelveticaNeueProMd";
+    src: url('fonts/HelveticaNeueLTPro-Md.woff');
+}
+@font-face {
+    font-family: "FuturaBold";
+    src: url('fonts/FuturaStd-Bold.woff');
+}
+@font-face {
+    font-family: "FuturaHeavy";
+    src: url('fonts/FuturaStd-Heavy.woff');
+}
+@font-face {
+    font-family: "FuturaMedium";
+    src: url('fonts/FuturaStd-Medium.woff');
+}
+@font-face {
+    font-family: "FuturaBook";
+    src: url('fonts/FuturaStd-Book.woff');
+}
+@font-face {
+    font-family: "FuturaLight";
+    src: url('fonts/FuturaStd-Light.woff');
+}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+header .logo-header {
+	position: fixed;
+	width: 320px;
+	height: 100px;
+	margin: -4px 0;
+	background-image: url('images/movil/logo_boa.png');
+	background-size: 320px;
+}
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
