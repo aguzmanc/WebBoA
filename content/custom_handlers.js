@@ -40,7 +40,61 @@ var BoA = {
 	}, 
 
 	defaultOrigen: 'CBB',
-	defaultDestino: 'VVI'
+	defaultDestino: 'VVI',
+
+	// Configuracion de bancos
+	banks : {
+		bcp: {
+			enabled: true,
+			image: "images/bancos/bcp.png",
+			url: "http://www.kittenwar.com"
+		}, 
+		bnb: {
+			enabled: true,
+			image: "images/bancos/bnb.png",
+			url: "http://www.kittenwar.com"
+		},
+		economico: {
+			enabled: true,
+			image: "images/bancos/economico.png",
+			url: "http://www.kittenwar.com"
+		},
+		fassil: {
+			enabled: true,
+			image: "images/bancos/fassil.png",
+			url: "http://www.kittenwar.com"
+		},
+		fie: {
+			enabled: true,
+			image: "images/bancos/fie.png",
+			url: "http://www.kittenwar.com"
+		},
+		ganadero: {
+			enabled: true,
+			image: "images/bancos/ganadero.png",
+			url: "http://www.kittenwar.com"
+		},
+		masterCard: {
+			enabled: true,
+			image: "images/bancos/master_card.png",
+			url: "http://www.kittenwar.com"
+		},
+		prodem: {
+			enabled: true,
+			image: "images/bancos/prodem.png",
+			url: "http://www.kittenwar.com"
+		},
+		union: {
+			enabled: true,
+			image: "images/bancos/union.png",
+			url: "http://www.kittenwar.com"
+		},
+		visa: {
+			enabled: true,
+			image: "images/bancos/visa.png",
+			url: "http://www.kittenwar.com"
+		}
+	}
 };
 // ---------------------------------------------------------------------------
 function handle_reserva_vuelos(parameters)

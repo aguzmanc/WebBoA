@@ -145,6 +145,32 @@ $(document).on('ready',function()
 	$("#btn_volver_vuelos").click(backToFlightStage);
 	$("#btn_validar_pasajeros").click(validatePassengers);
 
+	// BANKS SETUP
+	var tblBanks = $("#info_pago_bancos .banks-container");
+	tblBanks.find("tbody").html(""); //clear
+	var columnsCreated = 0;
+	var row;
+	for(var bankKey in BoA.banks) {
+		var bank = BoA.banks[bankKey];
+
+		if(false == bank.enabled) 
+			continue;
+
+		if(columnsCreated==0) {
+			row = document.createElement("tr");
+			tblBanks.find("tbody").append(row);
+
+			// console.log(tblBanks[0]);
+		}
+
+		var cell = document.createElement("td");
+		row.appendChild(cell);
+		$(cell).append("<a href='"+bank.url+"'><div class='bank "+bankKey+"'></div></a>");
+
+		columnsCreated = (columnsCreated+1)%3;
+
+	}
+
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
 	handleScroll();

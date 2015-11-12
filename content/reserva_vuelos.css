@@ -833,7 +833,6 @@
 #info_pago_bancos .bank {
 	width: 140px;
 	height: 140px;
-	background-color: #F00;
 	background-size: 140px;
 	margin: 0 auto;
 	border-radius: 30px;
@@ -847,9 +846,16 @@
 	border-radius: 0;
 }
 
-.bank.union {
-	background-image: url('images/bancos/union.png');
-}
+.bank.bcp {background-image: url('images/bancos/bcp.png');}
+.bank.bnb {background-image: url('images/bancos/bnb.png');}
+.bank.economico {background-image: url('images/bancos/economico.png');}
+.bank.fassil {background-image: url('images/bancos/fassil.png');}
+.bank.fie {background-image: url('images/bancos/fie.png');}
+.bank.ganadero {background-image: url('images/bancos/ganadero.png');}
+.bank.masterCard {background-image: url('images/bancos/master_card.png');}
+.bank.prodem {background-image: url('images/bancos/prodem.png');}
+.bank.union {background-image: url('images/bancos/union.png');}
+.bank.visa {background-image: url('images/bancos/visa.png');}
 
 /*------------------------------------------------------*/
 /*--------------- WIDGET CAMBIAR VUELO -----------------*/
