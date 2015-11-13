@@ -39,11 +39,20 @@ var BoA = {
 		register_passengers_service: "http://localhost/content/fake_services/register_passengers_service.php"
 	}, 
 
-	defaultOrigen: 'CBB',
-	defaultDestino: 'VVI',
+	defaultConsultaVuelos :{
+		origen: 'CBB',
+		destino: 'VVI',
+		fechaIda : formatCompactDate(new Date()), // today 
+		fechaVuelta: null,
+		adulto: 1,
+		infante: 0,
+		ninho: 0
+	},
 
 	// Configuracion de bancos
 	banks : {
+		columnsPerRow: 3, // Cambiar este tamaño de acuerdo a la grilla
+
 		bcp: {
 			enabled: true,
 			image: "images/bancos/bcp.png",

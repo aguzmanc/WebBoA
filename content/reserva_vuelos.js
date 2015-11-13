@@ -149,8 +149,13 @@ $(document).on('ready',function()
 	var tblBanks = $("#info_pago_bancos .banks-container");
 	tblBanks.find("tbody").html(""); //clear
 	var columnsCreated = 0;
+	var columnsPerRow = BoA.banks.columnsPerRow;
 	var row;
+
 	for(var bankKey in BoA.banks) {
+		if(bankKey == 'columnsPerRow') // special value
+			continue;
+
 		var bank = BoA.banks[bankKey];
 
 		if(false == bank.enabled) 
@@ -167,8 +172,7 @@ $(document).on('ready',function()
 		row.appendChild(cell);
 		$(cell).append("<a href='"+bank.url+"'><div class='bank "+bankKey+"'></div></a>");
 
-		columnsCreated = (columnsCreated+1)%3;
-
+		columnsCreated = (columnsCreated+1) % columnsPerRow;
 	}
 
 	// WINDOW SETUP
@@ -618,7 +622,7 @@ function validatePassengers()
 		}
 
 		if(isValid)
-			personas.push(persona);
+			pasajeros.push(persona);
 		else {
 			divPersona.addClass("invalid");
 			setTimeout(function() {
@@ -651,8 +655,11 @@ function validatePassengers()
 // ---------------------= =---------------------
 function asyncRegisterPassengers(response)
 {
-	console.log("success!!");
-	console.log(response);
+	$("#info_registro_pasajeros").removeClass("active");
+	$("#info_pago_bancos").addClass("active");
+
+	$("#stage_registro").removeClass("active");
+	$("#stage_compra").addClass("active");
 }
 // ---------------------= =---------------------
 function asyncValidateSeleccionVuelo(response)
@@ -1106,34 +1113,18 @@ function fillTableWithMessage(table, message)
 // ---------------------= =---------------------
 function handleInitialRequest()
 {
-	searchParameters.origen = location.queryString['origen'];
-	searchParameters.destino = location.queryString['destino'];
-	searchParameters.fechaIda = location.queryString['fecha_ida'];
-	searchParameters.fechaVuelta = location.queryString['fecha_vuelta'];
+	// searchParameters.origen = location.queryString['origen'];
+	// searchParameters.destino = location.queryString['destino'];
+	// searchParameters.fechaIda = location.queryString['fecha_ida'];
+	// searchParameters.fechaVuelta = location.queryString['fecha_vuelta'];
 
 	// origen
-	if(searchParameters.origen == null)
-		searchParameters.origen = BoA.defaultOrigen;
+	// if(searchParameters.origen == null)
 
-	// destino
-	if(searchParameters.destino == null)
-		searchParameters.destino = BoA.defaultDestino;
-
-	// salida
-	if(searchParameters.fechaIda == null) {
-		searchParameters.fechaIda = todayStr;
-	}
-
-	// DEBUG
-	// var tomorrowDate = new Date();
-	// tomorrowDate.setDate(tomorrowDate.getDate()+1);
-	// tomorrowStr = formatCompactDate(tomorrowDate);
-	// searchParameters.fechaIda = tomorrowStr;
-
-	// var oneTomorrow = new Date();
-	// oneTomorrow.setDate(oneTomorrow.getDate()+2);
-	// searchParameters.fechaVuelta = formatCompactDate(oneTomorrow);
-	// --------
+	searchParameters.origen = BoA.defaultConsultaVuelos.origen;
+	searchParameters.destino = BoA.defaultConsultaVuelos.destino;
+	searchParameters.fechaIda = BoA.defaultConsultaVuelos.fechaIda;
+	searchParameters.fechaVuelta = BoA.defaultConsultaVuelos.fechaVuelta;
 
 	$("#select_origen").val(searchParameters.origen);
 	$("#select_destino").val(searchParameters.destino);
