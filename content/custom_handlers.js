@@ -103,6 +103,12 @@ var BoA = {
 			image: "images/bancos/visa.png",
 			url: "http://www.kittenwar.com"
 		}
+	}, 
+
+	// Configuracion de Widget (compra)
+	widgetReservas :{
+		enableCompraStage: true,
+		redirectUrlPxRegisterFinished: "http://www.kittenwar.com"		
 	}
 };
 // ---------------------------------------------------------------------------

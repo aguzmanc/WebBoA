@@ -23,6 +23,8 @@
 	<script type="text/javascript" src="content/common.js"></script>
 	<script type="text/javascript" src="content/language_data_es.js"></script><!-- CHANGE BY LANGUAGE -->
 	<script type="text/javascript" src="content/custom_handlers.js"></script>
+
+	<script type="text/javascript" src="content/movil.js"></script>
 	<!--
 	<script type="text/javascript" src="content/home.js"></script>
 	<script type="text/javascript" src="content/header.js"></script>
@@ -38,9 +40,54 @@
 </head>
 <body>
 	<header style="display:block">
-		<a id="btn_return_home" href="http://www.boa.bo"></a>
+		<div id="btn_menu"></div>
 		<div class="logo-header"></div>
-		<ul id="main_menu">
+
+
+		<ul id="main_menu" data-menu_level="first">
+			<li id="menu_item_planifica">
+				<span>PLANIFICA TU VIAJE</span>
+				<ul>
+					<li>RESERVAR VUELOS</li>
+					<li>ESTADO DEL VUELO</li>
+					<li>HORARIO DE VUELOS</li>
+				</ul>
+			</li>
+			<li id="menu_item_antes_viajar">
+				<span>ANTES DE VIAJAR</span>
+				<ul>
+					<li>POL&Iacute;TICA DE EQUIPAJE</li>
+					<li>TIPS DE EQUIPAJE</li>
+					<li>LLEGAR AL AEROPUERTO</li>
+					<li>SERVICIOS ESPECIALES</li>
+					<li>PASAJEROS ESPECIALES</li>
+					<li>MEN&Uacute; ESPECIAL</li>
+					<li>DOCUMENTACION DE VIAJE, VISA Y API</li>
+					<li>VACUNAS</li>
+					<li>DERECHOS DE LOS PASAJEROS</li>
+				</ul>
+			</li>
+			<li id="menu_item_experiencia_boa">
+				<span>EXPERIENCIA BoA</span>
+				<ul>
+					<li>NUESTRA FLOTA</li>
+					<li>EXPERIENCIA A BORDO</li>
+					<li>SEGURO INTERNACIONAL</li>
+					<li>EN EL AEROPUERTO</li>
+					<li>CARACTER&Iacute;STICAS DE LAS CABINAS</li>
+				</ul>
+			</li>
+			<li id="menu_item_somos_boa">
+				<span>SOMOS BoA</span>
+				<ul>
+					<li>PERFIL CORPORATIVO</li>
+					<li>SOMOS IOSA</li>
+					<li>RECONOCIMIENTOS Y PREMIOS</li>
+				</ul>
+			</li>
+		</ul>
+
+		<ul id="main_menu" style="display:none">
 			<li id="menu_item_planifica" >
 				<span>PLANIFICA TU VIAJE</span>
 				<div class="shadow-margin-left"></div>

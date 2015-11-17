@@ -834,6 +834,7 @@
 	width: 140px;
 	height: 140px;
 	background-size: 140px;
+	background-repeat: no-repeat;
 	margin: 0 auto;
 	border-radius: 30px;
 	cursor: pointer;

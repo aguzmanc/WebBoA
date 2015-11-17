@@ -43,6 +43,14 @@
     src: url('fonts/FuturaStd-Light.woff');
 }
 /* --------------------------------------------------------------------------- */
+#main_menu
+{
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+}
 /* --------------------------------------------------------------------------- */
 header .logo-header {
 	position: fixed;
@@ -53,6 +61,76 @@ header .logo-header {
 	background-size: 320px;
 }
 /* --------------------------------------------------------------------------- */
+#btn_menu {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background-image: url('images/movil/icon_menu.png');
+    background-size: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+
+#btn_menu:active {
+    background-color: blue;
+}
+/* --------------------------------------------------------------------------- */
+#main_menu {
+    position: fixed;
+    top: 100px;
+    left: -250px;
+    width: 200px;
+    background-color: red;
+}
+
+#main_menu.active {
+    left: 0px;
+}
+
+#main_menu > li { cursor: pointer;}
+
+#main_menu > li:active {
+    background-color: blue;
+}
+
+#main_menu > li > span { 
+    padding: 30px 10px 10px 0;
+    text-align: right;
+}
+
+#main_menu[data-menu_level="first"] > li > span {
+    display: block;
+}
+
+#main_menu[data-menu_level="second"] > li > span {
+    display: none;
+}
+
+#main_menu > li > ul { }
+
+#main_menu[data-menu_level="first"] > li > ul {
+    display: none;
+}
+
+#main_menu[data-menu_level="second"] > li.selected > ul {
+    display: block;
+}
+
+<ul id="main_menu" data-menu_level="first">
+            <li id="menu_item_planifica">
+                <span>PLANIFICA TU VIAJE</span>
+                <ul>
+                    <li>RESERVAR VUELOS</li>
+                    <li>ESTADO DEL VUELO</li>
+                    <li>HORARIO DE VUELOS</li>
+                </ul>
+            </li>
+            <li id="menu_item_antes_viajar">
+                <span>ANTES DE VIAJAR</span>
+                <ul>
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

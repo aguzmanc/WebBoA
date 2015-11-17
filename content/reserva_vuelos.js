@@ -108,7 +108,7 @@ var compartmentNames = {"2":"Business","3":"Econ&oacute;mica"};
  **********************************************************/
 $(document).on('ready',function()
 {
-	if($("#ui_reserva_vuelos").data("mode") !="widget"){
+	if($("#ui_reserva_vuelos").data("mode") !="widget") {
 		initialize_header(true);
 		initialize_ui_sections({anchor_section_headers:false});	
 	}
@@ -145,34 +145,38 @@ $(document).on('ready',function()
 	$("#btn_volver_vuelos").click(backToFlightStage);
 	$("#btn_validar_pasajeros").click(validatePassengers);
 
-	// BANKS SETUP
-	var tblBanks = $("#info_pago_bancos .banks-container");
-	tblBanks.find("tbody").html(""); //clear
-	var columnsCreated = 0;
-	var columnsPerRow = BoA.banks.columnsPerRow;
-	var row;
+	// STAGES SETUP
+	if(false == BoA.widgetReservas.enableCompraStage) {
+		$("#stage_compra").hide();
+	} else {
+		// BANKS SETUP
+		var tblBanks = $("#info_pago_bancos .banks-container");
+		tblBanks.find("tbody").html(""); //clear
+		var columnsCreated = 0;
+		var columnsPerRow = BoA.banks.columnsPerRow;
+		var row;
 
-	for(var bankKey in BoA.banks) {
-		if(bankKey == 'columnsPerRow') // special value
-			continue;
 
-		var bank = BoA.banks[bankKey];
+		for(var bankKey in BoA.banks) {
+			if(bankKey == 'columnsPerRow') // special value
+				continue;
 
-		if(false == bank.enabled) 
-			continue;
+			var bank = BoA.banks[bankKey];
 
-		if(columnsCreated==0) {
-			row = document.createElement("tr");
-			tblBanks.find("tbody").append(row);
+			if(false == bank.enabled) 
+				continue;
 
-			// console.log(tblBanks[0]);
+			if(columnsCreated==0) {
+				row = document.createElement("tr");
+				tblBanks.find("tbody").append(row);
+			}
+
+			var cell = document.createElement("td");
+			row.appendChild(cell);
+			$(cell).append("<a href='"+bank.url+"'><div class='bank "+bankKey+"'></div></a>");
+
+			columnsCreated = (columnsCreated+1) % columnsPerRow;
 		}
-
-		var cell = document.createElement("td");
-		row.appendChild(cell);
-		$(cell).append("<a href='"+bank.url+"'><div class='bank "+bankKey+"'></div></a>");
-
-		columnsCreated = (columnsCreated+1) % columnsPerRow;
 	}
 
 	// WINDOW SETUP
@@ -655,11 +659,20 @@ function validatePassengers()
 // ---------------------= =---------------------
 function asyncRegisterPassengers(response)
 {
-	$("#info_registro_pasajeros").removeClass("active");
-	$("#info_pago_bancos").addClass("active");
+	if(response["success"] == false) {
+		console.log(response["reason"]);
+		return;
+	}
 
-	$("#stage_registro").removeClass("active");
-	$("#stage_compra").addClass("active");
+	if(BoA.widgetReservas.enableCompraStage) {
+		$("#info_registro_pasajeros").removeClass("active");
+		$("#info_pago_bancos").addClass("active");
+
+		$("#stage_registro").removeClass("active");
+		$("#stage_compra").addClass("active");	
+	} else {
+		window.location.replace(BoA.widgetReservas.redirectUrlPxRegisterFinished);
+	}
 }
 // ---------------------= =---------------------
 function asyncValidateSeleccionVuelo(response)
