@@ -163,7 +163,7 @@ $(document).on('ready',function()
 
 			var bank = BoA.banks[bankKey];
 
-			if(false == bank.enabled) 
+			if(false == bank.visible) 
 				continue;
 
 			if(columnsCreated==0) {
@@ -173,7 +173,7 @@ $(document).on('ready',function()
 
 			var cell = document.createElement("td");
 			row.appendChild(cell);
-			$(cell).append("<a href='"+bank.url+"'><div class='bank "+bankKey+"'></div></a>");
+			$(cell).append("<a href='"+bank.url+"' "+(bank.enabled?"":"class='disabled'")+"><div class='bank "+bankKey+" "+(bank.enabled?"":"disabled")+"' ></div></a>");
 
 			columnsCreated = (columnsCreated+1) % columnsPerRow;
 		}

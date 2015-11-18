@@ -2,18 +2,36 @@
 $(document).on('ready',function()
 {
 	$("#btn_menu").click(toggleMainMenu);
+
+	$("#main_menu > li").click(clickMenuItem);
 });
 /* --------------------------------------------------------------------------- */
 function toggleMainMenu() 
 {
 	var menu = $("#main_menu");
 
-	if(menu.hasClass("active"))
-		menu.removeClass("active");
+	if(menu.hasClass("active")) {
+		var level = menu.attr("data-level");
+
+		if(level=="first")
+			menu.removeClass("active");
+		else if(level == "second") {
+			menu.attr("data-level","first")
+			menu.find("li").removeClass("selected");
+		}
+	}
 	else
 		menu.addClass("active");
 }
 /* --------------------------------------------------------------------------- */
+function clickMenuItem() 
+{
+	$(this.parentNode).find("li").removeClass("selected");
+
+	$(this).addClass("selected");
+
+	$("#main_menu").attr("data-level","second");
+}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

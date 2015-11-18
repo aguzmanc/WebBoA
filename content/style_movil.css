@@ -43,7 +43,8 @@
     src: url('fonts/FuturaStd-Light.woff');
 }
 /* --------------------------------------------------------------------------- */
-#main_menu
+#main_menu,
+#main_menu > li > ul
 {
     transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -86,8 +87,12 @@ header .logo-header {
     background-color: red;
 }
 
-#main_menu.active {
+#main_menu[data-level="first"].active {
     left: 0px;
+}
+
+#main_menu[data-level="second"] {
+    left: -250px;
 }
 
 #main_menu > li { cursor: pointer;}
@@ -99,38 +104,33 @@ header .logo-header {
 #main_menu > li > span { 
     padding: 30px 10px 10px 0;
     text-align: right;
-}
-
-#main_menu[data-menu_level="first"] > li > span {
     display: block;
 }
 
-#main_menu[data-menu_level="second"] > li > span {
-    display: none;
+#main_menu > li > ul { 
+    position: fixed;
+    top: 100px;
+    left: -250px;
+    width: 200px;
+    background-color: #008000;
 }
 
-#main_menu > li > ul { }
-
-#main_menu[data-menu_level="first"] > li > ul {
-    display: none;
+#main_menu[data-level="first"] > li > ul {
+    left: -250px;
 }
 
-#main_menu[data-menu_level="second"] > li.selected > ul {
-    display: block;
+#main_menu[data-level="second"] > li.selected > ul {
+    left: 0;
 }
 
-<ul id="main_menu" data-menu_level="first">
-            <li id="menu_item_planifica">
-                <span>PLANIFICA TU VIAJE</span>
-                <ul>
-                    <li>RESERVAR VUELOS</li>
-                    <li>ESTADO DEL VUELO</li>
-                    <li>HORARIO DE VUELOS</li>
-                </ul>
-            </li>
-            <li id="menu_item_antes_viajar">
-                <span>ANTES DE VIAJAR</span>
-                <ul>
+#main_menu > li > ul > li {
+    padding: 30px 10px 10px 0;
+    text-align: right;
+}
+
+#main_menu > li > ul > li:active {
+    background-color: blue;
+}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
