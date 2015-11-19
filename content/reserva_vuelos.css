@@ -245,6 +245,10 @@
 	max-height: 9999px
 }
 
+#ui_reserva_vuelos .info .descripcion.wide {
+	padding-right: 20px;
+}
+
 /* --------------------------------------------- */
 /* ----------- RESULTADOS DE VUELOS ------------ */
 /* --------------------------------------------- */
@@ -824,61 +828,47 @@
 
 #info_pago_bancos .banks-container td{
 	width: 200px;
-	height: 200px;
+	height: 180px;
 	text-align: center;
-	background-color: transparent; 
+	/*background-color: red; */
 	padding: 0;
 }
 
 #info_pago_bancos .bank {
-	width: 140px;
-	height: 140px;
-	background-size: 140px;
-	background-repeat: no-repeat;
-	margin: 0 auto;
-	border-radius: 30px;
-	cursor: pointer
+	width: 100px;
+	height: 100px;
+	/*margin: 20px;*/
+	border-radius: 20px;
+	cursor: pointer;
 }
 
-#info_pago_bancos a:not(.disabled) .bank:hover {
-	width: 160px;
-	height: 160px;
-	background-size: 160px;
+#info_pago_bancos .bank.disabled {
+	cursor: default;
+}
+
+#info_pago_bancos .bank:not(.disabled):hover {
+	width: 140px;
+	height: 140px;
+	/*margin: 0;*/
 	border-radius: 0;
 }
 
 #info_pago_bancos a.disabled,
 #info_pago_bancos a.disabled .bank.disabled { cursor: default; }
 
-.bank.bcp {background-image: url('images/bancos/bcp.png');}
-.bank.bcp.disabled {background-image: url('images/bancos/bcp_disabled.png');}
 
-.bank.bnb {background-image: url('images/bancos/bnb.png');}
-.bank.bnb.disabled {background-image: url('images/bancos/bnb_disabled.png');}
-
-.bank.economico {background-image: url('images/bancos/economico.png');}
-.bank.economico.disabled {background-image: url('images/bancos/economico_disabled.png');}
-
-.bank.fassil {background-image: url('images/bancos/fassil.png');}
-.bank.fassil.disabled {background-image: url('images/bancos/fassil_disabled.png');}
-
-.bank.fie {background-image: url('images/bancos/fie.png');}
-.bank.fie.disabled {background-image: url('images/bancos/fie_disabled.png');}
-
-.bank.ganadero {background-image: url('images/bancos/ganadero.png');}
-.bank.ganadero.disabled {background-image: url('images/bancos/ganadero_disabled.png');}
-
-.bank.masterCard {background-image: url('images/bancos/master_card.png');}
-.bank.masterCard.disabled {background-image: url('images/bancos/master_card_disabed.png');}
-
-.bank.prodem {background-image: url('images/bancos/prodem.png');}
-.bank.prodem.disabled {background-image: url('images/bancos/prodem_disabled.png');}
-
-.bank.union {background-image: url('images/bancos/union.png');}
-.bank.union.disabled {background-image: url('images/bancos/union_disabled.png');}
-
-.bank.visa {background-image: url('images/bancos/visa.png');}
-.bank.visa.disabled {background-image: url('images/bancos/visa_disabled.png');}
+#info_pago_bancos .codigo-reserva {
+	font-size: 100px;
+    font-family: "HelveticaNeueProMd";
+    background-color: rgba(31, 54, 89, 0.31);
+    padding: 10px 30px 0 30px;
+    width: 300px;
+    margin: 10px auto;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #1F3656;
+    border-width: 4px;
+}
 
 /*------------------------------------------------------*/
 /*--------------- WIDGET CAMBIAR VUELO -----------------*/

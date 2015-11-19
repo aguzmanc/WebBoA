@@ -56,61 +56,53 @@ var BoA = {
 		bcp: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/bcp.png",
+			image: "content/images/bancos/bcp",
 			url: "http://www.kittenwar.com"
 		}, 
 		bnb: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/bnb.png",
+			image: "content/images/bancos/bnb",
 			url: "http://www.kittenwar.com"
 		},
 		economico: {
 			visible: true,
 			enabled: false,
-			image: "images/bancos/economico.png",
 			url: "http://www.kittenwar.com"
 		},
 		fassil: {
 			visible: true,
 			enabled: false,
-			image: "images/bancos/fassil.png",
 			url: "http://www.kittenwar.com"
 		},
 		fie: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/fie.png",
 			url: "http://www.kittenwar.com"
 		},
 		ganadero: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/ganadero.png",
 			url: "http://www.kittenwar.com"
 		},
 		masterCard: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/master_card.png",
 			url: "http://www.kittenwar.com"
 		},
 		prodem: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/prodem.png",
 			url: "http://www.kittenwar.com"
 		},
 		union: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/union.png",
 			url: "http://www.kittenwar.com"
 		},
 		visa: {
 			visible: true,
 			enabled: true,
-			image: "images/bancos/visa.png",
 			url: "http://www.kittenwar.com"
 		}
 	}, 

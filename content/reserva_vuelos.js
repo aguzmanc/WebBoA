@@ -156,7 +156,6 @@ $(document).on('ready',function()
 		var columnsPerRow = BoA.banks.columnsPerRow;
 		var row;
 
-
 		for(var bankKey in BoA.banks) {
 			if(bankKey == 'columnsPerRow') // special value
 				continue;
@@ -173,7 +172,11 @@ $(document).on('ready',function()
 
 			var cell = document.createElement("td");
 			row.appendChild(cell);
-			$(cell).append("<a href='"+bank.url+"' "+(bank.enabled?"":"class='disabled'")+"><div class='bank "+bankKey+" "+(bank.enabled?"":"disabled")+"' ></div></a>");
+
+			if(bank.enabled)
+				$(cell).append("<a href='"+bank.url+"'><img class='bank' src='content/images/bancos/"+bankKey+".png'></a>");
+			else
+				$(cell).append("<img class='bank "+bankKey+" disabled' src='content/images/bancos/"+bankKey+"_disabled.png'>");
 
 			columnsCreated = (columnsCreated+1) % columnsPerRow;
 		}
@@ -670,6 +673,8 @@ function asyncRegisterPassengers(response)
 
 		$("#stage_registro").removeClass("active");
 		$("#stage_compra").addClass("active");	
+
+		$("#widget_resumen_reserva").hide();
 	} else {
 		window.location.replace(BoA.widgetReservas.redirectUrlPxRegisterFinished);
 	}
