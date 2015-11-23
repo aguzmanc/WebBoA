@@ -56,13 +56,11 @@ var BoA = {
 		bcp: {
 			visible: true,
 			enabled: true,
-			image: "content/images/bancos/bcp",
 			url: "http://www.kittenwar.com"
 		}, 
 		bnb: {
 			visible: true,
 			enabled: true,
-			image: "content/images/bancos/bnb",
 			url: "http://www.kittenwar.com"
 		},
 		economico: {

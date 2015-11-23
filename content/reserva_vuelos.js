@@ -145,43 +145,6 @@ $(document).on('ready',function()
 	$("#btn_volver_vuelos").click(backToFlightStage);
 	$("#btn_validar_pasajeros").click(validatePassengers);
 
-	// STAGES SETUP
-	if(false == BoA.widgetReservas.enableCompraStage) {
-		$("#stage_compra").hide();
-	} else {
-		// BANKS SETUP
-		var tblBanks = $("#info_pago_bancos .banks-container");
-		tblBanks.find("tbody").html(""); //clear
-		var columnsCreated = 0;
-		var columnsPerRow = BoA.banks.columnsPerRow;
-		var row;
-
-		for(var bankKey in BoA.banks) {
-			if(bankKey == 'columnsPerRow') // special value
-				continue;
-
-			var bank = BoA.banks[bankKey];
-
-			if(false == bank.visible) 
-				continue;
-
-			if(columnsCreated==0) {
-				row = document.createElement("tr");
-				tblBanks.find("tbody").append(row);
-			}
-
-			var cell = document.createElement("td");
-			row.appendChild(cell);
-
-			if(bank.enabled)
-				$(cell).append("<a href='"+bank.url+"'><img class='bank' src='content/images/bancos/"+bankKey+".png'></a>");
-			else
-				$(cell).append("<img class='bank "+bankKey+" disabled' src='content/images/bancos/"+bankKey+"_disabled.png'>");
-
-			columnsCreated = (columnsCreated+1) % columnsPerRow;
-		}
-	}
-
 	// WINDOW SETUP
 	$(window).resize(checkResultsTableWidth);
 	handleScroll();
@@ -667,6 +630,34 @@ function asyncRegisterPassengers(response)
 		return;
 	}
 
+	$("#lbl_codigo_reserva").text(response["pnr"]);
+
+	if (false == BoA.widgetReservas.enableCompraStage) {
+		$("#stage_compra").hide();
+	} else {
+		var banks = {};
+
+		for(var bankKey in response.banks) {
+			var prototypeBank = BoA.banks[bankKey];
+
+			if(prototypeBank == null)
+				continue;
+
+			var bank = {
+				visible: prototypeBank.visible,
+				enabled: response.banks[bankKey].isLimitApproved,
+				url: 	 prototypeBank.url,
+				msg: 	 response.banks[bankKey].msg
+			};
+
+			banks[bankKey] = bank;
+		}
+
+		console.log(banks);
+
+		buildBanks(banks);
+	}
+
 	if(BoA.widgetReservas.enableCompraStage) {
 		$("#info_registro_pasajeros").removeClass("active");
 		$("#info_pago_bancos").addClass("active");
@@ -679,7 +670,7 @@ function asyncRegisterPassengers(response)
 		window.location.replace(BoA.widgetReservas.redirectUrlPxRegisterFinished);
 	}
 }
-// ---------------------= =---------------------
+
 function asyncValidateSeleccionVuelo(response)
 {
 	if(response["success"] == true) {
@@ -1523,6 +1514,36 @@ function buildRegistroPersona(tipo, numPx)
 	$(persona).find("input").focusin(focusOnPersona);
 
 	return persona;
+}
+// ---------------------= =---------------------
+function buildBanks(banks) {
+	// BANKS SETUP
+	var tblBanks = $("#info_pago_bancos .banks-container");
+	tblBanks.find("tbody").html(""); //clear
+	var columnsCreated = 0;
+	var columnsPerRow = BoA.banks.columnsPerRow;
+	var row;
+	for (var bankKey in banks) {
+		var bank = BoA.banks[bankKey];
+
+		if (false == bank.visible)
+			continue;
+
+		if (columnsCreated == 0) {
+			row = document.createElement("tr");
+			tblBanks.find("tbody").append(row);
+		}
+
+		var cell = document.createElement("td");
+		row.appendChild(cell);
+
+		if (bank.enabled)
+			$(cell).append("<a href='" + bank.url + "'><img class='bank' src='/content/images/bancos/" + bankKey + ".png'></a>");
+		else
+			$(cell).append("<img title='" + bank.msg + "' class='bank " + bankKey + " disabled' src='/content/images/bancos/" + bankKey + "_disabled.png'>");
+
+		columnsCreated = (columnsCreated + 1) % columnsPerRow;
+	}
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------

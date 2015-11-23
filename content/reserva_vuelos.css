@@ -856,13 +856,11 @@
 #info_pago_bancos a.disabled,
 #info_pago_bancos a.disabled .bank.disabled { cursor: default; }
 
-
 #info_pago_bancos .codigo-reserva {
 	font-size: 100px;
     font-family: "HelveticaNeueProMd";
     background-color: rgba(31, 54, 89, 0.31);
     padding: 10px 30px 0 30px;
-    width: 300px;
     margin: 10px auto;
     border-radius: 20px;
     border-style: solid;
