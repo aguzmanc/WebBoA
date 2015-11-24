@@ -524,10 +524,9 @@ function validateSeleccionVuelo()
 // ---------------------= =---------------------
 function validatePassengers()
 {
-	// validate here!!!
 	var divPersonas = $("#div_formulario_personas .persona");
 
-	var pasajeros = [];
+	var pasajeros = {adulto:[],infante:[],ninho:[]};
 	var isAllValid = true;
 	for(var i=0;i<divPersonas.length;i++) {
 		var divPersona = $(divPersonas[i]);
@@ -581,10 +580,11 @@ function validatePassengers()
 
 		persona["telefono"] = divPersona.find(".telefono").val();
 		persona["nroViajeroFrecuente"] = divPersona.find(".nro-viajero-frecuente").val();
+		if(tipo=='adulto')
+			persona["email"] = divPersona.find(".email").val();
 
 		if(tipo=="infante" || tipo=="ninho") {
 			var pickerNacimiento = divPersona.find(".nacimiento");
-			console.log(pickerNacimiento.val());
 			if($.trim(pickerNacimiento.val())=="" ) {
 				isValid = false;
 				pickerNacimiento.parent().addClass('active');
@@ -595,7 +595,7 @@ function validatePassengers()
 		}
 
 		if(isValid)
-			pasajeros.push(persona);
+			pasajeros[tipo].push(persona);
 		else {
 			divPersona.addClass("invalid");
 			setTimeout(function() {
@@ -607,10 +607,18 @@ function validatePassengers()
 	}
 
 	if(isAllValid) { 
+		var selVueloToSend = prepareSeleccionVueloToSend();
+
+		for(var tipo in pasajeros) {
+			if(pasajeros[tipo].length==0)
+				continue;
+
+			selVueloToSend[tipo]["pasajeros"] = pasajeros[tipo];
+		}
+
 		/* PREPARE AND SEND DATA */
 		var sendData = {
-			seleccionVuelo: prepareSeleccionVueloToSend(),
-			pasajeros : pasajeros 
+			seleccionVuelo: selVueloToSend
 		};
 
 		var dataStr = JSON.stringify(sendData);

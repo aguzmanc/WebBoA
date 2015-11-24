@@ -44,9 +44,9 @@ var BoA = {
 		destino: 'CBB',
 		fechaIda : formatCompactDate(new Date()), // today 
 		fechaVuelta: null, //"20151217", // example, (not recommended)
-		adulto: 3,
-		infante: 2,
-		ninho: 1
+		adulto: 1,
+		infante: 0,
+		ninho: 0
 	},
 
 	// Configuracion de bancos
