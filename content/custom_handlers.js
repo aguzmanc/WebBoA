@@ -40,13 +40,13 @@ var BoA = {
 	}, 
 
 	defaultConsultaVuelos :{
-		origen: 'CBB',
-		destino: 'VVI',
+		origen: 'VVI',
+		destino: 'CBB',
 		fechaIda : formatCompactDate(new Date()), // today 
-		fechaVuelta: null,
-		adulto: 1,
-		infante: 0,
-		ninho: 0
+		fechaVuelta: null, //"20151217", // example, (not recommended)
+		adulto: 3,
+		infante: 2,
+		ninho: 1
 	},
 
 	// Configuracion de bancos

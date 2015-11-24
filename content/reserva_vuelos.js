@@ -115,8 +115,6 @@ $(document).on('ready',function()
 
 	todayStr = formatCompactDate(new Date()); // today 
 
-	handleInitialRequest();
-
 	/*----------= UI SETUP HANDLERS =-----------*/
 	$("#widget_cambiar_vuelo #btn_cambiar_vuelo").click(toggleWidgetCambiarVuelo);
 	$("#widget_cambiar_vuelo .form .radio-button").click(toggleRbtnIdaVuelta);
@@ -124,6 +122,9 @@ $(document).on('ready',function()
 	$("#btn_borrar_ida").click(deleteIda);
 	$("#btn_borrar_vuelta").click(deleteVuelta);
 	$("#btn_buscar_vuelo").click(validateSearch);
+
+	// Initial search of flights
+	setTimeout(handleInitialRequest, 500);
 
 	// DATE PICKERs SETUP
 	$("#picker_salida").datepicker({ 
@@ -156,6 +157,8 @@ $(document).on('ready',function()
 		width: 7,
 		align: 'right'
 	});
+
+	
 }); // init
 // ---------------------= =---------------------
 function handleScroll(){
@@ -1122,14 +1125,6 @@ function fillTableWithMessage(table, message)
 // ---------------------= =---------------------
 function handleInitialRequest()
 {
-	// searchParameters.origen = location.queryString['origen'];
-	// searchParameters.destino = location.queryString['destino'];
-	// searchParameters.fechaIda = location.queryString['fecha_ida'];
-	// searchParameters.fechaVuelta = location.queryString['fecha_vuelta'];
-
-	// origen
-	// if(searchParameters.origen == null)
-
 	searchParameters.origen = BoA.defaultConsultaVuelos.origen;
 	searchParameters.destino = BoA.defaultConsultaVuelos.destino;
 	searchParameters.fechaIda = BoA.defaultConsultaVuelos.fechaIda;
@@ -1139,16 +1134,29 @@ function handleInitialRequest()
 	$("#select_destino").val(searchParameters.destino);
 
 	$('#picker_salida').datepicker("setDate", 
-		compactToJSDate(searchParameters.fechaIda)
+		compactToJSDate(BoA.defaultConsultaVuelos.fechaIda)
 	);
 
-	//continuar aqui, poniendo la fecha en date pickers
+	if(BoA.defaultConsultaVuelos.fechaVuelta != null) {
+		$("#rbtn_ida_vuelta").click();
+		$("#picker_regreso").datepicker("setDate",
+			compactToJSDate(BoA.defaultConsultaVuelos.fechaVuelta)
+		);
+	}
 
-	// console.log(searchParameters.fechaIda);
-
-	// $('#picker_salida').datepicker("setDate", new Date() );
+	// date pickers setup
+	$('#picker_salida').datepicker("setDate", new Date() );
 
 	requestSearchParameters(searchParameters);
+
+	// setup config passengers initial parameters
+	for(var tipo in {adulto:null,ninho:null,infante:null}) {
+		var pxCount = BoA.defaultConsultaVuelos[tipo];
+		var list = $("#widget_resumen_reserva .selector-pax ul[data-tipo='"+tipo+"']");
+
+		list.find("li.selected").click();
+		list.find("li[data-count='"+pxCount+"']").click();	
+	}
 }
 // ---------------------= =---------------------
 function requestSearchParameters(parms)
