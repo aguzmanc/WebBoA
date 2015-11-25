@@ -132,6 +132,261 @@ header .logo-header {
     background-color: blue;
 }
 /* --------------------------------------------------------------------------- */
+#buscador_vuelos{
+    position: absolute;
+    top: 200px;
+    left: 25px;
+    margin-top: -80px;
+    z-index: 200;
+}
+
+#buscador_vuelos .menu{
+    float: left;
+    font-family: "HelveticaNeuePro";
+    cursor: pointer;
+}
+
+#buscador_vuelos .menu.selected{
+    padding: 20px 0 2px 12px;
+    width: 100px;
+}
+
+#buscador_vuelos.collapsed {opacity: 0.5;}
+#buscador_vuelos.expanded {opacity: 1.0;}
+
+/*ENABLED TABS*/
+#buscador_vuelos .menu:nth-child(1):hover{background-color:rgba(66, 98, 142, 0.9);}
+/*#buscador_vuelos .menu:nth-child(2):hover{background-color:rgba(159, 124, 28, 0.9);}
+#buscador_vuelos .menu:nth-child(3):hover{background-color:rgba(134, 134, 134, 0.9);}*/
+
+#buscador_vuelos .menu:nth-child(1),
+#buscador_vuelos .menu.selected:nth-child(1):hover{
+    background-color: rgba(31, 54, 86, 0.9);
+    color: #FFF;
+}
+
+#buscador_vuelos .menu:nth-child(2),
+#buscador_vuelos .menu.selected:nth-child(2):hover {
+    background-color: rgba(239, 170, 53, 0.9);  
+    color: #1F3656;
+}
+
+#buscador_vuelos .menu:nth-child(3)
+/*#buscador_vuelos .menu.selected:nth-child(3):hover*/{
+    background-color: rgba(175, 175, 175, 0.9);
+    color: #797979;
+    cursor: not-allowed;
+    /* ENABLED COLORS
+    background-color: #DDE0E1;  
+    color: #1F3656;*/
+}
+
+#buscador_vuelos .menu{
+    position:relative;
+    width: 100px;
+    padding: 28px 0px 2px 5px;
+}
+
+#buscador_vuelos .menu .label-prox{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #7F7F7F;
+}
+
+#buscador_vuelos .menu h1{font-size: 12px}
+#buscador_vuelos .menu h2{font-size: 12px}
+
+#buscador_vuelos .menu.selected h1{font-size: 20px}
+#buscador_vuelos .menu.selected h2{font-size: 12px}
+
+#buscador_vuelos .content{
+    height: 275px;
+    padding: 20px 0 30px 30px;
+    display: none;
+    margin: 54px 0 0 0;
+    overflow: hidden;
+}
+
+#buscador_vuelos .content.selected{display: block;}
+
+#buscador_vuelos .form input[type="text"] {
+    height: 34px;
+    font-size: 15px;
+    padding: 2px 40px 0 10px;
+}
+
+#reserva_vuelos { background-color: rgba(31, 54, 86, 0.9); }
+#web_check_in { background-color: rgba(239, 170, 53, 0.9); }
+#estado_vuelo { background-color: rgba(221, 224, 225, 0.9); }
+/* --------------------------------------------------------------------------- */
+.form label{
+    font-family: "HelveticaNeuePro";
+    font-size: 13px;
+    color: #FFF;
+}
+
+.form label a{
+    color: #1F3656;
+    font-size: 15px;
+}
+
+.form label a:hover{text-decoration: underline;}
+
+.form .input-container{
+    padding: 0 20px 5px 0;
+}
+
+.form select {
+    height: 34px;
+    border-radius: 0px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #959595;
+    font-family: "HelveticaNeuePro";
+    font-size: 15px;
+    color: #1F3656;
+    padding: 2px 44px 0 10px;
+    background-image: url('images/icon_arrow_down.png');
+    background-repeat: no-repeat;
+    background-position: 165px 10px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
+.form select::-ms-expand{
+  display:none;
+}
+
+@-moz-document url-prefix(){
+  .content select { width: 100%; }
+}
+
+.content select.number{
+    background-image: url('images/icon_arrow_down.png');
+    background-repeat: no-repeat;
+    background-position: 40px 10px;
+}
+
+.form input[type="text"] {
+    border-radius: 0px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #959595;
+    font-family: "HelveticaNeuePro";
+    color: #1F3656;
+}
+
+.form input.calendar {
+    background-image: url('images/icon_calendar.png');
+    background-repeat: no-repeat;
+    background-position: 150px 10px;
+    cursor: pointer;
+}
+
+.form input.calendar:hover {
+    background-image: url('images/icon_calendar_hover.png');
+}
+.form .checkbox{
+    width: 35px;
+    height: 33px;
+    background-color: #FFF;
+    margin: 0 5px;
+    border-radius: 0px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #959595;
+    font-family: "HelveticaNeuePro";
+    font-size: 15px;
+    color: #1F3656;
+    cursor: pointer;
+    display: inline-table;
+}
+
+.form .checkbox div{
+    width:11px;
+    height:12px; 
+}
+
+.form .checkbox.checked{
+    background-image: url('images/checkbox_mark.png');
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 10px 8px;
+}
+
+.form .checkbox:hover{
+    background-color: #9E9E9E;
+}
+
+.form .radio-button, .content .radio-button label {
+    cursor: pointer;    
+}
+
+.form .radio-button .btn {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 100px;
+    margin: 4px;
+    vertical-align: middle;
+}
+
+.form .radio-button .btn div{
+    background-color: rgb(0, 0, 0);
+    width: 10px;
+    height: 10px;
+    margin: 5px auto;
+    vertical-align: middle;
+    border-radius: 100px;
+    display: none;
+}
+
+.form .radio-button.checked .btn div{
+    display: block;
+}
+
+.form .radio-button label{
+    line-height: 20px;
+    display: inline-block;
+}
+
+.form .validable {
+    border-color: transparent;
+    border-width: 3px;
+    border-style: solid;
+    background-color: transparent;
+}
+
+.form .validable.active{ background-color: #F00;}
+
+.button{
+    position: absolute;
+    font-family: "HelveticaNeuePro";
+    background-color: #085794;
+    border-color: #096CB9;
+    border-width: 0 0 4px 0;
+    border-style: solid;
+    color: #FFF;
+    padding: 10px 10px 6px 10px;
+    width: 200px;
+    text-align: center;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.button:hover{
+    color: #1F3656;
+    background-color: #E6BB38;
+    border-color: #BF9B2E;
+}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

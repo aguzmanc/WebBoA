@@ -1398,11 +1398,11 @@ function updatePriceByTipo(tipo, changeFlapper)
 			flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,0)).change();
 	}
 	else{
-		span.html("?");
+		span.html("0");
 		span.parent().parent().removeClass("calculated");
 
 		if(changeFlapper)
-			flapperTotal.val("???????").change();
+			flapperTotal.val("0000000").change();
 	}
 }
 // ---------------------= =---------------------
