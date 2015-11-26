@@ -507,6 +507,8 @@ function validateSeleccionVuelo()
 	/* PREPARE AND SEND DATA */
 	var sendData = prepareSeleccionVueloToSend();
 
+	console.log(sendData);
+
 	var dataStr = JSON.stringify(sendData);
 
 	$.ajax({
@@ -1858,6 +1860,7 @@ function prepareSeleccionVueloToSend()
 
 	for(var i=0;i<vuelos.length;i++) { 
 		var vuelo = vuelos[i]; 
+		console.log(vuelo);
 		packedSeleccionVuelo.vuelosIda.push(
 			{
 				horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
@@ -1866,12 +1869,12 @@ function prepareSeleccionVueloToSend()
 				tipoAvion: vuelo.tipoAvion,
 				fechaSalida: vuelo.fecha,
 				fareCode: vuelo.tarifas[seleccionVuelo.ida.compartment].fareCode,
+				clase: vuelo.tarifas[seleccionVuelo.ida.compartment].clase,
 				origen: vuelo.origen,
 				destino: vuelo.destino
 			}
 		);
 	}
-
 
 	if(seleccionVuelo.vuelta != null) {
 		packedSeleccionVuelo.vuelosVuelta = [];
@@ -1887,6 +1890,7 @@ function prepareSeleccionVueloToSend()
 					tipoAvion: vuelo.tipoAvion,
 					fechaSalida: vuelo.fecha,
 					fareCode: vuelo.tarifas[seleccionVuelo.vuelta.compartment].fareCode,
+					clase: vuelo.tarifas[seleccionVuelo.vuelta.compartment].clase,
 					origen: vuelo.origen,
 					destino: vuelo.destino
 				}

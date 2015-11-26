@@ -53,6 +53,11 @@
     -ms-transition: all 0.5s;
 }
 /* --------------------------------------------------------------------------- */
+header {
+    position: fixed;
+    z-index: 1000;
+}
+
 header .logo-header {
 	position: fixed;
 	width: 320px;
@@ -187,22 +192,21 @@ header .logo-header {
     padding: 28px 0px 2px 5px;
 }
 
-#buscador_vuelos .menu .label-prox{
+#buscador_vuelos .menu .label-prox {
     position: absolute;
     top: 10px;
     right: 10px;
     color: #7F7F7F;
 }
 
-#buscador_vuelos .menu h1{font-size: 12px}
-#buscador_vuelos .menu h2{font-size: 12px}
+#buscador_vuelos .menu h1 {font-size: 12px;}
+#buscador_vuelos .menu h2 {font-size: 12px;}
 
-#buscador_vuelos .menu.selected h1{font-size: 20px}
-#buscador_vuelos .menu.selected h2{font-size: 12px}
+#buscador_vuelos .menu.selected h1{font-size: 20px;}
+#buscador_vuelos .menu.selected h2{font-size: 12px;}
 
 #buscador_vuelos .content{
-    height: 275px;
-    padding: 20px 0 30px 30px;
+    padding: 20px 0 30px 10px;
     display: none;
     margin: 54px 0 0 0;
     overflow: hidden;
@@ -234,10 +238,11 @@ header .logo-header {
 .form label a:hover{text-decoration: underline;}
 
 .form .input-container{
-    padding: 0 20px 5px 0;
+    padding: 0 5px 5px 0;
 }
 
 .form select {
+    width: 140px;
     height: 34px;
     border-radius: 0px;
     border-width: 0 0 2px 0;
@@ -246,10 +251,10 @@ header .logo-header {
     font-family: "HelveticaNeuePro";
     font-size: 15px;
     color: #1F3656;
-    padding: 2px 44px 0 10px;
+    padding: 2px 10px 0 10px;
     background-image: url('images/icon_arrow_down.png');
     background-repeat: no-repeat;
-    background-position: 165px 10px;
+    background-position: 120px 10px;
 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -331,8 +336,8 @@ header .logo-header {
 
 .form .radio-button .btn {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     background-color: white;
     border-radius: 100px;
     margin: 4px;
@@ -341,9 +346,9 @@ header .logo-header {
 
 .form .radio-button .btn div{
     background-color: rgb(0, 0, 0);
-    width: 10px;
-    height: 10px;
-    margin: 5px auto;
+    width: 20px;
+    height: 20px;
+    margin: 4px auto;
     vertical-align: middle;
     border-radius: 100px;
     display: none;
