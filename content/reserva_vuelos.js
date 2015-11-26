@@ -507,8 +507,6 @@ function validateSeleccionVuelo()
 	/* PREPARE AND SEND DATA */
 	var sendData = prepareSeleccionVueloToSend();
 
-	console.log(sendData);
-
 	var dataStr = JSON.stringify(sendData);
 
 	$.ajax({
@@ -665,8 +663,6 @@ function asyncRegisterPassengers(response)
 
 			banks[bankKey] = bank;
 		}
-
-		console.log(banks);
 
 		buildBanks(banks);
 	}
@@ -883,7 +879,6 @@ function asyncReceiveFlights(response)
 	buildFlightsTable("tbl_salida", dataIda.flightOptions, dataIda.compartments);
 
 	if(currentDateVuelta != null) {
-		console.log(response);	
 		var dataVuelta = translateFlights(
 			response["vuelosYTarifas"]["Vuelos"]["vuelta"]["vuelos"]["vuelo"],
 			rawTarifas, 
@@ -961,7 +956,7 @@ function buildDatesSelector(rawDates, requestedDateStr, table, isIda)
 			$(cell).addClass("no-flights")
 				   .append("<h3>No hay<br>vuelos</h3>");
 		} else {
-			$(cell).append("<h3>" + tarifasByDate[dateStr] + "&nbsp;" + HTML_CURRENCIES[CURRENCY] +"</h3>");
+			$(cell).append("<h3>" + formatCurrencyQuantity(tarifasByDate[dateStr], true, 0) +"</h3>");
 		}
 
 		if(dateStr == (isIda?currentDateIda:currentDateVuelta))
@@ -1061,7 +1056,7 @@ function buildFlightOptionRow(opc, compartments)
 
 		cell = document.createElement("td");
 		$(cell).addClass("tarifa");
-		$(cell).html("<div class='rbtn'><div></div></div>" + tarifa.monto + " " + HTML_CURRENCIES[CURRENCY]);
+		$(cell).html("<div class='rbtn'><div></div></div>" + parseInt(tarifa.monto) /*should be formatted. services issue*/ + " " + HTML_CURRENCIES[CURRENCY]);
 		$(cell).click(selectTarifa);
 		$(cell).attr("data-compartment", tarifa.compart);
 		row.appendChild(cell);	
@@ -1748,7 +1743,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			if(false==(flightClass in paxPercentsByClass)) // parche!
 				continue;
 
-			var rateValue = parseInt(ratesByClass[flightClass]);
+			var rateValue = ratesByClass[flightClass];
 			var compartmentKey = rawClasses[k]["compart"];
 
 			// Tabla para mantener un orden unico de compartimientos al mostrar
@@ -1860,7 +1855,6 @@ function prepareSeleccionVueloToSend()
 
 	for(var i=0;i<vuelos.length;i++) { 
 		var vuelo = vuelos[i]; 
-		console.log(vuelo);
 		packedSeleccionVuelo.vuelosIda.push(
 			{
 				horaSalida: ("00"+vuelo.horaSalida.hh).slice(-2) + ("00"+vuelo.horaSalida.mm).slice(-2),
