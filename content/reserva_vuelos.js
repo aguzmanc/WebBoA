@@ -71,6 +71,8 @@ var tasasPorPasajero = {
 
 var tasas = {ida:{},vuelta:{}};
 
+var selectionConstraints = {};
+
 var allOptions = {};
 
 var currencies = {euro:"&euro;", usd:"USD"};
@@ -234,6 +236,7 @@ function selectTarifa()
 	var opcCode = $(row).data("opc_code");
 	var opcion = allOptions[opcCode];
 	var compartment = parseInt($(this).data("compartment"));
+	var tarifaID = $(this).data("id_tarifa");
 
 	if($(this).find(".rbtn").hasClass("checked"))
 		return;
@@ -249,6 +252,8 @@ function selectTarifa()
 		seleccionVuelo.ida.opcCode = opcCode;
 		seleccionVuelo.ida.compartment = compartment;
 		$("#empty_ida_slot").css("display","none");
+
+		constraintTableByTarifa($("#tbl_regreso"), selectionConstraints.ida[tarifaID]);
 	} else {
 		seleccionVuelo.vuelta = {};
 		seleccionVuelo.vuelta.opcCode = opcCode;	
@@ -256,6 +261,8 @@ function selectTarifa()
 
 		$("#empty_ida_slot").css("display",
 			seleccionVuelo.ida == null ? "block":"none");
+
+		constraintTableByTarifa($("#tbl_salida"), selectionConstraints.vuelta[tarifaID]);
 	}
 
 	$(table).find(".flights-option-row").removeClass("selected");
@@ -296,6 +303,47 @@ function selectTarifa()
 	setTimeout(function() {
 		tblSeleccion.removeClass("changed");
 	},100);
+}
+// ---------------------= =---------------------
+/* Lock restricted rates in table */ 
+function constraintTableByTarifa(table, allowedIds)
+{
+	var rows = table.find(".flights-option-row");
+	var tipo = table.data("tipo");
+
+	// first enable all cells and rows before start
+	table.find(".flights-option-row, .flight-details, .tarifa").css("visibility","visible");
+
+	for(var i=0;i<rows.length;i++) {
+		var row = $(rows[i]);
+		var tarifaCells = row.find(".tarifa");
+
+		var allValid = false;
+		for(var k=0;k<tarifaCells.length;k++) {
+			var cell = $(tarifaCells[k]);
+			var idTarifa = cell.data("id_tarifa");
+
+			if(allowedIds.indexOf(""+idTarifa) == -1) { // not found
+				cell.css("visibility","hidden");	
+
+				if(row.hasClass("selected")){
+					if(tipo=="ida")
+						deleteIda();
+					else
+						deleteVuelta();
+				}
+			} 
+			else
+				allValid = true; // at least one to enable entire row 
+		}
+
+		// if entire row is invalid, hide it
+		if(false==allValid) {
+			// hide entire row
+			row.css("visibility","hidden");
+			otherTable.find("tr.flight-details[data-opc_code='"+row.data("opc_code")+"']").css("visibility","hidden");
+		}
+	}
 }
 // ---------------------= =---------------------
 function validateSearch()
@@ -865,6 +913,8 @@ function asyncReceiveFlights(response)
 
 	var rawTarifas = response["vuelosYTarifas"]["Tarifas"]["TarifaPersoCombinabilityIdaVueltaShort"]["TarifasPersoCombinabilityID"]["TarifaPersoCombinabilityID"];
 
+	selectionConstraints = translateConstraints(response["vuelosYTarifas"]["Tarifas"]["TarifaPersoCombinabilityIdaVueltaShort"]["IVs"]["IV"]);
+
 	allOptions = {}; // reset before translating
 
 	var dataIda = translateFlights(
@@ -1052,13 +1102,14 @@ function buildFlightOptionRow(opc, compartments)
 		var tarifa = opc.tarifas[compartments[i]];
 
 		if(tarifa == null) 
-			continue; // it should have, but it doesn't :S
+			continue; // it should always have tarifas, but it doesn't sometimes :S
 
 		cell = document.createElement("td");
 		$(cell).addClass("tarifa");
 		$(cell).html("<div class='rbtn'><div></div></div>" + parseInt(tarifa.monto) /*should be formatted. services issue*/ + " " + HTML_CURRENCIES[CURRENCY]);
 		$(cell).click(selectTarifa);
 		$(cell).attr("data-compartment", tarifa.compart);
+		$(cell).attr("data-id_tarifa", tarifa.ID);
 		row.appendChild(cell);	
 	}
 
@@ -1680,6 +1731,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 
 	var ratesByClass = {};
 	var fareCodesByClass = {};
+	var rateIDsByClass = {};
 
 	for(var i=0;i<rawTarifas.length;i++) {
 		var rawTarifa = rawTarifas[i];
@@ -1691,6 +1743,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 		{
 			ratesByClass[rawTarifa["clases"]] = rawTarifa["importe"];
 			fareCodesByClass[rawTarifa["clases"]] = rawTarifa["fare_code"];
+			rateIDsByClass[rawTarifa["clases"]] = rawTarifa["ID"];
 		}
 	}
 
@@ -1745,6 +1798,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 
 			var rateValue = ratesByClass[flightClass];
 			var compartmentKey = rawClasses[k]["compart"];
+			var rateID = rateIDsByClass[flightClass];
 
 			// Tabla para mantener un orden unico de compartimientos al mostrar
 			if(to.compartments.indexOf(compartmentKey) == -1) // no encontrado
@@ -1756,6 +1810,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 					flight.tarifas[compartmentKey].monto = rateValue;
 					flight.tarifas[compartmentKey].clase = flightClass;
 					flight.tarifas[compartmentKey].fareCode = fareCodesByClass[flightClass];
+					flight.tarifas[compartmentKey].ID = rateID;
 				}
 			} else {
 				flight.tarifas[compartmentKey] = { // crear nuevo
@@ -1763,7 +1818,8 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 					monto: 	 rateValue,
 					compart: compartmentKey,
 					index: 	 to.compartments.indexOf(compartmentKey),
-					fareCode : fareCodesByClass[flightClass]
+					fareCode : fareCodesByClass[flightClass],
+					ID: rateID
 				};
 			}
 		}
@@ -1920,5 +1976,32 @@ function translateSeleccionVueloDetailForService(detail)
 	}
 }
 // ---------------------= =---------------------
+function translateConstraints(rawConstraints)
+{
+	var idaConstraints = {};
+	var vueltaConstraints = {};
+
+	for(var i=0;i<rawConstraints.length;i++) {
+		// ida
+		var I = rawConstraints[i]["I"];
+		var V = rawConstraints[i]["V"];
+
+		if(false == (I in idaConstraints))
+			idaConstraints[I] = [];
+
+		idaConstraints[I].push(V);
+
+		// vuelta (I swapped with V)
+		if(false == (V in vueltaConstraints))
+			vueltaConstraints[V] = [];
+
+		vueltaConstraints[V].push(I);
+	}
+
+	return {
+		ida: idaConstraints,
+		vuelta: vueltaConstraints
+	};
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
