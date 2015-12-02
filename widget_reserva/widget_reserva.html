@@ -26,10 +26,11 @@
 
 	<!-- COMMON SCRIPTS -->
 	<script type="text/javascript" src="content/language_data_es.js"></script> <!-- PT, EN -->
-	<script type="text/javascript" src="content/custom_handlers.js"></script>
 	<script type="text/javascript" src="content/common.js"></script>
-	<script type="text/javascript" src="content/header.js"></script>
-	<script type="text/javascript" src="content/generic_container.js"></script>
+	<script type="text/javascript" src="content/custom_handlers.js"></script>
+	
+	
+	
 
 	<!-- STYLE.CSS -->
 	<link href="content/reserva_vuelos.css" media="screen" rel="stylesheet" type="text/css" />
@@ -363,6 +364,68 @@
 				</div>
 			</div>
 
+			<!-- PAGO DE BANCOS -->
+			<div id="info_pago_bancos" class="info phase selected">
+				<div class="descripcion wide">
+					<table>
+						<tr>
+							<td valign="top">
+								<h2>C&oacute;digo de reserva</h2>
+								<div id="lbl_codigo_reserva" class="codigo-reserva">89873</div>
+								<div>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+									quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+									consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+									cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+									proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+								</div>
+							</td>
+							<td>
+								<h2>Bancos Locales</h2>
+								<table class='banks-container'>
+									<tbody>
+										<tr>
+											<td>
+												<a href="#"><div class='bank union'></div></a>
+											</td>
+											<td>
+												<div class='bank union'></div>
+											</td>
+											<td>
+												<div class='bank union'></div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class='bank union'></div>
+											</td>
+											<td>
+												<div class='bank union'></div>
+											</td>
+											<td>
+												<div class='bank union'></div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class='bank union'></div>
+											</td>
+											<td>
+												<div class='bank union'></div>
+											</td>
+											<td>
+												<div class='bank union'></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
 			<!-- WIDGET RESUMEN -->
 			<div id="widget_resumen_reserva">
 				<div class="head-tu-vuelo"></div>
@@ -587,5 +650,24 @@
 			</div>	
 		</div>
 	</div> <!-- <<< UI RESULTADOS VUELOS >>> -->
+
+	<!-- <<< DIALOGS >>> -->
+	<div id="dialog_overlay" style="display:none">
+		<div id="simple_dialog" class="dialog" style="display:none">
+			<div class="description">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+			<div class="button">CERRAR</div>
+		</div>
+	</div>
+	
+	<!-- <<< MISC UI >>> -->
+	<a id="btn_redirect" href="#" target="_blank" style="display:none"></a>
+	<div id="div_submit"></div>
 </body>
 </html>
