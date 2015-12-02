@@ -1851,7 +1851,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			// parche para error en servicio (datos no completos)
 			if(flight.origen == null) { 
 				// el origen es el destino del ultimo vuelo
-				var opc = flightOptions["opcion_" + flight.numOpcion];
+				var opc = to.flightOptions["opcion_" + flight.numOpcion];
 				flight.origen = opc.vuelos[opc.vuelos.length-1].destino;
 			}
 		}
