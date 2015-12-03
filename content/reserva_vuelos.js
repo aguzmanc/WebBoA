@@ -72,6 +72,7 @@ var tasasPorPasajero = {
 var tasas = {ida:{},vuelta:{}};
 
 var selectionConstraints = {};
+var disabledBanksMessages = {};
 
 var allOptions = {};
 
@@ -690,8 +691,6 @@ function asyncRegisterPassengers(response)
 		return;
 	}
 
-	console.log(response);
-
 	$("#lbl_codigo_reserva").text(response["pnr"]);
 
 	if (false == BoA.widgetReservas.enableCompraStage) {
@@ -712,8 +711,6 @@ function asyncRegisterPassengers(response)
 			};
 
 			banks[bankKey] = bank;
-
-			console.log(bank);
 		}
 
 		buildBanks(banks);
@@ -1610,9 +1607,11 @@ function buildBanks(banks)
 		if (bank.enabled)
 			$(cell).append("<a href='" + bank.url + "'><img class='bank' src='/content/images/bancos/" + bankKey + ".png'></a>");
 		else{
-			$(cell).append("<img class='bank " + bankKey + " disabled' src='/content/images/bancos/" + bankKey + "_disabled.png'>");
+			disabledBanksMessages[bankKey] = bank.msg;
+
+			$(cell).append("<img class='bank " + bankKey + " disabled' data-bank_key='"+bankKey+"' src='/content/images/bancos/" + bankKey + "_disabled.png'>");
 			$(cell).find("img").click(function(){
-				showSimpleDialog(bank.msg);	
+				showSimpleDialog($(this).data("bank_key"));	
 			});
 		}
 
@@ -2014,8 +2013,12 @@ function translateConstraints(rawConstraints)
 	};
 }
 // ---------------------= =---------------------
-function showSimpleDialog(msg)
+function showSimpleDialog(bankKey)
 {
+	var msg = disabledBanksMessages[bankKey];
+
+	console.log(disabledBanksMessages);
+	
 	$("#dialog_overlay").show();
 	$("#simple_dialog")
 		.show()
