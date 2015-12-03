@@ -1609,7 +1609,7 @@ function buildBanks(banks)
 		else{
 			disabledBanksMessages[bankKey] = bank.msg;
 
-			$(cell).append("<img class='bank " + bankKey + " disabled' data-bank_key='"+bankKey+"' src='/content/images/bancos/" + bankKey + "_disabled.png'>");
+			$(cell).append("<img class='bank " + bankKey + "' data-bank_key='"+bankKey+"' src='/content/images/bancos/" + bankKey + ".png'>");
 			$(cell).find("img").click(function(){
 				showSimpleDialog($(this).data("bank_key"));	
 			});
