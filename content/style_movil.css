@@ -137,12 +137,15 @@ header .logo-header {
     background-color: blue;
 }
 /* --------------------------------------------------------------------------- */
-#buscador_vuelos{
-    position: absolute;
-    top: 200px;
-    left: 25px;
-    margin-top: -80px;
-    z-index: 200;
+#ui_home {
+    background-color: red;
+    width: 100%;
+    height: 300px;
+}
+/* --------------------------------------------------------------------------- */
+#buscador_vuelos {
+    margin: 0 auto;
+    width: 90%;
 }
 
 #buscador_vuelos .menu{
@@ -208,21 +211,25 @@ header .logo-header {
 #buscador_vuelos .content{
     padding: 20px 0 30px 10px;
     display: none;
-    margin: 54px 0 0 0;
     overflow: hidden;
 }
 
 #buscador_vuelos .content.selected{display: block;}
 
 #buscador_vuelos .form input[type="text"] {
+    width: 95%;
     height: 34px;
     font-size: 15px;
-    padding: 2px 40px 0 10px;
+    padding: 2px 0 0 10px;
 }
 
 #reserva_vuelos { background-color: rgba(31, 54, 86, 0.9); }
 #web_check_in { background-color: rgba(239, 170, 53, 0.9); }
 #estado_vuelo { background-color: rgba(221, 224, 225, 0.9); }
+
+
+#reserva_vuelos table {width:100%;}
+
 /* --------------------------------------------------------------------------- */
 .form label{
     font-family: "HelveticaNeuePro";
@@ -242,7 +249,7 @@ header .logo-header {
 }
 
 .form select {
-    width: 140px;
+    width: 100%;
     height: 34px;
     border-radius: 0px;
     border-width: 0 0 2px 0;
@@ -254,7 +261,7 @@ header .logo-header {
     padding: 2px 10px 0 10px;
     background-image: url('images/icon_arrow_down.png');
     background-repeat: no-repeat;
-    background-position: 120px 10px;
+    background-position: right 5px center;
 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -265,18 +272,12 @@ header .logo-header {
     text-overflow: '';
 }
 
-.form select::-ms-expand{
-  display:none;
+.form select::-ms-expand {
+    display:none;
 }
 
 @-moz-document url-prefix(){
   .content select { width: 100%; }
-}
-
-.content select.number{
-    background-image: url('images/icon_arrow_down.png');
-    background-repeat: no-repeat;
-    background-position: 40px 10px;
 }
 
 .form input[type="text"] {
@@ -291,7 +292,7 @@ header .logo-header {
 .form input.calendar {
     background-image: url('images/icon_calendar.png');
     background-repeat: no-repeat;
-    background-position: 150px 10px;
+    background-position: right 10px center;
     cursor: pointer;
 }
 
@@ -393,6 +394,13 @@ header .logo-header {
     border-color: #BF9B2E;
 }
 /* --------------------------------------------------------------------------- */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+}
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */

@@ -39,7 +39,8 @@
 	<link href="content/lib/font-awesome/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<header style="display:block">
+	<!-- HEADER -->
+	<header style="display:none">
 		<div id="btn_menu"></div>
 		<div class="logo-header"></div>
 
@@ -86,10 +87,11 @@
 			</li>
 		</ul>
 	</header>
+	<!-- SLIDES -->
+	<img class="slide" src="content/fake_services/slides/aniversario_movil.jpg" style="display:none">
 	<!-- UI HOME -->
 	<div id="ui_home">
 		<div id="div_submit"></div>
-		<img class="slide" src="content/fake_services/slides/aniversario.jpg">
 		<div id="buscador_vuelos" class="expanded">
 			<!-- TABS -->
 			<ul>
@@ -171,16 +173,21 @@
 							</td>
 						</tr>
 						<tr>
-							<td><label>Salida:</label></td>
-							<td><label id="lbl_regreso" style="display:none">Regreso:</label></td>
+							<td colspan="2"><label>Salida:</label></td>
 						</tr>
 						<tr>
-							<td class='input-container'>
+							<td class='input-container' colspan="2">
 								<div class="validable">
 									<input type="text" id="picker_salida" class="calendar" text="(Ingrese fecha)" onkeypress="return false;">
 								</div>
 							</td>
-							<td class='input-container'>
+							
+						</tr>
+						<tr>
+							<td colspan="2"><label id="lbl_regreso" style="display:none">Regreso:</label></td>
+						</tr>
+						<tr>
+							<td class='input-container' colspan="2">
 								<div class="validable">
 									<input type="text" id="picker_regreso" class="calendar" style="display:none"
 										onkeypress="return false;">
@@ -191,6 +198,8 @@
 					<table>
 						<tr>
 							<td><label>Adultos</label></td>
+							<td><label>Ni&ntilde;os<br>(2-11)a&ntilde;os</label></td>
+							<td><label>Beb&eacute;s<br>(0-1)a&ntilde;os</label></td>
 						</tr>
 						<tr>
 							<td class="input-container">
@@ -206,11 +215,6 @@
 									<option value="9">9</option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td><label>Ni&ntilde;os<br>(2-11)a&ntilde;os</label></td>
-						</tr>
-						<tr>
 							<td class="input-container">
 								<select id="select_nro_ninhos" class="number">
 									<option value="0" selected>0</option>
@@ -225,12 +229,6 @@
 									<option value="9">9</option>
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td><label>Beb&eacute;s<br>(0-1)a&ntilde;os</label></td>
-							<td style="display:none"><label>Flexible en Fechas</label></td>
-						</tr>
-						<tr>
 							<td class="input-container">
 								<select id="select_nro_bebes" class="number">
 									<option value="0" selected>0</option>
@@ -238,6 +236,8 @@
 									<option value="1">2</option>
 								</select>
 							</td>
+						</tr>
+						<tr>
 							<td valign="top" style="display:none">
 								<div id="cbx_flexible_en_fechas" class="checkbox"></div>
 							</td>

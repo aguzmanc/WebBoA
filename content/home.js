@@ -107,6 +107,10 @@ $(document).on('ready',function()
 
 	// automatic collapse of "caja de reservas"
 	autoCollapseTimeout = setTimeout(function(){$("#buscador_vuelos").removeClass("expanded").addClass("collapsed");}, MILLISECONDS_TO_AUTOCOLLAPSE_RESERVAS_BOX);
+
+	// Dialog setup
+	$("#simple_dialog .button").click(closeSimpleDialog);
+	showSimpleDialog();
 });
 // ---------------------------------------------------------------------------
 function click_menu_buscador_vuelos()
@@ -407,6 +411,22 @@ function search_check_in()
 	btn[0].click();
 }
 // ---------------------= =---------------------
+function showSimpleDialog(msg)
+{
+	if(msg != null)
+		$("#simple_dialog .description").html(msg);
+
+	$("#home, #ui_home").addClass("blured");
+	$("#dialog_overlay").show();
+	$("#simple_dialog").show();
+}
+// ---------------------= =---------------------
+function closeSimpleDialog()
+{
+	$("#dialog_overlay").hide();
+	$("#simple_dialog").hide();
+	$("#home, #ui_home").removeClass("blured");
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= =---------------------

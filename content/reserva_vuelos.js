@@ -145,6 +145,10 @@ $(document).on('ready',function()
 		minDate: 0
 	});
 
+	// support for "font-awesome" icon library
+	$(".validable .calendar").datepicker("option", "prevText", '<i class="fa fa-arrow-left"></i>');
+	$(".validable .calendar").datepicker("option", "nextText", '<i class="fa fa-arrow-right"></i>');
+
 	$("#btn_validar_vuelos").click(validateSeleccionVuelo);
 	$("#btn_volver_vuelos").click(backToFlightStage);
 	$("#btn_validar_pasajeros").click(validatePassengers);

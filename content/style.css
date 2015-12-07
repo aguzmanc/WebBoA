@@ -2397,29 +2397,48 @@ footer .form .button {
 	height: 350px;
 }
 /* --------------------------------------------------------------------------- */
-#dialog_info{padding: 40px;}
-
-#dialog_info h2,
-#dialog_info h3{
-	color: #1F3656;
-	font-family: "HelveticaNeuePro";
-	margin: 10px 0;
+#dialog_overlay 
+{
+	background-color: rgba(66, 66, 66, 0.55);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
 }
 
-#dialog_info h2{font-size: 50px;}
-#dialog_info h3{font-size: 40px;}
-
-#dialog_info .descripcion{
+.dialog {
 	position: relative;
-	font-family: "HelveticaNeuePro";
-	font-size: 20px;
+	width: 700px;
+	min-height: 100px;
+	background-color: #35C1E7;
 	color: #1F3656;
-	border-color: #FFF;
-	border-style: solid;
+	margin: 100px auto 0 auto;
+	padding: 20px;
+
+	box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 6px 7px 11px rgba(0, 0, 0, 0.5);
+
+	z-index: 2010;
 }
 
-#dialog_info .info{
-	height: 300px;
+.dialog .description {
+	font-family: "FuturaLight";
+	color: #003E6D;
+	font-size: 15px;
+	text-align: justify;
+}
+
+.dialog .button {
+	position: relative;
+	margin: 20px auto 0 auto;
+}
+
+div.blured {
+	-webkit-filter: blur(7px);
 }
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
