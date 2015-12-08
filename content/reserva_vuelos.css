@@ -412,6 +412,11 @@
 	background-color: #ABC6D8;
 }
 
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.disabled td {
+	background-color: #ABABAB;
+    color: #929292;
+}
+
 #ui_reserva_vuelos .descripcion table tr.flights-option-row td.tarifa:hover {
 	background-color: #78A2BF;
 }
@@ -470,6 +475,10 @@
 
 #ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.am {
 	background-position: 0 0;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.disabled .icon-dia-noche {
+	opacity: 0.2;
 }
 
 #ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.pm {

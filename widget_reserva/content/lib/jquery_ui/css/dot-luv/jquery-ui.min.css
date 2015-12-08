@@ -387,6 +387,11 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
     width: 35%;
 }
 
+.ui-datepicker-today > a.ui-state-highlight {
+    border-radius: 100px;
+    background-color: #0871CE;
+}
+
 .ui-datepicker table {
     width: 100%;
     margin: 0;

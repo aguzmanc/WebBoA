@@ -260,6 +260,8 @@ function selectTarifa()
 		$("#empty_ida_slot").css("display","none");
 
 		constraintTableByTarifa($("#tbl_regreso"), selectionConstraints.ida[tarifaID]);
+
+		constraintTableByFechaHora(opcion, "ida");
 	} else {
 		seleccionVuelo.vuelta = {};
 		seleccionVuelo.vuelta.opcCode = opcCode;	
@@ -349,6 +351,52 @@ function constraintTableByTarifa(table, allowedIds)
 			row.css("visibility","hidden");
 			otherTable.find("tr.flight-details[data-opc_code='"+row.data("opc_code")+"']").css("visibility","hidden");
 		}
+	}
+}
+// ---------------------= =---------------------
+/* disables rows wich are out of range (crossed datetimes) */ 
+function constraintTableByFechaHora(option, tipo)
+{
+	var table;
+	if(tipo=="ida")
+		table = $("#tbl_regreso")
+	else if(tipo=="vuelta")
+		table = $("#tbl_salida");
+
+	var rows = table.find("tr.flights-option-row");
+
+	rows.removeClass("disabled");
+
+	for(var i=0;i<rows.length;i++) {
+		var otherOption = allOptions[$(rows[i]).data("opc_code")]; 
+
+		var dateTimeCrosses;		
+
+		if(tipo=="ida") {
+			var optionWeight = option.fechaLlegada.substr(2,6) * 10000 + 
+				option.horaLlegada.hh * 100 + option.horaLlegada.mm;
+
+			var otherOptionWeight = otherOption.fechaSalida.substr(2,6) * 10000 + 
+				otherOption.horaSalida.hh * 100 + otherOption.horaSalida.mm;
+
+			dateTimeCrosses = optionWeight >= otherOptionWeight;
+
+			console.log(optionWeight + " >= " + otherOptionWeight + " --> " + dateTimeCrosses );
+		} else if(tipo=="vuelta") {
+			var optionWeight = option.fechaSalida.substr(2,6) * 10000 + 
+				option.horaSalida.hh * 100 + option.horaSalida.mm;
+
+			var otherOptionWeight = otherOption.fechaLlegada.substr(2,6) * 10000 + 
+				otherOption.horaLlegada.hh * 100 + otherOption.horaLlegada.mm;
+
+			dateTimeCrosses = optionWeight >= otherOptionWeight;
+		}
+
+		
+
+
+		if(dateTimeCrosses)
+			$(rows[i]).addClass("disabled")
 	}
 }
 // ---------------------= =---------------------
@@ -841,6 +889,7 @@ function checkResultsTableWidth()
 // ---------------------= =---------------------
 function asyncReceiveDates(response)
 {
+	console.log(response);
 	// fix to .NET dumbest encoding ever (possible bug here in future)
 	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
 	
@@ -1770,6 +1819,8 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	for(var i=0;i<rawFlights.length;i++) {
 		var rawFlight = rawFlights[i];
 
+		// console.log(rawFlight);
+
 		var flight = {
 			numVuelo 		: rawFlight["num_vuelo"],
 			horaSalida 		: {hh:0,mm:0},
@@ -1783,6 +1834,16 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			fecha 			: date,
 			numOpcion 		: parseInt(rawFlight["num_opcion"])
 		};
+
+		if(rawFlight["hora_llegada"].length == 6 && rawFlight["hora_llegada"].substr(4,2) == "+1")  {
+			// one day after
+			var flightDate = compactToJSDate(date);
+			flightDate.setDate(flightDate.getDate() + 1);
+
+			flight["fechaLlegada"] = formatCompactDate(flightDate);
+		}
+		else
+			flight["fechaLlegada"] = date;
 
 		// Formateo de horas
 		flight.horaSalida.hh = parseInt(rawFlight["hora_salida"].substr(0,2));
@@ -1881,7 +1942,10 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 		opc.destino = opc.vuelos[opc.vuelos.length-1].destino;
 
 		opc.horaSalida = opc.vuelos[0].horaSalida;
+		opc.fechaSalida = opc.vuelos[0].fecha;
+
 		opc.horaLlegada = opc.vuelos[opc.vuelos.length-1].horaLlegada;
+		opc.fechaLlegada = opc.vuelos[opc.vuelos.length-1].fechaLlegada;
 
 		// calcular duracion total
 		var minsVuelo = 0;
