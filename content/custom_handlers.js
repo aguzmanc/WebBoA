@@ -41,7 +41,7 @@ var BoA = {
 
 	defaultConsultaVuelos :{
 		origen: 'LPB',
-		destino: 'VVI',
+		destino: 'MAD',
 		fechaIda : "20151215", //formatCompactDate(new Date()), // today 
 		fechaVuelta: "20151215", // example, (not recommended)
 		adulto: 1,

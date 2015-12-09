@@ -239,6 +239,10 @@ function toggleWidgetCambiarVuelo()
 function selectTarifa()
 {
 	var row = this.parentNode;
+
+	if($(row).hasClass("disabled"))
+		return;
+
 	var opcCode = $(row).data("opc_code");
 	var opcion = allOptions[opcCode];
 	var compartment = parseInt($(this).data("compartment"));
@@ -368,7 +372,8 @@ function constraintTableByFechaHora(option, tipo)
 	rows.removeClass("disabled");
 
 	for(var i=0;i<rows.length;i++) {
-		var otherOption = allOptions[$(rows[i]).data("opc_code")]; 
+		var otherOptionCode = $(rows[i]).data("opc_code")
+		var otherOption = allOptions[otherOptionCode]; 
 
 		var dateTimeCrosses;		
 
@@ -380,8 +385,6 @@ function constraintTableByFechaHora(option, tipo)
 				otherOption.horaSalida.hh * 100 + otherOption.horaSalida.mm;
 
 			dateTimeCrosses = optionWeight >= otherOptionWeight;
-
-			console.log(optionWeight + " >= " + otherOptionWeight + " --> " + dateTimeCrosses );
 		} else if(tipo=="vuelta") {
 			var optionWeight = option.fechaSalida.substr(2,6) * 10000 + 
 				option.horaSalida.hh * 100 + option.horaSalida.mm;
@@ -392,11 +395,15 @@ function constraintTableByFechaHora(option, tipo)
 			dateTimeCrosses = optionWeight >= otherOptionWeight;
 		}
 
-		
+		if(dateTimeCrosses){
+			$(rows[i]).addClass("disabled");
 
-
-		if(dateTimeCrosses)
-			$(rows[i]).addClass("disabled")
+			// deselect if disabled row is selected
+			if(tipo=="ida" && seleccionVuelo.vuelta != null && otherOptionCode == seleccionVuelo.vuelta.opcCode)
+				deleteVuelta();
+			else if(tipo=="vuelta" && otherOptionCode == seleccionVuelo.ida.opcCode)
+				deleteIda();
+		}
 	}
 }
 // ---------------------= =---------------------
@@ -946,6 +953,8 @@ function asyncReceiveFlights(response)
 
 	// el verdadero response esta mas adentro ¬¬
 	response = response['ResultAvailabilityPlusValuationsShort']; 
+
+	console.log(response);
 
 	var fechaIdaConsultada = response["fechaIdaConsultada"];
 	var fechaVueltaConsultada = response["fechaVueltaConsultada"];
