@@ -896,9 +896,16 @@ function checkResultsTableWidth()
 // ---------------------= =---------------------
 function asyncReceiveDates(response)
 {
-	console.log(response);
-	// fix to .NET dumbest encoding ever (possible bug here in future)
-	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
+	try {
+		// fix to .NET dumbest encoding ever (possible bug here in future)
+		response = $.parseJSON(response.CalendarResult).ResultCalendar; 
+	} catch (e){
+		showSimpleDialog (BoA.defaultApologyMessage, BoA.defaultURLAfterFail);
+
+		console.log(e);
+
+		return;
+	}
 	
 	// construir selector de fechas para vuelos de ida y vuelta
 	currentDateIda = response["fechaIdaConsultada"];
@@ -1345,6 +1352,8 @@ function requestSearchParameters(parms)
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
 
+	console.log(data);
+
 	var dataStr = JSON.stringify(data);
 
 	$.ajax({
@@ -1673,7 +1682,7 @@ function buildBanks(banks)
 
 			$(cell).append("<img class='bank " + bankKey + "' data-bank_key='"+bankKey+"' src='/content/images/bancos/" + bankKey + ".png'>");
 			$(cell).find("img").click(function(){
-				showSimpleDialog($(this).data("bank_key"));	
+				showSimpleDialog(disabledBanksMessages[$(this).data("bank_key")]);	
 			});
 		}
 
@@ -2090,25 +2099,29 @@ function translateConstraints(rawConstraints)
 	};
 }
 // ---------------------= =---------------------
-function showSimpleDialog(bankKey)
+function showSimpleDialog(msg, redirectUrl)
 {
-	var msg = disabledBanksMessages[bankKey];
-
-	console.log(disabledBanksMessages);
-	
 	$("#dialog_overlay").show();
 	$("#simple_dialog")
 		.show()
 		.find(".description").html(msg);
 
 	$("#ui_reserva_vuelos").addClass("blured");
+
+	if(redirectUrl != null)
+		$("#simple_dialog .button").click(function(){
+			closeSimpleDialog(redirectUrl);	
+		});
 }
 // ---------------------= =---------------------
-function closeSimpleDialog()
+function closeSimpleDialog(redirectUrl)
 {
 	$("#dialog_overlay").hide();
 	$("#simple_dialog").hide();
 	$("#ui_reserva_vuelos").removeClass("blured");
+
+	if(redirectUrl != null)
+		window.location.href = redirectUrl;
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------

@@ -42,12 +42,15 @@ var BoA = {
 	defaultConsultaVuelos :{
 		origen: 'LPB',
 		destino: 'MAD',
-		fechaIda : "20151215", //formatCompactDate(new Date()), // today 
-		fechaVuelta: "20151215", // example, (not recommended)
+		fechaIda : formatCompactDate(new Date()), // today 
+		fechaVuelta: null, // example, (not recommended)
 		adulto: 1,
 		infante: 0,
 		ninho: 0
 	},
+
+	defaultApologyMessage : "En estos momentos no podemos atender su solicitud, por favor intente mas tarde.",
+	defaultURLAfterFail: "http://www.boa.bo",
 
 	// Configuracion de bancos
 	banks : {
