@@ -362,18 +362,24 @@ function constraintTableByTarifa(table, allowedIds)
 function constraintTableByFechaHora(option, tipo)
 {
 	var table;
-	if(tipo=="ida")
+	if(tipo=="vuelta")
 		table = $("#tbl_regreso")
-	else if(tipo=="vuelta")
+	else if(tipo=="ida")
 		table = $("#tbl_salida");
 
 	var rows = table.find("tr.flights-option-row");
 
 	rows.removeClass("disabled");
 
+	console.log(option.fechaLlegada);
+	console.log("--------");
+	console.log(table);
+
 	for(var i=0;i<rows.length;i++) {
-		var otherOptionCode = $(rows[i]).data("opc_code")
+		var otherOptionCode = $(rows[i]).data("opc_code");
 		var otherOption = allOptions[otherOptionCode]; 
+
+		console.log(otherOptionCode);
 
 		var dateTimeCrosses;		
 
@@ -961,8 +967,6 @@ function asyncReceiveFlights(response)
 	// el verdadero response esta mas adentro ¬¬
 	response = response['ResultAvailabilityPlusValuationsShort']; 
 
-	console.log(response);
-
 	var fechaIdaConsultada = response["fechaIdaConsultada"];
 	var fechaVueltaConsultada = response["fechaVueltaConsultada"];
 	
@@ -1352,8 +1356,6 @@ function requestSearchParameters(parms)
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
 
-	console.log(data);
-
 	var dataStr = JSON.stringify(data);
 
 	$.ajax({
@@ -1375,7 +1377,7 @@ function requestFlights(dateIda, dateVuelta)
 	var data = {
 		tokenAv 		: SERVICE_CREDENTIALS_KEY,
 		language 		: "ES",
-		currency 		: CODE_CURRENCIES[CURRENCY],
+		currency 		: "USD", // CODE_CURRENCIES[CURRENCY],
 		locationType 	: "N",
 		location 		: "BO",
 		bringAv			: "1",
@@ -1694,13 +1696,21 @@ function buildBanks(banks)
 // ---------------------= =---------------------
 function translateTaxes(fromResponse) 
 {
+	console.log(fromResponse);
+
 	var rawTaxesByPx = fromResponse['tasaTipoPasajero']['TasaTipoPasajero'];
-	var rawIdaTaxes = fromResponse['tasaIda']['tasa'];
+
+	var rawIdaTaxes;
+	if(fromResponse['tasaIda'] != null) 
+		rawIdaTaxes = fromResponse['tasaIda']['tasa'];
+	else 
+		rawIdaTaxes = [];
+
 	var rawVueltaTaxes;
 	if(fromResponse['tasaVuelta'] == null)  // podria no existir
 		rawVueltaTaxes = null;
 	else
-		rawVueltaTaxes = fromResponse['tasaVuelta']['tasa']
+		rawVueltaTaxes = fromResponse['tasaVuelta']['tasa'];
 
 	var to = {
 		byPassenger: {},
@@ -1821,7 +1831,14 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			&& rawTarifa["fare_code"] != "SSENIOR" // exception rule (hardcoded :S )
 		  ) 
 		{
-			ratesByClass[rawTarifa["clases"]] = rawTarifa["importe"];
+			var importe = parseFloat(rawTarifa["importe"]);
+			if(rawTarifa["recargos"] != null) { // si existiese un recargo adicional
+				var recargo = parseFloat(rawTarifa["recargos"]["recargo"]["importe"]);
+				importe += recargo;
+			}
+
+			ratesByClass[rawTarifa["clases"]] = importe;
+
 			fareCodesByClass[rawTarifa["clases"]] = rawTarifa["fare_code"];
 			rateIDsByClass[rawTarifa["clases"]] = rawTarifa["ID"];
 		}

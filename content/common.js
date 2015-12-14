@@ -69,7 +69,7 @@ function formatShortDate(date)
 
 	var d = new Date(yyyy, mm, dd, 0,0,0,0);
 
-	var formatted = d.getDay() + " " + COMPACT_MONTH_NAMES[d.getMonth()] + " " + yyyy;
+	var formatted = d.getDate() + " " + COMPACT_MONTH_NAMES[d.getMonth()] + " " + yyyy;
 
 	return formatted; 
 }
