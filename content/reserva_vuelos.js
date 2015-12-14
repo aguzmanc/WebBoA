@@ -362,7 +362,7 @@ function constraintTableByTarifa(table, allowedIds)
 function constraintTableByFechaHora(option, tipo)
 {
 	var table;
-	if(tipo=="vuelta")
+	if(tipo=="vuelta") // CONTINUAR AQUI, VER PORQUE LAS FECHAS DE LOS OPTIONS SON LAS MISMAS CUANDO SE BUSCA FECHAS DIFERENTES
 		table = $("#tbl_regreso")
 	else if(tipo=="ida")
 		table = $("#tbl_salida");
@@ -621,6 +621,8 @@ function validateSeleccionVuelo()
 {
 	/* PREPARE AND SEND DATA */
 	var sendData = prepareSeleccionVueloToSend();
+
+	console.log(sendData);
 
 	var dataStr = JSON.stringify(sendData);
 
@@ -1377,7 +1379,7 @@ function requestFlights(dateIda, dateVuelta)
 	var data = {
 		tokenAv 		: SERVICE_CREDENTIALS_KEY,
 		language 		: "ES",
-		currency 		: "USD", // CODE_CURRENCIES[CURRENCY],
+		currency 		: CODE_CURRENCIES[CURRENCY],
 		locationType 	: "N",
 		location 		: "BO",
 		bringAv			: "1",
@@ -2067,7 +2069,7 @@ function translateSeleccionVueloForService(sel)
 {
 	return {
 		num: 			sel.num,
-		precioTotal: 	sel.precioTotal,
+		precioTotal: 	parseInt(formatCurrencyQuantity(sel.precioTotal,false,0)),
 		ida: 			translateSeleccionVueloDetailForService(sel.ida),
 		vuelta: 		translateSeleccionVueloDetailForService(sel.vuelta)
 	};
@@ -2080,10 +2082,14 @@ function translateSeleccionVueloDetailForService(detail)
 
 	var tasas = [];
 	for(var k in detail.tasas) 
-		tasas.push({key:k, value:detail.tasas[k]});
+		tasas.push(
+			{
+				key:k, 
+				value: parseInt(formatCurrencyQuantity(detail.tasas[k], false, 0))
+			});
 
 	return {
-		precioBase	: detail.precioBase,
+		precioBase	: parseInt(formatCurrencyQuantity(detail.precioBase,false,0)) ,
 		tasas 		: tasas
 	}
 }
