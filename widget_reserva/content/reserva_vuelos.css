@@ -404,6 +404,9 @@
 #ui_reserva_vuelos .descripcion table tr.flights-option-row td {
 	position: relative;
     height: 70px;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row:not(.disabled) td {
 	cursor: pointer;
 	background-color: #CADAE5;
 }
@@ -412,7 +415,12 @@
 	background-color: #ABC6D8;
 }
 
-#ui_reserva_vuelos .descripcion table tr.flights-option-row td.tarifa:hover {
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.disabled td {
+	background-color: #ABABAB;
+    color: #929292;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row:not(.disabled) td.tarifa:hover {
 	background-color: #78A2BF;
 }
 
@@ -430,6 +438,10 @@
 #ui_reserva_vuelos .descripcion table tr.flights-option-row:hover .rbtn,
 #ui_reserva_vuelos .descripcion table tr.flights-option-row.selected .rbtn {
 	opacity: 1;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.disabled .rbtn {
+	display: none;
 }
 
 #ui_reserva_vuelos .descripcion table tr.flights-option-row .rbtn > div{
@@ -470,6 +482,10 @@
 
 #ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.am {
 	background-position: 0 0;
+}
+
+#ui_reserva_vuelos .descripcion table tr.flights-option-row.disabled .icon-dia-noche {
+	opacity: 0.2;
 }
 
 #ui_reserva_vuelos .descripcion table tr.flights-option-row .icon-dia-noche.pm {

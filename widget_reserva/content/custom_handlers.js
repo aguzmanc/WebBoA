@@ -2,8 +2,28 @@
 var CURRENCY = "bs"; // "euro", "bs" , "usd" 
 var HTML_CURRENCIES = {bs:"Bs.",euro:"&euro;",usd:"USD"};
 var CODE_CURRENCIES = {bs:"BOB",euro:"EU",usd:"USD"};
-var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYjodw11Skn4GuEa/vBjimiJIHskXyu0UociT0HglEoORow3WSwyaHUu0tdZEfahPHdOHcfEkRelOw==";
+var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYhe+i9RAAQRuXSV2Nm6aGyfO9zf530xYSZy6bkXui7Ux/1DAhfg/6F7q7leHl8o0X3O1uiunF/4Mg==";
 // ---------------------------------------------------------------------------
+var LocaleConfig = {
+	countries: [
+		{key:"BO",value:"Bolivia"},
+		{key:"USA",value:"Estados Unidos"},
+		{key:"ES",value:"Espa&ntilde;a"},
+		{key:"ARG",value:"Argentina"}
+	],
+	languages: [
+		{key:"ES",value:"Espa&ntilde;ol"},
+		{key:"PT",value:"Portugues"},
+		{key:"EN",value:"Ingl&eacute;s"}
+	],
+	currencies: [
+		{key:"BOB",value:"Bolivianos"},
+		{key:"EU",value:"Euros"},
+		{key:"USD",value:"D&oacute;lares Estadounidenses"}
+	]
+};
+
+
 var BoA = {
 	urls : {
 		home : "home.html",
@@ -36,18 +56,22 @@ var BoA = {
 		nearest_dates_service: "http://skbpruebas.cloudapp.net/Services/BasicReservationService.svc/Calendar",
 		flights_schedule_service: "http://skbpruebas.cloudapp.net/Services/BasicReservationService.svc/AvailabilityPlusValuationsShort",
 		validate_flight_selection_service: "http://localhost/content/fake_services/validate_flight_selection_service.php",
-		register_passengers_service: "http://localhost/content/fake_services/register_passengers_service.php"
+		register_passengers_service: "http://localhost/content/fake_services/register_passengers_service.php",
+		change_locale_settings_service: "http://localhost/content/fake_services/change_locale_settings.php"
 	}, 
 
-	defaultConsultaVuelos :{
+	defaultConsultaVuelos : {
 		origen: 'LPB',
-		destino: 'VVI',
-		fechaIda : "20151205", //formatCompactDate(new Date()), // today 
-		fechaVuelta: null, //"20151229", // example, (not recommended)
+		destino: 'CBB',
+		fechaIda : formatCompactDate(new Date()), // today 
+		fechaVuelta: null, // example, (not recommended)
 		adulto: 1,
 		infante: 0,
 		ninho: 0
 	},
+
+	defaultApologyMessage : "En estos momentos no podemos atender su solicitud, por favor intente mas tarde.",
+	defaultURLAfterFail: "http://www.boa.bo",
 
 	// Configuracion de bancos
 	banks : {

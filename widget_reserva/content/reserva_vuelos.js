@@ -72,6 +72,7 @@ var tasasPorPasajero = {
 var tasas = {ida:{},vuelta:{}};
 
 var selectionConstraints = {};
+var disabledBanksMessages = {};
 
 var allOptions = {};
 
@@ -143,6 +144,10 @@ $(document).on('ready',function()
 		numberOfMonths: 2, 
 		minDate: 0
 	});
+
+	// support for "font-awesome" icon library
+	$(".validable .calendar").datepicker("option", "prevText", '<i class="fa fa-arrow-left"></i>');
+	$(".validable .calendar").datepicker("option", "nextText", '<i class="fa fa-arrow-right"></i>');
 
 	$("#btn_validar_vuelos").click(validateSeleccionVuelo);
 	$("#btn_volver_vuelos").click(backToFlightStage);
@@ -234,6 +239,10 @@ function toggleWidgetCambiarVuelo()
 function selectTarifa()
 {
 	var row = this.parentNode;
+
+	if($(row).hasClass("disabled"))
+		return;
+
 	var opcCode = $(row).data("opc_code");
 	var opcion = allOptions[opcCode];
 	var compartment = parseInt($(this).data("compartment"));
@@ -255,6 +264,8 @@ function selectTarifa()
 		$("#empty_ida_slot").css("display","none");
 
 		constraintTableByTarifa($("#tbl_regreso"), selectionConstraints.ida[tarifaID]);
+
+		constraintTableByFechaHora(opcion, "ida");
 	} else {
 		seleccionVuelo.vuelta = {};
 		seleccionVuelo.vuelta.opcCode = opcCode;	
@@ -343,6 +354,61 @@ function constraintTableByTarifa(table, allowedIds)
 			// hide entire row
 			row.css("visibility","hidden");
 			otherTable.find("tr.flight-details[data-opc_code='"+row.data("opc_code")+"']").css("visibility","hidden");
+		}
+	}
+}
+// ---------------------= =---------------------
+/* disables rows wich are out of range (crossed datetimes) */ 
+function constraintTableByFechaHora(option, tipo)
+{
+	var table;
+	if(tipo=="ida")
+		table = $("#tbl_regreso")
+	else if(tipo=="vuelta")
+		table = $("#tbl_salida");
+
+	var rows = table.find("tr.flights-option-row");
+
+	rows.removeClass("disabled");
+
+	console.log(option.fechaLlegada);
+	console.log("--------");
+	console.log(table);
+
+	for(var i=0;i<rows.length;i++) {
+		var otherOptionCode = $(rows[i]).data("opc_code");
+		var otherOption = allOptions[otherOptionCode]; 
+
+		console.log(otherOptionCode);
+
+		var dateTimeCrosses;		
+
+		if(tipo=="ida") {
+			var optionWeight = option.fechaLlegada.substr(2,6) * 10000 + 
+				option.horaLlegada.hh * 100 + option.horaLlegada.mm;
+
+			var otherOptionWeight = otherOption.fechaSalida.substr(2,6) * 10000 + 
+				otherOption.horaSalida.hh * 100 + otherOption.horaSalida.mm;
+
+			dateTimeCrosses = optionWeight >= otherOptionWeight;
+		} else if(tipo=="vuelta") {
+			var optionWeight = option.fechaSalida.substr(2,6) * 10000 + 
+				option.horaSalida.hh * 100 + option.horaSalida.mm;
+
+			var otherOptionWeight = otherOption.fechaLlegada.substr(2,6) * 10000 + 
+				otherOption.horaLlegada.hh * 100 + otherOption.horaLlegada.mm;
+
+			dateTimeCrosses = optionWeight >= otherOptionWeight;
+		}
+
+		if(dateTimeCrosses){
+			$(rows[i]).addClass("disabled");
+
+			// deselect if disabled row is selected
+			if(tipo=="ida" && seleccionVuelo.vuelta != null && otherOptionCode == seleccionVuelo.vuelta.opcCode)
+				deleteVuelta();
+			else if(tipo=="vuelta" && otherOptionCode == seleccionVuelo.ida.opcCode)
+				deleteIda();
 		}
 	}
 }
@@ -455,6 +521,9 @@ function deleteIda()
 		$("#div_empty_vuelo").css("display","block");
 	}
 
+	// habilita nuevamente todas las filas de la tabla de vuelta
+	$("#tbl_regreso .flights-option-row").removeClass("disabled"); 
+
 	var row = $("#tbl_salida .flights-option-row[data-opc_code='"+opcCode+"']");
 	row.removeClass("selected");
 	row.find(".rbtn").removeClass("checked");
@@ -555,6 +624,8 @@ function validateSeleccionVuelo()
 {
 	/* PREPARE AND SEND DATA */
 	var sendData = prepareSeleccionVueloToSend();
+
+	console.log(sendData);
 
 	var dataStr = JSON.stringify(sendData);
 
@@ -690,8 +761,6 @@ function asyncRegisterPassengers(response)
 		return;
 	}
 
-	console.log(response);
-
 	$("#lbl_codigo_reserva").text(response["pnr"]);
 
 	if (false == BoA.widgetReservas.enableCompraStage) {
@@ -712,8 +781,6 @@ function asyncRegisterPassengers(response)
 			};
 
 			banks[bankKey] = bank;
-
-			console.log(bank);
 		}
 
 		buildBanks(banks);
@@ -840,8 +907,16 @@ function checkResultsTableWidth()
 // ---------------------= =---------------------
 function asyncReceiveDates(response)
 {
-	// fix to .NET dumbest encoding ever (possible bug here in future)
-	response = $.parseJSON(response.CalendarResult).ResultCalendar; 
+	try {
+		// fix to .NET dumbest encoding ever (possible bug here in future)
+		response = $.parseJSON(response.CalendarResult).ResultCalendar; 
+	} catch (e){
+		showSimpleDialog (BoA.defaultApologyMessage, BoA.defaultURLAfterFail);
+
+		console.log(e);
+
+		return;
+	}
 	
 	// construir selector de fechas para vuelos de ida y vuelta
 	currentDateIda = response["fechaIdaConsultada"];
@@ -936,7 +1011,7 @@ function asyncReceiveFlights(response)
 		var dataVuelta = translateFlights(
 			response["vuelosYTarifas"]["Vuelos"]["vuelta"]["vuelos"]["vuelo"],
 			rawTarifas, 
-			fechaIdaConsultada,
+			fechaVueltaConsultada,
 			porcentajesPorPasajero);
 
 		// reconstruir tabla de fechas (vuelta)
@@ -1610,9 +1685,11 @@ function buildBanks(banks)
 		if (bank.enabled)
 			$(cell).append("<a href='" + bank.url + "'><img class='bank' src='/content/images/bancos/" + bankKey + ".png'></a>");
 		else{
-			$(cell).append("<img class='bank " + bankKey + " disabled' src='/content/images/bancos/" + bankKey + "_disabled.png'>");
+			disabledBanksMessages[bankKey] = bank.msg;
+
+			$(cell).append("<img class='bank " + bankKey + "' data-bank_key='"+bankKey+"' src='/content/images/bancos/" + bankKey + ".png'>");
 			$(cell).find("img").click(function(){
-				showSimpleDialog(bank.msg);	
+				showSimpleDialog(disabledBanksMessages[$(this).data("bank_key")]);	
 			});
 		}
 
@@ -1624,13 +1701,21 @@ function buildBanks(banks)
 // ---------------------= =---------------------
 function translateTaxes(fromResponse) 
 {
+	console.log(fromResponse);
+
 	var rawTaxesByPx = fromResponse['tasaTipoPasajero']['TasaTipoPasajero'];
-	var rawIdaTaxes = fromResponse['tasaIda']['tasa'];
+
+	var rawIdaTaxes;
+	if(fromResponse['tasaIda'] != null) 
+		rawIdaTaxes = fromResponse['tasaIda']['tasa'];
+	else 
+		rawIdaTaxes = [];
+
 	var rawVueltaTaxes;
 	if(fromResponse['tasaVuelta'] == null)  // podria no existir
 		rawVueltaTaxes = null;
 	else
-		rawVueltaTaxes = fromResponse['tasaVuelta']['tasa']
+		rawVueltaTaxes = fromResponse['tasaVuelta']['tasa'];
 
 	var to = {
 		byPassenger: {},
@@ -1751,7 +1836,14 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			&& rawTarifa["fare_code"] != "SSENIOR" // exception rule (hardcoded :S )
 		  ) 
 		{
-			ratesByClass[rawTarifa["clases"]] = rawTarifa["importe"];
+			var importe = parseFloat(rawTarifa["importe"]);
+			if(rawTarifa["recargos"] != null) { // si existiese un recargo adicional
+				var recargo = parseFloat(rawTarifa["recargos"]["recargo"]["importe"]);
+				importe += recargo;
+			}
+
+			ratesByClass[rawTarifa["clases"]] = importe;
+
 			fareCodesByClass[rawTarifa["clases"]] = rawTarifa["fare_code"];
 			rateIDsByClass[rawTarifa["clases"]] = rawTarifa["ID"];
 		}
@@ -1767,6 +1859,8 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	for(var i=0;i<rawFlights.length;i++) {
 		var rawFlight = rawFlights[i];
 
+		// console.log(rawFlight);
+
 		var flight = {
 			numVuelo 		: rawFlight["num_vuelo"],
 			horaSalida 		: {hh:0,mm:0},
@@ -1780,6 +1874,16 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			fecha 			: date,
 			numOpcion 		: parseInt(rawFlight["num_opcion"])
 		};
+
+		if(rawFlight["hora_llegada"].length == 6 && rawFlight["hora_llegada"].substr(4,2) == "+1")  {
+			// one day after
+			var flightDate = compactToJSDate(date);
+			flightDate.setDate(flightDate.getDate() + 1);
+
+			flight["fechaLlegada"] = formatCompactDate(flightDate);
+		}
+		else
+			flight["fechaLlegada"] = date;
 
 		// Formateo de horas
 		flight.horaSalida.hh = parseInt(rawFlight["hora_salida"].substr(0,2));
@@ -1878,7 +1982,10 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 		opc.destino = opc.vuelos[opc.vuelos.length-1].destino;
 
 		opc.horaSalida = opc.vuelos[0].horaSalida;
+		opc.fechaSalida = opc.vuelos[0].fecha;
+
 		opc.horaLlegada = opc.vuelos[opc.vuelos.length-1].horaLlegada;
+		opc.fechaLlegada = opc.vuelos[opc.vuelos.length-1].fechaLlegada;
 
 		// calcular duracion total
 		var minsVuelo = 0;
@@ -1965,7 +2072,7 @@ function translateSeleccionVueloForService(sel)
 {
 	return {
 		num: 			sel.num,
-		precioTotal: 	sel.precioTotal,
+		precioTotal: 	parseInt(formatCurrencyQuantity(sel.precioTotal,false,0)),
 		ida: 			translateSeleccionVueloDetailForService(sel.ida),
 		vuelta: 		translateSeleccionVueloDetailForService(sel.vuelta)
 	};
@@ -1978,10 +2085,14 @@ function translateSeleccionVueloDetailForService(detail)
 
 	var tasas = [];
 	for(var k in detail.tasas) 
-		tasas.push({key:k, value:detail.tasas[k]});
+		tasas.push(
+			{
+				key:k, 
+				value: parseInt(formatCurrencyQuantity(detail.tasas[k], false, 0))
+			});
 
 	return {
-		precioBase	: detail.precioBase,
+		precioBase	: parseInt(formatCurrencyQuantity(detail.precioBase,false,0)) ,
 		tasas 		: tasas
 	}
 }
@@ -2014,7 +2125,7 @@ function translateConstraints(rawConstraints)
 	};
 }
 // ---------------------= =---------------------
-function showSimpleDialog(msg)
+function showSimpleDialog(msg, redirectUrl)
 {
 	$("#dialog_overlay").show();
 	$("#simple_dialog")
@@ -2022,13 +2133,21 @@ function showSimpleDialog(msg)
 		.find(".description").html(msg);
 
 	$("#ui_reserva_vuelos").addClass("blured");
+
+	if(redirectUrl != null)
+		$("#simple_dialog .button").click(function(){
+			closeSimpleDialog(redirectUrl);	
+		});
 }
 // ---------------------= =---------------------
-function closeSimpleDialog()
+function closeSimpleDialog(redirectUrl)
 {
 	$("#dialog_overlay").hide();
 	$("#simple_dialog").hide();
 	$("#ui_reserva_vuelos").removeClass("blured");
+
+	if(redirectUrl != null)
+		window.location.href = redirectUrl;
 }
 // ---------------------= =---------------------
 // ---------------------= =---------------------
