@@ -110,7 +110,11 @@ $(document).on('ready',function()
 
 	// Dialog setup
 	$("#simple_dialog .button").click(closeSimpleDialog);
-	showSimpleDialog();
+
+	// locale dialog
+	$("#locale_dialog .button").click(validateAndSelectLocaleDialog);
+
+	// showLocaleSettingsDialog();
 });
 // ---------------------------------------------------------------------------
 function click_menu_buscador_vuelos()
@@ -421,12 +425,95 @@ function showSimpleDialog(msg)
 	$("#simple_dialog").show();
 }
 // ---------------------= =---------------------
+function showLocaleSettingsDialog() 
+{
+	$("#select_locale_country, #select_locale_language, #select_locale_currency").html("<option value=''>(seleccione opci&oacute;n)</option>");
+
+	// paises
+	var select = $("#select_locale_country");
+	for(var i=0;i<LocaleConfig.countries.length;i++) {
+		var key = LocaleConfig.countries[i].key;
+		var value = LocaleConfig.countries[i].value;
+
+		select.append("<option value='"+key+"'>"+value+"</option>");
+	}
+
+	select = $("#select_locale_language");
+	for(var i=0;i<LocaleConfig.languages.length;i++) {
+		var key = LocaleConfig.languages[i].key;
+		var value = LocaleConfig.languages[i].value;
+
+		select.append("<option value='"+key+"'>"+value+"</option>");
+	}
+
+	select = $("#select_locale_currency");
+	for(var i=0;i<LocaleConfig.currencies.length;i++) {
+		var key = LocaleConfig.currencies[i].key;
+		var value = LocaleConfig.currencies[i].value;
+
+		select.append("<option value='"+key+"'>"+value+"</option>");
+	}
+
+	$("#home, #ui_home").addClass("blured");
+	$("#dialog_overlay").show();
+	$("#locale_settings_dialog").show();
+}
+// ---------------------= =---------------------
 function closeSimpleDialog()
 {
 	$("#dialog_overlay").hide();
-	$("#simple_dialog").hide();
+	$("#dialog_overlay .dialog").hide();
 	$("#home, #ui_home").removeClass("blured");
 }
 // ---------------------= =---------------------
+function validateAndSelectLocaleDialog() 
+{
+	var validForm = true;
+	var selCountry = $("#select_locale_country");
+	var country = selCountry.val();
+
+	var selLanguage = $("#select_locale_language");
+	var language = selLanguage.val();
+
+	var selCurrency = $("#select_locale_currency");
+	var currency = selCurrency.val();
+
+	if(country=="") {
+		validForm = false;
+		activate_validation(selCountry);
+	}
+
+	if(language=="") {
+		validForm = false;
+		activate_validation(selLanguage);
+	}
+
+	if(currency=="") {
+		validForm = false;
+		activate_validation(selCurrency);
+	}
+
+	// when no valid data, finish here
+	if(false == validForm) {
+		setTimeout(function() { $(".validable").removeClass("active"); },1500);
+		return;
+	}
+
+	var sendData = {
+		country: country,
+		language: language,
+		currency: currency
+	};
+
+	var dataStr = JSON.stringify(sendData);
+
+	$.ajax({
+		url: BoA.urls["change_locale_settings_service"],
+		type: 'POST',
+		dataType:'json',
+		contentType: "application/json; charset=utf-8",
+		data: dataStr
+	});
+}
 // ---------------------= =---------------------
 // ---------------------= =---------------------

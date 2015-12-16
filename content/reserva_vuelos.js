@@ -521,6 +521,9 @@ function deleteIda()
 		$("#div_empty_vuelo").css("display","block");
 	}
 
+	// habilita nuevamente todas las filas de la tabla de vuelta
+	$("#tbl_regreso .flights-option-row").removeClass("disabled"); 
+
 	var row = $("#tbl_salida .flights-option-row[data-opc_code='"+opcCode+"']");
 	row.removeClass("selected");
 	row.find(".rbtn").removeClass("checked");

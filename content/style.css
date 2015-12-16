@@ -780,7 +780,7 @@ header .att-div{
 	padding: 2px 44px 0 10px;
 	background-image: url('images/icon_arrow_down.png');
 	background-repeat: no-repeat;
-	background-position: 165px 10px;
+	background-position: center right 10px;
 
 	-webkit-appearance: none;
 	-moz-appearance: none;
