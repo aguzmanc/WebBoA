@@ -362,9 +362,9 @@ function constraintTableByTarifa(table, allowedIds)
 function constraintTableByFechaHora(option, tipo)
 {
 	var table;
-	if(tipo=="vuelta") // CONTINUAR AQUI, VER PORQUE LAS FECHAS DE LOS OPTIONS SON LAS MISMAS CUANDO SE BUSCA FECHAS DIFERENTES
+	if(tipo=="ida")
 		table = $("#tbl_regreso")
-	else if(tipo=="ida")
+	else if(tipo=="vuelta")
 		table = $("#tbl_salida");
 
 	var rows = table.find("tr.flights-option-row");
@@ -1008,7 +1008,7 @@ function asyncReceiveFlights(response)
 		var dataVuelta = translateFlights(
 			response["vuelosYTarifas"]["Vuelos"]["vuelta"]["vuelos"]["vuelo"],
 			rawTarifas, 
-			fechaIdaConsultada,
+			fechaVueltaConsultada,
 			porcentajesPorPasajero);
 
 		// reconstruir tabla de fechas (vuelta)
