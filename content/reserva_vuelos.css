@@ -496,6 +496,16 @@
 	background-position: 0 -80px;
 }
 
+#ui_reserva_vuelos .descripcion table tr.flights-option-row .lbl-num-vuelos {
+	position: absolute;
+    left: 125px;
+    background-color: #1F3656;
+    color: #FFF;
+    font-family: "FuturaBold";
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
 
 /* detalles de celda */ 
 #ui_reserva_vuelos .descripcion table td.cell-details {

@@ -1158,8 +1158,16 @@ function buildFlightOptionRow(opc, compartments)
 	var iconLlegada = (opc.horaLlegada.hh >= 5 && opc.horaLlegada.hh <= 12) ? "am" : 
 		((opc.horaLlegada.hh <= 18) ? "pm" : "night");
 
+	var strNumVuelos = "";
+
+	for(var i=0;i<opc.vuelos.length;i++)
+		strNumVuelos += ("," + opc.vuelos[i].numVuelo);
+	
+	strNumVuelos = strNumVuelos.substr(1,strNumVuelos.length-1);
+
 	var strDuracion = 
 		"<div class='icon-dia-noche salida " + iconSalida + "'></div>" + 
+		"<div class='lbl-num-vuelos' title='N&uacute;mero de Vuelo'>"+strNumVuelos+"</div>" + 
 		formatTime(opc.horaSalida) + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
 		formatTime(opc.horaLlegada) +
 		"<div class='icon-dia-noche llegada " + iconLlegada + "'></div>" + 
