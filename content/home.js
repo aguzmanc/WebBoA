@@ -410,9 +410,7 @@ function search_reserva_vuelos()
 // ---------------------= =---------------------
 function search_check_in()
 {
-	var btn = $("#btn_redirect");
-	btn.attr("href","https://portal.iberia.es/webcki_handling/busquedaLoader.do?aerolinea=OB");
-	btn[0].click();
+	redirect("web_check_in");
 }
 // ---------------------= =---------------------
 function showSimpleDialog(msg)

@@ -50,6 +50,8 @@ var BoA = {
 		social_networks: "http://localhost",
 		/* CALL CENTER */
 		call_center: "http://localhost", 
+		/* WEB CHECK IN */
+		web_check_in : "https://portal.iberia.es/webcki_handling/busquedaLoader.do?aerolinea=OB",
 
 		/* SERVICES */
 		// nearest_dates_service: "http://localhost/content/fake_services/nearest_dates.php",

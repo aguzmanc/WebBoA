@@ -142,10 +142,15 @@ header .logo-header {
 }
 /* --------------------------------------------------------------------------- */
 #buscador_vuelos {
-    margin: 0 20px;
+    position: relative;
+    width: 90%;
+    height: 100px;
+    min-width: 350px;
+    margin: 50px auto;
+    overflow: visible;
 }
 
-#buscador_vuelos .menu{
+#buscador_vuelos .menu {
     float: left;
     font-family: "HelveticaNeuePro";
     cursor: pointer;
@@ -155,9 +160,6 @@ header .logo-header {
     padding: 20px 0 2px 12px;
     width: 100px;
 }
-
-#buscador_vuelos.collapsed {opacity: 0.5;}
-#buscador_vuelos.expanded {opacity: 1.0;}
 
 /*ENABLED TABS*/
 #buscador_vuelos .menu:nth-child(1):hover{background-color:rgba(66, 98, 142, 0.9);}
@@ -181,13 +183,13 @@ header .logo-header {
     background-color: rgba(175, 175, 175, 0.9);
     color: #797979;
     cursor: not-allowed;
+
     /* ENABLED COLORS
     background-color: #DDE0E1;  
     color: #1F3656;*/
 }
 
-#buscador_vuelos .menu{
-    position:relative;
+#buscador_vuelos .menu {
     width: 100px;
     padding: 28px 0px 2px 5px;
 }
@@ -195,7 +197,7 @@ header .logo-header {
 #buscador_vuelos .menu .label-prox {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 235px;
     color: #7F7F7F;
 }
 
@@ -206,15 +208,14 @@ header .logo-header {
 #buscador_vuelos .menu.selected h2{font-size: 12px;}
 
 #buscador_vuelos .content { 
-    /*padding: 20px 0 30px 10px;*/
+    width: 100%;
+    padding: 20px 0 20px 10px;
+    margin: 0 0 200px 0;
     display: none;
-    /*overflow: hidden;*/
 }
 
 #buscador_vuelos .content.selected {
-    display: block;
-    width: 100%;
-    margin: 54px 0 0 0;
+    display: inline-block;
 }
 
 #buscador_vuelos .form input[type="text"] {
@@ -228,9 +229,12 @@ header .logo-header {
 #web_check_in { background-color: rgba(239, 170, 53, 0.9); }
 #estado_vuelo { background-color: rgba(221, 224, 225, 0.9); }
 
-
 #reserva_vuelos table {width:100%;}
 
+#buscador_vuelos .button {
+    position: relative;
+    margin: 20px auto;
+}
 /* --------------------------------------------------------------------------- */
 .form label {
     font-family: "HelveticaNeuePro";
