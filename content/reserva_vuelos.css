@@ -556,6 +556,14 @@
 	padding: 0 30px;
 }
 
+#ui_reserva_vuelos .descripcion table td.cell-details .lbl-num-vuelo {
+	color: #1F3656;
+	font-family: "FuturaBold";
+	font-size: 30px;
+	text-align: right;
+	margin: 0 20px 0 0;
+}
+
 #ui_reserva_vuelos .descripcion table td.cell-details .separator {
 	width: 70%;
 	height: 2px;
@@ -570,11 +578,10 @@
 #ui_reserva_vuelos .descripcion table td.cell-details .detail.stretched.left{float: left;}
 #ui_reserva_vuelos .descripcion table td.cell-details .detail.stretched.righr{float: right;}
 
-#ui_reserva_vuelos .descripcion table td.cell-details .detail .icon-cell {
-	width: 80px;
-}
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .icon-cell { width: 80px; }
 
-#ui_reserva_vuelos .descripcion table td.cell-details .detail .time-cell{
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .time-cell {
+	width: 130px;
 	vertical-align: middle;
 	font-family: "FuturaBold";
 	text-align: center;
@@ -593,6 +600,11 @@
 	color: #1F3656;
 	font-size: 16px;
 	padding: 0 0 0 20px;
+}
+
+#ui_reserva_vuelos .descripcion table td.cell-details .detail .airport-cell div{
+	font-size: 20px;
+	margin: 10px 0 0 0;
 }
 
 #ui_reserva_vuelos .descripcion table td.cell-details .detail .duracion-cell{

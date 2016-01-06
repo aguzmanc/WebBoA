@@ -1158,16 +1158,8 @@ function buildFlightOptionRow(opc, compartments)
 	var iconLlegada = (opc.horaLlegada.hh >= 5 && opc.horaLlegada.hh <= 12) ? "am" : 
 		((opc.horaLlegada.hh <= 18) ? "pm" : "night");
 
-	var strNumVuelos = "";
-
-	for(var i=0;i<opc.vuelos.length;i++)
-		strNumVuelos += ("," + opc.vuelos[i].numVuelo);
-	
-	strNumVuelos = strNumVuelos.substr(1,strNumVuelos.length-1);
-
 	var strDuracion = 
 		"<div class='icon-dia-noche salida " + iconSalida + "'></div>" + 
-		"<div class='lbl-num-vuelos' title='N&uacute;mero de Vuelo'>"+strNumVuelos+"</div>" + 
 		formatTime(opc.horaSalida) + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
 		formatTime(opc.horaLlegada) +
 		"<div class='icon-dia-noche llegada " + iconLlegada + "'></div>" + 
@@ -1203,34 +1195,37 @@ function buildFlightOptionRow(opc, compartments)
 	return row;
 }
 // ---------------------= =---------------------
-function buildFlightDetailRow(opc, flight) 
-{
-	/*** FILA DE DETALLES ***/
-	row = document.createElement("tr");
+function buildFlightDetailRow(opc, flight) {
+    /*** FILA DE DETALLES ***/
+    row = document.createElement("tr");
 
-	$(row).attr("data-opc_code",opc.code)
-	      .attr("data-num_vuelo",flight.numVuelo)
+    $(row).attr("data-opc_code", opc.code)
+		  .attr("data-num_vuelo", flight.numVuelo)
 		  .addClass("flight-details").addClass("collapsed")
-	 	  .html("<td colspan='10' class='cell-details'><div class='expandable'></div><div class='separator'></div></td>");
-
-	var expandable = $(row).find(".expandable");
-
-	for(var m=0;m<2;m++) {
-		var isSalida = (m==0);
-		var timeStr = formatTime(isSalida?flight.horaSalida:flight.horaLlegada);
-
-		var detail = document.createElement("table");
-		$(detail).addClass("detail")
-			     .addClass(isSalida?"left":"right")
-				 .attr("cellspacing","0")
-				 .attr("cellpadding","0")
-				 .append("<tr><td class='icon-cell' rowspan='2'><div class='icon-"+(isSalida?"salida":"llegada")+"'></div></td><td class='time-cell'>"+timeStr+"<br>Hrs.</td><td class='airport-cell'>"+ airports[flight[isSalida?"origen":"destino"]]+"</td></tr>")
-				 .append("<tr><td class='ciudad-cell'>"+cities[flight[isSalida?"origen":"destino"]]+"</td><td class='duracion-cell'>" +(isSalida?("Duraci&oacute;n: "+ formatExpandedTime(flight.duracion)):"")+ "</td></tr>");
-
-		expandable.append(detail);
-	}
-
-	return row;
+		  .html("<td colspan='10' class='cell-details'>" + 
+		  			"<div class='expandable'>" +
+		  				"<div class='lbl-num-vuelo' title='N&uacute;mero de Vuelo'>" + flight.linea + " - " + flight.numVuelo + "&nbsp;&nbsp;&nbsp;("+flight.operador+")</div>" +
+		  			"</div>" + 
+		  			"<div class='separator'></div>" +
+		  		"</td>");
+ 
+    var expandable = $(row).find(".expandable");
+    for (var m = 0; m < 2; m++) {
+        var isSalida = (m == 0);
+        var timeStr = formatTime(isSalida ? flight.horaSalida : flight.horaLlegada);
+ 
+        var detail = document.createElement("table");
+        $(detail).addClass("detail")
+                          .addClass(isSalida ? "left" : "right")
+                           .attr("cellspacing", "0")
+                           .attr("cellpadding", "0")
+                           .append("<tr><td class='icon-cell' rowspan='2'><div class='icon-" + (isSalida ? "salida" : "llegada") + "'></div></td><td class='time-cell'>" + timeStr + "<br>Hrs.</td><td class='airport-cell' valign='top'><div>" +flight[isSalida ? "origen" : "destino"] +" - "+ airports[flight[isSalida ? "origen" : "destino"]] + "</div></td></tr>")
+                           .append("<tr><td class='ciudad-cell'>" + cities[flight[isSalida ? "origen" : "destino"]] + "</td><td class='duracion-cell'>" + (isSalida ? ("Duraci&oacute;n: " + formatExpandedTime(flight.duracion)) : "") + "</td></tr>");
+ 
+        expandable.append(detail);
+    }
+ 
+    return row;
 }
 // ---------------------= =---------------------
 function buildCompartmentsHeader(table, compartments) 
@@ -1867,7 +1862,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	for(var i=0;i<rawFlights.length;i++) {
 		var rawFlight = rawFlights[i];
 
-		// console.log(rawFlight);
+		console.log(rawFlight);
 
 		var flight = {
 			numVuelo 		: rawFlight["num_vuelo"],
@@ -1875,6 +1870,7 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			horaLlegada 	: {hh:0,mm:0},
 			duracion 		: {hrs:0,mins:0},
 			operador 		: "BoA",
+			linea			: rawFlight["linea"],
 			tarifas 		: {}, // por compartimiento
 			origen 			: rawFlight["origen"],
 			destino 		: rawFlight["destino"],
@@ -1882,6 +1878,18 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 			fecha 			: date,
 			numOpcion 		: parseInt(rawFlight["num_opcion"])
 		};
+
+		// hora salida can also be +1 when is second or third flight of complete trip (it departs a day(s) after)
+		if (rawFlight["hora_salida"].length == 6 && rawFlight["hora_salida"].substr(4, 2) == "+1") {
+            // one day after
+            var flightDate = compactToJSDate(date);
+            flightDate.setDate(flightDate.getDate() + 1);
+ 
+            flight["fecha"] = formatCompactDate(flightDate);
+        }
+        else
+            flight["fecha"] = date;
+
 
 		if(rawFlight["hora_llegada"].length == 6 && rawFlight["hora_llegada"].substr(4,2) == "+1")  {
 			// one day after

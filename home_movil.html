@@ -40,46 +40,118 @@
 </head>
 <body>
 	<!-- HEADER -->
-	<header style="display:none">
+	<header style="display:block">
 		<div id="btn_menu"></div>
 		<div class="logo-header"></div>
-
+		<div id="menu_overlay" style="display:none"></div>
 		<ul id="main_menu" data-level="first">
 			<li id="menu_item_planifica">
 				<span>PLANIFICA TU VIAJE</span>
 				<ul>
-					<li>RESERVAR VUELOS</li>
-					<li>ESTADO DEL VUELO</li>
-					<li>HORARIO DE VUELOS</li>
+					<li class="title">PLANIFICA TU VIAJE</li>
+					<li><span>RESERVAR VUELOS</span></li>
+					<li><span>ESTADO DEL VUELO</span></li>
+					<li><span>HORARIO DE VUELOS</span></li>
 				</ul>
 			</li>
 			<li id="menu_item_antes_viajar">
 				<span>ANTES DE VIAJAR</span>
 				<ul>
-					<li>POL&Iacute;TICA DE EQUIPAJE</li>
-					<li>TIPS DE EQUIPAJE</li>
-					<li>LLEGAR AL AEROPUERTO</li>
-					<li>SERVICIOS ESPECIALES</li>
-					<li>PASAJEROS ESPECIALES</li>
-					<li>MEN&Uacute; ESPECIAL</li>
-					<li>DOCUMENTACION DE VIAJE, VISA Y API</li>
-					<li>VACUNAS</li>
-					<li>DERECHOS DE LOS PASAJEROS</li>
+					<li class="title">ANTES DE VIAJAR</li>
+					<li>
+						<span>POL&Iacute;TICA DE EQUIPAJE</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Equipaje de Mano</li>
+							<li>Equipaje Facturable</li>
+							<li>Exceso de Equipaje</li>
+							<li>Equipaje Especial</li>
+							<li>Mercanc&iacute;as Peligrosas</li>
+							<li>Mascotas</li>
+						</ul>
+					</li>
+					<li>
+						<span>TIPS DE EQUIPAJE</span>
+					</li>
+					<li>
+						<span>LLEGAR AL AEROPUERTO</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Hora l&iacute;mite</li>
+							<li>Aeropuerto de La Paz</li>
+							<li>Aeropuerto de Cochabamba</li>
+							<li>Aeropuerto de Viru Viru</li>
+						</ul>
+					</li>
+					<li>
+						<span>SERVICIOS ESPECIALES</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Menores no acompa&ntilde;ados</li>
+							<li>Pasajeros con necesidades diferentes</li>
+							<li>Condiciones m&eacute;dicas especiales</li>
+							<li>Transporte de ox&iacute;geno</li>
+							<li>Transporte de equipo de di&aacute;lisis portatil(PDMs)</li>
+							<li>Viajando con beb&eacute;s</li>
+							<li>Viajando con tu mascota en cabina</li>
+						</ul>
+					</li>
+					<li>
+						<span>PASAJEROS ESPECIALES</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Mujeres embarazadas</li>
+							<li>Pasajeros de la tercera edad</li>
+							<li>Pasajeros que requieren asiento extra</li>
+						</ul>
+					</li>
+					<li>
+						<span>MEN&Uacute; ESPECIAL</span>
+					</li>
+					<li>
+						<span>DOCUMENTACION DE VIAJE, VISA Y API</span>
+					</li>
+					<li>
+						<span>VACUNAS</span>
+					</li>
+					<li>
+						<span>DERECHOS DE LOS PASAJEROS</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Contrato de transporte</li>
+						</ul>
+					</li>
 				</ul>
 			</li>
 			<li id="menu_item_experiencia_boa">
 				<span>EXPERIENCIA BoA</span>
 				<ul>
-					<li>NUESTRA FLOTA</li>
-					<li>EXPERIENCIA A BORDO</li>
-					<li>SEGURO INTERNACIONAL</li>
-					<li>EN EL AEROPUERTO</li>
-					<li>CARACTER&Iacute;STICAS DE LAS CABINAS</li>
+					<li class="title">EXPERIENCIA BoA</li>
+					<li>
+						<span>NUESTRA FLOTA</span>
+					</li>
+					<li>
+						<span>EXPERIENCIA A BORDO</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Gastronim&iacute;a, snack y bebidas</li>
+						</ul>
+					</li>
+					<li><span>SEGURO INTERNACIONAL</span></li>
+					<li>
+						<span>EN EL AEROPUERTO</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li>Servicio de Check-in</li>
+						</ul>
+					</li>
+					<li><span>CARACTER&Iacute;STICAS DE LAS CABINAS</span></li>
 				</ul>
 			</li>
 			<li id="menu_item_somos_boa">
 				<span>SOMOS BoA</span>
 				<ul>
+					<li class="title">SOMOS BoA</li>
 					<li>PERFIL CORPORATIVO</li>
 					<li>SOMOS IOSA</li>
 					<li>RECONOCIMIENTOS Y PREMIOS</li>
@@ -103,7 +175,7 @@
 					<h2>WEB</h2>
 					<h1>CHECK IN</h1>
 				</li>
-				<li class="menu" data-content="estado_vuelo" title="Disponible Pr&oacute;ximamente">
+				<li class="menu disabled" data-content="estado_vuelo" title="Disponible Pr&oacute;ximamente">
 					<div class="label-prox">(pr&oacute;ximamente)</div>
 					<h2>ESTADO DE MI</h2>
 					<h1>VUELO</h1>

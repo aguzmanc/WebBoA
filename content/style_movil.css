@@ -44,7 +44,9 @@
 }
 /* --------------------------------------------------------------------------- */
 #main_menu,
-#main_menu > li > ul
+#main_menu > li > ul,
+#main_menu .inner-menu,
+#main_menu .locker
 {
     transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -55,6 +57,8 @@
 /* --------------------------------------------------------------------------- */
 header {
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 1000;
 }
 
@@ -65,6 +69,15 @@ header .logo-header {
 	margin: -4px 0;
 	background-image: url('images/movil/logo_boa.png');
 	background-size: 320px;
+    z-index: 100;
+}
+
+header #menu_overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 50;
 }
 /* --------------------------------------------------------------------------- */
 #btn_menu {
@@ -77,7 +90,7 @@ header .logo-header {
     background-size: 40px;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 100;
+    z-index: 101;
 }
 
 #btn_menu:active {
@@ -88,8 +101,10 @@ header .logo-header {
     position: fixed;
     top: 100px;
     left: -250px;
-    width: 200px;
-    background-color: red;
+    width: 150px;
+    background-color: #DCDCDC;
+    font-family: "FuturaMedium";
+    z-index: 100;
 }
 
 #main_menu[data-level="first"].active {
@@ -100,10 +115,15 @@ header .logo-header {
     left: -250px;
 }
 
-#main_menu > li { cursor: pointer;}
+#main_menu > li {
+    cursor: pointer;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+}
 
 #main_menu > li:active {
-    background-color: blue;
+    background-color: #9A9A9A;
 }
 
 #main_menu > li > span { 
@@ -115,13 +135,13 @@ header .logo-header {
 #main_menu > li > ul { 
     position: fixed;
     top: 100px;
-    left: -250px;
-    width: 200px;
-    background-color: #008000;
+    left: -300px;
+    width: 300px;
+    background-color: #DCDCDC;
 }
 
 #main_menu[data-level="first"] > li > ul {
-    left: -250px;
+    left: -300px;
 }
 
 #main_menu[data-level="second"] > li.selected > ul {
@@ -129,16 +149,90 @@ header .logo-header {
 }
 
 #main_menu > li > ul > li {
-    padding: 30px 10px 10px 0;
+    position: relative;
     text-align: right;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 0 0 2px 0;
 }
 
-#main_menu > li > ul > li:active {
-    background-color: blue;
+#main_menu > li > ul > li > span {
+    display: block;
+    padding: 10px 30px 10px 0;
+}
+
+#main_menu > li > ul > li > span:active {background-color: #EFAA35;}
+
+#main_menu > li > ul > li:first-child {
+    padding: 10px;
+    background-color: #0A3E67;
+    color: #FFF;
+    border-width: 2px 2px 1px 0;
+    text-align: center;
+    font-size: 12px;
+    font-family: "HelveticaNeueProMd";
+    cursor: default;
+    
+    box-shadow: inset -2px 3px 9px 3px #113552;
+}
+
+#main_menu > li > ul > li:active:not(.title) {
+    background-color: #8E8E8E;
+}
+
+/* third level */
+#main_menu .locker {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    background-image: url('images/movil/locker_menu.png');
+    background-size: 15px;
+    background-repeat: no-repeat;
+}
+
+#main_menu > li > ul > li.active .locker {
+    -ms-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+#main_menu > li > ul > li .inner-menu {
+    overflow: hidden;
+    max-height: 0px;
+}
+
+#main_menu > li > ul > li.active .inner-menu {
+    max-height: 300px;
+}
+
+
+#main_menu .inner-menu li {
+    background-color: #002644;
+    padding: 7px 13px 1px 20px;
+    color: #FFF;
+    font-size: 15px;
+    font-family: "FuturaLight";
+    border-style: solid;
+    border-color: #FFF;
+    border-width: 0 0 1px 0;
+    text-align: left;
 }
 /* --------------------------------------------------------------------------- */
 #ui_home {
-    background-color: red;
+    transition: -webkit-filter,-moz-filter 0.5s;
+    -moz-transition: -webkit-filter,-moz-filter 0.5s;
+    -webkit-transition: -webkit-filter,-moz-filter 0.5s;
+    -o-transition: -webkit-filter,-moz-filter 0.5s;
+    -ms-transition: -webkit-filter,-moz-filter 0.5s;
+}
+
+#ui_home.blured {
+    -webkit-filter: blur(3px);
+
+    -webkit-transition: all 0.5s;
 }
 /* --------------------------------------------------------------------------- */
 #buscador_vuelos {
@@ -146,7 +240,7 @@ header .logo-header {
     width: 90%;
     height: 100px;
     min-width: 350px;
-    margin: 50px auto;
+    margin: 100px auto;
     overflow: visible;
 }
 
@@ -228,6 +322,60 @@ header .logo-header {
 #reserva_vuelos { background-color: rgba(31, 54, 86, 0.9); }
 #web_check_in { background-color: rgba(239, 170, 53, 0.9); }
 #estado_vuelo { background-color: rgba(221, 224, 225, 0.9); }
+/* --------------------------------------------------------------------------- */
+#web_check_in .tbl_tipo_identificacion {
+    width: 500px;
+}
+
+#web_check_in .tbl_tipo_identificacion td {
+    width: 270px;
+}
+
+#web_check_in .tbl_tipo_identificacion label {
+    color: #1F3656;
+    font-size: 15px;
+}
+
+#web_check_in .tbl_tipo_identificacion input[type="radio"] {
+    float: right;
+}
+
+#web_check_in .tbl_datos{
+    float: left;
+}
+
+#web_check_in .tbl_datos label{
+    color: #FFF;
+    font-size: 15px
+}
+
+#web_check_in .tbl_indicaciones {
+    width: 200px;
+    color: #1F3656;
+    font-family: "HelveticaNeuePro";
+    margin: 0 50px 0 0;
+}
+
+#web_check_in .clock-img {
+    width:50px;
+    height: 50px;
+    background-image: url('images/textures.png');
+    background-position: -184px -317px;
+}
+
+#web_check_in .book-img {
+    width:50px;
+    height: 50px;
+    background-image: url('images/textures.png');
+    background-position: -132px -317px;
+}
+
+#web_check_in .paper-img {
+    width:50px;
+    height: 50px;
+    background-image: url('images/textures.png');
+    background-position: -693px -346px;
+}
 
 #reserva_vuelos table {width:100%;}
 

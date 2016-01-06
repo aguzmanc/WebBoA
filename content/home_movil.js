@@ -1,9 +1,10 @@
-/* --------------------------------------------------------------------------- */
+ /*--------------------------------------------------------------------------- */
 $(document).on('ready',function()
 {
 	// menus
 	$("#btn_menu").click(toggleMainMenu);
 	$("#main_menu > li").click(clickMenuItem);
+	$("#main_menu > li > ul > li > span").click(toggleInnerMenu);
 
 	// radio buttons
 	$(".radio-button").click(toggleRadioButton);
@@ -31,7 +32,14 @@ $(document).on('ready',function()
 		minDate: 0
 	});
 
+	// menus
 	$("#buscador_vuelos li.menu").click(changeMainTab);
+
+	$("#menu_overlay").click(function(){
+		$("#main_menu").attr("data-level","first"); // force
+		$("#btn_menu").click();
+	});
+
 
 	// checkboxes
 	$(".checkbox").click(toggleCheckbox);
@@ -42,8 +50,8 @@ $(document).on('ready',function()
 			$("#btn_buscar_check_in").hide();
 	});
 
+	// Web check in
 	$("#btn_buscar_check_in").click(function(){
-		console.log()
 		redirect("web_check_in");
 	});
 
@@ -59,15 +67,21 @@ function toggleMainMenu()
 	if(menu.hasClass("active")) {
 		var level = menu.attr("data-level");
 
-		if(level=="first")
+		if(level=="first"){
 			menu.removeClass("active");
+			$("#ui_home").removeClass("blured");
+			$("#menu_overlay").hide();
+		}
 		else if(level == "second") {
-			menu.attr("data-level","first")
+			menu.attr("data-level","first");
 			menu.find("li").removeClass("selected");
 		}
 	}
-	else
+	else{
 		menu.addClass("active");
+		$("#ui_home").addClass("blured");
+		$("#menu_overlay").show();
+	}
 }
 /* --------------------------------------------------------------------------- */
 function clickMenuItem() 
@@ -79,9 +93,30 @@ function clickMenuItem()
 	$("#main_menu").attr("data-level","second");
 }
 /* --------------------------------------------------------------------------- */
+function toggleInnerMenu() 
+{
+	var li = $(this.parentNode);
+	var isActive = li.hasClass("active");
+
+	var ul = li.parent();
+	ul.find("li").removeClass("active");
+
+	// console.log(li[0]);
+	// console.log($(li[0]).hasClass("active"));
+
+	if(isActive)
+		li.removeClass("active")
+	else
+		li.addClass("active");
+}
+/* --------------------------------------------------------------------------- */
 function changeMainTab()
 {
+	if($(this).hasClass("disabled"))
+		return;
+
 	var idContent = $(this).data("content");
+
 	$("#buscador_vuelos .content, #buscador_vuelos li.menu").removeClass("selected");
 
 	$("#buscador_vuelos #" + idContent).addClass("selected");
@@ -103,7 +138,6 @@ function toggleCheckbox()
 	else
 		$(this).addClass("checked");
 }
-/* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
