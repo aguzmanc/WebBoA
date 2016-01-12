@@ -1,0 +1,7 @@
+.ui-section {
+	display: none;
+}
+
+.ui-section.selected {
+	display: block;
+}

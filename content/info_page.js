@@ -1,6 +1,5 @@
 // ---------------------= =---------------------
 var MENU_ICONS_SCROLL_THRESHOLD = 141;
-
 // ---------------------= =---------------------
 var mouse={left:false,right:false};
 var mousePos={x:0.0,y:0.0};
@@ -49,7 +48,7 @@ $(document).on('ready',function()
 	$("#btn_ir_a_documentacion_requerida").click(function(){
 		$("#subtitle_mascotas_documentacion").removeClass("collapsed");
 
-		setTimeout(function(){
+		setTimeout(function() {
 			$('html, body').animate({
         		scrollTop: $("#subtitle_mascotas_documentacion").offset().top 
     		}, 0);	

@@ -12,6 +12,7 @@ var HEADER_SCROLL_THRESHOLD_FOR_MENU = 170;
 // 	handle_section_parameters_from_querystring();
 // });
 // ---------------------= =---------------------
+/* not designed for mobile layout */
 function initialize_ui_sections(parms)
 {
 	// ------------= SECTION MENU =----------------
@@ -31,7 +32,7 @@ function initialize_ui_sections(parms)
 	$(".ui-section .desplegable").addClass("collapsed");
 
 	// SECONDARY MENU INSIDE WIDE SECTIONS (right menu)
-	$(".ui-section.wide .right-menu li").click(function(ev){
+	$(".ui-section.wide .right-menu li").click(function(ev) {
 		var item = $(this).data("item");
 		$(this).parent().find("li").removeClass("selected");
 		$(this).addClass("selected");

@@ -49,76 +49,76 @@
 				<span>PLANIFICA TU VIAJE</span>
 				<ul>
 					<li class="title">PLANIFICA TU VIAJE</li>
-					<li><span>RESERVAR VUELOS</span></li>
-					<li><span>ESTADO DEL VUELO</span></li>
-					<li><span>HORARIO DE VUELOS</span></li>
+					<li data-link="reservar_vuelos"><span>RESERVAR VUELOS</span></li>
+					<li data-link="estado_vuelo"><span>ESTADO DEL VUELO</span></li>
+					<li data-link="horario_vuelos"><span>HORARIO DE VUELOS</span></li>
 				</ul>
 			</li>
 			<li id="menu_item_antes_viajar">
 				<span>ANTES DE VIAJAR</span>
 				<ul>
 					<li class="title">ANTES DE VIAJAR</li>
-					<li>
+					<li data-primary="politica_equipaje" class="collapsible">
 						<span>POL&Iacute;TICA DE EQUIPAJE</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Equipaje de Mano</li>
-							<li>Equipaje Facturable</li>
-							<li>Exceso de Equipaje</li>
-							<li>Equipaje Especial</li>
-							<li>Mercanc&iacute;as Peligrosas</li>
-							<li>Mascotas</li>
+							<li data-item="equipaje_mano">Equipaje de Mano</li>
+							<li data-item="equipaje_facturable">Equipaje Facturable</li>
+							<li data-item="exceso_equipaje">Exceso de Equipaje</li>
+							<li data-item="equipaje_especial">Equipaje Especial</li>
+							<li data-item="mercancias_peligrosas">Mercanc&iacute;as Peligrosas</li>
+							<li data-item="equipaje_mascotas">Mascotas</li>
 						</ul>
 					</li>
-					<li>
+					<li data-primary="tips_equipaje">
 						<span>TIPS DE EQUIPAJE</span>
 					</li>
-					<li>
+					<li data-primary="llegar_aeropuerto" class="collapsible">
 						<span>LLEGAR AL AEROPUERTO</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Hora l&iacute;mite</li>
-							<li>Aeropuerto de La Paz</li>
-							<li>Aeropuerto de Cochabamba</li>
-							<li>Aeropuerto de Viru Viru</li>
+							<li data-item="hora_limite">Hora l&iacute;mite</li>
+							<li data-item="aeropuerto_lp">Aeropuerto de La Paz</li>
+							<li data-item="aeropuerto_cbba">Aeropuerto de Cochabamba</li>
+							<li data-item="aeropuerto_viruviru">Aeropuerto de Viru Viru</li>
 						</ul>
 					</li>
-					<li>
+					<li data-primary="servicios_especiales">
 						<span>SERVICIOS ESPECIALES</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Menores no acompa&ntilde;ados</li>
-							<li>Pasajeros con necesidades diferentes</li>
-							<li>Condiciones m&eacute;dicas especiales</li>
-							<li>Transporte de ox&iacute;geno</li>
-							<li>Transporte de equipo de di&aacute;lisis portatil(PDMs)</li>
-							<li>Viajando con beb&eacute;s</li>
-							<li>Viajando con tu mascota en cabina</li>
+							<li data-item="menores_no_acompanados">Menores no acompa&ntilde;ados</li>
+							<li data-item-"pasajeros_necesidades_diferentes">Pasajeros con necesidades diferentes</li>
+							<li data-item="condiciones_medicas_especiales">Condiciones m&eacute;dicas especiales</li>
+							<li data-item="oxigeno">Transporte de ox&iacute;geno</li>
+							<li data-item="dialisis_portatil">Transporte de equipo de di&aacute;lisis portatil(PDMs)</li>
+							<li data-item-"bebes">Viajando con beb&eacute;s</li>
+							<li data-item="mascota">Viajando con tu mascota en cabina</li>
 						</ul>
 					</li>
-					<li>
+					<li data-primary="pasajeros_especiales">
 						<span>PASAJEROS ESPECIALES</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Mujeres embarazadas</li>
-							<li>Pasajeros de la tercera edad</li>
-							<li>Pasajeros que requieren asiento extra</li>
+							<li data-item="embarazadas">Mujeres embarazadas</li>
+							<li data-item="tercera_edad">Pasajeros de la tercera edad</li>
+							<li data-item="pasajeros_sobrepeso">Pasajeros que requieren asiento extra</li>
 						</ul>
 					</li>
-					<li>
+					<li data-primary="menu_especial">
 						<span>MEN&Uacute; ESPECIAL</span>
 					</li>
-					<li>
+					<li data-primary="documentacion_viaje">
 						<span>DOCUMENTACION DE VIAJE, VISA Y API</span>
 					</li>
-					<li>
+					<li data-primary="vacunas">
 						<span>VACUNAS</span>
 					</li>
-					<li>
+					<li data-primary="derechos_pasajeros" class="collapsible">
 						<span>DERECHOS DE LOS PASAJEROS</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Contrato de transporte</li>
+							<li data-link="contrato_transporte">Contrato de transporte</li>
 						</ul>
 					</li>
 				</ul>
@@ -127,34 +127,40 @@
 				<span>EXPERIENCIA BoA</span>
 				<ul>
 					<li class="title">EXPERIENCIA BoA</li>
-					<li>
+					<li data-primary="nuestra_flota">
 						<span>NUESTRA FLOTA</span>
 					</li>
-					<li>
+					<li data-primary="experiencia_bordo" class="collapsible">
 						<span>EXPERIENCIA A BORDO</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Gastronim&iacute;a, snack y bebidas</li>
+							<li data-item="gastronomia">Gastronim&iacute;a, snack y bebidas</li>
 						</ul>
 					</li>
-					<li><span>SEGURO INTERNACIONAL</span></li>
-					<li>
+					<li data-primary="seguro_internacional"><span>SEGURO INTERNACIONAL</span></li>
+					<li data-primary="en_el_aeropuerto" class="collapsible">
 						<span>EN EL AEROPUERTO</span>
 						<div class="locker"></div>
 						<ul class="inner-menu">
-							<li>Servicio de Check-in</li>
+							<li data-item="check_in">Servicio de Check-in</li>
 						</ul>
 					</li>
-					<li><span>CARACTER&Iacute;STICAS DE LAS CABINAS</span></li>
+					<li data-primary="cabinas"><span>CARACTER&Iacute;STICAS DE LAS CABINAS</span></li>
 				</ul>
 			</li>
 			<li id="menu_item_somos_boa">
 				<span>SOMOS BoA</span>
 				<ul>
 					<li class="title">SOMOS BoA</li>
-					<li>PERFIL CORPORATIVO</li>
-					<li>SOMOS IOSA</li>
-					<li>RECONOCIMIENTOS Y PREMIOS</li>
+					<li data-primary="perfil_corporativo">
+						<span>PERFIL CORPORATIVO<span>
+					</li>
+					<li data-primary="somos_iosa">
+						<span>SOMOS IOSA</span>
+					</li>
+					<li data-primary="reconocimientos_premios">
+						<span>RECONOCIMIENTOS Y PREMIOS</span>
+					</li>
 				</ul>
 			</li>
 		</ul>
@@ -163,6 +169,7 @@
 	<img class="slide" src="content/fake_services/slides/aniversario_movil.jpg" style="display:block">
 	<!-- UI HOME -->
 	<div id="ui_home">
+		<div class="overlay"></div>
 		<div id="div_submit"></div>
 		<div id="buscador_vuelos">
 			<!-- TABS -->

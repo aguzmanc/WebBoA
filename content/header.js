@@ -193,7 +193,7 @@ function click_menu_item(ev)
 	href = INFO_PAGE_LINK_ADDRESS;
 	btn.attr("target","_top");
 
-	if(isPrimary){
+	if(isPrimary) {
 		if(primary == qs_primary) 
 			$("#ui_" + primary + " .first-menu li:first-child").click();
 		else{

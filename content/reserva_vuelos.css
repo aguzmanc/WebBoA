@@ -133,7 +133,7 @@
     top: -10px;
     width: 50px;
     height: 50px;
-	background-color: #238fac;
+	background-color: #238FAC;
     color: #FFF;
     font-size: 30px;
     line-height: 56px;
@@ -1268,7 +1268,6 @@
 #widget_resumen_reserva .cell-cantidad {
 	color: #FFF;
 	font-family: "HelveticaNeuePro";
-	font-style: italic;
 	font-size: 16px;
 	letter-spacing: 1px;
 	text-align: right;

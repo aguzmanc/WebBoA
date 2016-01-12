@@ -117,7 +117,6 @@ function formatCurrencyQuantity(quantity, includeCurrency, digits)
 	else
 		str =  str + parseInt(mult/digitFactor) + "." + decimalPart;
 
-
 	return  str;
 }
 // ---------------------= =---------------------

@@ -371,10 +371,6 @@ function constraintTableByFechaHora(option, tipo)
 
 	rows.removeClass("disabled");
 
-	console.log(option.fechaLlegada);
-	console.log("--------");
-	console.log(table);
-
 	for(var i=0;i<rows.length;i++) {
 		var otherOptionCode = $(rows[i]).data("opc_code");
 		var otherOption = allOptions[otherOptionCode]; 
@@ -1505,7 +1501,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 		}
 
 		// Redondeo al subtotal y total
-		seleccionVuelo[tipo].precioTotal = parseInt(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal,false,0));
+		// seleccionVuelo[tipo].precioTotal = parseInt(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal,false,0));
 		seleccionVuelo[tipo].precioTotal *= seleccionVuelo[tipo].num;
 
 		seleccionVuelo.precioTotal = 
@@ -1519,7 +1515,7 @@ function updatePriceByTipo(tipo, changeFlapper)
 	var span = $("#precio_" + tipo);
 
 	if(seleccionVuelo.ida != null)  {
-		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true, 0));
+		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true, 2));
 		span.parent().parent().addClass("calculated");
 
 		buildDetailPrices(seleccionVuelo[tipo], tipo);
@@ -1550,6 +1546,12 @@ function updateAllPrices()
 // ---------------------= =---------------------
 function buildDetailPrices(info, tipo)
 {
+	console.log(CURRENCY);
+	console.log(LocaleConfig);
+	var nDecimals = LocaleConfig.decimalDigitsByCurrency[CURRENCY];
+
+	var formattedPrecioBase = formatCurrencyQuantity(info.ida.precioBase,false,nDecimals);
+
 	var titles = {adulto:"ADULTO",ninho:"NI&Ntilde;O",infante:"INFANTE"};
 
 	var tooltip = $("#tooltip_" + tipo);
@@ -1564,13 +1566,13 @@ function buildDetailPrices(info, tipo)
 
 	tbl.append("<tr><th colspan='3'><h1>"+titles[tipo]+"</h1></th></tr>");
 	tbl.append("<tr><th class='subtitle' colspan='3'><div>Ida</div></th></tr>");
-	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+formatCurrencyQuantity(info.ida.precioBase,false,0)+"</td></tr>");
+	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+ formattedPrecioBase +"</td></tr>");
 
 	for(var keyTasa in info.ida.tasas) {
 		var tr = document.createElement("tr");
 		$(tr).append("<th>"+keyTasa+"</th>")
 		     .append("<td></td>")
-		     .append("<td class='qty'>"+formatCurrencyQuantity(info.ida.tasas[keyTasa],false,0)+"</td>");
+		     .append("<td class='qty'>"+formatCurrencyQuantity(info.ida.tasas[keyTasa],false,nDecimals)+"</td>");
 		     
 		tbl.append(tr);
 		tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
@@ -1578,37 +1580,38 @@ function buildDetailPrices(info, tipo)
 
 	if(seleccionVuelo.vuelta != null) {
 		tbl.append("<tr><th class='subtitle' colspan='3'><div>Vuelta</div></th></tr>");
-		tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>Bs.</td><td class='qty'>"+formatCurrencyQuantity(info.vuelta.precioBase,false,2)+"</td></tr>");
+		tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>Bs.</td><td class='qty'>"+formatCurrencyQuantity(info.vuelta.precioBase,false,nDecimals)+"</td></tr>");
 
 		for(var keyTasa in info.vuelta.tasas) {
 			var tr = document.createElement("tr");
 			$(tr).append("<th>"+keyTasa+"</th>")
 			     .append("<td></td>")
-			     .append("<td class='qty'>"+formatCurrencyQuantity(info.vuelta.tasas[keyTasa],false,0)+"</td>");
+			     .append("<td class='qty'>"+formatCurrencyQuantity(info.vuelta.tasas[keyTasa],false,nDecimals)+"</td>");
 			     
 			tbl.append(tr);
 			tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
-		}		
+		}
 	}
 
-	var subtotal = info.ida.precioBase;
-	for(var key in info.ida.tasas)
-		subtotal += info.ida.tasas[key];
-	if(seleccionVuelo.vuelta != null) {
-		subtotal += info.vuelta.precioBase;
+	// Calculations just for UI purposes 
+	var subtotal = parseFloat(formattedPrecioBase);
+	for(var key in info.ida.tasas) // tasas de ida
+		subtotal +=  parseFloat(formatCurrencyQuantity(info.ida.tasas[key], false, nDecimals));
+
+	if(seleccionVuelo.vuelta != null) { // tasas de vuelta
+		subtotal += parseFloat(formattedPrecioBase);
 		for(var key in info.vuelta.tasas)
-			subtotal += info.vuelta.tasas[key];
+			subtotal += parseFloat(formatCurrencyQuantity(info.vuelta.tasas[key], false, nDecimals));
 	}
 
-	// just for UI purposes 
-	var fakeSubtotal = parseInt(formatCurrencyQuantity(subtotal,false,0));
-	var fakeTotal = parseInt(formatCurrencyQuantity(info.num * fakeSubtotal,false,0));
-
+	var strSubtotal = formatCurrencyQuantity(subtotal, false, nDecimals);
+	var strTotal = formatCurrencyQuantity(subtotal * info.num, false, nDecimals);
+	
 	tbl.append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
-	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+fakeSubtotal+"</td></tr>")
+	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+strSubtotal+"</td></tr>")
 	   .append("<tr><td></td><td></td><td class='qty'><h3>x "+info.num+"</h3></td></tr>")
 	   .append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
-	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+fakeTotal+"</td></tr>");
+	   .append("<tr><th><h3>TOTAL</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+strTotal+"</td></tr>");
 }
 // ---------------------= =---------------------
 function buildRegistroPersona(tipo, numPx)
@@ -1704,8 +1707,6 @@ function buildBanks(banks)
 // ---------------------= =---------------------
 function translateTaxes(fromResponse) 
 {
-	console.log(fromResponse);
-
 	var rawTaxesByPx = fromResponse['tasaTipoPasajero']['TasaTipoPasajero'];
 
 	var rawIdaTaxes;
@@ -1840,11 +1841,11 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 		  ) 
 		{
 			var importe = parseFloat(rawTarifa["importe"]);
+
 			if(rawTarifa["recargos"] != null) { // si existiese un recargo adicional
 				var recargo = parseFloat(rawTarifa["recargos"]["recargo"]["importe"]);
 				importe += recargo;
 			}
-
 			ratesByClass[rawTarifa["clases"]] = importe;
 
 			fareCodesByClass[rawTarifa["clases"]] = rawTarifa["fare_code"];
@@ -1861,8 +1862,6 @@ function translateFlights(rawFlights, rawTarifas, date, paxPercentsByClass)
 	// Traducir datos del servicio
 	for(var i=0;i<rawFlights.length;i++) {
 		var rawFlight = rawFlights[i];
-
-		console.log(rawFlight);
 
 		var flight = {
 			numVuelo 		: rawFlight["num_vuelo"],

@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-var CURRENCY = "bs"; // "euro", "bs" , "usd" 
+var CURRENCY = "usd"; // "euro", "bs" , "usd" 
 var HTML_CURRENCIES = {bs:"Bs.",euro:"&euro;",usd:"USD"};
 var CODE_CURRENCIES = {bs:"BOB",euro:"EU",usd:"USD"};
 var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYhe+i9RAAQRuXSV2Nm6aGyfO9zf530xYSZy6bkXui7Ux/1DAhfg/6F7q7leHl8o0X3O1uiunF/4Mg==";
@@ -20,7 +20,12 @@ var LocaleConfig = {
 		{key:"BOB",value:"Bolivianos"},
 		{key:"EU",value:"Euros"},
 		{key:"USD",value:"D&oacute;lares Estadounidenses"}
-	]
+	],
+	decimalDigitsByCurrency:{
+		bs: 0,
+		euro: 2,
+		usd: 2
+	}
 };
 
 
@@ -28,6 +33,7 @@ var BoA = {
 	urls : {
 		home : "home.html",
 		info_page : "info_page.html",
+		info_movil: "info_movil.html",
 		facebook: "http://www.facebook.com/bolivianaDeAviacion",
 		twitter: "http://www.twitter.com/BoABolivia",
 		instagram: "http://i.instagram.com/boa_bolivia",
@@ -42,6 +48,10 @@ var BoA = {
 		info_turismo_bolivia: "http://www.minculturas.gob.bo",
 		contrato_transporte: "content/docs/contrato_transporte.pdf",
 		convocatorias: "http://sms.obairlines.bo/webboa/menupublicaciones.htm",
+		/* HEADER MENU */
+		reservar_vuelos: 	"http://www.boa.bo/bolivia/inicio",
+		estado_vuelo: 	 	"http://www.boa.bo/bolivia/inicio",
+		horario_vuelos: 	"http://www.boa.bo/bolivia/inicio",
 		/* RESULTADOS DE HORARIOS DE VUELOS */
 		flight_schedule_results : "http://localhost/reserva_vuelos.html",
 		/* MAPAS DE OFICINAS */

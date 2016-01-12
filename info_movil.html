@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--     BOLIVIANA DE AVIACION     -->
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+	<title>Boliviana de Aviaci&oacute;n</title>
+	<link rel="icon" href="content/images/icon.png" type="image/x-icon">
+
+	<!-- JQUERY LIBRARY -->
+	<script type="text/javascript" src="content/lib/jquery-1.11.1.min.js"></script>
+
+	<!-- SCROLLBAR LIBRARY -->
+	<link href="content/lib/custom_scrollbar/jquery.mCustomScrollbar.css" 
+		rel="stylesheet" type="text/css" />
+	<script src="content/lib/custom_scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- COMMON SCRIPTS -->
+	<script type="text/javascript" src="content/common.js"></script>
+	<script type="text/javascript" src="content/custom_handlers.js"></script>
+
+	<!-- INFO PAGE CUSTOM SCRIPTS -->
+	<script type="text/javascript" src="content/info_movil.js"></script>
+	<script type="text/javascript" src="content/generic_container.js"></script>
+
+	<!-- STYLE.CSS -->
+	<link href="content/style_movil.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="content/info_movil.css" media="screen" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+	<!-- HEADER -->
+	<header style="display:block">
+		<div id="btn_menu"></div>
+		<div class="logo-header"></div>
+		<div id="menu_overlay" style="display:none"></div>
+		<ul id="main_menu" data-level="first">
+			<li id="menu_item_planifica">
+				<span>PLANIFICA TU VIAJE</span>
+				<ul>
+					<li class="title">PLANIFICA TU VIAJE</li>
+					<li data-link="reservar_vuelos"><span>RESERVAR VUELOS</span></li>
+					<li data-link="estado_vuelo"><span>ESTADO DEL VUELO</span></li>
+					<li data-link="horario_vuelos"><span>HORARIO DE VUELOS</span></li>
+				</ul>
+			</li>
+			<li id="menu_item_antes_viajar">
+				<span>ANTES DE VIAJAR</span>
+				<ul>
+					<li class="title">ANTES DE VIAJAR</li>
+					<li data-primary="politica_equipaje" class="collapsible">
+						<span>POL&Iacute;TICA DE EQUIPAJE</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-item="equipaje_mano">Equipaje de Mano</li>
+							<li data-item="equipaje_facturable">Equipaje Facturable</li>
+							<li data-item="exceso_equipaje">Exceso de Equipaje</li>
+							<li data-item="equipaje_especial">Equipaje Especial</li>
+							<li data-item="mercancias_peligrosas">Mercanc&iacute;as Peligrosas</li>
+							<li data-item="equipaje_mascotas">Mascotas</li>
+						</ul>
+					</li>
+					<li data-primary="tips_equipaje">
+						<span>TIPS DE EQUIPAJE</span>
+					</li>
+					<li data-primary="llegar_aeropuerto" class="collapsible">
+						<span>LLEGAR AL AEROPUERTO</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-item="hora_limite">Hora l&iacute;mite</li>
+							<li data-item="aeropuerto_lp">Aeropuerto de La Paz</li>
+							<li data-item="aeropuerto_cbba">Aeropuerto de Cochabamba</li>
+							<li data-item="aeropuerto_viruviru">Aeropuerto de Viru Viru</li>
+						</ul>
+					</li>
+					<li data-primary="servicios_especiales">
+						<span>SERVICIOS ESPECIALES</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-item="menores_no_acompanados">Menores no acompa&ntilde;ados</li>
+							<li data-item-"pasajeros_necesidades_diferentes">Pasajeros con necesidades diferentes</li>
+							<li data-item="condiciones_medicas_especiales">Condiciones m&eacute;dicas especiales</li>
+							<li data-item="oxigeno">Transporte de ox&iacute;geno</li>
+							<li data-item="dialisis_portatil">Transporte de equipo de di&aacute;lisis portatil(PDMs)</li>
+							<li data-item-"bebes">Viajando con beb&eacute;s</li>
+							<li data-item="mascota">Viajando con tu mascota en cabina</li>
+						</ul>
+					</li>
+					<li data-primary="pasajeros_especiales">
+						<span>PASAJEROS ESPECIALES</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-item="embarazadas">Mujeres embarazadas</li>
+							<li data-item="tercera_edad">Pasajeros de la tercera edad</li>
+							<li data-item="pasajeros_sobrepeso">Pasajeros que requieren asiento extra</li>
+						</ul>
+					</li>
+					<li data-primary="menu_especial">
+						<span>MEN&Uacute; ESPECIAL</span>
+					</li>
+					<li data-primary="documentacion_viaje">
+						<span>DOCUMENTACION DE VIAJE, VISA Y API</span>
+					</li>
+					<li data-primary="vacunas">
+						<span>VACUNAS</span>
+					</li>
+					<li data-primary="derechos_pasajeros" class="collapsible">
+						<span>DERECHOS DE LOS PASAJEROS</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-link="contrato_transporte">Contrato de transporte</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li id="menu_item_experiencia_boa">
+				<span>EXPERIENCIA BoA</span>
+				<ul>
+					<li class="title">EXPERIENCIA BoA</li>
+					<li data-primary="nuestra_flota">
+						<span>NUESTRA FLOTA</span>
+					</li>
+					<li data-primary="experiencia_bordo" class="collapsible">
+						<span>EXPERIENCIA A BORDO</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-item="gastronomia">Gastronim&iacute;a, snack y bebidas</li>
+						</ul>
+					</li>
+					<li data-primary="seguro_internacional"><span>SEGURO INTERNACIONAL</span></li>
+					<li data-primary="en_el_aeropuerto" class="collapsible">
+						<span>EN EL AEROPUERTO</span>
+						<div class="locker"></div>
+						<ul class="inner-menu">
+							<li data-item="check_in">Servicio de Check-in</li>
+						</ul>
+					</li>
+					<li data-primary="cabinas"><span>CARACTER&Iacute;STICAS DE LAS CABINAS</span></li>
+				</ul>
+			</li>
+			<li id="menu_item_somos_boa">
+				<span>SOMOS BoA</span>
+				<ul>
+					<li class="title">SOMOS BoA</li>
+					<li data-primary="perfil_corporativo">
+						<span>PERFIL CORPORATIVO<span>
+					</li>
+					<li data-primary="somos_iosa">
+						<span>SOMOS IOSA</span>
+					</li>
+					<li data-primary="reconocimientos_premios">
+						<span>RECONOCIMIENTOS Y PREMIOS</span>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</header>
+
+	<!-- UI POLITICA EQUIPAJE -->
+	<div id="ui_politica_equipaje" class="ui-section selected">
+		<h2>Pol&iacute;tica de Equipaje</h2>
+		<div id="info_equipaje_mano" class="info selected"></div> 
+		<div id="info_equipaje_facturable" class="info"></div>
+		<div id="info_exceso_equipaje" class="info"></div>
+		<div id="info_equipaje_especial" class="info"></div>
+		<div id="info_mercancias_peligrosas" class="info"></div>
+		<div id="info_equipaje_mascotas" class="info"></div>
+	</div>
+	<!--  <<< UI POLITICA EQUIPAJE >>> -->
+
+	<!-- UI LLEGAR AL AEROPUERTO -->
+	<div id="ui_llegar_aeropuerto" class="ui-section">
+		<h2>Llegar al Aeropuerto</h2>
+		<div id="info_hora_limite" class="info selected"></div>
+		<div id="info_aeropuerto_lp" class="info"></div>
+		<div id="info_aeropuerto_cbba" class="info"></div>
+		<div id="info_aeropuerto_viruviru" class="info"></div>
+	</div>
+	<!-- <<< UI LLEGAR AL AEROPUERTO >>> -->
+
+	<!-- UI SERVICIOS ESPECIALES -->
+	<div id="ui_servicios_especiales" class="ui-section">
+		<h2>Servicios Especiales</h2>
+		<div id="info_menores_no_acompanados" class="info selected"></div>
+		<div id="info_pasajeros_necesidades_diferentes" class="info"></div>
+		<div id="info_condiciones_medicas_especiales" class="info"></div>
+		<div id="info_oxigeno" class="info"></div>
+		<div id="info_dialisis_portatil" class="info"></div>
+		<div id="info_bebes" class="info"></div>
+		<div id="info_mascota" class="info"></div>
+		<div id="info_" class="info"></div>
+	</div>
+	<!-- <<< UI SERVICIOS ESPECIALES >>> -->
+
+	<!-- UI PASAJEROS ESPECIALES -->
+	<div id="ui_pasajeros_especiales" class="ui-section">
+		<h2>Pasajeros Especiales</h2>
+		<div id="info_embarazadas" class="info selected"></div>
+		<div id="info_tercera_edad" class="info"></div>
+		<div id="info_pasajeros_sobrepeso" class="info"></div>
+	</div>
+	<!-- <<< UI PASAJEROS ESPECIALES >>> -->
+
+	<!-- UI DOCUMENTACION DE VIAJE -->
+	<div id="ui_documentacion_viaje" class="ui-section">
+		<h2>Documentaci&oacute;n de Viaje, VISA y API</h2>
+		<div class="info"></div>
+	</div>
+	<!-- <<< UI DOCUMENTACION DE VIAJE >>> -->
+
+	<!-- UI NUESTRA FLOTA -->
+	<div id="ui_nuestra_flota" class="ui-section">
+		<h2>Nuestra Flota</h2>
+		<div class="info"></div>
+	</div>
+	<!-- <<< UI NUESTRA FLOTA >>> -->
+
+	<!-- UI EXPERIENCIA A BORDO -->
+	<div id="ui_experiencia_bordo" class="ui-section">
+		<h2>Experiencia a Bordo</h2>
+		<div id="info_gastronomia" class="info"></div>
+	</div>
+	<!-- <<< UI EXPERIENCIA A BORDO >>> -->
+
+	<!-- UI SOMOS IOSA -->
+	<div id="ui_somos_iosa" class="ui-section">
+		<h2>Somos IOSA</h2>
+		<div id="info" class="info"></div>
+	</div>
+	<!-- <<< UI SOMOS IOSA >>> -->
+
+	<!-- UI RECONOCIMIENTOS Y PREMIOS -->
+	<div id="ui_reconocimientos_premios" class="ui-section">
+		<h2>Reconocimientos y Premios</h2>
+		<div id="info" class="info"></div>
+	</div>
+	<!-- <<< UI RECONOCIMIENTOS Y PREMIOS >>> -->
+</body>
+</html>
