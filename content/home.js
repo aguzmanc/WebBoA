@@ -81,6 +81,7 @@ $(document).on('ready',function()
 
 	$("#buscador_vuelos").mouseleave(function(){
 		parallaxLocked = false;
+		return;
 
 		if(!autoCollapseTimeout)
 			autoCollapseTimeout = 
