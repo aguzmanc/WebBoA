@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-var CURRENCY = "usd"; // "euro", "bs" , "usd" 
+var CURRENCY = "bs"; // "euro", "bs" , "usd" 
 var HTML_CURRENCIES = {bs:"Bs.",euro:"&euro;",usd:"USD"};
 var CODE_CURRENCIES = {bs:"BOB",euro:"EU",usd:"USD"};
 var SERVICE_CREDENTIALS_KEY = "z+bwQzMVBklGZ42xI45QYdeI6V+zHjjfSyULJMWKgH0G2qkasgs+LaGvZYYLe9s+ABTKCPa3RNdiLGlb3wBMWnrYqDusuEvZtrT5kZK+PYhe+i9RAAQRuXSV2Nm6aGyfO9zf530xYSZy6bkXui7Ux/1DAhfg/6F7q7leHl8o0X3O1uiunF/4Mg==";

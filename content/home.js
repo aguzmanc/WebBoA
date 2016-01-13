@@ -106,7 +106,7 @@ $(document).on('ready',function()
 	$("#btn_buscar_check_in").click(search_check_in);
 
 	// automatic collapse of "caja de reservas"
-	autoCollapseTimeout = setTimeout(function(){$("#buscador_vuelos").removeClass("expanded").addClass("collapsed");}, MILLISECONDS_TO_AUTOCOLLAPSE_RESERVAS_BOX);
+	// autoCollapseTimeout = setTimeout(function(){$("#buscador_vuelos").removeClass("expanded").addClass("collapsed");}, MILLISECONDS_TO_AUTOCOLLAPSE_RESERVAS_BOX);
 
 	// Dialog setup
 	$("#simple_dialog .button").click(closeSimpleDialog);

@@ -33,7 +33,8 @@ var seleccionVuelo = {
 			precioBase: 0,
 			tasas: 		{}
 		},
-		precioTotal: 		0
+		precioTotal: 		0,
+		formattedPrecioTotal: "0.00"
 	},
 	ninho: 		{
 		num: 			0,
@@ -45,7 +46,8 @@ var seleccionVuelo = {
 			precioBase: 0,
 			tasas: 		{}
 		},
-		precioTotal: 	0
+		precioTotal: 	0,
+		formattedPrecioTotal: "0.00"
 	},
 	infante:		{
 		num: 			0,
@@ -57,7 +59,8 @@ var seleccionVuelo = {
 			precioBase: 0,
 			tasas: 		{}
 		},
-		precioTotal: 	0
+		precioTotal: 	0,
+		formattedPrecioTotal: "0.00"
 	},
 	// adultosMayores: 0
 	precioTotal:    	0
@@ -1501,7 +1504,6 @@ function updatePriceByTipo(tipo, changeFlapper)
 		}
 
 		// Redondeo al subtotal y total
-		// seleccionVuelo[tipo].precioTotal = parseInt(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal,false,0));
 		seleccionVuelo[tipo].precioTotal *= seleccionVuelo[tipo].num;
 
 		seleccionVuelo.precioTotal = 
@@ -1515,13 +1517,15 @@ function updatePriceByTipo(tipo, changeFlapper)
 	var span = $("#precio_" + tipo);
 
 	if(seleccionVuelo.ida != null)  {
-		span.html(formatCurrencyQuantity(seleccionVuelo[tipo].precioTotal, true, 2));
-		span.parent().parent().addClass("calculated");
-
 		buildDetailPrices(seleccionVuelo[tipo], tipo);
 
-		if(changeFlapper)
-			flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,0)).change();
+		var nDecimals = LocaleConfig.decimalDigitsByCurrency[CURRENCY];
+		span.html(seleccionVuelo[tipo].formattedPrecioTotal);
+		span.parent().parent().addClass("calculated");
+
+		if(changeFlapper){
+			updateFlapper();
+		}
 	}
 	else{
 		span.html("0");
@@ -1538,16 +1542,28 @@ function updateAllPrices()
 	updatePriceByTipo("ninho",   false);
 	updatePriceByTipo("infante", false);
 
-	if(seleccionVuelo.ida != null)
-		flapperTotal.val(formatCurrencyQuantity(seleccionVuelo.precioTotal,false,0)).change();
+	updateFlapper();
+}
+// ---------------------= =---------------------
+function updateFlapper()
+{
+	if(seleccionVuelo.ida != null) {
+		var sum = parseFloat(seleccionVuelo["adulto"].formattedPrecioTotal) +
+				  parseFloat(seleccionVuelo["ninho"].formattedPrecioTotal) +
+				  parseFloat(seleccionVuelo["infante"].formattedPrecioTotal);
+
+		var nDecimals = LocaleConfig.decimalDigitsByCurrency[CURRENCY];
+
+		var formatted = formatCurrencyQuantity(sum, false, nDecimals);
+
+		flapperTotal.val(formatted).change();
+	}
 	else
 		flapperTotal.val("???????").change();
 }
 // ---------------------= =---------------------
 function buildDetailPrices(info, tipo)
 {
-	console.log(CURRENCY);
-	console.log(LocaleConfig);
 	var nDecimals = LocaleConfig.decimalDigitsByCurrency[CURRENCY];
 
 	var formattedPrecioBase = formatCurrencyQuantity(info.ida.precioBase,false,nDecimals);
@@ -1606,6 +1622,8 @@ function buildDetailPrices(info, tipo)
 
 	var strSubtotal = formatCurrencyQuantity(subtotal, false, nDecimals);
 	var strTotal = formatCurrencyQuantity(subtotal * info.num, false, nDecimals);
+
+	seleccionVuelo[tipo].formattedPrecioTotal = strTotal;
 	
 	tbl.append("<tr><td class='cell-separator' colspan='3'><div></div></td></tr>")
 	   .append("<tr><th><h3>Subtotal</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+strSubtotal+"</td></tr>")
