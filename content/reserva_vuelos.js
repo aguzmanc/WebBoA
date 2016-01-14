@@ -2103,9 +2103,11 @@ function prepareSeleccionVueloToSend()
 // ---------------------= =---------------------
 function translateSeleccionVueloForService(sel) 
 {
+	console.log(sel);
+
 	return {
 		num: 			sel.num,
-		precioTotal: 	parseInt(formatCurrencyQuantity(sel.precioTotal,false,0)),
+		precioTotal: 	sel.formattedPrecioTotal,
 		ida: 			translateSeleccionVueloDetailForService(sel.ida),
 		vuelta: 		translateSeleccionVueloDetailForService(sel.vuelta)
 	};
