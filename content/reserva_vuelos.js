@@ -1579,9 +1579,10 @@ function buildDetailPrices(info, tipo)
 
 	tbl = $(tbl).find("tbody"); 
 
-	tbl.append("<tr><th colspan='3'><h1>"+titles[tipo]+"</h1></th></tr>");
-	tbl.append("<tr><th class='subtitle' colspan='3'><div>Ida</div></th></tr>");
-	tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+ formattedPrecioBase +"</td></tr>");
+	tbl .append("<tr><th colspan='3'><h1>"+titles[tipo]+"</h1></th></tr>")
+		.append("<tr><th class='subtitle' colspan='3'><div>Ida</div></th></tr>")
+		.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>"+HTML_CURRENCIES[CURRENCY]+"</td><td class='qty'>"+ formattedPrecioBase +"</td></tr>")
+		.append("<tr><td colspan='3' class='divisor'></td></tr>");
 
 	for(var keyTasa in info.ida.tasas) {
 		var tr = document.createElement("tr");
@@ -1590,12 +1591,14 @@ function buildDetailPrices(info, tipo)
 		     .append("<td class='qty'>"+formatCurrencyQuantity(info.ida.tasas[keyTasa],false,nDecimals)+"</td>");
 		     
 		tbl.append(tr);
+		tbl.append("<tr><td colspan='3' class='divisor'></td></tr>");
 		tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
 	}
 
 	if(seleccionVuelo.vuelta != null) {
 		tbl.append("<tr><th class='subtitle' colspan='3'><div>Vuelta</div></th></tr>");
 		tbl.append("<tr><th><h3>Precio Base</h3></th><td class='currency'>Bs.</td><td class='qty'>"+formatCurrencyQuantity(info.vuelta.precioBase,false,nDecimals)+"</td></tr>");
+		tbl.append("<tr><td colspan='3' class='divisor'></td></tr>");
 
 		for(var keyTasa in info.vuelta.tasas) {
 			var tr = document.createElement("tr");
@@ -1604,6 +1607,7 @@ function buildDetailPrices(info, tipo)
 			     .append("<td class='qty'>"+formatCurrencyQuantity(info.vuelta.tasas[keyTasa],false,nDecimals)+"</td>");
 			     
 			tbl.append(tr);
+			tbl.append("<tr><td colspan='3' class='divisor'></td></tr>");
 			tbl.append("<tr><td class='detail' colspan='3'>"+tasas[keyTasa].nombre+"</tr>");
 		}
 	}
@@ -1788,9 +1792,16 @@ function translateTaxes(fromResponse)
 
 	// tasas vuelta
 	if(rawVueltaTaxes != null) {
+		console.log(rawVueltaTaxes);
 		for(var i=0;i<rawVueltaTaxes.length;i++) {
 			var rawTax = rawVueltaTaxes[i];
 			var taxKey = rawTax['tipo_tasa']['#text'];
+
+			console.log(taxKey);
+			console.log(to.byTax);
+
+			if(false == (taxKey in to.byTax))
+				continue; 
 
 			to.byTax[taxKey].vuelta = { fijo: 0.0, porcentaje: 0.0 }; // adding
 

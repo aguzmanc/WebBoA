@@ -73,10 +73,10 @@ var BoA = {
 	}, 
 
 	defaultConsultaVuelos : {
-		origen: 'LPB',
-		destino: 'CBB',
-		fechaIda : formatCompactDate(new Date()), // today 
-		fechaVuelta: null, // no flight back
+		origen: 'CBB',
+		destino: 'LPB',
+		fechaIda : '20160127',//formatCompactDate(new Date()), // today 
+		fechaVuelta: '20160227',//null, // no flight back
 		adulto: 1,
 		infante: 0,
 		ninho: 0
