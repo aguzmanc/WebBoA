@@ -76,7 +76,7 @@ var BoA = {
 		origen: 'LPB',
 		destino: 'CBB',
 		fechaIda : formatCompactDate(new Date()), // today 
-		fechaVuelta: null, // example, (not recommended)
+		fechaVuelta: null, // no flight back
 		adulto: 1,
 		infante: 0,
 		ninho: 0

@@ -1562,9 +1562,6 @@ function updateFlapper()
 // ---------------------= =---------------------
 function buildDetailPrices(info, tipo)
 {
-	if(tipo!='adulto')
-		return;
-
 	var nDecimals = LocaleConfig.decimalDigitsByCurrency[CURRENCY];
 
 	// console.log(info.ida.precioBase);
