@@ -378,8 +378,6 @@ function constraintTableByFechaHora(option, tipo)
 		var otherOptionCode = $(rows[i]).data("opc_code");
 		var otherOption = allOptions[otherOptionCode]; 
 
-		console.log(otherOptionCode);
-
 		var dateTimeCrosses;		
 
 		if(tipo=="ida") {
@@ -1564,8 +1562,12 @@ function updateFlapper()
 // ---------------------= =---------------------
 function buildDetailPrices(info, tipo)
 {
+	if(tipo!='adulto')
+		return;
+
 	var nDecimals = LocaleConfig.decimalDigitsByCurrency[CURRENCY];
 
+	// console.log(info.ida.precioBase);
 	var formattedPrecioBase = formatCurrencyQuantity(info.ida.precioBase,false,nDecimals);
 
 	var titles = {adulto:"ADULTO",ninho:"NI&Ntilde;O",infante:"INFANTE"};
@@ -1610,14 +1612,17 @@ function buildDetailPrices(info, tipo)
 	}
 
 	// Calculations just for UI purposes 
-	var subtotal = parseFloat(formattedPrecioBase);
-	for(var key in info.ida.tasas) // tasas de ida
+	var subtotal = parseFloat(formatCurrencyQuantity(info.ida.precioBase,false,nDecimals));
+	for(var key in info.ida.tasas){
+		// tasas de ida
 		subtotal +=  parseFloat(formatCurrencyQuantity(info.ida.tasas[key], false, nDecimals));
-
+	}
+	
 	if(seleccionVuelo.vuelta != null) { // tasas de vuelta
-		subtotal += parseFloat(formattedPrecioBase);
-		for(var key in info.vuelta.tasas)
+		subtotal += parseFloat(formatCurrencyQuantity(info.vuelta.precioBase,false,nDecimals));
+		for(var key in info.vuelta.tasas){
 			subtotal += parseFloat(formatCurrencyQuantity(info.vuelta.tasas[key], false, nDecimals));
+		}
 	}
 
 	var strSubtotal = formatCurrencyQuantity(subtotal, false, nDecimals);
