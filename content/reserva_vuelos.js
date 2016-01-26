@@ -8,7 +8,8 @@ var searchParameters = {
 	origen : "", 
 	destino : "", 
 	fechaIda : "", 
-	fechaVuelta : null
+	fechaVuelta : null,
+	sitios: 0
 };
 
 var waitingForFlightsData = false;
@@ -125,6 +126,11 @@ $(document).on('ready',function()
 	$("#widget_cambiar_vuelo #btn_cambiar_vuelo").click(toggleWidgetCambiarVuelo);
 	$("#widget_cambiar_vuelo .form .radio-button").click(toggleRbtnIdaVuelta);
 	$("#widget_resumen_reserva td.selector-pax ul li").click(changeNumPassengers);
+	$("#widget_resumen_reserva td.selector-pax ul").mouseleave(function(){
+		if($(this).hasClass("active"))
+			$(this).removeClass("active");
+	});
+
 	$("#btn_borrar_ida").click(deleteIda);
 	$("#btn_borrar_vuelta").click(deleteVuelta);
 	$("#btn_buscar_vuelo").click(validateSearch);
@@ -482,6 +488,8 @@ function validateSearch()
 		searchParameters.fechaVuelta = rawDate[2] +""+ MONTHS_LANGUAGE_TABLE[rawDate[1]] +""+ rawDate[0];
 	}
 
+	searchParameters.sitios = getSelectedSitesCount();
+
 	requestSearchParameters(searchParameters);
 
 	$("#widget_cambiar_vuelo").removeClass("expanded").addClass("collapsed");
@@ -610,6 +618,7 @@ function changeNumPassengers()
 			ul.parent().find("span").html($(this).html());
 		}
 	}else {
+		$("#widget_resumen_reserva td.selector-pax ul").removeClass("active");
 		if(false == $(this).hasClass("selected"))
 			return;
 
@@ -1282,16 +1291,22 @@ function handleInitialRequest()
 	// date pickers setup
 	$('#picker_salida').datepicker("setDate", new Date() );
 
-	requestSearchParameters(searchParameters);
-
 	// setup config passengers initial parameters
+	var defaultSitesCount = 0;
 	for(var tipo in {adulto:null,ninho:null,infante:null}) {
 		var pxCount = BoA.defaultConsultaVuelos[tipo];
+		if(tipo != 'infante')
+			defaultSitesCount += pxCount;
+
 		var list = $("#widget_resumen_reserva .selector-pax ul[data-tipo='"+tipo+"']");
 
 		list.find("li.selected").click();
 		list.find("li[data-count='"+pxCount+"']").click();	
 	}
+
+	searchParameters.sitios = defaultSitesCount; // start value
+
+	requestSearchParameters(searchParameters);
 }
 // ---------------------= =---------------------
 function requestSearchParameters(parms)
@@ -1350,7 +1365,7 @@ function requestSearchParameters(parms)
 		returning 		: (parms.fechaVuelta == null ? "" : parms.fechaVuelta),
 		days 			: "7",
 		ratesMax		: "1",
-		sites			: "1",
+		sites			: (""+parms.sitios),
 		compartment 	: "0", 
 		classes 		: "",
 		clientDate 		: todayStr,
@@ -1360,6 +1375,8 @@ function requestSearchParameters(parms)
 		ipAddress 		: "127.0.0.1", 
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
+
+	console.log(data);
 
 	var dataStr = JSON.stringify(data);
 
@@ -1373,7 +1390,7 @@ function requestSearchParameters(parms)
 	});
 }
 // ---------------------= =---------------------
-function requestFlights(dateIda, dateVuelta)
+function requestFlights(dateIda, dateVuelta, totalSites)
 {
 	// now!
 	var now = new Date();
@@ -1731,6 +1748,7 @@ function buildBanks(banks)
 // ---------------------= =---------------------
 function translateTaxes(fromResponse) 
 {
+	
 	var rawTaxesByPx = fromResponse['tasaTipoPasajero']['TasaTipoPasajero'];
 
 	var rawIdaTaxes;
@@ -1781,6 +1799,9 @@ function translateTaxes(fromResponse)
 		var rawTax = rawIdaTaxes[i];
 		var taxKey = rawTax['tipo_tasa']['#text'];
 
+		if(false == (taxKey in to.byTax)) // completing unknown tax with blank name
+			to.byTax[taxKey] = { nombre: "" };
+
 		to.byTax[taxKey].ida = { fijo: 0.0, porcentaje: 0.0 };	 // adding
 
 		if('importe' in rawTax){
@@ -1792,16 +1813,12 @@ function translateTaxes(fromResponse)
 
 	// tasas vuelta
 	if(rawVueltaTaxes != null) {
-		console.log(rawVueltaTaxes);
 		for(var i=0;i<rawVueltaTaxes.length;i++) {
 			var rawTax = rawVueltaTaxes[i];
 			var taxKey = rawTax['tipo_tasa']['#text'];
 
-			console.log(taxKey);
-			console.log(to.byTax);
-
-			if(false == (taxKey in to.byTax))
-				continue; 
+			if(false == (taxKey in to.byTax)) // completing unknown tax with blank name
+				to.byTax[taxKey] = { nombre: "" };
 
 			to.byTax[taxKey].vuelta = { fijo: 0.0, porcentaje: 0.0 }; // adding
 
@@ -2112,6 +2129,22 @@ function prepareSeleccionVueloToSend()
 	}
 
 	return packedSeleccionVuelo;
+}
+// ---------------------= =---------------------
+function getSelectedSitesCount() 
+{
+	var pxSelections = $("#widget_resumen_reserva .selector-pax ul");
+	var total = 0;
+
+	for(var i=0;i<pxSelections.length;i++) {
+		var ul = $(pxSelections[i]);
+		var tipo = ul.data("tipo");
+
+		if(tipo=="adulto" || tipo=="infante") 
+			total += parseInt(ul.find("li.selected").data("count"));
+	}
+
+	return total;
 }
 // ---------------------= =---------------------
 function translateSeleccionVueloForService(sel) 
