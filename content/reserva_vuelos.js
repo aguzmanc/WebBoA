@@ -489,13 +489,30 @@ function validateSearch()
 	}
 
 	searchParameters.sitios = getSelectedSitesCount();
-
 	requestSearchParameters(searchParameters);
 
 	$("#widget_cambiar_vuelo").removeClass("expanded").addClass("collapsed");
 	// remover vuelos seleccionados
 	deleteIda();
 	deleteVuelta();
+}
+// ---------------------= =---------------------
+// checks if selected passenger numbers don't pass available searched seats
+function checkWarningPxNumber() 
+{
+	// warning icon to show if there 
+	var warn = $("#widget_resumen_reserva .warning-icon");
+
+	console.log("------");
+	console.log("ui sites:" + getSelectedSitesCount());
+	console.log("search sites:" + searchParameters.sitios);
+	console.log("------");
+
+	// CONTINUAR AQUI, PROBAR CAMBIO DE PASAJEROS
+	if(getSelectedSitesCount() <= searchParameters.sitios || searchParameters.sitios == 0)
+		warn.removeClass("visible");
+	else
+		warn.addClass("visible");
 }
 // ---------------------= =---------------------
 function checkCompleteSeleccionVuelo()
@@ -614,6 +631,7 @@ function changeNumPassengers()
 			seleccionVuelo[tipo].num = count;
 			updatePriceByTipo(tipo,true);
 			checkCompleteSeleccionVuelo();
+			checkWarningPxNumber();
 
 			ul.parent().find("span").html($(this).html());
 		}
@@ -624,6 +642,8 @@ function changeNumPassengers()
 
 		$(this.parentNode).addClass("active");
 	}
+
+	
 }
 // ---------------------= =---------------------
 function validateSeleccionVuelo()
@@ -963,6 +983,8 @@ function asyncReceiveDates(response)
 // ---------------------= =---------------------
 function asyncReceiveFlights(response)
 {
+	checkWarningPxNumber();
+	
 	if(waitingForFlightsData == false) // response ya fue procesado
 		return;
 
@@ -1027,6 +1049,8 @@ function asyncReceiveFlights(response)
 	}
 
 	checkResultsTableWidth(); // acomodar tablas segun tamaño
+
+
 }
 
 /***************************************************** 
@@ -1306,6 +1330,16 @@ function handleInitialRequest()
 
 	searchParameters.sitios = defaultSitesCount; // start value
 
+	// new loop because change num parameters needs searchParameters.sitios to 
+	// check
+	// for(var tipo in {adulto:null,ninho:null,infante:null}) {
+	// 	var list = $("#widget_resumen_reserva .selector-pax ul[data-tipo='"+tipo+"']");
+
+	// 	list.find("li.selected").click();
+	// 	list.find("li[data-count='"+pxCount+"']").click();	
+	// }
+
+	
 	requestSearchParameters(searchParameters);
 }
 // ---------------------= =---------------------
@@ -1375,8 +1409,6 @@ function requestSearchParameters(parms)
 		ipAddress 		: "127.0.0.1", 
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
-
-	console.log(data);
 
 	var dataStr = JSON.stringify(data);
 
@@ -2140,7 +2172,7 @@ function getSelectedSitesCount()
 		var ul = $(pxSelections[i]);
 		var tipo = ul.data("tipo");
 
-		if(tipo=="adulto" || tipo=="infante") 
+		if(tipo=="adulto" || tipo=="ninho") 
 			total += parseInt(ul.find("li.selected").data("count"));
 	}
 

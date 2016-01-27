@@ -1191,6 +1191,47 @@
 	vertical-align: bottom;
 }
 
+#widget_resumen_reserva .warning-icon {
+	display: none;
+	position: absolute;
+	top: 14px;
+	left: 120px;
+	width: 14px;
+	height: 20px;
+	color: red;
+	background-color: #D6840B;
+	border-radius: 10px;
+	font-size: 18px;
+	font-family: "FuturaBold";
+	font-weight: bold;
+	padding: 0 0 0 7px;
+}
+
+#widget_resumen_reserva .warning-icon.visible {
+	display: block;
+}
+
+#widget_resumen_reserva .warning-icon.visible:hover {
+	border-radius: 0 0 10px 10px;
+}
+
+#widget_resumen_reserva .warning-icon div {
+	display: none;
+	position: absolute;
+	width: 450px;
+	height: 90px;
+	top: -98px;
+	right: -50;
+	background-color: #D6840B;
+	color: #FFF;
+	font-size: 14px;
+	font-family: "FuturaLight";
+    padding: 5px;
+    z-index: 100;
+}
+
+#widget_resumen_reserva .warning-icon.visible:hover div { display: block; }
+
 #widget_resumen_reserva .cell-descripcion .tooltip {
 	position: absolute;
 	width: 200px;
