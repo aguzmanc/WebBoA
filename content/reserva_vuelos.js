@@ -503,11 +503,6 @@ function checkWarningPxNumber()
 	// warning icon to show if there 
 	var warn = $("#widget_resumen_reserva .warning-icon");
 
-	console.log("------");
-	console.log("ui sites:" + getSelectedSitesCount());
-	console.log("search sites:" + searchParameters.sitios);
-	console.log("------");
-
 	// CONTINUAR AQUI, PROBAR CAMBIO DE PASAJEROS
 	if(getSelectedSitesCount() <= searchParameters.sitios || searchParameters.sitios == 0)
 		warn.removeClass("visible");
@@ -649,20 +644,12 @@ function changeNumPassengers()
 function validateSeleccionVuelo()
 {
 	/* PREPARE AND SEND DATA */
-	var sendData = prepareSeleccionVueloToSend();
+	var dataToSend = prepareSeleccionVueloToSend();
 
-	console.log(sendData);
-
-	var dataStr = JSON.stringify(sendData);
-
-	$.ajax({
-		url: BoA.urls["validate_flight_selection_service"],
-		type: 'POST',
-		dataType:'json',
-		contentType: "application/json; charset=utf-8",
-		success: asyncValidateSeleccionVuelo,
-		data: dataStr
-	});
+	ajaxRequest(
+		BoA.urls["validate_flight_selection_service"], 
+		asyncValidateSeleccionVuelo, 
+		"POST", dataToSend);
 
 	$("#loading_compra").show();
 	$("#btn_validar_vuelos").hide();
@@ -763,20 +750,14 @@ function validatePassengers()
 		}
 
 		/* PREPARE AND SEND DATA */
-		var sendData = {
+		var dataToSend = {
 			seleccionVuelo: selVueloToSend
 		};
 
-		var dataStr = JSON.stringify(sendData);
-
-		$.ajax({
-			url: BoA.urls["register_passengers_service"],
-			type: 'POST',
-			dataType:'json',
-			contentType: "application/json; charset=utf-8",
-			success: asyncRegisterPassengers,
-			data: dataStr
-		});
+		ajaxRequest(
+			BoA.urls["register_passengers_service"], 
+			asyncRegisterPassengers, 
+			"POST", dataToSend);
 	}
 }
 // ---------------------= =---------------------
@@ -1410,16 +1391,10 @@ function requestSearchParameters(parms)
 		xmlOrJson 		: false  // false=json ; true=xml 
 	};
 
-	var dataStr = JSON.stringify(data);
-
-	$.ajax({
-		url: BoA.urls["nearest_dates_service"],
-		type: 'POST',
-		dataType:'json',
-		contentType: "application/json; charset=utf-8",
-		success: asyncReceiveDates,
-		data: dataStr
-	});
+	ajaxRequest(
+		BoA.urls["nearest_dates_service"], 
+		asyncReceiveDates, 
+		"POST", data);
 }
 // ---------------------= =---------------------
 function requestFlights(dateIda, dateVuelta, totalSites)
@@ -1463,16 +1438,10 @@ function requestFlights(dateIda, dateVuelta, totalSites)
 		to: searchParameters.destino
 	};
 
-	var dataStr = JSON.stringify(data);
-
-	$.ajax({
-		url: BoA.urls["flights_schedule_service"],
-		type: 'POST',
-		dataType:'json',
-		contentType: "application/json; charset=utf-8",
-		success: asyncReceiveFlights,
-		data: dataStr
-	});
+	ajaxRequest(
+		BoA.urls["flights_schedule_service"], 
+		asyncReceiveFlights, 
+		"POST", data);
 }
 // ---------------------= =---------------------
 function updatePriceByTipo(tipo, changeFlapper)

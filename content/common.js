@@ -152,6 +152,40 @@ function fillWithLeadingZeros(quantity, length)
 {
 	return (Array(length+1).join("0") + quantity).slice(-length);
 }
+// AJAX REQUEST (with support for IE8 and IE9)
+// ---------------------= =---------------------
+function ajaxRequest(url, responseFunction, getOrPost, jsonData)
+{
+	if(getOrPost != 'GET' && getOrPost != 'POST'){
+		console.log('ERROR! Bad parameter in getOrPost: ' + getOrPost);
+		return;
+	}
+
+	if ($.browser.msie && window.XDomainRequest) {
+		if (window.XDomainRequest) {
+			var xdr = new XDomainRequest();
+			if (xdr) {
+				xdr.onload = responseFunction;
+				xdr.onerror = function () { /* error handling here */ };
+				xdr.open(getOrPost, url);
+				xdr.send(JSON.stringify(jsonData));
+			}
+		}
+	} else {
+        $.ajax(
+        	{
+				type: getOrPost,
+				crossDomain: true,
+				url: url,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+                success: responseFunction,
+                data: JSON.stringify(jsonData)
+            });
+    }
+}
+// ---------------------= =---------------------
+// ---------------------= =---------------------
 // ---------------------= =---------------------
 // ---------------------= VALIDATION =---------------------
 /* Used with "validable" class as parent of ui_element  */ 
